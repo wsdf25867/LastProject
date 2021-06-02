@@ -9,18 +9,18 @@ from flask import Flask, escape, request
 
 app = Flask(__name__)
     
-@app.route('/<string:uid>')
-def get_member_data(uid):
+@app.route('/refresh/<string:uid>')
+def get_member_data_refresh(uid):
     member = db.reference('/Level Us/UserAccount/' + uid).get()
     user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
 
     count_vector = CountVectorizer(ngram_range=(1,3))
     c_vector_category= count_vector.fit_transform(data['category'])
     category_c_sim = cosine_similarity(c_vector_category, c_vector_category).argsort()[:, ::-1]
-    return(get_recommend_bucket_list(uid, data, user_log, category_c_sim))
+    return(get_recommend_bucket_list_refresh(uid, data, user_log, category_c_sim))
 
 #사용자 평점이 가장 높은 퀘스트의 유사 퀘스트를 추천(완료된 퀘스트는 제거)
-def get_recommend_bucket_list(uid, df, user_log, category_c_sim, top=30):
+def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30):
     top = 0
     quest_index = 0
     for log in user_log :  
