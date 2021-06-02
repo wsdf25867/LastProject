@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".QuestListFragment"
     android:orientation="vertical">
-<<<<<<< HEAD
 
     <View
         android:id="@+id/rectangle_3"
@@ -191,62 +190,4 @@
             />
     </LinearLayout>
 
-=======
-<LinearLayout
-    android:id="@+id/quest_info"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_centerInParent="true">
-    <TextView
-        android:id="@+id/added"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/keyword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/quest_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/title_ko"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/way"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-</LinearLayout>
-    <Button
-        android:id="@+id/nextQuest"
-        android:layout_below="@+id/quest_info"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next Quest"
-        android:textSize="20sp"/>
-
->>>>>>> a7913ade0629563a33f2c73ba3d313db2c453037
 </RelativeLayout>
