@@ -36,7 +36,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-core:15.0.2'
-    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'      //이걸하면 이미지인식
+//    implementation 'com.google.firebase:firebase-ml-vision:15.0.0'    //이걸하면 텍스트인식
 
     implementation 'com.google.firebase:firebase-ml-vision-image-label-model:20.0.1'
 
