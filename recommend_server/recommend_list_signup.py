@@ -57,10 +57,12 @@ def get_member_data_refresh(uid):
 def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30):
     top = 0
     quest_index = 0
-    for log in user_log :  
-        if (top <= log['rating']) :
-            quest_index = log['quest_num']
-            top = log['rating']
+    cnt = 0
+    for log in user_log['rating'] : 
+        if (top <= log) :
+            quest_index = user_log['quest_num'][cnt]
+            top = log
+        cnt = cnt+1
 
     
     target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
