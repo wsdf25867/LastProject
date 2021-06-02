@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "889881494910",
+    "firebase_url": "https://collabtest-71a4d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "collabtest-71a4d",
+    "storage_bucket": "collabtest-71a4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889881494910:android:48bae0212e2a708b671f2f",
+        "android_client_info": {
+          "package_name": "com.example.collabtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889881494910-ooljv8jrfjqp4h75kgg415scu0b51ksk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQkO4e8EMem5YWcH_jpYj4oAwgZ3iH43M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889881494910-ooljv8jrfjqp4h75kgg415scu0b51ksk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889881494910:android:50db675228357f26671f2f",
+        "android_client_info": {
+          "package_name": "com.example.levelus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889881494910-ooljv8jrfjqp4h75kgg415scu0b51ksk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQkO4e8EMem5YWcH_jpYj4oAwgZ3iH43M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889881494910-ooljv8jrfjqp4h75kgg415scu0b51ksk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889881494910:android:1c22f1b1b2c9fddc671f2f",
+        "android_client_info": {
+          "package_name": "com.sl.textrecognitionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889881494910-ooljv8jrfjqp4h75kgg415scu0b51ksk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQkO4e8EMem5YWcH_jpYj4oAwgZ3iH43M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889881494910-ooljv8jrfjqp4h75kgg415scu0b51ksk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

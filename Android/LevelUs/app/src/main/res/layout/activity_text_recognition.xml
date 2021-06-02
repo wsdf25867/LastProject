@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TextRecognitionActivity">
+
+    <!-- 여기에 찍은 사진이 배치될거임 -->
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        />
+
+    <!-- 여기에 해당 사진에 있는 텍스트가 보여질거임 -->
+    <TextView
+        android:id="@+id/text_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/image_view"
+        android:textSize="26dp"
+        android:maxLines="5"
+        android:layout_margin="10dp"
+        />
+
+    <!-- 이 버튼 누르면 사진찍기가 활성됨. -->
+    <Button
+        android:id="@+id/capture_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="검증사진촬영"
+        android:textAllCaps="false"
+        android:layout_above="@+id/detect_text_image_btn"
+        android:layout_marginBottom="10dp"
+        />
+
+    <!-- 이버튼 누르면 찍은 사진에 있는 텍스트가 추출됨 -->
+    <Button
+        android:id="@+id/detect_text_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="텍스트 인식하기"
+        android:textAllCaps="false"
+        android:layout_marginBottom="48dp"
+        />
+
+    <TextView
+        android:id="@+id/gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS Provider:  "
+        android:textSize="20dp"
+        android:layout_above="@+id/capture_image_btn"/>
+
+    <TextView
+        android:id="@+id/network"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Network Provider: "
+        android:textSize="20dp"
+        android:layout_above="@+id/gps"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location: "
+        android:textSize="24dp"
+        android:layout_above="@+id/network"/>
+    <TextView
+        android:id="@+id/location2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location: "
+        android:textSize="24dp"
+        android:layout_above="@+id/location"/>
+
+</RelativeLayout>

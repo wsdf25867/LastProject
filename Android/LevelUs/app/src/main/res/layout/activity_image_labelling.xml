@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageLabellingActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="105dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        tools:ignore="UnknownId"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="356dp"
+        android:layout_below="@+id/imageView"/>
+
+    <!-- 이 버튼 누르면 사진찍기가 활성됨. -->
+    <Button
+        android:id="@+id/capture_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="검증사진촬영"
+        android:textAllCaps="false"
+        android:layout_marginBottom="48dp"
+        android:layout_alignParentBottom="true"
+        />
+
+    <!-- 이버튼 누르면 찍은 사진에 있는 텍스트가 추출됨 -->
+
+
+    <TextView
+        android:id="@+id/gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS Provider:  "
+        android:textSize="20dp"
+        android:layout_above="@+id/capture_image_btn"/>
+
+    <TextView
+        android:id="@+id/network"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Network Provider: "
+        android:textSize="20dp"
+        android:layout_above="@+id/gps"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location: "
+        android:textSize="24dp"
+        android:layout_above="@+id/network"/>
+
+    <TextView
+        android:id="@+id/location2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location: "
+        android:textSize="24dp"
+        android:layout_above="@+id/location"/>
+</RelativeLayout>
