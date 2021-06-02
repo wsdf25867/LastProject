@@ -1,0 +1,224 @@
+title,category,added,done,title_ko,keyword,way,quest_num
+Send a message in a bottle,diy,9500,550,메세지 병에 담아 보내기,bottle,object,0
+Ride in a hot air balloon,diy,7100,445,열기구를 타기,air balloon,object,1
+Visit Japan,travel,6500,528,일본 가보기,japan,gps,2
+Backpack Europe,travel,6500,513,유럽 배낭여행 가보기,europe,gps,3
+Write a book,diy,4200,128,책 쓰기,book,object,4
+Swim with sharks,diy,3800,538,상어와 함께 수영하기,shark,object,5
+Volunteer abroad,diy,3400,591,해외봉사 해보기,other,gps,6
+Sleep under the stars,diy,3000,662,별보며 자보기,star,object,7
+Travel by myself,diy,2900,945,혼자 여행하기,alone,gps,8
+Go on a road trip,travel,2200,461,로드트립 떠나기,road,gps,9
+Learn Spanish,diy,2100,371,스페인어 배우기,spanish,text,10
+Find a four leaf clover,diy,1800,806,네 잎 클로버를 찾기,four leaf clover,object,11
+Learn to paint,diy,1700,303,그림 배우기,picture,object,12
+Learn to Sew,diy,1600,361,바느질 배우기,sew,object,13
+Go to Australia,travel,1400,174,호주 가보기,australia,gps,14
+See a Shooting Star,diy,1300,668,별똥별 보기,shooting star,object,15
+Take a cooking class,diy,1100,142,요리 배우기,knife,object,16
+Write a novel,diy,1000,47,소설을 쓰기,book,object,17
+Go to a shooting range,diy,987,296,사격장 가보기,gun,object,18
+Learn Programming,diy,900,174,프로그래밍 학습해보기,int,text,19
+Build my own mini library,diy,889,67,나만의 작은 도서관 만들기,"books,book",object,20
+Watch the sunset,diy,873,537,일몰을 보기,sun,object,21
+Grow an abundant herb garden,diy,871,26,나만의 정원 가꾸기,"leaf,flower,send",object,22
+Start a Blog,diy,807,343,블로그 시작하기,blog,text,23
+Solve a Rubix-Cube,diy,694,265,루빅스 큐브 해보기,"rubix,cube,rubix_cube",object,24
+Bungee Jumping,entertainment,625,81,번지점프 해보기,sky,gps,25
+Start my own business,diy,604,82,창업 해보기,사업자등록증,text,26
+Donate my hair,diy,552,234,내 머리카락을 기부해보기,hair,object,27
+Bake a cake,diy,550,389,케이크 만들기,cake,object,28
+Get my drivers license,diy,513,137,운전면허증 받기,drive license,object,29
+Make a YouTube video,diy,507,130,유튜브 동영상 만들기,youtube,text,30
+Take a jumping picture,diy,477,217,점프 사진 찍기,"picture,person,people",object,31
+Build a snowman,diy,428,170,눈사람을 만들다.,snowman,object,32
+Buy my own car,diy,378,133,내 차를 사세요.,car,object,33
+Hold an Owl,diy,324,64,올빼미 잡기,owl,object,34
+Make a time capsule,diy,291,19,타임캡슐 만들기,capsule,object,35
+Learn to use chopsticks,diy,233,108,젓가락 사용법 배우기,chopsticks,object,36
+Get a college degree,diy,233,46,대학 학위를 따기,학위증,text,37
+Try oysters,diy,217,121,굴을 먹어보세요.,oyster,object,38
+Go to a Fancy Dress Party,diy,214,86,화려한 드레스 파티에 가기,dress,object,39
+Fold 1000 paper cranes,diy,205,15,종이 학 1000개 접기,"paper,paper cranes",object,40
+Climb a tree,diy,188,62,나무를 오르다.,tree,object,41
+Learn to Crochet,diy,184,47,코바늘 뜨개질 배우기,crochet hook,object,42
+Take a dance class,diy,184,36,춤 배우기,"person,people,mirror",object,43
+Carve a pumpkin for halloween,diy,163,81,할로윈을 호박 조각하기,pumpkin,object,44
+Own a Cat,diy,159,59,고양이 키우기,cat,object,45
+Become an Early Riser,diy,145,22,7시에 일어나기,7:00 AM,text,46
+Build A Computer,diy,138,58,내 컴퓨터 조립하기,"computer,monitor,mouse,keyboard",object,47
+Learn to dive,diy,130,28,다이빙 배우기,"board,diving board",object,48
+Ride on an Elephant,diy,122,25,코끼리 타기,elephant,object,49
+Make tiramisu,diy,113,27,티라미수 만들기,"tiramisu,cake",object,50
+Join a gym,diy,110,49,헬스장 등록하기,"barbell,dumbbell",object,51
+Make a kite and fly it,diy,108,33,연을 만들어 날리기,kite,object,52
+Dye my hair,diy,106,37,내 머리 염색하기,hair,object,53
+Complete a scrapbook,diy,105,12,스크랩북 작성,book,object,54
+Learn to Make Homemade Pasta,diy,27,10,집에서 파스타 만들기,pasta,object,55
+Celebrate Holi in India,entertainment,3900,41,인도에서 홀리를 축하하다,india,gps,56
+Ride a Unicycle,entertainment,1100,134,외발자전거 타기,unicycle,object,57
+Go to disneyworld,entertainment,1000,320,디즈니월드에 가기,disneyworld,text,58
+Drink wine in Italy,entertainment,786,238,이탈리아에서 와인을 마시기,italy,gps,59
+Visit Versailles,entertainment,326,136,베르사유 가기,verailles,gps,60
+See A Broadway Play,entertainment,296,802,브로드웨이 연극 보기,broadway,gps,61
+Go to a nude beach,entertainment,226,30,누드비치 가보기,node beach,gps,62
+Go to a jazz bar,entertainment,195,40,재즈바에 가다.,jazz bar,text,63
+Eat gelato in Italy,entertainment,190,91,이탈리아에서 젤라또 먹기,gelato,gps,64
+Make a kite and fly it,entertainment,108,33,연 날리기,kite,object,65
+"Eat ""Chinese"" Food in China",food,300,121,"중국에서 ""중국"" 음식 먹기",china,gps,66
+Take Pole Dancing Classes,health,4400,756,폴댄스 수업 듣기,pole dancing,text,67
+Complete a half marathon,health,1800,290,하프 마라톤 완주,"complete,marathon",text,68
+Take a Bellydancing Classes,health,1400,75,벨리댄스 수업 듣기,bellydancing,text,69
+Walk on the Great Wall of China,hiking,9400,574,만리장성 걷기,great wall,gps,70
+Trek the Inca Trail,hiking,3600,95,잉카산책로,inca trail,gps,71
+Visit hawaii,hiking,3300,519,하와이 방문,hawaii,gps,72
+Visit the Grand Canyon,hiking,2300,507,그랜드 캐년 방문,grand canyon,gps,73
+Visit the Blue mountains in Australia!,hiking,2300,188,호주의 블루 마운틴을 방문하세요!,blue mountain,gps,74
+Visit Machu Picchu,hiking,2100,122,마추픽추 방문,machu picchu,gps,75
+Go to Antarctica,hiking,2000,20,남극에 가다,antarctica,gps,76
+Own a dog,hiking,1400,632,개를 기르다.,dog,object,77
+Visit San Fransico,hiking,1400,584,샌프란시스코 방문,san fransico,gps,78
+Hike for at least 20km,hiking,1400,135,20km 이상 하이킹,20km,gps,79
+See a Shooting Star,hiking,1300,668,별똥별 보기,shooting star,object,80
+Visit Prague,hiking,1200,413,프라하 방문,prague,gps,81
+Visit the Leaning Tower of Pisa,hiking,1200,332,피사의 사탑 방문,"paris,tower of pisa","gps,object",82
+Visit Canada,hiking,1100,258,캐나다 방문,canada,gps,83
+Hike/Climb Kilimanjaro,hiking,997,29,하이킹/클라이밍 킬리만자로,kiliminjaro,gps,84
+"Visit Petra, Jordan",hiking,945,87,요르단 페트라 방문,"petra,jordan",gps,85
+Visit LA,hiking,909,321,LA 방문,la,gps,86
+Visit Croatia,hiking,809,223,크로아티아 방문,croatia,gps,87
+Visit Morocco,hiking,779,153,모로코 방문,morocco,gps,88
+Go horseback riding,hiking,668,218,승마하러 가다.,horse,object,89
+Zipline,hiking,412,128,집라인,zipline,object,90
+Travel to New Zealand,hiking,353,36,뉴질랜드 여행,new zealand,gps,91
+Go canoeing,hiking,294,133,카누 타기,cano,object,92
+Walk the Golden Gate bridge,hiking,237,53,금문교 걷기,golden gate bridge,object,93
+Visit yellowstone,hiking,231,31,옐로스톤 방문,yellowstone,gps,94
+Visit Yosemite National Park,hiking,216,40,요세미티 국립공원 방문,yosemite national park,gps,95
+Put My Feet in the Ocean,hiking,196,201,바닷물에 발 담구기,"foot, feet",object,96
+Travel to Iceland,hiking,186,15,아이슬란드 여행,iceland,object,97
+Visit the Pyramids,travel,3000,513,피라미드 방문,pyramids,object,98
+Go to Spain,travel,1900,550,스페인으로 가다,spain,gps,99
+Get my first car!,travel,1100,156,내 첫 차 사기,car,object,100
+Visit Vatican city,travel,938,238,바티칸 시티 방문,vatican city,gps,101
+Visit the 9-11 Memorial (Ground Zero),travel,782,332,9-11 기념관 방문(그라운드 제로),"9-11 memorial,ground zero",gps,102
+Visit amsterdam,travel,778,579,암스테르담 방문,amsterdam,gps,103
+Go to Venice,travel,544,15,베니스에 가다,venice,gps,104
+"Visit Vienna, Austria",travel,241,584,오스트리아 비엔나 방문,vienna,gps,105
+Make a bucket list,travel,204,50,버킷 목록 만들기,bucket list,text,106
+Visit Istanbul,travel,164,35,이스탄불 방문,istanbul,gps,107
+Buy a house,life_milestone,4300,510,집을 사다,house,object,108
+Have Children,life_milestone,4200,510,아이를 낳기,baby,object,109
+Swim with sharks,life_milestone,3800,538,상어와 함께 수영하기,shark,object,110
+Own my dream house,life_milestone,3800,33,내 꿈의 집을 소유하기,house,object,111
+Volunteer abroad,life_milestone,3400,591,해외봉사,other,gps,112
+Go on a Romantic Camping Trip,life_milestone,1800,46,로맨틱한 캠핑 여행,fire,object,113
+Wear a snake around my neck,life_milestone,1500,851,내 목에 뱀 두르기,snake,object,114
+Dye my hair,life_milestone,1500,646,내 머리를 염색해라.,hair,object,115
+Climb a mountain,life_milestone,1500,311,산을 오르다.,mountain,object,116
+Own a dog,life_milestone,1400,632,개를 기르다.,dog,object,117
+Write a novel,life_milestone,1000,47,소설을 쓰다.,book,object,118
+Hold a koala,life_milestone,917,119,코알라 보기,koala,object,119
+Pass my driving test,life_milestone,911,429,운전면허 따기,운전면허증,text,120
+Visit LA,life_milestone,909,321,LA 방문,la,gps,121
+Attend an opera,life_milestone,898,157,오페라에 보기,opera,text,122
+Start a Blog,life_milestone,807,343,블로그 시작,blog,text,123
+Learn japanese,life_milestone,538,16,일본어를 배우기,japanese,text,124
+Become a mother,life_milestone,509,113,엄마가 되기,baby,object,125
+See a lunar eclipse,life_milestone,497,220,월식 보기,eclipse,object,126
+Swim with the Dolphins,life_milestone,470,93,돌고래와 함께 수영하기,dolphin,object,127
+Run a full Marathon,life_milestone,334,33,마라톤 풀 러닝,marathon,text,128
+Learn how to ride a horse,life_milestone,277,74,말 타는 법 배우기,hose,object,129
+Drive a Ferrari,life_milestone,259,19,페라리 운전,ferrai,text,130
+Run with the bulls,life_milestone,255,14,황소들과 함께 달려라.,bull,object,131
+Adopt a cat,life_milestone,209,87,고양이를 입양하다.,cat,object,132
+Go to China,life_milestone,205,35,중국에 가다,china,object,133
+Find out my blood type,life_milestone,203,61,내 혈액형을 찾아봐,"a,b,o,ab",text,134
+LIve in New York,life_milestone,198,22,뉴욕에 살다,new york,gps,135
+Own a Cat,life_milestone,159,59,고양이 소유,cat,object,136
+Get my passport,life_milestone,156,51,여권 만들기,passport,text,137
+Take An I.Q. Test,life_milestone,115,42,아이큐테스트하기,number,text,138
+Own a dog,love,1400,195,개를 기르다.,dog,object,139
+Go to Australia,love,1400,49,호주로 가다,australia,object,140
+Learn how to ride a bike,love,1100,134,자전거 타는 법 배우기,bike,object,141
+"Visit Paris, France",love,964,584,프랑스 파리 방문,paris,gps,142
+See fireflies,love,174,174,반딧불 보기,fireflies,object,143
+See Eiffel Tower in the winter,love,155,101,에펠탑 보기,eiffel tower,object,144
+See the Northern Lights (Aurora Borealis),nature,17000,658,북극광 보기(오로라 보레알리스),aurora,object,145
+Go on an African safari,nature,9400,846,아프리카 사파리에 가기,african safari,gps,146
+Visit Argentinas Iguazu Falls,nature,4100,257,아르헨티나 이과수 폭포 방문,iguazu fall,gps,147
+Go Whale Watching,nature,3300,914,고래를 보기,whale,object,148
+Plant a Tree,nature,2400,567,나무 심기,tree,object,149
+Feed a giraffe,nature,2100,892,기린에게 먹이를 주다.,giraffe,object,150
+Stand on the equator,nature,2100,140,적도에 서다.,equator,gps,151
+ Go to Antarctica,nature,2000,20,남극에 가다,antarctica,gps,152
+Find a four leaf clover,nature,1800,806,네 잎 클로버를 찾아라.,four leaf clover,object,153
+Go kayaking,nature,1400,755,카약 타기,kayak,object,154
+Visit the Galapagos Islands,nature,946,33,갈라파고스 제도 방문,galapagos island,gps,155
+Watch the sunset,nature,873,537,일몰을 보세요.,sunset,object,156
+Capture lightning in a photograph,nature,832,123,번개 사진 찍기,lightning,object,157
+Visit Morocco,nature,779,153,모로코 방문,morocco,gps,158
+Swim with a sea turtle,nature,630,172,바다거북과 수영하기,sea turtle,object,159
+Visit Alaska,nature,617,49,알래스카 방문,alaska,gps,160
+Swim with whale sharks,nature,563,85,고래상어와 함께 수영하세요.,whale shark,object,161
+Visit Scotland,nature,535,97,스코틀랜드 방문,scotland,object,162
+Visit Niagra Falls,nature,524,96,나이아그라 폭포 방문,niagara fall,gps,163
+See a lunar eclipse,nature,497,220,월식 보기,lunar eclipse,object,164
+Visit the Maldives,nature,485,27,몰디브 방문,maldives,gps,165
+See the tulips in Holland,nature,451,86,네덜란드의 튤립을 보세요.,"tulips,holland",object,166
+Hold a Tarantula,nature,337,127,타란툴라 잡기,tarantula,object,167
+Swim in the Blue Lagoon in Iceland,nature,269,25,아이슬란드의 푸른 라군 수영,blue lagoon,gps,168
+Try oysters,nature,217,121,굴을 먹어보기,oyster,object,169
+Build an igloo,nature,204,27,이글루를 건설하기,igloo,object,170
+See a solar eclipse,nature,197,48,일식 보기,solar eclipse,object,171
+Make a snowman,nature,192,77,눈사람 만들기,snowman,object,172
+Watch a sunrise,nature,191,52,일출 보기,sunrise,object,173
+Learn to ride a motorcycle,new_skill,7100,779,오토바이 타는 법을 배우기,motocycle,object,174
+Learn to Surf,new_skill,6800,800,서핑 배우기,surfing board,object,175
+Learn how to play guitar,new_skill,3500,882,기타 치는 법 배우기,guitar,object,176
+Learn sign language,new_skill,3200,211,수화 배우기,hand,object,177
+Ride an Elephant in Thailand,new_skill,3000,578,태국에서 코끼리 타기,thailand,gps,178
+Learn how to play the piano,new_skill,2500,602,피아노 치는 법을 배우기,piano,object,179
+Visit Las Vegas,new_skill,1000,306,라스베이거스 방문,las vegas,gps,180
+Make a YouTube video,new_skill,507,130,유튜브 동영상 만들기,youtubelink,text,181
+Travel to London,new_skill,431,222,런던 여행,london,gps,182
+Learn to speak french,new_skill,359,22,프랑스어를 배우기,french,text,183
+Learn to play the Violin,new_skill,269,36,바이올린 연주 하기,vionlin,object,184
+Try Fencing,new_skill,190,25,펜싱 하기,fencing,object,185
+Learn how to Longboard,new_skill,143,24,롱보드 타는 방법 알아보기,longboard,object,186
+Float in the Dead Sea,outdoor,14000,806,사해 가기,dead sea,gps,187
+Go Snowboarding,outdoor,1200,381,스노보드 타러 가기,snowboard,object,188
+See Mount Rushmore,outdoor,866,156,러시모어 산 보기,mount rushmore,gps,189
+Learn to Ski,outdoor,841,234,스키 배우기,ski,object,190
+Ride a dune buggy in the desert,outdoor,583,49,사막에서 둔버기 타기,dune buggy,object,191
+Go jet skiing,outdoor,370,109,제트스키 타러 가다.,jet ski,object,192
+Go to glastonbury festival,outdoor,287,36,글래스톤베리 축제에 가기,glastonbury festival,text,193
+Go on the London Eye,outdoor,255,127,런던아이에 가기,london eye,gps,194
+Go to Fiji,outdoor,189,16,피지에 가기,fiji,gps,195
+Visit Redwood National Park,outdoor,135,12,레드우드 국립공원 방문,redwood antional park,gps,196
+Ice skate,outdoor,129,70,아이스 스케이트하기,ice skate,object,197
+Have a Bonfire,outdoor,120,31,모닥불을 피워라,bonfire,object,198
+Do yoga,sports,1900,471,요가를 하다,yoga,text,199
+Drive a race car,sports,171,484,경주용 자동차 운전,race car,object,200
+Jump out of a plane,sports,128,33,비행기에서 뛰어내리기,plane,object,201
+Buy A Boat,sports,108,102,보트 구입,boat,object,202
+Swim The Great Barrier Reef,travel,6300,467,대보초 헤엄치기,great barrier reef,gps,203
+See the Taj Mahal,travel,2500,257,타지마할 보기,taj mahal,object,204
+Visit Singapore,travel,2100,468,싱가포르 방문,singapore,gps,205
+Ride a Gondola in Venice,travel,2000,336,베네치아에서 곤돌라 타기,gondola,object,206
+Visit Switzerland,travel,1900,625,스위스 방문,switzerland,gps,207
+Visit Easter Island,travel,1100,14,이스터 섬 방문,easter island,gps,208
+Visit New York City,travel,963,299,뉴욕 방문,new york city,gps,209
+Go to South America,travel,909,69,남아메리카로 가기,south america,gps,210
+Go to a black sand beach,travel,608,148,검은 모래사장으로 가기,pasir hitam,gps,211
+Drink from a coconut,travel,604,243,코코넛을 마시기,coconut,object,212
+Visit Austria,travel,462,194,오스트리아 방문,austria,gps,213
+See the Mona Lisa,travel,410,175,모나리자 보기,mona lisa,object,214
+Visit Norway,travel,382,57,노르웨이 방문,norway,gps,215
+Visit Chicago,travel,257,76,시카고 방문,chicago,gps,216
+Drive Down Route 66,travel,241,11,미국 66번 국도 차로 달려보기,route 66,gps,217
+Visit South America,travel,213,19,남미 방문,south america,gps,218
+Visit Israel,travel,193,19,이스라엘 방문,israel,gps,219
+"Visit Rome, Italy",travel,187,50,이탈리아 로마 방문,rome,gps,220
+See the Pope,travel,157,50,교황 만나기,pope,gps,221
+Visit Seattle,travel,143,36,시애틀 방문,seattle,gps,222
