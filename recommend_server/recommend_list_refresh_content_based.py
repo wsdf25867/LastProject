@@ -9,29 +9,35 @@ from flask import Flask, escape, request
 
 app = Flask(__name__)
     
-
 @app.route('/<string:uid>')
 def get_member_data(uid):
-   
     member = db.reference('/Level Us/UserAccount/' + uid).get()
-    #user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
+
     count_vector = CountVectorizer(ngram_range=(1,3))
     c_vector_category= count_vector.fit_transform(data['category'])
     category_c_sim = cosine_similarity(c_vector_category, c_vector_category).argsort()[:, ::-1]
-    #get_recommend_bucket_list(uid, data, user_log, title_ko='메세지 병에 담아 보내기')
-    return(get_recommend_bucket_list(uid, data, category_c_sim, title_ko='메세지 병에 담아 보내기'))
+    return(get_recommend_bucket_list(uid, data, user_log, category_c_sim))
 
-#def get_recommend_bucket_list(uid, df, user_log, title_ko, top=30):
-def get_recommend_bucket_list(uid, df, category_c_sim,title_ko, top=30):
-    target_bucketlist_index = df[df['title_ko'] == title_ko].index.values
+#사용자 평점이 가장 높은 퀘스트의 유사 퀘스트를 추천(완료된 퀘스트는 제거)
+def get_recommend_bucket_list(uid, df, user_log, category_c_sim, top=30):
+    top = 0
+    quest_index = 0
+    for log in user_log :  
+        if (top <= log['rating']) :
+            quest_index = log['quest_num']
+            top = log['rating']
+
+    
+    target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)
     
-    # for index in user_log['quest_index'] :  
-    #     sim_index = sim_index[sim_index != index]
+    for index in user_log['quest_num'] :  
+        sim_index = sim_index[sim_index != index]
     
     result = df.iloc[sim_index].sort_values('done', ascending=False)[:10]
     print(result)
-    # ascending=False 하면 내림차순
+    
     result = result.sort_values(by=['quest_num'], axis=0)
 
     # 2) index reset하기
@@ -57,12 +63,7 @@ if __name__ == "__main__":
     cred = credentials.Certificate("collabtest-71a4d-firebase-adminsdk-ty8fu-79e0a2a74e.json")
     firebase_admin.initialize_app(cred,{
     'databaseURL':'https://collabtest-71a4d-default-rtdb.asia-southeast1.firebasedatabase.app/'})
-    dir = db.reference('/quest/-Mb16FwvadiCQF-HD9_E')
+    dir = db.reference('/quest/ALL')
     #content based filtering 알고리즘을 이용한 유사한 퀘스트 추천
     data = pd.DataFrame(dir.get())
-    app.run(host="192.168.0.12", port=8888)
-    
-
-
-
-    
+    app.run(host="192.168.0.12", port=8889)
