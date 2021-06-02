@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -54,6 +56,8 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     double lng;
     double nowLat;
     double nowLng;
+    TextView txt;
+    Button b1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         network = (TextView) findViewById(R.id.network);
 
         location2 = (TextView) findViewById(R.id.location2);
+        b1 = (Button) findViewById(R.id.b1);
+        txt = (TextView)findViewById(R.id.txt);
 
         // LocationManager 참조 객체
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -79,6 +85,28 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             network.setText("Network Provider: Available");
         }
+
+        Geocoder g = new Geocoder(this);    //좌표 -> 주소
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Address> address=null;
+                try {
+                    address = g.getFromLocation(nowLat,nowLng,10);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.d("test","입출력오류");
+                }
+                if(address!=null){
+                    if(address.size()==0){
+                        txt.setText("주소찾기 오류");
+                    }else{
+                        Log.d("찾은 주소",address.get(0).toString());
+                        txt.setText(address.get(0).getAddressLine(0));
+                    }
+                }
+            }
+        });
 
 
         captureImageBtn = findViewById(R.id.capture_image_btn);
