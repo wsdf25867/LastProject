@@ -26,9 +26,7 @@ def get_recommend_bucket_list_signup(uid, df, category_c_sim,title_ko, top=30):
 
     # 2) index reset하기
     result = result.reset_index(drop=True)
-    print(result)
-    js = result.to_dict('records')
-    print(js)    
+    js = result.to_dict('records') 
     #json 파일로 저장
     with open('test.json', 'w', encoding='cp949') as make_file:
         json.dump(js, make_file)
@@ -55,32 +53,26 @@ def get_member_data_refresh(uid):
 
 #사용자 평점이 가장 높은 퀘스트의 유사 퀘스트를 추천(완료된 퀘스트는 제거)
 def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30):
-    top = 0
+    toprate = 0
     quest_index = 0
-    cnt = 0
-    for log in user_log['rating'] : 
-        if (top <= log) :
-            quest_index = user_log['quest_num'][cnt]
-            top = log
-        cnt = cnt+1
-
-    
+    for index, row in user_log.iterrows() : 
+        if (toprate <= row['rating']) :
+            toprate = row['rating']
+            quest_index = str(row['quest_num'])
+   
     target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)
-    
+
     for index in user_log['quest_num'] :  
         sim_index = sim_index[sim_index != index]
     
     result = df.iloc[sim_index].sort_values('done', ascending=False)[:10]
-    print(result)
-    
     result = result.sort_values(by=['quest_num'], axis=0)
 
     # 2) index reset하기
     result = result.reset_index(drop=True)
-    print(result)
     js = result.to_dict('records')
-    print(js)    
+    
     #json 파일로 저장
     with open('test.json', 'w', encoding='cp949') as make_file:
         json.dump(js, make_file)
@@ -91,7 +83,7 @@ def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30)
 
     dir = db.reference('/recommend_list/'+uid)
     dir.set(data)
-
+   
     return result    
 
 
