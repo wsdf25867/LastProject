@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +26,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,6 +44,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,10 +54,13 @@ import java.io.InputStream;
 public class EditMyInfoFragment extends Fragment{
 
     private DatabaseReference mDatabaseRef;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
+    private String imagePath;
+    private String fileName;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -104,8 +112,9 @@ public class EditMyInfoFragment extends Fragment{
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
-
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Level Us");
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
+        mDatabaseRef = firebaseDatabase.getReference("Level Us");
         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -157,12 +166,24 @@ public class EditMyInfoFragment extends Fragment{
         user_favorite.setText(intent.getStringExtra("favorite"));
         user_local.setText(intent.getStringExtra("local"));
 
+        if(storageRef.child(firebaseUser.getUid()+"/profile_img") != null){
+            StorageReference submitProfile = storageRef.child(firebaseUser.getUid()+"/profile_img");
+            submitProfile.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful())
+                        Glide.with(EditMyInfoFragment.this).load(task.getResult()).into(user_img);
+                }
+
+            });
+        }
 
         user_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
             }
         });
@@ -176,13 +197,14 @@ public class EditMyInfoFragment extends Fragment{
         if (requestCode == GET_GALLERY_IMAGE && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
 
             Uri selectedImageUri = data.getData();
+            imagePath = getPath(selectedImageUri);
             user_img.setImageURI(selectedImageUri);
 
-            System.out.println(getPath(data.getData()));
+//            System.out.println(getPath(selectedImageUri));
 
-            Uri file = Uri.fromFile(new File(getPath(selectedImageUri)));
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
-            StorageReference riversRef = storageRef.child(firebaseUser.getUid()+"/"+file.getLastPathSegment());
+            Uri file = Uri.fromFile(new File(imagePath));
+
+            StorageReference riversRef = storageRef.child(firebaseUser.getUid()+"/profile_img");
             UploadTask uploadTask = riversRef.putFile(file);
 
 // Register observers to listen for when the download is done or if it fails
@@ -196,6 +218,10 @@ public class EditMyInfoFragment extends Fragment{
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                     // ...
+//                    Uri downloadURL = taskSnapshot.getUploadSessionUri();
+//                    UserImage userImage = new UserImage();
+//                    userImage.setImageUrl(downloadURL.toString());
+//                    mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).child("userImage").setValue(userImage);
                 }
             });
 
@@ -215,5 +241,4 @@ public class EditMyInfoFragment extends Fragment{
 
         return cursor.getString(index);
     }
-
 }
