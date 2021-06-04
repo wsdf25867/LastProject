@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -95,9 +96,10 @@ public class QuestListFragment extends Fragment {
         nextQuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabaseRef.child(firebaseUser.getUid()).child(Integer.toString(questNum)).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(mDatabaseRef.child(firebaseUser.getUid()).child(Integer.toString(questNum))!=null){
+                    mDatabaseRef.child(firebaseUser.getUid()).child(Integer.toString(questNum)).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                        QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
 //                        added.setText(questInfo.getAdded());
 //                        category.setText(questInfo.getCategory());
@@ -108,24 +110,29 @@ public class QuestListFragment extends Fragment {
 //                        title_ko.setText(questInfo.getTitle_ko());
 //                        way.setText(questInfo.getWay());
 //                        questNum++;
-                        questInfo[questNum] = snapshot.getValue(QuestInfo.class);
-                        added.setText(questInfo[questNum].getAdded());
-                        category.setText(questInfo[questNum].getCategory());
-                        done.setText(questInfo[questNum].getDone());
-                        keyword.setText(questInfo[questNum].getKeyword());
-                        quest_num.setText(questInfo[questNum].getQuest_num());
-                        title.setText(questInfo[questNum].getTitle());
-                        title_ko.setText(questInfo[questNum].getTitle_ko());
-                        way.setText(questInfo[questNum].getWay());
-                        questNum++;
-                        if(questNum==questInfo.length)
-                            questNum = 0;
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                            if(snapshot.exists()){
+                                questInfo[questNum] = snapshot.getValue(QuestInfo.class);
+                                added.setText(questInfo[questNum].getAdded());
+                                category.setText(questInfo[questNum].getCategory());
+                                done.setText(questInfo[questNum].getDone());
+                                keyword.setText(questInfo[questNum].getKeyword());
+                                quest_num.setText(questInfo[questNum].getQuest_num());
+                                title.setText(questInfo[questNum].getTitle());
+                                title_ko.setText(questInfo[questNum].getTitle_ko());
+                                way.setText(questInfo[questNum].getWay());
+                                questNum++;
+                                if(questNum==questInfo.length)
+                                    questNum = 0;
+                            }
+                            else
+                                Toast.makeText(getActivity(), "No quest exists", Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
 
