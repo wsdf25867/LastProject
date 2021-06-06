@@ -18,16 +18,21 @@ driver.get('https://www.google.co.kr/imghp?hl=ko&ogbl')
 
 for index, row in selectdata[63:].iterrows() :
     driver.get('https://www.google.co.kr/imghp?hl=ko&ogbl')
+
+    #검색창에 검색어 입력
     elem_search = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/form/div[1]/div[1]/div[1]/div/div[2]/input")
     elem_search.clear()
     elem_search.send_keys(row['title'] + ' + bucketlist.org')
 
-    btn_login = driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/form/div[1]/div[1]/div[1]/button')
-    btn_login.click()
+    #검색 버튼 클릭
+    btn_search = driver.find_element_by_xpath('/html/body/div[2]/div[2]/div[2]/form/div[1]/div[1]/div[1]/button')
+    btn_search.click()
     
+    #맨 처음 이미지 클릭
     elem_image_little = driver.find_element_by_xpath('/html/body/div[2]/c-wiz/div[3]/div[1]/div/div/div/div[1]/div[1]/span/div[1]/div[1]/div[1]/a[1]/div[1]/img')
     elem_image_little.click()
 
+    #해당 이미지 다운로드
     elem_image = driver.find_element_by_xpath('/html/body/div[2]/c-wiz/div[3]/div[2]/div[3]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div/div[2]/a/img')
     url = elem_image.get_attribute("src")
     print(url)
