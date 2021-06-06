@@ -28,8 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 public class QuestListFragment extends Fragment {
 
     private DatabaseReference mDatabaseRef;
+
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+//    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//    DatabaseReference allDatabaseRef = firebaseDatabase.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
