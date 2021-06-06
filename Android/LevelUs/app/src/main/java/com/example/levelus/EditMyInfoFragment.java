@@ -2,6 +2,8 @@ package com.example.levelus;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,19 +119,20 @@ public class EditMyInfoFragment extends Fragment{
         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserAccount userAccount = dataSnapshot.getValue(UserAccount.class);
-
                 //각각의 값 받아오기 get어쩌구 함수들은 Together_group_list.class에서 지정한것
-                strName = userAccount.getName();
-                strAge = userAccount.getAge();
-                strFavorite = userAccount.getFavorite();
-                strLocal = userAccount.getLocal();
+                if(dataSnapshot.exists()){
+                    UserAccount userAccount = dataSnapshot.getValue(UserAccount.class);
+                    strName = userAccount.getName();
+                    strAge = userAccount.getAge();
+                    strFavorite = userAccount.getFavorite();
+                    strLocal = userAccount.getLocal();
 
-                //텍스트뷰에 받아온 문자열 대입하기
-                user_name.setText(strName);
-                user_age.setText(strAge);
-                user_favorite.setText(strFavorite);
-                user_local.setText(strLocal);
+                    //텍스트뷰에 받아온 문자열 대입하기
+                    user_name.setText(strName);
+                    user_age.setText(strAge);
+                    user_favorite.setText(strFavorite);
+                    user_local.setText(strLocal);
+                }
             }
 
             @Override
@@ -149,12 +153,46 @@ public class EditMyInfoFragment extends Fragment{
                 drawerLayout.openDrawer(drawerView);
             }
         });
+
         Button fix_profile = view.findViewById(R.id.fix_profile);
         fix_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent GoToEditActivity = new Intent(getActivity(),EditActivity.class);
                 startActivity(GoToEditActivity);
+            }
+        });
+
+        Button delete_profile = view.findViewById(R.id.delete_profile);
+        delete_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder askDeleteAccount = new AlertDialog.Builder(getActivity());
+                askDeleteAccount.setIcon(R.mipmap.ic_launcher);
+                askDeleteAccount.setTitle("회원탈퇴");
+                askDeleteAccount.setMessage("회원탈퇴 하시겠습니까?");
+
+                askDeleteAccount.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent GoToMainActivity = new Intent(getContext(), MainActivity.class);
+                        mFirebaseAuth.signOut();
+                        firebaseUser.delete();
+                        mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).removeValue();
+                        dialog.dismiss();
+                        startActivity(GoToMainActivity);
+                        Toast.makeText(getActivity(),"회원탈퇴 성공",Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
+                    }
+                });
+
+                askDeleteAccount.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                askDeleteAccount.show();
             }
         });
 
