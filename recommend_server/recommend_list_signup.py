@@ -94,7 +94,7 @@ if __name__ == "__main__":
     dir = db.reference('/quest/ALL')
     #content based filtering 알고리즘을 이용한 유사한 퀘스트 추천
     data = pd.DataFrame(dir.get())
-    app.run(host="192.168.0.12", port=8888)
+    app.run(host="0.0.0.0", port=5000)
     
 
 

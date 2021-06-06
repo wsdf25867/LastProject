@@ -2,6 +2,7 @@ package com.example.levelus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +16,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mDatabaseRef;
     private EditText email, password;
     private Button button_log_in;
 
@@ -30,12 +32,27 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activtiy_log_in);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Level Us");
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d("user UID", "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d("user null", "onAuthStateChanged:signed_out");
+                }
+            }
+        };
 
         email = findViewById(R.id.input_id);
         password = findViewById(R.id.input_password);
 
         button_log_in = findViewById(R.id.button_log_in);
+
+
         button_log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent GoToLoggedPages = new Intent(LoginActivity.this, LoggedPages.class);
+                            mFirebaseAuth.addAuthStateListener(mAuthListener);
+                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+                            firebaseUser.updateEmail(firebaseUser.getEmail());
+                            Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
                             startActivity(GoToLoggedPages);
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             finish();

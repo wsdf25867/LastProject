@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="#88F88D"
+        android:orientation="vertical"
+        android:gravity="right">
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_close_24"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right">
+            <Button
+                android:id="@+id/fix_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="계정 정보 변경"/>
+            <Button
+                android:id="@+id/delete_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원 탈퇴하기"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
