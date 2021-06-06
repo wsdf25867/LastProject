@@ -149,6 +149,14 @@ public class EditMyInfoFragment extends Fragment{
                 drawerLayout.openDrawer(drawerView);
             }
         });
+        Button fix_profile = view.findViewById(R.id.fix_profile);
+        fix_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GoToEditActivity = new Intent(getActivity(),EditActivity.class);
+                startActivity(GoToEditActivity);
+            }
+        });
 
         drawerLayout.setDrawerListener(listener);
         drawerView.setOnTouchListener(new View.OnTouchListener() {
