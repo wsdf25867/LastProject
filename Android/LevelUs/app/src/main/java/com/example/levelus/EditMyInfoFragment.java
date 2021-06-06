@@ -2,26 +2,24 @@ package com.example.levelus;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
 
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,8 +41,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +49,9 @@ import java.net.URL;
  */
 public class EditMyInfoFragment extends Fragment{
 
+    private DrawerLayout drawerLayout;
+    private View drawerView;
+
     private DatabaseReference mDatabaseRef;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -60,7 +59,6 @@ public class EditMyInfoFragment extends Fragment{
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private String imagePath;
-    private String fileName;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -140,6 +138,33 @@ public class EditMyInfoFragment extends Fragment{
         });
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_my_info, container, false);
+
+        drawerLayout = view.findViewById(R.id.drawer_layout);
+        drawerView  = view.findViewById(R.id.drawer);
+
+        TextView settings = view.findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawerView);
+            }
+        });
+
+        drawerLayout.setDrawerListener(listener);
+        drawerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
+        Button cancel_button = view.findViewById(R.id.cancel_button);
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawers();
+            }
+        });
 
         TextView logout = view.findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -230,6 +255,7 @@ public class EditMyInfoFragment extends Fragment{
             Toast.makeText(getActivity(), "사진 선택 취소", Toast.LENGTH_LONG).show();
         }
     }
+
     public String getPath(Uri uri){
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader cursorLoader = new CursorLoader(getActivity(), uri, proj, null, null, null);
@@ -241,4 +267,26 @@ public class EditMyInfoFragment extends Fragment{
 
         return cursor.getString(index);
     }
+
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
 }
