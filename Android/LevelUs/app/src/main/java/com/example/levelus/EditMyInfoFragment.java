@@ -1,22 +1,17 @@
 package com.example.levelus;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.loader.content.CursorLoader;
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,9 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.InputStream;
@@ -51,18 +41,16 @@ public class EditMyInfoFragment extends Fragment{
     private DatabaseReference mDatabaseRef;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private final int GET_GALLERY_IMAGE = 200;
+    private static final int REQUEST_CODE = 1;
 
     ImageView user_img;
     TextView user_name, user_age, user_favorite, user_local;
-    private String strName, strAge, strFavorite, strLocal;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -101,9 +89,6 @@ public class EditMyInfoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
-        }
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Level Us");
         mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
@@ -112,10 +97,10 @@ public class EditMyInfoFragment extends Fragment{
                 UserAccount userAccount = dataSnapshot.getValue(UserAccount.class);
 
                 //각각의 값 받아오기 get어쩌구 함수들은 Together_group_list.class에서 지정한것
-                strName = userAccount.getName();
-                strAge = userAccount.getAge();
-                strFavorite = userAccount.getFavorite();
-                strLocal = userAccount.getLocal();
+                String strName = userAccount.getName();
+                String strAge = userAccount.getAge();
+                String strFavorite = userAccount.getFavorite();
+                String strLocal = userAccount.getLocal();
 
                 //텍스트뷰에 받아온 문자열 대입하기
                 user_name.setText(strName);
@@ -161,9 +146,15 @@ public class EditMyInfoFragment extends Fragment{
         user_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                startActivityForResult(intent, GET_GALLERY_IMAGE);
+                switch (view.getId()) { // 갤러리에서 사진 업로드 클릭
+                    case R.id.user_img: // 갤러리에서 사진 가져오기 창을 띄운다.
+                        Intent intent = new Intent();
+                        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/*");
+                        intent.setAction(Intent.ACTION_GET_CONTENT); // 위의 Activity를 실행한 이후 이벤트를 정의
+                        startActivityForResult(intent, REQUEST_CODE);
+                        break;
+                }
             }
         });
         return view;
@@ -173,47 +164,26 @@ public class EditMyInfoFragment extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
 //        AppCompatActivity appCompatActivity = newInstance();
-        if (requestCode == GET_GALLERY_IMAGE && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+        if(requestCode == REQUEST_CODE)
+        {
+            if(resultCode == Activity.RESULT_OK)
+            {
+                try{
+                    InputStream in = getActivity().getContentResolver().openInputStream(data.getData());
 
-            Uri selectedImageUri = data.getData();
-            user_img.setImageURI(selectedImageUri);
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
 
-            System.out.println(getPath(data.getData()));
+                    user_img.setImageBitmap(img);
+                }catch(Exception e)
+                {
 
-            Uri file = Uri.fromFile(new File(getPath(selectedImageUri)));
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
-            StorageReference riversRef = storageRef.child(firebaseUser.getUid()+"/"+file.getLastPathSegment());
-            UploadTask uploadTask = riversRef.putFile(file);
-
-// Register observers to listen for when the download is done or if it fails
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
                 }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                    // ...
-                }
-            });
-
-        }
-        else if(resultCode == Activity.RESULT_CANCELED) {
-            Toast.makeText(getActivity(), "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
+            else if(resultCode == Activity.RESULT_CANCELED)
+            {
+                Toast.makeText(getActivity(), "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
         }
     }
-    public String getPath(Uri uri){
-        String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(getActivity(), uri, proj, null, null, null);
-
-        Cursor cursor = cursorLoader.loadInBackground();
-        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-
-        cursor.moveToFirst();
-
-        return cursor.getString(index);
-    }
-
 }

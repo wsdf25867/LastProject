@@ -9,8 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,8 @@ public class QuestListFragment extends Fragment {
     private DatabaseReference mDatabaseRef;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+    private LinearLayout container;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,57 +86,380 @@ public class QuestListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quest_list, container, false);
         // Inflate the layout for this fragment
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("recommend_list");
-
-        Button nextQuest = view.findViewById(R.id.nextQuest);
-
-        TextView added = view.findViewById(R.id.added);
-        TextView category = view.findViewById(R.id.category);
-        TextView done = view.findViewById(R.id.done);
-        TextView keyword = view.findViewById(R.id.keyword);
-        TextView quest_num = view.findViewById(R.id.quest_num);
-        TextView title = view.findViewById(R.id.title);
-        TextView title_ko = view.findViewById(R.id.title_ko);
-        TextView way = view.findViewById(R.id.way);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
 
-        QuestInfo[] questInfo = new QuestInfo[10];
-        nextQuest.setOnClickListener(new View.OnClickListener() {
+//        TextView added = view.findViewById(R.id.added);
+//        TextView category = view.findViewById(R.id.category);
+//        TextView done = view.findViewById(R.id.done);
+//        TextView keyword = view.findViewById(R.id.keyword);
+//        TextView quest_num = view.findViewById(R.id.quest_num);
+//        TextView title = view.findViewById(R.id.title);
+        TextView title_ko = view.findViewById(R.id.title_ko);       //quest title
+        TextView title_ko1 = view.findViewById(R.id.title_ko1);
+        TextView title_ko2 = view.findViewById(R.id.title_ko2);
+        TextView title_ko3 = view.findViewById(R.id.title_ko3);
+        TextView title_ko4 = view.findViewById(R.id.title_ko4);
+        TextView title_ko5 = view.findViewById(R.id.title_ko5);
+
+
+//        TextView way = view.findViewById(R.id.way);
+
+        TextView title = view.findViewById(R.id.title);                 //카테고리 이름
+        ImageButton category1 = view.findViewById(R.id.category1);     //카테고리들 선택
+        ImageButton category2 = view.findViewById(R.id.category2);
+        ImageButton category3 = view.findViewById(R.id.category3);
+        ImageButton category4 = view.findViewById(R.id.category4);
+        ImageButton category5 = view.findViewById(R.id.category5);
+        ImageButton category6 = view.findViewById(R.id.category6);
+        ImageButton category7 = view.findViewById(R.id.category7);
+        ImageButton category8 = view.findViewById(R.id.category8);
+        ImageButton category9 = view.findViewById(R.id.category9);
+        ImageButton category10 = view.findViewById(R.id.category10);
+        ImageButton category11 = view.findViewById(R.id.category11);
+        ImageButton category12 = view.findViewById(R.id.category12);
+
+
+
+
+        QuestInfo[] questInfo = new QuestInfo[100];
+        category1.setOnClickListener(new View.OnClickListener() {   //diy
             @Override
             public void onClick(View v) {
-                mDatabaseRef.child(firebaseUser.getUid()).child(Integer.toString(questNum)).addValueEventListener(new ValueEventListener() {
+                mDatabaseRef.child("quest").child("diy").addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
-//                        added.setText(questInfo.getAdded());
-//                        category.setText(questInfo.getCategory());
-//                        done.setText(questInfo.getDone());
-//                        keyword.setText(questInfo.getKeyword());
-//                        quest_num.setText(questInfo.getQuest_num());
-//                        title.setText(questInfo.getTitle());
-//                        title_ko.setText(questInfo.getTitle_ko());
-//                        way.setText(questInfo.getWay());
-//                        questNum++;
-                        questInfo[questNum] = snapshot.getValue(QuestInfo.class);
-                        added.setText(questInfo[questNum].getAdded());
-                        category.setText(questInfo[questNum].getCategory());
-                        done.setText(questInfo[questNum].getDone());
-                        keyword.setText(questInfo[questNum].getKeyword());
-                        quest_num.setText(questInfo[questNum].getQuest_num());
-                        title.setText(questInfo[questNum].getTitle());
-                        title_ko.setText(questInfo[questNum].getTitle_ko());
-                        way.setText(questInfo[questNum].getWay());
-                        questNum++;
-                        if(questNum==questInfo.length)
-                            questNum = 0;
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("diy");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                     }
                 });
             }
         });
+
+        category2.setOnClickListener(new View.OnClickListener() {   //entertainment
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("entertainment").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("entertainment");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category3.setOnClickListener(new View.OnClickListener() {   //food
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("food").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("food");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category4.setOnClickListener(new View.OnClickListener() {   //health
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("health").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("health");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+
+        category5.setOnClickListener(new View.OnClickListener() {   //hiking
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("hiking").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("hiking");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category6.setOnClickListener(new View.OnClickListener() {   //life_milestone
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("life_milestone").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("life_milestone");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category7.setOnClickListener(new View.OnClickListener() {   //love
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("love").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("love");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category8.setOnClickListener(new View.OnClickListener() {   //nature
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("nature").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("nature");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category9.setOnClickListener(new View.OnClickListener() {   //new_skill
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("new_skill").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("new_skill");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category10.setOnClickListener(new View.OnClickListener() {   //outdoor
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("outdoor").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("outdoor");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category11.setOnClickListener(new View.OnClickListener() {   //sports
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("sports").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("sports");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        category12.setOnClickListener(new View.OnClickListener() {   //travel
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child("quest").child("travel").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        title.setText("travel");
+                        for(int i = 0; i<(int)snapshot.getChildrenCount(); i++) {
+                            questInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            questNum++;
+                        }
+                        title_ko.setText(questInfo[0].getTitle_ko());      //얘만 한글버전
+                        title_ko1.setText(questInfo[1].getTitle_ko());
+                        title_ko2.setText(questInfo[2].getTitle_ko());
+                        title_ko3.setText(questInfo[3].getTitle_ko());
+                        title_ko4.setText(questInfo[4].getTitle_ko());
+                        title_ko5.setText(questInfo[5].getTitle_ko());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
 
         return view;
     }

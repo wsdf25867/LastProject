@@ -3,92 +3,366 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context=".QuestListFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".QuestListFragment">
 
-    <View
-        android:id="@+id/rectangle_3"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rectangle_3"
-        android:layout_above="@+id/nextQuest"
-        />
+
+    <HorizontalScrollView
+        android:id="@+id/allCategory"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/page_header"
+        android:layout_marginTop="22dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/category1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/edit" />
+
+        <ImageButton
+            android:id="@+id/category2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/layers_alt" />
+
+        <ImageButton
+            android:id="@+id/category3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/dribbble" />
+
+        <ImageButton
+            android:id="@+id/category4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/discord" />
+
+        <ImageButton
+            android:id="@+id/category5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/window_check" />
+        <ImageButton
+            android:id="@+id/category6"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/location" />
+        <ImageButton
+            android:id="@+id/category7"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/flag_fill" />
+        <ImageButton
+            android:id="@+id/category8"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/heart_fill" />
+        <ImageButton
+            android:id="@+id/category9"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/warning" />
+        <ImageButton
+            android:id="@+id/category10"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/play_circle_outline" />
+        <ImageButton
+            android:id="@+id/category11"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/group_alt" />
+        <ImageButton
+            android:id="@+id/category12"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/home_alt_fill" />
+    </LinearLayout>
+    </HorizontalScrollView>
+
 
     <LinearLayout
-        android:id="@+id/quest_info"
+        android:id="@+id/little_menu_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
-        <TextView
-            android:id="@+id/added"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-        <TextView
-            android:id="@+id/done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-        <TextView
-            android:id="@+id/keyword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-        <TextView
-            android:id="@+id/quest_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+        android:layout_height="84dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/little_menu_bottom_background"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/user_circle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/user_circle" />
+
+        <Button
+            android:id="@+id/media_play"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/media_play" />
+
+        <Button
+            android:id="@+id/edit_plus_s"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/plus_square" />
+
+        <Button
+            android:id="@+id/bar_chart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bar_chart" />
+    </LinearLayout>
+    <!--        <TextView-->
+    <!--            android:id="@+id/title"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"/>-->
+    <!--        <TextView-->
+    <!--            android:id="@+id/way"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"/>-->
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/allCategory"
+        android:layout_marginBottom="90dp">
+    <RelativeLayout
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/allCategory">
+
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="40dp" />
+
+        <ImageButton
+            android:id="@+id/quest"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" /><!-- 1번째 -->
+        <ImageButton
+            android:id="@+id/quest1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest" />
+
+        <ImageButton
+            android:id="@+id/quest2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest3"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest1"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest2" />
+
+        <ImageButton
+            android:id="@+id/quest4"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest2"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest5"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest3"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest4" />
+
+        <ImageButton
+            android:id="@+id/quest6"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest4"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest7"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest5"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest6" />
+        <ImageButton
+            android:id="@+id/quest8"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest6"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest9"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest7"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest8"
+            />
+
+
+
         <TextView
             android:id="@+id/title_ko"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest"
+            android:layout_marginLeft="50dp" />
         <TextView
-            android:id="@+id/way"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-    <Button
-        android:id="@+id/nextQuest"
-        android:layout_below="@+id/quest_info"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next Quest"
-        android:textSize="20sp"/>
+            android:id="@+id/title_ko1"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest1"
+            android:layout_marginLeft="220dp" />
+
+        <TextView
+            android:id="@+id/title_ko2"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest2"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko3"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest3"
+            android:layout_marginLeft="220dp" />
+
+        <TextView
+            android:id="@+id/title_ko4"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest4"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko5"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest5"
+            android:layout_marginLeft="220dp" />
+
+        <TextView
+            android:id="@+id/title_ko6"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest6"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko7"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest7"
+            android:layout_marginLeft="220dp" />
+        <TextView
+            android:id="@+id/title_ko8"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest8"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko9"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest9"
+            android:layout_marginLeft="220dp"
+            />
+        <!-- 마지막 부분에 마진90줘야함 -->
+
+    </RelativeLayout>
+    </ScrollView>
+
     <RelativeLayout
         android:id="@+id/page_header"
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="36dp">
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="16dp">
+
         <TextView
             android:id="@+id/log_in"
             android:layout_width="150dp"
             android:layout_height="36dp"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal|top"
             android:text="@string/quest_list"
-            android:textAppearance="@style/big_black_title"
-            android:gravity="center_horizontal|top" />
+            android:textAppearance="@style/big_black_title" />
+
         <TextView
             android:id="@+id/logout"
             android:layout_width="60dp"
@@ -98,96 +372,8 @@
             android:layout_marginTop="8dp"
             android:gravity="right|top"
             android:text="@string/log_out"
-            android:textAppearance="@style/login"/>
+            android:textAppearance="@style/login" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/page_header"
-        android:layout_marginTop="22dp"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/edit_my_info"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="7.5dp"
-            android:background="defaultIconColor"
-            android:src="@drawable/edit" />
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="7.5dp"
-            android:background="defaultIconColor"
-            android:src="@drawable/layers_alt" />
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="7.5dp"
-            android:background="defaultIconColor"
-            android:src="@drawable/dribbble" />
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="7.5dp"
-            android:background="defaultIconColor"
-            android:src="@drawable/discord" />
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_marginTop="7.5dp"
-            android:background="defaultIconColor"
-            android:src="@drawable/window_check" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/little_menu_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@drawable/little_menu_bottom_background">
-        <Button
-            android:id="@+id/user_circle"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="50dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/user_circle"/>
-        <Button
-            android:id="@+id/media_play"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="50dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/media_play"/>
-        <Button
-            android:id="@+id/edit_plus_s"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="50dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/plus_square" />
-        <Button
-            android:id="@+id/bar_chart"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="50dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bar_chart"
-            />
-    </LinearLayout>
 
 </RelativeLayout>

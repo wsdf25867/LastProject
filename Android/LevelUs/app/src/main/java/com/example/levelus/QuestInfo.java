@@ -10,6 +10,10 @@ public class QuestInfo {
     private String title_ko;
     private String way;
 
+    public QuestInfo(){
+
+    }
+
     public String getAdded() {
         return added;
     }
