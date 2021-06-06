@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -88,7 +89,12 @@ public class SignActivity extends AppCompatActivity {
 
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
 
+
+
+
                             Toast.makeText(SignActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+
+
                             Intent GoToLoginActivity = new Intent(SignActivity.this, LoginActivity.class);
                             startActivity(GoToLoginActivity);
                         }
