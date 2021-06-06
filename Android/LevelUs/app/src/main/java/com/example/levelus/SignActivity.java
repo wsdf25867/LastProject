@@ -95,8 +95,10 @@ public class SignActivity extends AppCompatActivity {
                             Toast.makeText(SignActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
 
 
-                            Intent GoToLoginActivity = new Intent(SignActivity.this, LoginActivity.class);
-                            startActivity(GoToLoginActivity);
+                            Intent GoToWebPractice = new Intent(SignActivity.this, WebPractice.class);
+                            GoToWebPractice.putExtra("uid",firebaseUser.getUid());
+
+                            startActivity(GoToWebPractice);
                         }
                         else{
                             Toast.makeText(SignActivity.this, "회원가입 실패, 이메일 형식확인, 중복된 이메일, 또는 비밀번호 6자리 이상으로 입력", Toast.LENGTH_SHORT).show();
