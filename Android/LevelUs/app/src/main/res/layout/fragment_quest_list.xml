@@ -14,7 +14,7 @@
         android:layout_below="@+id/page_header"
         android:layout_marginTop="22dp">
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:orientation="horizontal">
 
@@ -270,6 +270,333 @@
             android:layout_marginTop="50dp"
             android:layout_toRightOf="@+id/quest8"
             />
+        <ImageButton
+            android:id="@+id/quest10"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest8"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest11"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest9"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest10"
+            />
+        <ImageButton
+            android:id="@+id/quest12"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest10"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest13"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest11"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest12"
+            />
+        <ImageButton
+            android:id="@+id/quest14"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest12"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest15"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest13"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest14"
+            />
+        <ImageButton
+            android:id="@+id/quest16"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest14"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest17"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest15"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest16"
+            />
+        <ImageButton
+            android:id="@+id/quest18"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest16"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest19"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest17"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest18"
+            />
+        <ImageButton
+            android:id="@+id/quest20"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest18"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest21"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest19"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest20"
+            />
+        <ImageButton
+            android:id="@+id/quest22"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest20"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest23"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest21"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest22"
+            />
+        <ImageButton
+            android:id="@+id/quest24"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest22"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest25"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest23"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest24"
+            />
+        <ImageButton
+            android:id="@+id/quest26"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest24"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest27"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest25"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest26"
+            />
+        <ImageButton
+            android:id="@+id/quest28"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest26"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest29"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest27"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest28"
+            />
+        <ImageButton
+            android:id="@+id/quest30"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest28"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest31"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest29"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest30"
+            />
+        <ImageButton
+            android:id="@+id/quest32"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest30"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest33"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest31"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest32"
+            />
+        <ImageButton
+            android:id="@+id/quest34"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest32"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest35"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest33"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest34"
+            />
+        <ImageButton
+            android:id="@+id/quest36"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest34"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest37"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest35"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest36"
+            />
+        <ImageButton
+            android:id="@+id/quest38"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest36"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest39"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest37"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest38"
+            />
+        <ImageButton
+            android:id="@+id/quest40"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest38"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest41"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest39"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest40"
+            />
+        <ImageButton
+            android:id="@+id/quest42"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest40"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest43"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest41"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest42"
+            />
+        <ImageButton
+            android:id="@+id/quest44"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest42"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest45"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest43"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest44"
+            />
+        <ImageButton
+            android:id="@+id/quest46"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest44"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest47"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest45"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest46"
+            />
+        <ImageButton
+            android:id="@+id/quest48"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest46"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
+        <ImageButton
+            android:id="@+id/quest49"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest47"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/quest48"
+            />
+        <ImageButton
+            android:id="@+id/quest50"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/quest48"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp" />
 
 
 
@@ -337,6 +664,272 @@
             android:layout_below="@+id/quest9"
             android:layout_marginLeft="220dp"
             />
+        <TextView
+            android:id="@+id/title_ko10"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest10"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko11"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest11"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko12"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest12"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko13"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest13"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko14"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest14"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko15"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest15"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko16"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest16"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko17"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest17"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko18"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest18"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko19"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest19"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko20"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest20"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko21"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest21"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko22"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest22"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko23"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest23"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko24"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest24"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko25"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest25"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko26"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest26"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko27"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest27"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko28"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest28"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko29"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest29"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko30"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest30"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko31"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest31"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko32"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest32"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko33"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest33"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko34"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest34"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko35"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest35"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko36"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest36"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko37"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest37"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko38"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest38"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko39"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest39"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko40"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest40"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko41"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest41"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko42"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest42"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko43"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest43"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko44"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest44"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko45"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest45"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko46"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest46"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko47"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest47"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko48"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest48"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/title_ko49"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest49"
+            android:layout_marginLeft="220dp"
+            />
+        <TextView
+            android:id="@+id/title_ko50"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/quest50"
+            android:layout_marginLeft="50dp" />
         <!-- 마지막 부분에 마진90줘야함 -->
 
     </RelativeLayout>
