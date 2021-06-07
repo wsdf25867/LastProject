@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("Level Us");
 //    private boolean state = firebaseAuth.
-
+    public static boolean isLoginSuccess = true;
     Button login_in,sign_in;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(firebaseUser != null && !getIntent().getBooleanExtra("isSuccessSecession", true)){
+        if(firebaseUser != null && isLoginSuccess){
             Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
             startActivity(GoToLoggedPages);
             Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();

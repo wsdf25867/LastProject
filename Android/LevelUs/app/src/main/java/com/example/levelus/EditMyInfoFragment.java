@@ -118,6 +118,7 @@ public class EditMyInfoFragment extends Fragment{
 //            startActivity(GoToMainActivity);
 //            getActivity().finish();
 //        }
+        MainActivity.isLoginSuccess = true;
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
         mDatabaseRef = firebaseDatabase.getReference("Level Us");
