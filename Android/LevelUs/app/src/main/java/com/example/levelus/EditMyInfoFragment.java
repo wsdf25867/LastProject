@@ -113,6 +113,11 @@ public class EditMyInfoFragment extends Fragment{
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
+//        if(getActivity().getIntent().getBooleanExtra("isSuccessSecession",true)){
+//            Intent GoToMainActivity = new Intent(getActivity(), MainActivity.class);
+//            startActivity(GoToMainActivity);
+//            getActivity().finish();
+//        }
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
         mDatabaseRef = firebaseDatabase.getReference("Level Us");
@@ -195,8 +200,8 @@ public class EditMyInfoFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 mFirebaseAuth.signOut();
-                Intent BackToLoginActivity = new Intent(getActivity(), LoginActivity.class);
-                startActivity(BackToLoginActivity);
+                Intent BackToMainActivity = new Intent(getActivity(), MainActivity.class);
+                startActivity(BackToMainActivity);
                 getActivity().finish();
             }
         });

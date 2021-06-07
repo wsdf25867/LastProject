@@ -23,6 +23,8 @@ import java.io.InputStream;
 public class LoggedPages extends AppCompatActivity {
     //    private TextView logout;
 //    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+//    public static LoggedPages loggedPages;
+
     private Fragment selected_fragment = null;
 
     private BottomNavigationView navigationView;
@@ -49,6 +51,7 @@ public class LoggedPages extends AppCompatActivity {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        loggedPages = LoggedPages.this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loggedpages);
 
@@ -59,15 +62,5 @@ public class LoggedPages extends AppCompatActivity {
 
         navigationView = findViewById(R.id.bottom_nav);
         navigationView.setOnNavigationItemSelectedListener(listener);
-//        logout = findViewById(R.id.logout);
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mFirebaseAuth.signOut();
-//                Intent BackToLoginActivity = new Intent(LoggedPages.this, LoginActivity.class);
-//                startActivity(BackToLoginActivity);
-//                finish();
-//            }
-//        });
     }
 }
