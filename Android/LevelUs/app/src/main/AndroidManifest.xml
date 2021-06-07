@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LevelUs"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".DeleteActivity"></activity>
+        <activity android:name=".EditActivity" />
         <activity android:name=".WebPractice" />
         <activity android:name=".ImageLabellingActivity" />
         <activity android:name=".TextRecognitionActivity">

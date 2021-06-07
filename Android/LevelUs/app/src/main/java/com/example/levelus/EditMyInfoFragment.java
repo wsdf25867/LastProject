@@ -160,6 +160,7 @@ public class EditMyInfoFragment extends Fragment{
             public void onClick(View v) {
                 Intent GoToEditActivity = new Intent(getActivity(),EditActivity.class);
                 startActivity(GoToEditActivity);
+                drawerLayout.closeDrawers();
             }
         });
 
@@ -167,32 +168,9 @@ public class EditMyInfoFragment extends Fragment{
         delete_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder askDeleteAccount = new AlertDialog.Builder(getActivity());
-                askDeleteAccount.setIcon(R.mipmap.ic_launcher);
-                askDeleteAccount.setTitle("회원탈퇴");
-                askDeleteAccount.setMessage("회원탈퇴 하시겠습니까?");
-
-                askDeleteAccount.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent GoToMainActivity = new Intent(getContext(), MainActivity.class);
-                        mFirebaseAuth.signOut();
-                        firebaseUser.delete();
-                        mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).removeValue();
-                        dialog.dismiss();
-                        startActivity(GoToMainActivity);
-                        Toast.makeText(getActivity(),"회원탈퇴 성공",Toast.LENGTH_SHORT).show();
-                        getActivity().finish();
-                    }
-                });
-
-                askDeleteAccount.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                askDeleteAccount.show();
+                Intent GoToDeleteActivity = new Intent(getActivity(),DeleteActivity.class);
+                startActivity(GoToDeleteActivity);
+                drawerLayout.closeDrawers();
             }
         });
 

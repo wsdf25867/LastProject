@@ -21,23 +21,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal|top"
-            android:text="Edit Info"
+            android:text="Secession"
             android:textAppearance="@style/big_black_title" />
     </RelativeLayout>
-    <EditText
-        android:id="@+id/input_name"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/bg"
-        android:hint="@string/name"
-        android:paddingLeft="16dp">
-    </EditText>
     <EditText
         android:id="@+id/input_id"
         android:layout_width="0dp"
@@ -66,47 +52,9 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingLeft="16dp"/>
-    <EditText
-        android:id="@+id/input_age"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="302dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/bg"
-        android:hint="@string/age"
-        android:paddingLeft="16dp"/>
-    <EditText
-        android:id="@+id/input_favorite"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="368dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/bg"
-        android:hint="@string/favorite"
-        android:padding="16dp"/>
-    <EditText
-        android:id="@+id/input_local"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="434dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/bg"
-        android:hint="@string/local"
-        android:paddingLeft="16dp"/>
+
     <Button
-        android:id="@+id/button_edit"
+        android:id="@+id/button_admit"
         android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_alignParentLeft="true"
@@ -114,8 +62,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginBottom="153dp"
+        android:layout_marginBottom="223dp"
         android:background="@drawable/button_prim"
-        android:text="Edit"
+        android:text="Admit"
         android:textColor="#ffffff"/>
 </RelativeLayout>
