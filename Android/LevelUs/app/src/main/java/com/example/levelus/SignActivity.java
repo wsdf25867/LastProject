@@ -32,6 +32,8 @@ public class SignActivity extends AppCompatActivity {
     private EditText name, age, favorite, local;
     private Button button_sign;
 
+    private int level = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +90,7 @@ public class SignActivity extends AppCompatActivity {
                             account.setLocal(strLocal);
 
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
-
-
+                            mDatabaseRef.child("UserLevel").child(firebaseUser.getUid()).setValue(level);
 
 
                             Toast.makeText(SignActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();

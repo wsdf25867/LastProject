@@ -79,8 +79,11 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
                                 mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
                                 break;
                             }
+
                         }
-                    }
+                        }
+
+
                 });
             }
             @Override
