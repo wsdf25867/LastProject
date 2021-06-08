@@ -76,11 +76,12 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
                         for(int i=0;i<10;i++){
                         QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                        System.out.println("확인용 "+i+" 번째 "+questInfo);
                         if(questInfo==null){
                             mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
                             break;
                         }
-                        break;
+
 
                     }
                     }
