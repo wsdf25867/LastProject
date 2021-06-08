@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
-
-
     <!-- 이 버튼 누르면 사진찍기가 활성됨. -->
     <Button
         android:id="@+id/capture_image_btn"

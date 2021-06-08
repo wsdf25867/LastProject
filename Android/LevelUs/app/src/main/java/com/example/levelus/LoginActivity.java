@@ -63,9 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            mFirebaseAuth.addAuthStateListener(mAuthListener);
-                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                            firebaseUser.updateEmail(firebaseUser.getEmail());
                             Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
                             startActivity(GoToLoggedPages);
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();

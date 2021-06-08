@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,7 +24,10 @@ import java.io.InputStream;
 public class LoggedPages extends AppCompatActivity {
     //    private TextView logout;
 //    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+//    public static LoggedPages loggedPages;
+
     private Fragment selected_fragment = null;
+    private Activity selected_activity = null;
 
     private BottomNavigationView navigationView;
     private BottomNavigationView.OnNavigationItemSelectedListener listener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,7 +38,7 @@ public class LoggedPages extends AppCompatActivity {
                     selected_fragment = new EditMyInfoFragment();
                     break;
                 case R.id.media_play:
-                    selected_fragment = new QuestInProgressFragment();
+                    selected_fragment = new MyQuestFragment();
                     break;
                 case R.id.plus_square:
                     selected_fragment = new QuestListFragment();
@@ -49,6 +53,7 @@ public class LoggedPages extends AppCompatActivity {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        loggedPages = LoggedPages.this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loggedpages);
 
@@ -59,15 +64,5 @@ public class LoggedPages extends AppCompatActivity {
 
         navigationView = findViewById(R.id.bottom_nav);
         navigationView.setOnNavigationItemSelectedListener(listener);
-//        logout = findViewById(R.id.logout);
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mFirebaseAuth.signOut();
-//                Intent BackToLoginActivity = new Intent(LoggedPages.this, LoginActivity.class);
-//                startActivity(BackToLoginActivity);
-//                finish();
-//            }
-//        });
     }
 }
