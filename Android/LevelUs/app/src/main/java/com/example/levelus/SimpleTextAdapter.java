@@ -4,10 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -15,14 +26,22 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
     private ArrayList<QuestInfo> mData;
 
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("ing_quest");
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+    String uid = firebaseUser.getUid();
+
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView quest_name ;
+        Button agree_button;
 
         ViewHolder(View view) {
             super(view) ;
             // 뷰 객체에 대한 참조. (hold strong reference)
             quest_name = (TextView) view.findViewById(R.id.quest_name);
+            agree_button = (Button) view.findViewById(R.id.agree_button);
         }
     }
 
@@ -46,11 +65,39 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
         holder.quest_name.setText(mData.get(position).getTitle_ko());
 
-    }
+        holder.agree_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                        for(int i=0;i<10;i++){
+                        QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                        System.out.println("확인용 "+i+" 번째 "+questInfo);
+                        if(questInfo==null){
+                            mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
+                            break;
+                        }
+
+
+                    }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+        });
+    }
     // getItemCount() - 전체 데이터 갯수 리턴.
     @Override
     public int getItemCount() {
-        return mData.size() ;
+        return mData.size();
     }
 }

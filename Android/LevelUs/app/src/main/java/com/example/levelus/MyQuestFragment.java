@@ -82,17 +82,11 @@ public class MyQuestFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-
-
                 QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
 
                 list.add(questInfo);
 
             }
-
-
-
-
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
