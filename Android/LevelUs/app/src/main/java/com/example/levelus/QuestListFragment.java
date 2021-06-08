@@ -224,6 +224,113 @@ public class QuestListFragment extends Fragment {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
 
+        title_ko.setVisibility(View.GONE);
+        title_ko1.setVisibility(View.GONE);    //여기부터 가리기
+        title_ko2.setVisibility(View.GONE);
+        title_ko3.setVisibility(View.GONE);
+        title_ko4.setVisibility(View.GONE);
+        title_ko5.setVisibility(View.GONE);
+        title_ko6.setVisibility(View.GONE);
+        title_ko7.setVisibility(View.GONE);
+        title_ko8.setVisibility(View.GONE);
+        title_ko9.setVisibility(View.GONE);
+        title_ko10.setVisibility(View.GONE);
+        title_ko11.setVisibility(View.GONE);
+        title_ko12.setVisibility(View.GONE);
+        title_ko13.setVisibility(View.GONE);
+        title_ko14.setVisibility(View.GONE);
+        title_ko15.setVisibility(View.GONE);
+        title_ko16.setVisibility(View.GONE);
+        title_ko17.setVisibility(View.GONE);
+        title_ko18.setVisibility(View.GONE);
+        title_ko19.setVisibility(View.GONE);
+        title_ko20.setVisibility(View.GONE);
+        title_ko21.setVisibility(View.GONE);
+        title_ko22.setVisibility(View.GONE);
+        title_ko23.setVisibility(View.GONE);
+        title_ko24.setVisibility(View.GONE);
+        title_ko25.setVisibility(View.GONE);
+        title_ko26.setVisibility(View.GONE);
+        title_ko27.setVisibility(View.GONE);
+        title_ko28.setVisibility(View.GONE);
+        title_ko29.setVisibility(View.GONE);
+        title_ko30.setVisibility(View.GONE);
+        title_ko31.setVisibility(View.GONE);
+        title_ko32.setVisibility(View.GONE);
+        title_ko33.setVisibility(View.GONE);
+        title_ko34.setVisibility(View.GONE);
+        title_ko35.setVisibility(View.GONE);
+        title_ko36.setVisibility(View.GONE);
+        title_ko37.setVisibility(View.GONE);
+        title_ko38.setVisibility(View.GONE);
+        title_ko39.setVisibility(View.GONE);
+        title_ko40.setVisibility(View.GONE);
+        title_ko41.setVisibility(View.GONE);
+        title_ko42.setVisibility(View.GONE);
+        title_ko43.setVisibility(View.GONE);
+        title_ko44.setVisibility(View.GONE);
+        title_ko45.setVisibility(View.GONE);
+        title_ko46.setVisibility(View.GONE);
+        title_ko47.setVisibility(View.GONE);
+        title_ko48.setVisibility(View.GONE);
+        title_ko49.setVisibility(View.GONE);
+        title_ko50.setVisibility(View.GONE);
+
+        quest.setVisibility(View.GONE);
+        quest1.setVisibility(View.GONE);       //여기부터 가리기
+        quest2.setVisibility(View.GONE);
+        quest3.setVisibility(View.GONE);
+        quest4.setVisibility(View.GONE);
+        quest5.setVisibility(View.GONE);
+        quest6.setVisibility(View.GONE);
+        quest7.setVisibility(View.GONE);
+        quest8.setVisibility(View.GONE);
+        quest9.setVisibility(View.GONE);
+        quest10.setVisibility(View.GONE);
+        quest11.setVisibility(View.GONE);
+        quest12.setVisibility(View.GONE);
+        quest13.setVisibility(View.GONE);
+        quest14.setVisibility(View.GONE);
+        quest15.setVisibility(View.GONE);
+        quest16.setVisibility(View.GONE);
+        quest17.setVisibility(View.GONE);
+        quest18.setVisibility(View.GONE);
+        quest19.setVisibility(View.GONE);
+        quest20.setVisibility(View.GONE);
+        quest21.setVisibility(View.GONE);
+        quest22.setVisibility(View.GONE);
+        quest23.setVisibility(View.GONE);
+        quest24.setVisibility(View.GONE);
+        quest25.setVisibility(View.GONE);
+        quest26.setVisibility(View.GONE);
+        quest27.setVisibility(View.GONE);
+        quest28.setVisibility(View.GONE);
+        quest29.setVisibility(View.GONE);
+        quest30.setVisibility(View.GONE);
+        quest31.setVisibility(View.GONE);
+        quest32.setVisibility(View.GONE);
+        quest33.setVisibility(View.GONE);
+        quest34.setVisibility(View.GONE);
+        quest35.setVisibility(View.GONE);
+        quest36.setVisibility(View.GONE);
+        quest37.setVisibility(View.GONE);
+        quest38.setVisibility(View.GONE);
+        quest39.setVisibility(View.GONE);
+        quest40.setVisibility(View.GONE);
+        quest41.setVisibility(View.GONE);
+        quest42.setVisibility(View.GONE);
+        quest43.setVisibility(View.GONE);
+        quest44.setVisibility(View.GONE);
+        quest45.setVisibility(View.GONE);
+        quest46.setVisibility(View.GONE);
+        quest47.setVisibility(View.GONE);
+        quest48.setVisibility(View.GONE);
+        quest49.setVisibility(View.GONE);
+        quest50.setVisibility(View.GONE);
+
+        title.setText("카테고리를 선택해 주세요");
+
+
 
         QuestInfo[] questInfo = new QuestInfo[100];
         category1.setOnClickListener(new View.OnClickListener() {   //diy   51개..?
@@ -400,6 +507,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -408,6 +516,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -421,6 +530,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -429,6 +539,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -437,6 +548,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -445,6 +557,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -453,6 +566,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest6);
                             }
                         });
@@ -461,6 +575,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest7);
                             }
                         });
@@ -469,6 +584,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest8);
                             }
                         });
@@ -477,6 +593,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest9);
                             }
                         });
@@ -485,6 +602,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest10);
                             }
                         });
@@ -493,6 +611,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest11);
                             }
                         });
@@ -501,6 +620,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest12);
                             }
                         });
@@ -509,6 +629,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest13);
                             }
                         });
@@ -517,6 +638,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest14);
                             }
                         });
@@ -525,6 +647,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest15);
                             }
                         });
@@ -533,6 +656,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest16);
                             }
                         });
@@ -541,6 +665,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest17);
                             }
                         });
@@ -549,6 +674,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest18);
                             }
                         });
@@ -557,6 +683,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest19);
                             }
                         });
@@ -565,6 +692,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest20);
                             }
                         });
@@ -573,6 +701,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest21);
                             }
                         });
@@ -581,6 +710,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest22);
                             }
                         });
@@ -589,6 +719,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest23);
                             }
                         });
@@ -597,6 +728,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest24);
                             }
                         });
@@ -605,6 +737,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest25);
                             }
                         });
@@ -613,6 +746,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest26);
                             }
                         });
@@ -621,6 +755,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest27);
                             }
                         });
@@ -629,6 +764,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest28);
                             }
                         });
@@ -637,6 +773,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest29);
                             }
                         });
@@ -645,6 +782,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest30);
                             }
                         });
@@ -653,6 +791,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest31);
                             }
                         });
@@ -661,6 +800,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest32);
                             }
                         });
@@ -669,6 +809,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest33);
                             }
                         });
@@ -677,6 +818,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest34);
                             }
                         });
@@ -685,6 +827,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest35);
                             }
                         });
@@ -693,6 +836,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest36);
                             }
                         });
@@ -701,6 +845,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest37);
                             }
                         });
@@ -709,6 +854,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest38);
                             }
                         });
@@ -717,6 +863,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest39);
                             }
                         });
@@ -725,6 +872,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest40);
                             }
                         });
@@ -733,6 +881,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest41);
                             }
                         });
@@ -741,6 +890,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest42);
                             }
                         });
@@ -749,6 +899,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest43);
                             }
                         });
@@ -757,6 +908,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest44);
                             }
                         });
@@ -765,6 +917,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest45);
                             }
                         });
@@ -773,6 +926,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest46);
                             }
                         });
@@ -781,6 +935,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest47);
                             }
                         });
@@ -789,6 +944,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest48);
                             }
                         });
@@ -797,6 +953,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest49);
                             }
                         });
@@ -805,6 +962,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest50);
                             }
                         });
@@ -959,6 +1117,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -967,6 +1126,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -975,6 +1135,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -983,6 +1144,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -991,6 +1153,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -999,6 +1162,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -1007,6 +1171,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest6);
                             }
                         });
@@ -1015,6 +1180,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest7);
                             }
                         });
@@ -1023,6 +1189,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest8);
                             }
                         });
@@ -1031,6 +1198,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest9);
                             }
                         });
@@ -1039,6 +1207,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest10);
                             }
                         });
@@ -1184,6 +1353,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -1328,6 +1498,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -1336,6 +1507,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -1344,6 +1516,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -1511,6 +1684,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -1519,6 +1693,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -1527,6 +1702,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -1535,6 +1711,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -1543,6 +1720,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -1551,6 +1729,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -1559,6 +1738,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest6);
                             }
                         });
@@ -1567,6 +1747,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest7);
                             }
                         });
@@ -1575,6 +1756,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest8);
                             }
                         });
@@ -1583,6 +1765,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest9);
                             }
                         });
@@ -1591,6 +1774,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest10);
                             }
                         });
@@ -1599,6 +1783,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest11);
                             }
                         });
@@ -1607,6 +1792,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest12);
                             }
                         });
@@ -1615,6 +1801,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest13);
                             }
                         });
@@ -1623,6 +1810,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest14);
                             }
                         });
@@ -1631,6 +1819,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest15);
                             }
                         });
@@ -1639,6 +1828,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest16);
                             }
                         });
@@ -1647,6 +1837,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest17);
                             }
                         });
@@ -1655,6 +1846,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest18);
                             }
                         });
@@ -1663,6 +1855,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest19);
                             }
                         });
@@ -1671,6 +1864,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest20);
                             }
                         });
@@ -1679,6 +1873,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest21);
                             }
                         });
@@ -1687,6 +1882,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest22);
                             }
                         });
@@ -1695,6 +1891,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest23);
                             }
                         });
@@ -1703,6 +1900,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest24);
                             }
                         });
@@ -1711,6 +1909,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest25);
                             }
                         });
@@ -1719,6 +1918,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest26);
                             }
                         });
@@ -1727,6 +1927,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest27);
                             }
                         });
@@ -1896,6 +2097,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -1904,6 +2106,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -1912,6 +2115,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -1920,6 +2124,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -1928,6 +2133,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -1936,6 +2142,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -1944,6 +2151,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest6);
                             }
                         });
@@ -1952,6 +2160,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest7);
                             }
                         });
@@ -1960,6 +2169,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest8);
                             }
                         });
@@ -1968,6 +2178,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest9);
                             }
                         });
@@ -1976,6 +2187,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest10);
                             }
                         });
@@ -1984,6 +2196,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest11);
                             }
                         });
@@ -1992,6 +2205,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest12);
                             }
                         });
@@ -2000,6 +2214,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest13);
                             }
                         });
@@ -2008,6 +2223,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest14);
                             }
                         });
@@ -2016,6 +2232,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest15);
                             }
                         });
@@ -2024,6 +2241,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest16);
                             }
                         });
@@ -2032,6 +2250,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest17);
                             }
                         });
@@ -2040,6 +2259,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest18);
                             }
                         });
@@ -2048,6 +2268,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest19);
                             }
                         });
@@ -2056,6 +2277,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest20);
                             }
                         });
@@ -2064,6 +2286,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest21);
                             }
                         });
@@ -2072,6 +2295,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest22);
                             }
                         });
@@ -2080,6 +2304,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest23);
                             }
                         });
@@ -2088,6 +2313,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest24);
                             }
                         });
@@ -2096,6 +2322,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest25);
                             }
                         });
@@ -2104,6 +2331,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest26);
                             }
                         });
@@ -2112,6 +2340,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest27);
                             }
                         });
@@ -2120,6 +2349,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest28);
                             }
                         });
@@ -2128,6 +2358,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest29);
                             }
                         });
@@ -2136,6 +2367,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest30);
                             }
                         });
@@ -2283,6 +2515,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2291,6 +2524,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -2299,6 +2533,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -2307,6 +2542,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -2315,6 +2551,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -2323,6 +2560,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -2493,6 +2731,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2501,6 +2740,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -2509,6 +2749,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -2517,6 +2758,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -2525,6 +2767,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -2533,6 +2776,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -2541,6 +2785,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest6);
                             }
                         });
@@ -2549,6 +2794,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest7);
                             }
                         });
@@ -2557,6 +2803,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest8);
                             }
                         });
@@ -2565,6 +2812,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest9);
                             }
                         });
@@ -2573,6 +2821,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest10);
                             }
                         });
@@ -2581,6 +2830,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest11);
                             }
                         });
@@ -2589,6 +2839,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest12);
                             }
                         });
@@ -2597,6 +2848,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest13);
                             }
                         });
@@ -2605,6 +2857,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest14);
                             }
                         });
@@ -2613,6 +2866,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest15);
                             }
                         });
@@ -2621,6 +2875,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest16);
                             }
                         });
@@ -2629,6 +2884,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest17);
                             }
                         });
@@ -2637,6 +2893,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest18);
                             }
                         });
@@ -2645,6 +2902,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest19);
                             }
                         });
@@ -2653,6 +2911,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest20);
                             }
                         });
@@ -2661,6 +2920,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest21);
                             }
                         });
@@ -2669,6 +2929,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest22);
                             }
                         });
@@ -2677,6 +2938,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest23);
                             }
                         });
@@ -2685,6 +2947,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest24);
                             }
                         });
@@ -2693,6 +2956,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest25);
                             }
                         });
@@ -2701,6 +2965,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest26);
                             }
                         });
@@ -2709,6 +2974,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest27);
                             }
                         });
@@ -2717,6 +2983,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest28);
                             }
                         });
@@ -2869,6 +3136,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2877,6 +3145,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2885,6 +3154,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2893,6 +3163,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2901,6 +3172,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2909,6 +3181,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2917,6 +3190,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2925,6 +3199,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2933,6 +3208,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2941,6 +3217,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2949,6 +3226,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2957,6 +3235,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -2965,6 +3244,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -3117,6 +3397,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -3125,6 +3406,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -3133,6 +3415,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -3141,6 +3424,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -3149,6 +3433,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -3157,6 +3442,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -3165,6 +3451,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest6);
                             }
                         });
@@ -3173,6 +3460,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest7);
                             }
                         });
@@ -3181,6 +3469,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest8);
                             }
                         });
@@ -3189,6 +3478,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest9);
                             }
                         });
@@ -3197,6 +3487,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest10);
                             }
                         });
@@ -3205,6 +3496,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest11);
                             }
                         });
@@ -3349,6 +3641,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -3357,6 +3650,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -3365,6 +3659,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -3373,6 +3668,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -3548,6 +3844,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest);
                             }
                         });
@@ -3556,6 +3853,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest1);
                             }
                         });
@@ -3564,6 +3862,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest2);
                             }
                         });
@@ -3572,6 +3871,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest3);
                             }
                         });
@@ -3580,6 +3880,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest4);
                             }
                         });
@@ -3588,6 +3889,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest5);
                             }
                         });
@@ -3597,6 +3899,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest6);
                             }
                         });
@@ -3605,6 +3908,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest7);
                             }
                         });
@@ -3613,6 +3917,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest8);
                             }
                         });
@@ -3621,6 +3926,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest9);
                             }
                         });
@@ -3629,6 +3935,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest10);
                             }
                         });
@@ -3637,6 +3944,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest11);
                             }
                         });
@@ -3653,6 +3961,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest13);
                             }
                         });
@@ -3661,6 +3970,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest14);
                             }
                         });
@@ -3669,6 +3979,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest15);
                             }
                         });
@@ -3677,6 +3988,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest16);
                             }
                         });
@@ -3685,6 +3997,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest17);
                             }
                         });
@@ -3693,6 +4006,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest18);
                             }
                         });
@@ -3701,6 +4015,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest19);
                             }
                         });
@@ -3709,6 +4024,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest20);
                             }
                         });
@@ -3717,6 +4033,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest21);
                             }
                         });
@@ -3725,6 +4042,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest22);
                             }
                         });
@@ -3733,6 +4051,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest23);
                             }
                         });
@@ -3741,6 +4060,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest24);
                             }
                         });
@@ -3749,6 +4069,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest25);
                             }
                         });
@@ -3757,6 +4078,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest26);
                             }
                         });
@@ -3765,6 +4087,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest27);
                             }
                         });
@@ -3773,6 +4096,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest28);
                             }
                         });
@@ -3781,6 +4105,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest29);
                             }
                         });
@@ -3789,6 +4114,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest30);
                             }
                         });
@@ -3797,6 +4123,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest31);
                             }
                         });
@@ -3805,6 +4132,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest32);
                             }
                         });
@@ -3813,6 +4141,7 @@ public class QuestListFragment extends Fragment {
                             public void onSuccess(Uri uri) {
                                 Glide.with(getActivity().getApplicationContext())
                                         .load(uri)
+                                        .override(340,400)
                                         .into(quest33);
                             }
                         });
