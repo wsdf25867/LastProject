@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:text="My Quest"
         android:textSize="40dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginTop="16dp"/>
 
 
     <TextView

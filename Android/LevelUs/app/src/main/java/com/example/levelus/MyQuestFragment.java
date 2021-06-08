@@ -37,6 +37,7 @@ public class MyQuestFragment extends Fragment {
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
 
+
     public MyQuestFragment() {
         // Required empty public constructor
     }
@@ -46,6 +47,8 @@ public class MyQuestFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         String uid = firebaseUser.getUid();
         ArrayList<QuestInfo> list = new ArrayList<>();

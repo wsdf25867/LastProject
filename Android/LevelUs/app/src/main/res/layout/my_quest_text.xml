@@ -12,7 +12,6 @@
             android:id="@+id/quest_name"
             android:padding="8dp"
             android:textSize="18dp"
-            android:text="퀘스트"
             android:gravity="center_vertical"
             android:layout_weight="9"/>
 
