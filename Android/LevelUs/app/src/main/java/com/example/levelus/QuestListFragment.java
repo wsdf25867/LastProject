@@ -1175,10 +1175,10 @@ public class QuestListFragment extends Fragment {
                         quest49.setVisibility(View.GONE);
                         quest50.setVisibility(View.GONE);
 
-<<<<<<< HEAD
+
                         System.out.println(questInfo[0].getTitle_ko());
 
-=======
+
                         storageRef.child("quest_thumbnail/66.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
@@ -1187,7 +1187,7 @@ public class QuestListFragment extends Fragment {
                                         .into(quest);
                             }
                         });
->>>>>>> 88b53b6209c55d0b26174c795edde191d54c2f47
+
 
                     }
 
