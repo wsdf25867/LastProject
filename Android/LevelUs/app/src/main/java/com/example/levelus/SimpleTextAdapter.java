@@ -65,34 +65,27 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
         holder.quest_name.setText(mData.get(position).getTitle_ko());
 
-        holder.agree_button.setOnClickListener(new View.OnClickListener() {
+
+        mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-
-
-                mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                holder.agree_button.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
+                    public void onClick(View v) {
                         for(int i=0;i<10;i++){
-                        QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
-                        System.out.println("확인용 "+i+" 번째 "+questInfo);
-                        if(questInfo==null){
-                            mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
-                            break;
+                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            System.out.println("확인용 "+i+" 번째 "+questInfo);
+                            if(questInfo==null){
+                                mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
+                                break;
+                            }
                         }
-
-
-                    }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
                     }
                 });
-
             }
-
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+            }
         });
     }
     // getItemCount() - 전체 데이터 갯수 리턴.
