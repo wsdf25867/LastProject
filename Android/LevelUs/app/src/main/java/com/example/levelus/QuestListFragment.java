@@ -1,12 +1,17 @@
 package com.example.levelus;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +64,41 @@ public class QuestListFragment extends Fragment {
 
     public QuestListFragment() {
         // Required empty public constructor
+    }
+
+    public static class MyAlertDialogFragment extends DialogFragment {
+
+        public static MyAlertDialogFragment newInstance(String title){
+            MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putString("title", title);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            //return super.onCreateDialog(savedInstanceState);
+
+            String title = getArguments().getString("title");
+            return new AlertDialog.Builder(getActivity())
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setTitle(title)
+                    .setPositiveButton("수락하기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.i("MyLog", "확인 버튼이 눌림");
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.i("MyLog", "취소 버튼이 눌림");
+                        }
+                    })
+                    .create();
+        }
     }
 
     /**
@@ -1358,6 +1398,16 @@ public class QuestListFragment extends Fragment {
                             }
                         });
 
+                        quest.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                MyAlertDialogFragment newDialogFragment =
+                                        MyAlertDialogFragment.newInstance("Fragment Dialog 테스트 중...");
+                                newDialogFragment.show(getFragmentManager(), "dialog");
+
+
+                            }
+                        });
 
                     }
 
