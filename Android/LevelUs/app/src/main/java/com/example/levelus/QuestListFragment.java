@@ -669,6 +669,8 @@ public class QuestListFragment extends Fragment {
                         quest49.setVisibility(View.GONE);
                         quest50.setVisibility(View.GONE);
 
+                        System.out.println(questInfo[0].getTitle_ko());
+
 
                     }
 

@@ -1,5 +1,6 @@
 package com.example.levelus;
 
+import android.icu.text.SymbolTable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +34,10 @@ public class MyQuestFragment extends Fragment {
     private SimpleTextAdapter mAdapter;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("Level Us");
+    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("recommend_list");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
 
 
 
@@ -47,36 +50,10 @@ public class MyQuestFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-        String uid = firebaseUser.getUid();
-        ArrayList<QuestInfo> list = new ArrayList<>();
-
-        for(int i=0;i<10;i++) {
-
-            String qNum = Integer.toString(i);
-
-            mDatabaseRef.child("recommend_list").child(uid).child(qNum).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()) {
-
-                        QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
-
-                        list.add(questInfo);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }
+        prepareData();
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,7 +61,7 @@ public class MyQuestFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_quest, container, false);
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.recycleView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
         mAdapter = new SimpleTextAdapter(list);
 
@@ -96,4 +73,34 @@ public class MyQuestFragment extends Fragment {
         return v;
     }
 
+
+    public void prepareData() {
+        String uid = firebaseUser.getUid();
+
+        for(int i =0;i<10;i++){
+        mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+
+
+                QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
+
+                list.add(questInfo);
+
+            }
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+        }
+
+    }
 }
+
+

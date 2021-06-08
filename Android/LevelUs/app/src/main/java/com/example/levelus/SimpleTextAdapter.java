@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.ViewHolder> {
 
-    private ArrayList<QuestInfo> mData = null ;
+    private ArrayList<QuestInfo> mData;
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -21,9 +21,8 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
         ViewHolder(View view) {
             super(view) ;
-
             // 뷰 객체에 대한 참조. (hold strong reference)
-            quest_name = (TextView) view.findViewById(R.id.quest_name) ;
+            quest_name = (TextView) view.findViewById(R.id.quest_name);
         }
     }
 
@@ -46,6 +45,7 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     public void onBindViewHolder(@NonNull SimpleTextAdapter.ViewHolder holder, int position) {
 
         holder.quest_name.setText(mData.get(position).getTitle_ko());
+
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
