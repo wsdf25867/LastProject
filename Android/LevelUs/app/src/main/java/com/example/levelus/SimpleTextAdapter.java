@@ -20,11 +20,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.ViewHolder> {
 
     private ArrayList<QuestInfo> mData;
+
+    //오늘 날짜 받아서 String 변환
+    long now = System.currentTimeMillis();
+    Date date = new Date(now);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String getTime = sdf.format(date);
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
@@ -35,13 +43,14 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView quest_name;
-        Button agree_button;
+        Button agree_button,disagree_button;
 
         ViewHolder(View view) {
             super(view);
             // 뷰 객체에 대한 참조. (hold strong reference)
             quest_name = (TextView) view.findViewById(R.id.quest_name);
             agree_button = (Button) view.findViewById(R.id.agree_button);
+            disagree_button = (Button) view.findViewById(R.id.disagree_button);
         }
     }
 
@@ -69,22 +78,29 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
         mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                holder.agree_button.setOnClickListener(new View.OnClickListener() {
+                holder.agree_button.setOnClickListener(new View.OnClickListener() { //수락버튼
                     @Override
                     public void onClick(View v) {
                         for (int i = 0; i < 10; i++) {
                             QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
                             System.out.println("확인용 " + i + " 번째 " + questInfo);
                             if (questInfo == null) {
-                                mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
+
+                                QuestlogInfo questlogInfo = new QuestlogInfo();
+                                questlogInfo.setCategory(mData.get(position).getCategory());
+                                questlogInfo.setQuest_num(mData.get(position).getQuest_num());
+                                questlogInfo.setRating("0");
+                                questlogInfo.setTitle_ko(mData.get(position).getTitle_ko());
+                                questlogInfo.setAccepted_date(getTime);
+                                questlogInfo.setFinished_date("9999-99-99");
+                                mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(questlogInfo);
                                 break;
                             }
 
                         }
                     }
-
-
                 });
+
             }
 
             @Override
