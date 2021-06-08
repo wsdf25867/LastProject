@@ -65,30 +65,34 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
         holder.quest_name.setText(mData.get(position).getTitle_ko());
 
-//        holder.agree_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                for(int i=0;i<10;i++){
-//                mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//
-//                        QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
-//                        if(questInfo==null){
-//                            mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
-//                        }
-//
-//                    }
-//                    @Override
-//                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//                    }
-//                });
-//
-//            }
-//            }
-//        });
+        holder.agree_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                        for(int i=0;i<10;i++){
+                        QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                        if(questInfo==null){
+                            mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(mData.get(position));
+                            break;
+                        }
+                        break;
+
+                    }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+        });
     }
     // getItemCount() - 전체 데이터 갯수 리턴.
     @Override
