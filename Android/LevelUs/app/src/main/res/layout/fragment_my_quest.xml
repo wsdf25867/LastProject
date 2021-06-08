@@ -22,12 +22,27 @@
         android:textSize="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Recommand List" />
+        android:text="추천 퀘스트" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycleView"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="진행중인 퀘스트"
+        android:textSize="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycleView2"
         />
 
 </LinearLayout>

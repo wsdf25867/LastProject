@@ -36,8 +36,5 @@ public class WebPractice extends AppCompatActivity {
         startActivity(GoToLoginActivity);
 
 
-
-
-
     }
 }
