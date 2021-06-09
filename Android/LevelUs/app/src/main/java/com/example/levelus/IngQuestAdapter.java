@@ -71,11 +71,12 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                 holder.giveup_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for (int i = 0; i < 10; i++) {
+                        for (int i = 0; i < 222; i++) {
                             QuestlogInfo questlogInfo = snapshot.child(Integer.toString(i)).getValue(QuestlogInfo.class);
                             if (questlogInfo != null) {
                                 if (qData.get(position).getTitle_ko().equals(questlogInfo.getTitle_ko())) {
                                     mDatabaseRef.child(uid).child(Integer.toString(i)).removeValue();
+                                    break;
                                 }
                             }
                         }

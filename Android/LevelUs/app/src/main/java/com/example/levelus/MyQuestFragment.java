@@ -118,7 +118,7 @@ public class MyQuestFragment extends Fragment {
     }
 
     public void prepareLogData() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 222; i++) {
             firebaseDatabase.getReference("quest_log").child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
