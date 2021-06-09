@@ -2,11 +2,17 @@ package com.example.levelus;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +31,8 @@ public class CompletedQuestActivity extends AppCompatActivity {
     private ArrayList<QuestlogInfo> loglist = new ArrayList<>();     // quest_log 데이터 저장 리스트
     private ArrayList<QuestlogInfo> searchlist =  new ArrayList<>();    // 검색 리스트
 
+    private TextView back;
+    private TextView logout;
     private ListView listView;          // 검색을 보여줄 리스트변수
     private EditText editSearch;        // 검색어를 입력할 Input 창
     private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
@@ -43,7 +51,18 @@ public class CompletedQuestActivity extends AppCompatActivity {
 
         editSearch = (EditText) findViewById(R.id.editSearch);
         listView = (ListView) findViewById(R.id.listView);
+        back = (TextView) findViewById(R.id.back);
+        logout = (TextView) findViewById(R.id.logout);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
+                startActivity(GoToLoggedPages);
+                Toast.makeText(CompletedQuestActivity.this, "되돌아가기", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
         // 검색에 사용할 데이터을 미리 저장한다.
         prepareData();
 
@@ -52,7 +71,7 @@ public class CompletedQuestActivity extends AppCompatActivity {
         searchlist.addAll(loglist);
 
         // 리스트에 연동될 아답터를 생성한다.
-        adapter = new SearchAdapter(loglist,this);
+        adapter = new SearchAdapter(searchlist,this);
 
         // 리스트뷰에 아답터를 연결한다.
         listView.setAdapter(adapter);
@@ -77,6 +96,8 @@ public class CompletedQuestActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void prepareData() {
@@ -85,6 +106,24 @@ public class CompletedQuestActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 cnt = (int)snapshot.getChildrenCount();
+                Log.d("count",Integer.toString(cnt));
+
+                for(int i =0;i<cnt;i++){
+                    mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                            QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
+                            Log.d("questInfo",questlogInfo.getTitle_ko());
+                            loglist.add(questlogInfo);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -92,21 +131,7 @@ public class CompletedQuestActivity extends AppCompatActivity {
 
             }
         });
-        for(int i =0;i<cnt;i++){
-            mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                    QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
-                    loglist.add(questlogInfo);
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }
 
     }
 
@@ -124,8 +149,11 @@ public class CompletedQuestActivity extends AppCompatActivity {
         else
         {
             // 리스트의 모든 데이터를 검색한다.
+            //Log.d("size",Integer.toString(loglist.size())) ;
+            Log.d("charText",charText);
             for(int i = 0;i < loglist.size(); i++)
             {
+                Log.d("title", loglist.get(i).getTitle_ko());
                 // searchlist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
                 if (loglist.get(i).getTitle_ko().toLowerCase().contains(charText))
                 {

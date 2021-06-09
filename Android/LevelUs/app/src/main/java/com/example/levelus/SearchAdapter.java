@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,18 +16,18 @@ import java.util.List;
 public class SearchAdapter extends BaseAdapter {
 
     private Context context;
-    private List<QuestlogInfo> loglist;
+    private List<QuestlogInfo> searchlist;
     private LayoutInflater inflate;
     private ViewHolder viewHolder;
 
-    public SearchAdapter(List<QuestlogInfo> loglist, Context context){
-        this.loglist = loglist;
+    public SearchAdapter(List<QuestlogInfo> searchlist, Context context){
+        this.searchlist = searchlist;
         this.context = context;
         this.inflate = LayoutInflater.from(context);
     }
     @Override
     public int getCount() {
-        return loglist.size();
+        return searchlist.size();
     }
 
     @Override
@@ -45,7 +46,9 @@ public class SearchAdapter extends BaseAdapter {
             convertView = inflate.inflate(R.layout.row_listview,null);
 
             viewHolder = new ViewHolder();
-            viewHolder.label = convertView.findViewById(R.id.label);
+            viewHolder.quest_finished_imgView = convertView.findViewById(R.id.quest_finished_imgView);
+            viewHolder.quest_finished_title = convertView.findViewById(R.id.quest_finished_title);
+            viewHolder.quest_finished_category = convertView.findViewById(R.id.quest_finished_category);
 
             convertView.setTag(viewHolder);
         }else{
@@ -53,13 +56,15 @@ public class SearchAdapter extends BaseAdapter {
         }
 
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌린다. ***********(CharSequence 의미 찾기)
-        viewHolder.label.setText((CharSequence) loglist.get(position));
+        viewHolder.label.setText((CharSequence) searchlist.get(position).getTitle_ko());
 
         return convertView;
     }
 
     class ViewHolder{
-        public TextView label;
+        public ImageView quest_finished_imgView;
+        public TextView quest_finished_title;
+        public TextView quest_finished_category;
     }
 
 }

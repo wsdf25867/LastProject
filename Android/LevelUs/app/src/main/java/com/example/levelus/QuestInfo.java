@@ -9,10 +9,13 @@ public class QuestInfo {
     private String title;
     private String title_ko;
     private String way;
+    private String difficulty;
+    private String period;
 
     public QuestInfo(){
 
     }
+
 
     public String getAdded() {
         return added;
@@ -76,5 +79,21 @@ public class QuestInfo {
 
     public void setWay(String way) {
         this.way = way;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
     }
 }

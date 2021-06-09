@@ -1,12 +1,17 @@
 package com.example.levelus;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +64,45 @@ public class QuestListFragment extends Fragment {
 
     public QuestListFragment() {
         // Required empty public constructor
+    }
+
+    public static class MyAlertDialogFragment extends DialogFragment {
+
+        public static MyAlertDialogFragment newInstance(String title){
+            MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putString("title", title);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            //return super.onCreateDialog(savedInstanceState);
+
+            String title = getArguments().getString("title");
+            return new AlertDialog.Builder(getActivity())
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setTitle(title)
+                    .setPositiveButton("수락하기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {    //이때 QuestlogInfo로 UID에 퀘스트 입력.
+                            Toast myToast = Toast.makeText(getActivity().getApplicationContext(),"퀘스트가 수락되었습니다.", Toast.LENGTH_SHORT);
+
+
+
+                            myToast.show();
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.i("MyLog", "취소 버튼이 눌림");
+                        }
+                    })
+                    .create();
+        }
     }
 
     /**
@@ -1357,7 +1401,24 @@ public class QuestListFragment extends Fragment {
                                         .into(quest);
                             }
                         });
+                        //switch로..?
+                        quest.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                MyAlertDialogFragment newDialogFragment =
+                                        MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko());
+                                newDialogFragment.show(getFragmentManager(), "dialog");
 
+                                //    private String quest_num; //퀘스트 번호
+                                //    private String rating;    //퀘스트 성취도?(진행중일때는 0으로)
+                                //    private String category;  //퀘스트 카테고리
+                                //    private String title_ko;  //퀘스트 제목
+                                //    private Date accepted_date;//퀘스트 시작시간
+                                //    private Date finished_date;  //퀘스트 종료시간(0으로 넘기면됨)
+                                //이것들 매개변수로 넘겨주면 될듯?
+
+                            }
+                        });
 
                     }
 
