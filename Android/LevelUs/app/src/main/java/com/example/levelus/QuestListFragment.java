@@ -135,7 +135,7 @@ public class QuestListFragment extends Fragment {
                                             mDatabaseRef.child(firebaseUser.getUid()).child(Integer.toString(i)).setValue(questlogInfo2);
                                             break;
 
-                                        }break;
+                                        }
                                     }
 
 
