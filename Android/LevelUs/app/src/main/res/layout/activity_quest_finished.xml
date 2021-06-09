@@ -37,16 +37,7 @@
                 android:gravity="center_horizontal|top"
                 android:text="완료한 퀘스트"
                 android:textAppearance="@style/big_black_title" />
-            <TextView
-                android:id="@+id/logout"
-                android:layout_width="wrap_content"
-                android:layout_height="23dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="8dp"
-                android:gravity="right|top"
-                android:text="Logout"
-                android:textAppearance="@style/left_black"/>
+
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
