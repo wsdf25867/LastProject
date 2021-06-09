@@ -3,15 +3,21 @@ package com.example.levelus;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,11 +41,20 @@ public class RankFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference("Level Us");
+//    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//    private DatabaseReference databaseReference = firebaseDatabase.getReference("Level Us");
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-//    private FirebaseUser allFirebaseUser = firebaseAuth.getUid();
+
+    private ArrayList<UserAccount> rankList;
+    private RankAdapter rankAdapter;
+    private RecyclerView rankRecyclerView;
+    private LinearLayoutManager linearLayoutManager;
+//    private RankAdapter rankAdapter = new RankAdapter();
+
+//    ArrayAdapter adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -80,13 +96,46 @@ public class RankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rank, container, false);
-        final ArrayList<DataSnapshot> userLevels = new ArrayList<DataSnapshot>();
-        databaseReference.child("UserLevel").addValueEventListener(new ValueEventListener() {
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Level Us");
+
+//        adapter = new ArrayAdapter<String>(getActivity(), R.layout.fragment_rank, R.id.rank_list, rankList);
+        rankRecyclerView = view.findViewById(R.id.rank_list);
+        rankRecyclerView.setHasFixedSize(true);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rankRecyclerView.setLayoutManager(linearLayoutManager);
+        rankList = new ArrayList<>();
+        rankAdapter = new RankAdapter(rankList);
+        rankRecyclerView.setAdapter(rankAdapter);
+
+        databaseReference.child("UserAccount").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for(int cnt=0;cnt<snapshot.getChildrenCount();cnt++)
-//                    userLevels.add(snapshot.getChildren());
-                Log.d("levels", ":"+userLevels.toString());
+            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                if(snapshot.exists()){
+                    UserAccount userAccount = snapshot.getValue(UserAccount.class);
+
+                    rankList.add(userAccount);
+                    rankRecyclerView.scrollToPosition(rankList.size()-1);
+                    rankAdapter.notifyItemInserted(rankList.size()-1);
+                    for(int i=0;i< rankList.size();i++)
+                        Log.i(i+"번째 사람의 레벨 ", Integer.toString(userAccount.getLevel()));
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
             }
 
             @Override

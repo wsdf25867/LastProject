@@ -10,6 +10,16 @@ public class UserAccount {
     private String favorite;
     private String local;
 
+    private int level;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(){
+        this.level = 0;
+    }
+
     public String getIdToken() {
         return idToken;
     }
