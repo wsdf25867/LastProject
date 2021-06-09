@@ -23,7 +23,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".DeleteActivity" />
         <activity android:name=".EditActivity" />
-        <activity android:name=".WebPractice" />
         <activity android:name=".ImageLabellingActivity" />
         <activity android:name=".TextRecognitionActivity">
             <meta-data

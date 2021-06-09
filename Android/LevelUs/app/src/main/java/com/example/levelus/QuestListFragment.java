@@ -87,8 +87,12 @@ public class QuestListFragment extends Fragment {
                     .setTitle(title)
                     .setPositiveButton("수락하기", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Log.i("MyLog", "확인 버튼이 눌림");
+                        public void onClick(DialogInterface dialog, int which) {    //이때 QuestlogInfo로 UID에 퀘스트 입력.
+                            Toast myToast = Toast.makeText(getActivity().getApplicationContext(),"퀘스트가 수락되었습니다.", Toast.LENGTH_SHORT);
+
+
+
+                            myToast.show();
                         }
                     })
                     .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -1397,14 +1401,21 @@ public class QuestListFragment extends Fragment {
                                         .into(quest);
                             }
                         });
-
+                        //switch로..?
                         quest.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 MyAlertDialogFragment newDialogFragment =
-                                        MyAlertDialogFragment.newInstance("Fragment Dialog 테스트 중...");
+                                        MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko());
                                 newDialogFragment.show(getFragmentManager(), "dialog");
 
+                                //    private String quest_num; //퀘스트 번호
+                                //    private String rating;    //퀘스트 성취도?(진행중일때는 0으로)
+                                //    private String category;  //퀘스트 카테고리
+                                //    private String title_ko;  //퀘스트 제목
+                                //    private Date accepted_date;//퀘스트 시작시간
+                                //    private Date finished_date;  //퀘스트 종료시간(0으로 넘기면됨)
+                                //이것들 매개변수로 넘겨주면 될듯?
 
                             }
                         });
