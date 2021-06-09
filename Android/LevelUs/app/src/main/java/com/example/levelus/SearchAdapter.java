@@ -56,7 +56,7 @@ public class SearchAdapter extends BaseAdapter {
         }
 
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌린다. ***********(CharSequence 의미 찾기)
-        viewHolder.label.setText((CharSequence) searchlist.get(position).getTitle_ko());
+//        viewHolder.label.setText((CharSequence) searchlist.get(position).getTitle_ko());
 
         return convertView;
     }

@@ -87,14 +87,16 @@ public class MyQuestFragment extends Fragment {
 
 
     public void prepareData() {
+        DatabaseReference ref = firebaseDatabase.getReference("recommend_list").child(uid);
         for (int i = 0; i < 10; i++) {
-            firebaseDatabase.getReference("recommend_list").child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
+            ref.child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                     QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
-
-                    list.add(questInfo);
+                    if (questInfo != null) {
+                        list.add(questInfo);
+                    }
 
                 }
 
