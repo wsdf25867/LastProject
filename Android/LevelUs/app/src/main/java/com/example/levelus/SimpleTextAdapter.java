@@ -84,10 +84,7 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
                     holder.agree_button.setOnClickListener(new View.OnClickListener() { //수락버튼
                         @Override
                         public void onClick(View v) {
-                            for (int i = 0; i < 10; i++) {
-                                QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
-                                System.out.println("확인용 " + i + " 번째 " + questInfo);
-                                if (questInfo == null) {
+
 
                                     QuestlogInfo questlogInfo = new QuestlogInfo();
                                     questlogInfo.setCategory(mData.get(position).getCategory());
@@ -96,11 +93,8 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
                                     questlogInfo.setTitle_ko(mData.get(position).getTitle_ko());
                                     questlogInfo.setAccepted_date(getTime);
                                     questlogInfo.setFinished_date("99-99-99");
-                                    mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(questlogInfo);
-                                    break;
-                                }
+                                    mDatabaseRef.child(uid).child(mData.get(position).getQuest_num()).setValue(questlogInfo);
 
-                            }
                         }
                     });
 

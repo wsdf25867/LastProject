@@ -52,7 +52,6 @@ public class QuestListFragment extends Fragment {
 
     private DatabaseReference mDatabaseRef;
 
-
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");
     ;
     private StorageReference storageRef = storage.getReference();
@@ -115,39 +114,16 @@ public class QuestListFragment extends Fragment {
                             FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
-                            QuestlogInfo[] questlogInfo = new QuestlogInfo[10];
-                            mDatabaseRef.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            QuestlogInfo questlogInfo = new QuestlogInfo();
 
-                                    for (int i = 0; i < 10; i++) {
-                                        questlogInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestlogInfo.class);
-                                        System.out.println("확인용 " + i + " 번째 " + questlogInfo);
-                                        if (questlogInfo[i] == null) {
-                                            QuestlogInfo questlogInfo2 = new QuestlogInfo();
-
-                                            questlogInfo2.setTitle_ko(title_ko);
-                                            questlogInfo2.setCategory(category);
-                                            questlogInfo2.setQuest_num(quest_num);
-                                            questlogInfo2.setFinished_date(finished_date);
-                                            questlogInfo2.setAccepted_date(accepted_date);
-                                            questlogInfo2.setRating(rating);
-                                            mDatabaseRef.child(firebaseUser.getUid()).child(Integer.toString(i)).setValue(questlogInfo2);
-                                            break;
-
-                                        }
-                                    }
-
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                                }
-
-                            });
-
+                            questlogInfo.setTitle_ko(title_ko);
+                            questlogInfo.setCategory(category);
+                            questlogInfo.setQuest_num(quest_num);
+                            questlogInfo.setFinished_date(finished_date);
+                            questlogInfo.setAccepted_date(accepted_date);
+                            questlogInfo.setRating(rating);
+                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).setValue(questlogInfo);
+                            //해당 퀘스트 번호로 저장됨
                             myToast.show();
                         }
                     })
