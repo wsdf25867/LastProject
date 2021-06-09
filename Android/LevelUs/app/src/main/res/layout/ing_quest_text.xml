@@ -22,7 +22,7 @@
             android:text="검증"/>
 
         <Button
-            android:id="@+id/forgive_button"
+            android:id="@+id/giveup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="포기"/>
