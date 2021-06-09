@@ -1,5 +1,6 @@
 package com.example.levelus;
 
+import android.content.Intent;
 import android.icu.text.SymbolTable;
 import android.os.Bundle;
 
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,6 +48,9 @@ public class MyQuestFragment extends Fragment {
 
     String uid = firebaseUser.getUid();
 
+
+
+
     public MyQuestFragment() {
         // Required empty public constructor
     }
@@ -54,6 +60,9 @@ public class MyQuestFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        webPractice();
         prepareData();
         prepareLogData();
 
@@ -65,7 +74,6 @@ public class MyQuestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_quest, container, false);
-
         recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
         recyclerView2 = (RecyclerView) v.findViewById(R.id.recycleView2);
         recyclerView.setHasFixedSize(true);
@@ -130,6 +138,12 @@ public class MyQuestFragment extends Fragment {
             });
         }
 
+    }
+
+    public void webPractice(){
+        Intent GoToWebPractice2 = new Intent(getActivity(),WebPractice2.class);
+        GoToWebPractice2.putExtra("uid",uid);
+        startActivity(GoToWebPractice2);
     }
 }
 
