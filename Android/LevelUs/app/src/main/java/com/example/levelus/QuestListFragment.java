@@ -57,6 +57,11 @@ public class QuestListFragment extends Fragment {
     ;
     private StorageReference storageRef = storage.getReference();
 
+    //경로
+
+
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -99,6 +104,10 @@ public class QuestListFragment extends Fragment {
                     .setIcon(R.mipmap.ic_launcher)
                     .setTitle(title_ko)
                     .setPositiveButton("수락하기", new DialogInterface.OnClickListener() {
+
+                        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("quest_log");
+                        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+                        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
 
                         @Override

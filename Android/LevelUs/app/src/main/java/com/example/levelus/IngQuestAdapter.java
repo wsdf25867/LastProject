@@ -42,7 +42,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
             // 뷰 객체에 대한 참조. (hold strong reference)
             ing_quest_name = (TextView) view.findViewById(R.id.ing_quest_name);
             check_button = (Button) view.findViewById(R.id.check_button);
-            giveup_button = (Button) view.findViewById(R.id.forgive_button);
+            giveup_button = (Button) view.findViewById(R.id.giveup_button);
         }
     }
 
