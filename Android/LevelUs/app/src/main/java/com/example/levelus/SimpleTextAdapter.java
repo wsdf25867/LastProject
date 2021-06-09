@@ -36,6 +36,7 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
+    private DatabaseReference recommendRef = firebaseDatabase.getReference("recommend_list");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     String uid = firebaseUser.getUid();
@@ -43,7 +44,7 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView quest_name;
-        Button agree_button,disagree_button;
+        Button agree_button, disagree_button;
 
         ViewHolder(View view) {
             super(view);
@@ -72,42 +73,73 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull SimpleTextAdapter.ViewHolder holder, int position) {
 
-        holder.quest_name.setText(mData.get(position).getTitle_ko());
+        if (mData.get(position) != null) {
+
+            holder.quest_name.setText(mData.get(position).getTitle_ko());
 
 
-        mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                holder.agree_button.setOnClickListener(new View.OnClickListener() { //수락버튼
-                    @Override
-                    public void onClick(View v) {
-                        for (int i = 0; i < 10; i++) {
-                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
-                            System.out.println("확인용 " + i + " 번째 " + questInfo);
-                            if (questInfo == null) {
+            mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    holder.agree_button.setOnClickListener(new View.OnClickListener() { //수락버튼
+                        @Override
+                        public void onClick(View v) {
+                            for (int i = 0; i < 10; i++) {
+                                QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                                System.out.println("확인용 " + i + " 번째 " + questInfo);
+                                if (questInfo == null) {
 
-                                QuestlogInfo questlogInfo = new QuestlogInfo();
-                                questlogInfo.setCategory(mData.get(position).getCategory());
-                                questlogInfo.setQuest_num(mData.get(position).getQuest_num());
-                                questlogInfo.setRating("0");
-                                questlogInfo.setTitle_ko(mData.get(position).getTitle_ko());
-                                questlogInfo.setAccepted_date(getTime);
-                                questlogInfo.setFinished_date("99-99-99");
-                                mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(questlogInfo);
-                                break;
+                                    QuestlogInfo questlogInfo = new QuestlogInfo();
+                                    questlogInfo.setCategory(mData.get(position).getCategory());
+                                    questlogInfo.setQuest_num(mData.get(position).getQuest_num());
+                                    questlogInfo.setRating("0");
+                                    questlogInfo.setTitle_ko(mData.get(position).getTitle_ko());
+                                    questlogInfo.setAccepted_date(getTime);
+                                    questlogInfo.setFinished_date("99-99-99");
+                                    mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(questlogInfo);
+                                    break;
+                                }
+
                             }
-
                         }
-                    }
-                });
+                    });
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                }
+            });
+
+            recommendRef.child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    holder.disagree_button.setOnClickListener(new View.OnClickListener() { //거절버튼
+                        @Override
+                        public void onClick(View v) {
+                            for (int i = 0; i < 10; i++) {
+                                QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                                if (questInfo != null) {
+                                    if (questInfo.getTitle_ko().equals(mData.get(position).getTitle_ko())) {
+                                        recommendRef.child(uid).child(Integer.toString(i)).removeValue();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+        }
     }
+
 
     // getItemCount() - 전체 데이터 갯수 리턴.
     @Override

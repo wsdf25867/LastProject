@@ -1,5 +1,7 @@
 package com.example.levelus;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHolder>{
+public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHolder> {
 
     ArrayList<QuestlogInfo> qData;
 
@@ -30,14 +35,14 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView ing_quest_name;
-        Button check_button,forgive_button;
+        Button check_button, giveup_button;
 
         ViewHolder(View view) {
             super(view);
             // 뷰 객체에 대한 참조. (hold strong reference)
             ing_quest_name = (TextView) view.findViewById(R.id.ing_quest_name);
             check_button = (Button) view.findViewById(R.id.check_button);
-            forgive_button = (Button) view.findViewById(R.id.forgive_button);
+            giveup_button = (Button) view.findViewById(R.id.forgive_button);
         }
     }
 
@@ -57,7 +62,32 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.ing_quest_name.setText(qData.get(position).getTitle_ko());
+
+        holder.ing_quest_name.setText(qData.get(position).getTitle_ko()); //진행 퀘스트 제목 출력
+
+        mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() { //퀘스트 포기
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                holder.giveup_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        for (int i = 0; i < 10; i++) {
+                            QuestlogInfo questlogInfo = snapshot.child(Integer.toString(i)).getValue(QuestlogInfo.class);
+                            if (questlogInfo != null) {
+                                if (qData.get(position).getTitle_ko().equals(questlogInfo.getTitle_ko())) {
+                                    mDatabaseRef.child(uid).child(Integer.toString(i)).removeValue();
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
 
     }

@@ -32,9 +32,13 @@ public class WebPractice extends AppCompatActivity {
 
         webView.loadUrl("http://3.35.9.194:5000/signup/"+uid);
 
+
+
         Intent GoToLoginActivity = new Intent(WebPractice.this, LoginActivity.class);
+        GoToLoginActivity.putExtra("uid",uid);
         startActivity(GoToLoginActivity);
 
+        finish();
 
     }
 }

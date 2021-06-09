@@ -12,15 +12,15 @@ def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30)
     toprate = 0
     quest_index = 0
     for index, row in user_log.iterrows() : 
-        if (toprate <= row['rating']) :
-            toprate = row['rating']
-            quest_index = str(row['quest_num'])
+        if (toprate <= int(row['rating'])) :
+            toprate = int(row['rating'])
+            quest_index = row['quest_num']
    
     target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)
 
     for index in user_log['quest_num'] :  
-        sim_index = sim_index[sim_index != index]
+        sim_index = sim_index[sim_index != int(index)]
     
     result = df.iloc[sim_index].sort_values('done', ascending=False)[:10]
     result = result.sort_values(by=['quest_num'], axis=0)
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     #content based filtering 알고리즘을 이용한 유사한 퀘스트 추천
     df = pd.DataFrame(dir.get())
     
-    uid = '6S1p1mlz1vSKwmMFlOrCPH0fipH3'
+    uid = 'qEyWe2xINORTYNzUBqjwavFFtCz1'
     user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
 
     count_vector = CountVectorizer(ngram_range=(1,3))
