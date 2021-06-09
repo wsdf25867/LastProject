@@ -4,7 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,6 +21,8 @@ import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,39 +34,37 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
+import java.io.IOException;
 
-import java.util.ArrayList;
 
 public class CompletedQuestActivity extends AppCompatActivity {
-
-    private ArrayList<QuestlogInfo> loglist = new ArrayList<>();     // quest_log 데이터 저장 리스트
-    private ArrayList<QuestlogInfo> searchlist =  new ArrayList<>();    // 검색 리스트
-
-    private TextView back;
-    private TextView logout;
-    private ListView listView;          // 검색을 보여줄 리스트변수
-    private EditText editSearch;        // 검색어를 입력할 Input 창
-    private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
-    int cnt; //quest_log 개수 반환
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com/quest_thumbnail");;
+    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");;
     private StorageReference storageRef = storage.getReference();
 
+
+    private TextView back;
+    private ListView listView = null;          // 검색을 보여줄 리스트변수
+    private ListViewAdapter adapter;      // 리스트뷰에 연결할 아답터
+    private int cnt; //quest_log 개수 반환
+    private Drawable questThumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest_finished);
 
-        editSearch = (EditText) findViewById(R.id.editSearch);
-        listView = (ListView) findViewById(R.id.listView);
-        back = (TextView) findViewById(R.id.back);
-        logout = (TextView) findViewById(R.id.logout);
+        // Adapter 생성
+        adapter = new ListViewAdapter() ;
 
+        listView = (ListView) findViewById(R.id.listview1);
+        listView.setAdapter(adapter);
+
+        back = (TextView) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,40 +74,30 @@ public class CompletedQuestActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         // 검색에 사용할 데이터을 미리 저장한다.
         prepareData();
 
-        // 리스트의 모든 데이터를 searchlist에 복사한다.// list 복사본을 만든다.
-        searchlist = new ArrayList<QuestlogInfo>();
-        searchlist.addAll(loglist);
-
-        // 리스트에 연동될 아답터를 생성한다.
-        adapter = new SearchAdapter(searchlist,this);
-
-        // 리스트뷰에 아답터를 연결한다.
-        listView.setAdapter(adapter);
-
-        // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
-        editSearch.addTextChangedListener(new TextWatcher() {
+        EditText editTextFilter = (EditText)findViewById(R.id.editTextFilter) ;
+        editTextFilter.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void afterTextChanged(Editable edit) {
+                String filterText = edit.toString() ;
+                if (filterText.length() > 0) {
+                    listView.setFilterText(filterText) ;
+                } else {
+                    listView.clearTextFilter() ;
+                }
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-                // input창에 문자를 입력할때마다 호출된다.
-                // search 메소드를 호출한다.
-                String text = editSearch.getText().toString();
-                search(text);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-        });
-
-
+        }) ;
 
     }
 
@@ -116,10 +113,28 @@ public class CompletedQuestActivity extends AppCompatActivity {
                     mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
+                            questThumbnail = null;
                             QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
                             Log.d("questInfo",questlogInfo.getTitle_ko());
-                            loglist.add(questlogInfo);
+                            storageRef.child("quest_thumbnail/" + questlogInfo.getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+                                Log.d("uri", String.valueOf(uri));
+                                Bitmap bitmap = null;
+                                try{
+                                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+                                        bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(),uri));
+                                    }
+                                    else{
+                                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                                    }
+                                }catch (IOException e){
+                                        e.printStackTrace();
+                                }
+                                questThumbnail = new BitmapDrawable(bitmap);
+
+                            });
+                            //Drawable icon, String title_ko, String rating, String category, String accepted_date, String finished_date
+                            Log.d("thumb", String.valueOf(questThumbnail));
+                            adapter.addItem(questThumbnail, questlogInfo.getTitle_ko(),questlogInfo.getRating(),questlogInfo.getCategory(),questlogInfo.getAccepted_date(),questlogInfo.getFinished_date());
                         }
 
                         @Override
@@ -135,38 +150,6 @@ public class CompletedQuestActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
-    // 검색을 수행하는 메소드
-    public void search(String charText) {
-
-        // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
-        searchlist.clear();
-
-        // 문자 입력이 없을때는 모든 데이터를 보여준다.
-        if (charText.length() == 0) {
-            searchlist.addAll(loglist);
-        }
-        // 문자 입력을 할때..
-        else
-        {
-            // 리스트의 모든 데이터를 검색한다.
-            //Log.d("size",Integer.toString(loglist.size())) ;
-            Log.d("charText",charText);
-            for(int i = 0;i < loglist.size(); i++)
-            {
-                Log.d("title", loglist.get(i).getTitle_ko());
-                // searchlist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                if (loglist.get(i).getTitle_ko().toLowerCase().contains(charText))
-                {
-                    // 검색된 데이터를 리스트에 추가한다.
-                    searchlist.add(loglist.get(i));
-                }
-            }
-        }
-        // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
-        adapter.notifyDataSetChanged();
-    }
 }

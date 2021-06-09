@@ -40,42 +40,33 @@
 
         </RelativeLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/page_header"
-            >
+            android:layout_below="@+id/page_header">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:id="@+id/textView1"
+                android:text="검색" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/textView1"
+                android:id="@+id/editTextFilter"/>
+
+            <ListView
+                android:id="@+id/listview1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_below="@id/editTextFilter"
+                android:layout_marginTop="-2dp"
+                android:textFilterEnabled="true" />
 
-                <EditText
-                    android:id="@+id/editSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="검색어를 입력하세요."/>
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/editSearch">
-
-                    <ListView
-                        android:id="@+id/listView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:divider="#999999"
-                        android:dividerHeight="1dp">
-                    </ListView>
-
-                </ScrollView>
-
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
    </androidx.constraintlayout.widget.ConstraintLayout>
