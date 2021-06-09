@@ -30,16 +30,20 @@ import java.util.ArrayList;
 public class MyQuestFragment extends Fragment {
 
     private ArrayList<QuestInfo> list = new ArrayList<>();
+    private ArrayList<QuestlogInfo> qlist = new ArrayList<>();
+
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView2;
     private SimpleTextAdapter mAdapter;
+    private IngQuestAdapter ingQuestAdapter;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("recommend_list");
+    //    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("recommend_list");
+//    private DatabaseReference mDatabaseRef2 = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
-
-
+    String uid = firebaseUser.getUid();
 
     public MyQuestFragment() {
         // Required empty public constructor
@@ -51,6 +55,7 @@ public class MyQuestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prepareData();
+        prepareLogData();
 
     }
 
@@ -62,36 +67,65 @@ public class MyQuestFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_my_quest, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
+        recyclerView2 = (RecyclerView) v.findViewById(R.id.recycleView2);
         recyclerView.setHasFixedSize(true);
+        recyclerView2.setHasFixedSize(true);
         mAdapter = new SimpleTextAdapter(list);
+        ingQuestAdapter = new IngQuestAdapter(qlist);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView2.setLayoutManager(mLayoutManager2);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView2.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+        recyclerView2.setAdapter(ingQuestAdapter);
 
         return v;
     }
 
 
     public void prepareData() {
-        String uid = firebaseUser.getUid();
+        for (int i = 0; i < 10; i++) {
+            firebaseDatabase.getReference("recommend_list").child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-        for(int i =0;i<10;i++){
-        mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
 
-                QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
+                    list.add(questInfo);
 
-                list.add(questInfo);
+                }
 
-            }
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+
+    }
+
+    public void prepareLogData() {
+        for (int i = 0; i < 10; i++) {
+            firebaseDatabase.getReference("quest_log").child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                    QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
+                    if (questlogInfo != null) {
+                        if (questlogInfo.getRating().equals("0")) {
+                            qlist.add(questlogInfo);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
         }
 
     }

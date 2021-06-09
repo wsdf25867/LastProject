@@ -207,13 +207,15 @@ public class EditMyInfoFragment extends Fragment{
             }
         });
 
-//        Button quest_finished = (Button) findViewById(R.id.quest_finished);
-//        quest_finished.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            Intent
-//            }
-//        });
+        Button quest_finished = view.findViewById(R.id.quest_finished);
+        quest_finished.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Intent GotoCompletedQeusetActivity = new Intent(getActivity(), CompletedQuestActivity.class);
+            startActivity(GotoCompletedQeusetActivity);
+            getActivity().finish();
+            }
+        });
 
 
         user_img = view.findViewById(R.id.user_img);

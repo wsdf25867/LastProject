@@ -6,13 +6,27 @@
     tools:context="com.example.levelus.MyQuestFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/page_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Quest"
-        android:textSize="40dp"
-        android:gravity="center"
-        android:layout_marginTop="16dp"/>
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="16dp">
+
+        <TextView
+            android:id="@+id/log_in"
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal|top"
+            android:text="My Quest"
+            android:textAppearance="@style/big_black_title" />
+    </RelativeLayout>
 
 
     <TextView
@@ -25,10 +39,9 @@
         android:text="추천 퀘스트" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/recycleView"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -40,9 +53,8 @@
         android:textSize="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/recycleView2"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
 
 </LinearLayout>

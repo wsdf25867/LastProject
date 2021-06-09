@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignActivity" />
+        <activity android:name=".CompletedQuestActivity"
+            android:parentActivityName=""/>
     </application>
 
 </manifest>

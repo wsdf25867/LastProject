@@ -7,8 +7,8 @@ public class QuestlogInfo {
     private String rating;
     private String category;
     private String title_ko;
-    private Date accepted_date;
-    private Date finished_date;
+    private String accepted_date;
+    private String finished_date;
 
     public QuestlogInfo(){
 
@@ -45,19 +45,19 @@ public class QuestlogInfo {
         this.title_ko = title_ko;
     }
 
-    public Date getAccepted_date() {
+    public String getAccepted_date() {
         return accepted_date;
     }
 
-    public void setAccepted_date(Date accepted_date) {
+    public void setAccepted_date(String accepted_date) {
         this.accepted_date = accepted_date;
     }
 
-    public Date getFinished_date() {
+    public String getFinished_date() {
         return finished_date;
     }
 
-    public void setFinished_date(Date finished_date) {
+    public void setFinished_date(String finished_date) {
         this.finished_date = finished_date;
     }
 

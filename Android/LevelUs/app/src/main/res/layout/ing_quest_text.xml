@@ -9,24 +9,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/quest_name"
+            android:id="@+id/ing_quest_name"
             android:padding="8dp"
             android:textSize="18dp"
             android:gravity="center_vertical"
             android:layout_weight="9"/>
 
         <Button
-            android:id="@+id/agree_button"
+            android:id="@+id/check_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수락"/>
+            android:text="검증"/>
 
         <Button
-            android:id="@+id/disagree_button"
+            android:id="@+id/forgive_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="거절"/>
-
+            android:text="포기"/>
     </LinearLayout>
 
 </LinearLayout>
