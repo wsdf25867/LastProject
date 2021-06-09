@@ -92,7 +92,7 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
                                 questlogInfo.setRating("0");
                                 questlogInfo.setTitle_ko(mData.get(position).getTitle_ko());
                                 questlogInfo.setAccepted_date(getTime);
-                                questlogInfo.setFinished_date("9999-99-99");
+                                questlogInfo.setFinished_date("99-99-99");
                                 mDatabaseRef.child(uid).child(Integer.toString(i)).setValue(questlogInfo);
                                 break;
                             }
