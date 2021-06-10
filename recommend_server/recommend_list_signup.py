@@ -95,38 +95,9 @@ def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30)
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)
 
     for index in user_log['quest_num'] :  
-        sim_index = sim_index[sim_index != int(index)]
+        sim_index = sim_index[sim_index != index]
     
     result = df.iloc[sim_index].sort_values('done', ascending=False)[:10]
-    result = result.sort_values(by=['quest_num'], axis=0)
-
-    # 2) index reset하기
-    result = result.reset_index(drop=True)
-    js = result.to_dict('records')
-    
-    #json 파일로 저장
-    with open('test.json', 'w', encoding='cp949') as make_file:
-        json.dump(js, make_file)
-
-    # firebase에 json파일 업로드
-    jsonData = open("test.json","r",encoding="cp949").read()
-    data = json.loads(jsonData)
-
-    dir = db.reference('/recommend_list/'+uid)
-    dir.set(data)
-   
-    return result    
-
-
-@app.route('/difficulty/<string:uid>')
-def get_recommend_difficulty(uid, df) :
-    member = db.reference('/Level Us/UserAccount/' + uid).get()
-    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
-    
-    for index in user_log['quest_num'] :  
-        df = df[df['quest_num'] != int(index)]
-
-    result = df.sort_values('done', ascending=False).sort_values('difficulty', ascending = False)[:10]
     result = result.sort_values(by=['quest_num'], axis=0)
 
     # 2) index reset하기
