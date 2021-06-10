@@ -1,5 +1,6 @@
 package com.example.levelus;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ import java.util.List;
  * Use the {@link RankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RankFragment extends Fragment {
+public class RankFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -144,5 +145,15 @@ public class RankFragment extends Fragment {
             }
         });
         return view;
+    }
+    @Override
+    public void onBackKey() {
+        LoggedPages activity = (LoggedPages) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
     }
 }

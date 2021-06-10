@@ -24,7 +24,6 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         protected TextView text_name, text_level, rank;
         protected ImageView highest_rank_imageView;
         protected Context context;
-        protected Drawable medal;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             this.rank = itemView.findViewById(R.id.rank);
