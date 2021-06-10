@@ -111,7 +111,7 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
                     holder.disagree_button.setOnClickListener(new View.OnClickListener() { //거절버튼
                         @Override
                         public void onClick(View v) {
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 0; i < 222; i++) {
                                 QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
                                 if (questInfo != null) {
                                     if (questInfo.getTitle_ko().equals(mData.get(position).getTitle_ko())) {

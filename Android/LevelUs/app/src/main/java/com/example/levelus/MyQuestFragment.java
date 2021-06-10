@@ -1,5 +1,6 @@
 package com.example.levelus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SymbolTable;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class MyQuestFragment extends Fragment {
 
     String uid = firebaseUser.getUid();
 
+    Context mContext = getContext();
 
 
 
@@ -79,7 +81,7 @@ public class MyQuestFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView2.setHasFixedSize(true);
         mAdapter = new SimpleTextAdapter(list);
-        ingQuestAdapter = new IngQuestAdapter(qlist);
+        ingQuestAdapter = new IngQuestAdapter(mContext,qlist);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
