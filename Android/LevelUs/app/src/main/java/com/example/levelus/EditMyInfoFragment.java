@@ -213,7 +213,6 @@ public class EditMyInfoFragment extends Fragment{
             public void onClick(View v) {
             Intent GotoCompletedQeusetActivity = new Intent(getActivity(), CompletedQuestActivity.class);
             startActivity(GotoCompletedQeusetActivity);
-            getActivity().finish();
             }
         });
 
