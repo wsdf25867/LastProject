@@ -3,6 +3,7 @@ package com.example.levelus;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,36 +93,36 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
             }
         });
 
-        firebaseDatabase.getReference("quest").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                holder.check_button.setOnClickListener(new View.OnClickListener() { //검증버튼
-                    @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        for(int i=0;i<222;i++){
-                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
-                            if(questInfo!=null){
-                                if(questInfo.getTitle_ko().equals(qData.get(position).getTitle_ko())){
-                                    Intent intent = new Intent(v.getContext(),ImageLabellingActivity.class);
-                                    intent.putExtra("title_ko",questInfo.getTitle_ko());
-                                    intent.putExtra("keyword",questInfo.getKeyword());
-                                    intent.putExtra("way",questInfo.getWay());
-                                    intent.putExtra("quest_num",questInfo.getQuest_num());
-                                    intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                                    v.getContext().startActivity(intent);
-                                    break;
 
+        holder.check_button.setOnClickListener(new View.OnClickListener() { //검증버튼
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(v.getContext(), ImageLabellingActivity.class);
+                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                firebaseDatabase.getReference("quest").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        for (int i = 0; i < 222; i++) {
+                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            if (questInfo != null) {
+                                if (questInfo.getTitle_ko().equals(qData.get(position).getTitle_ko())) {
+                                    intent.putExtra("title_ko", questInfo.getTitle_ko());
+                                    intent.putExtra("keyword", questInfo.getKeyword());
+                                    intent.putExtra("way", questInfo.getWay());
+                                    intent.putExtra("quest_num", questInfo.getQuest_num());
+                                    break;
                                 }
                             }
                         }
                     }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
                 });
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
+                v.getContext().startActivity(intent);
             }
         });
 
