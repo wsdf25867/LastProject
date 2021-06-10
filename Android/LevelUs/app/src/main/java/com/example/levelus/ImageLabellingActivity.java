@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,11 +33,12 @@ import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImageLabellingActivity extends AppCompatActivity implements LocationListener {
 
-    private Button captureImageBtn, detectTextBtn;  //사진찍기, 텍스트 추출하기
+    private Button captureImageBtn;                 //사진찍기
     private ImageView imageView;                    //찍은 이미지
     private TextView resultTv;                      //찍은 이미지의 텍스트
     static final int REQUEST_IMAGE_CAPTURE = 1;     //찍은 사진 1장의 의미 인가?
@@ -46,18 +48,26 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     //gps관련 (사진에서 말고 현재 위치 가져오는 방식임!)
     final static String TAG = "MSP03";
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    TextView logView;
-    TextView gps;
-    TextView network;
+    TextView logView;   //처음 받아오는 현재위치
     LocationManager lm;
 
-    TextView location2;
-    double lat;
-    double lng;
-    double nowLat;
-    double nowLng;
-    TextView txt;
-    Button b1;
+    TextView location2; //사진 찍으면 고정되는 현재위치
+
+    double lat;         //처음 받아오는 좌표
+    double lng;         //처음 받아오는 좌표
+    double nowLat;      //사진 찍으면 고정되는 현재좌표
+    double nowLng;      //사진 찍으면 고정되는 현재좌표
+    TextView txt;       //주소반환 버튼 누를 시 반환되는 주소 값
+    Button b1;          //주소반환 버튼
+
+    //intent로 값 받아와야 함.
+
+    //얘넨 테스트용
+    ArrayList list = new ArrayList();
+
+    String object = "object";
+    String gps = "gps";
+    String room = "Room";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +76,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
         //gps관련
         logView = (TextView) findViewById(R.id.location);    //gps2
-        gps = (TextView) findViewById(R.id.gps);
-        network = (TextView) findViewById(R.id.network);
 
         location2 = (TextView) findViewById(R.id.location2);
         b1 = (Button) findViewById(R.id.b1);
@@ -76,15 +84,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         // LocationManager 참조 객체
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // GPS 프로바이더 사용 가능 여부
-        if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            gps.setText("GPS Provider: Available");
-        }
-
-        // 네트워크 프로바이더 사용 가능 여부
-        if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            network.setText("Network Provider: Available");
-        }
 
         Geocoder g = new Geocoder(this);    //좌표 -> 주소
         b1.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +265,16 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                 String entityId = label.getEntityId();
                                 float confidence = label.getConfidence();
                                 resultTv.append(text + "    " + confidence + "\n");
+                                list.add(text);
+                                System.out.println(text);
+
+                            }
+                            System.out.println(list);
+                            for(int i = 0; i<list.size(); i++){
+                                if(room.equals((String)list.get(i))){
+                                    Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
+                                    myToast.show();
+                                }
                             }
                         }
                     })

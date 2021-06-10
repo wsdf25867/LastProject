@@ -34,32 +34,13 @@
         android:layout_alignParentBottom="true"
         />
 
-    <!-- 이버튼 누르면 찍은 사진에 있는 텍스트가 추출됨 -->
-
-
-    <TextView
-        android:id="@+id/gps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GPS Provider:  "
-        android:textSize="20dp"
-        android:layout_above="@+id/capture_image_btn"/>
-
-    <TextView
-        android:id="@+id/network"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Network Provider: "
-        android:textSize="20dp"
-        android:layout_above="@+id/gps"/>
-
     <TextView
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location: "
         android:textSize="24dp"
-        android:layout_above="@+id/network"/>
+        android:layout_above="@+id/capture_image_btn"/>
 
     <TextView
         android:id="@+id/location2"

@@ -26,11 +26,6 @@
         <activity android:name=".DeleteActivity" />
         <activity android:name=".EditActivity" />
         <activity android:name=".ImageLabellingActivity" />
-        <activity android:name=".TextRecognitionActivity">
-            <meta-data
-                android:name="com.google.mlkit.vision.DEPENDENCIES"
-                android:value="ocr" />
-        </activity>
         <activity android:name=".LoggedPages" />
         <activity android:name=".MainActivity">
             <intent-filter>
