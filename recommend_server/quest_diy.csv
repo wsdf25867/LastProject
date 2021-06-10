@@ -1,52 +1,52 @@
-title,category,added,done,title_ko,keyword,way,quest_num
-Send a message in a bottle,diy,9500,550,메세지 병에 담아 보내기,bottle,object,0
-Ride in a hot air balloon,diy,7100,445,열기구를 타기,air balloon,object,1
-Write a book,diy,4200,128,책 쓰기,book,object,4
-Swim with sharks,diy,3800,538,상어와 함께 수영하기,shark,object,5
-Volunteer abroad,diy,3400,591,해외봉사 해보기,other,gps,6
-Sleep under the stars,diy,3000,662,별보며 자보기,star,object,7
-Travel by myself,diy,2900,945,혼자 여행하기,alone,gps,8
-Learn Spanish,diy,2100,371,스페인어 배우기,spanish,text,10
-Find a four leaf clover,diy,1800,806,네 잎 클로버를 찾기,four leaf clover,object,11
-Learn to paint,diy,1700,303,그림 배우기,picture,object,12
-Learn to Sew,diy,1600,361,바느질 배우기,sew,object,13
-See a Shooting Star,diy,1300,668,별똥별 보기,shooting star,object,15
-Take a cooking class,diy,1100,142,요리 배우기,knife,object,16
-Write a novel,diy,1000,47,소설을 쓰기,book,object,17
-Go to a shooting range,diy,987,296,사격장 가보기,gun,object,18
-Learn Programming,diy,900,174,프로그래밍 학습해보기,int,text,19
-Build my own mini library,diy,889,67,나만의 작은 도서관 만들기,"books,book",object,20
-Watch the sunset,diy,873,537,일몰을 보기,sun,object,21
-Grow an abundant herb garden,diy,871,26,나만의 정원 가꾸기,"leaf,flower,send",object,22
-Start a Blog,diy,807,343,블로그 시작하기,blog,text,23
-Solve a Rubix-Cube,diy,694,265,루빅스 큐브 해보기,"rubix,cube,rubix_cube",object,24
-Start my own business,diy,604,82,창업 해보기,사업자등록증,text,26
-Donate my hair,diy,552,234,내 머리카락을 기부해보기,hair,object,27
-Bake a cake,diy,550,389,케이크 만들기,cake,object,28
-Get my drivers license,diy,513,137,운전면허증 받기,drive license,object,29
-Make a YouTube video,diy,507,130,유튜브 동영상 만들기,youtube,text,30
-Take a jumping picture,diy,477,217,점프 사진 찍기,"picture,person,people",object,31
-Build a snowman,diy,428,170,눈사람을 만들다.,snowman,object,32
-Buy my own car,diy,378,133,내 차를 사세요.,car,object,33
-Hold an Owl,diy,324,64,올빼미 잡기,owl,object,34
-Make a time capsule,diy,291,19,타임캡슐 만들기,capsule,object,35
-Learn to use chopsticks,diy,233,108,젓가락 사용법 배우기,chopsticks,object,36
-Get a college degree,diy,233,46,대학 학위를 따기,학위증,text,37
-Try oysters,diy,217,121,굴을 먹어보세요.,oyster,object,38
-Go to a Fancy Dress Party,diy,214,86,화려한 드레스 파티에 가기,dress,object,39
-Fold 1000 paper cranes,diy,205,15,종이 학 1000개 접기,"paper,paper cranes",object,40
-Climb a tree,diy,188,62,나무를 오르다.,tree,object,41
-Learn to Crochet,diy,184,47,코바늘 뜨개질 배우기,crochet hook,object,42
-Take a dance class,diy,184,36,춤 배우기,"person,people,mirror",object,43
-Carve a pumpkin for halloween,diy,163,81,할로윈을 호박 조각하기,pumpkin,object,44
-Own a Cat,diy,159,59,고양이 키우기,cat,object,45
-Become an Early Riser,diy,145,22,7시에 일어나기,7:00 AM,text,46
-Build A Computer,diy,138,58,내 컴퓨터 조립하기,"computer,monitor,mouse,keyboard",object,47
-Learn to dive,diy,130,28,다이빙 배우기,"board,diving board",object,48
-Ride on an Elephant,diy,122,25,코끼리 타기,elephant,object,49
-Make tiramisu,diy,113,27,티라미수 만들기,"tiramisu,cake",object,50
-Join a gym,diy,110,49,헬스장 등록하기,"barbell,dumbbell",object,51
-Make a kite and fly it,diy,108,33,연을 만들어 날리기,kite,object,52
-Dye my hair,diy,106,37,내 머리 염색하기,hair,object,53
-Complete a scrapbook,diy,105,12,스크랩북 작성,book,object,54
-Learn to Make Homemade Pasta,diy,27,10,집에서 파스타 만들기,pasta,object,55
+title,category,added,done,title_ko,keyword,way,quest_num,difficulty,period
+Send a message in a bottle,diy,9500,550,메세지 병에 담아 보내기,bottle,object,0,1,3
+Ride in a hot air balloon,diy,7100,445,열기구를 타기,air balloon,object,1,1,3
+Write a book,diy,4200,128,책 쓰기,book,object,4,2,7
+Swim with sharks,diy,3800,538,상어와 함께 수영하기,shark,object,5,3,14
+Volunteer abroad,diy,3400,591,해외봉사 해보기,other,gps,6,3,14
+Sleep under the stars,diy,3000,662,별보며 자보기,star,object,7,2,2
+Travel by myself,diy,2900,945,혼자 여행하기,alone,gps,8,1,7
+Learn Spanish,diy,2100,371,스페인어 배우기,spanish,text,10,2,7
+Find a four leaf clover,diy,1800,806,네 잎 클로버를 찾기,four leaf clover,object,11,3,14
+Learn to paint,diy,1700,303,그림 배우기,picture,object,12,2,7
+Learn to Sew,diy,1600,361,바느질 배우기,sew,object,13,1,7
+See a Shooting Star,diy,1300,668,별똥별 보기,shooting star,object,15,2,14
+Take a cooking class,diy,1100,142,요리 배우기,knife,object,16,2,7
+Write a novel,diy,1000,47,소설을 쓰기,book,object,17,2,7
+Go to a shooting range,diy,987,296,사격장 가보기,gun,object,18,2,3
+Learn Programming,diy,900,174,프로그래밍 학습해보기,int,text,19,1,2
+Build my own mini library,diy,889,67,나만의 작은 도서관 만들기,"books,book",object,20,2,14
+Watch the sunset,diy,873,537,일몰을 보기,sun,object,21,1,2
+Grow an abundant herb garden,diy,871,26,나만의 정원 가꾸기,"leaf,flower,send",object,22,2,7
+Start a Blog,diy,807,343,블로그 시작하기,blog,text,23,1,2
+Solve a Rubix-Cube,diy,694,265,루빅스 큐브 해보기,"rubix,cube,rubix_cube",object,24,1,2
+Start my own business,diy,604,82,창업 해보기,사업자등록증,text,26,3,14
+Donate my hair,diy,552,234,내 머리카락을 기부해보기,hair,object,27,2,14
+Bake a cake,diy,550,389,케이크 만들기,cake,object,28,1,2
+Get my drivers license,diy,513,137,운전면허증 받기,drive license,object,29,2,14
+Make a YouTube video,diy,507,130,유튜브 동영상 만들기,youtube,text,30,2,7
+Take a jumping picture,diy,477,217,점프 사진 찍기,"picture,person,people",object,31,1,2
+Build a snowman,diy,428,170,눈사람을 만들다.,snowman,object,32,1,2
+Buy my own car,diy,378,133,내 차를 사세요.,car,object,33,3,14
+Hold an Owl,diy,324,64,올빼미 잡기,owl,object,34,3,14
+Make a time capsule,diy,291,19,타임캡슐 만들기,capsule,object,35,1,2
+Learn to use chopsticks,diy,233,108,젓가락 사용법 배우기,chopsticks,object,36,1,7
+Get a college degree,diy,233,46,대학 학위를 따기,학위증,text,37,3,14
+Try oysters,diy,217,121,굴을 먹어보세요.,oyster,object,38,1,2
+Go to a Fancy Dress Party,diy,214,86,화려한 드레스 파티에 가기,dress,object,39,2,7
+Fold 1000 paper cranes,diy,205,15,종이 학 1000개 접기,"paper,paper cranes",object,40,2,14
+Climb a tree,diy,188,62,나무를 오르다.,tree,object,41,1,2
+Learn to Crochet,diy,184,47,코바늘 뜨개질 배우기,crochet hook,object,42,1,2
+Take a dance class,diy,184,36,춤 배우기,"person,people,mirror",object,43,2,7
+Carve a pumpkin for halloween,diy,163,81,할로윈을 호박 조각하기,pumpkin,object,44,2,7
+Own a Cat,diy,159,59,고양이 키우기,cat,object,45,2,7
+Become an Early Riser,diy,145,22,7시에 일어나기,7:00 AM,text,46,1,2
+Build A Computer,diy,138,58,내 컴퓨터 조립하기,"computer,monitor,mouse,keyboard",object,47,2,7
+Learn to dive,diy,130,28,다이빙 배우기,"board,diving board",object,48,2,7
+Ride on an Elephant,diy,122,25,코끼리 타기,elephant,object,49,2,7
+Make tiramisu,diy,113,27,티라미수 만들기,"tiramisu,cake",object,50,1,2
+Join a gym,diy,110,49,헬스장 등록하기,"barbell,dumbbell",object,51,2,5
+Make a kite and fly it,diy,108,33,연을 만들어 날리기,kite,object,52,2,5
+Dye my hair,diy,106,37,내 머리 염색하기,hair,object,53,1,5
+Complete a scrapbook,diy,105,12,스크랩북 작성,book,object,54,2,5
+Learn to Make Homemade Pasta,diy,27,10,집에서 파스타 만들기,pasta,object,55,1,2

@@ -1,7 +1,6 @@
 package com.example.levelus;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-/**
- * Created by Administrator on 2017-08-07.
- */
 
 public class ListViewAdapter extends BaseAdapter implements Filterable {
 
@@ -23,18 +19,18 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
     // 필터링된 결과 데이터를 저장하기 위한 ArrayList. 최초에는 전체 리스트 보유.
     private ArrayList<ListViewItem> filteredItemList = listViewItemList ;
-
     Filter listFilter ;
 
     // ListViewAdapter의 생성자
-    public ListViewAdapter() {
-
+    public ListViewAdapter(ArrayList<ListViewItem> listViewItemList) {
+        this.listViewItemList = listViewItemList;
+        this.filteredItemList = listViewItemList;
+        Log.d("filtersize",Integer.toString(filteredItemList.size()));
     }
 
 
     @Override
     public int getCount() {
-        Log.d("Count",Integer.toString(filteredItemList.size()));
         return filteredItemList.size() ;
     }
 
@@ -50,21 +46,6 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         return filteredItemList.get(position) ;
     }
 
-    // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String title_ko, String rating, String category, String accepted_date, String finished_date ) {
-        ListViewItem item = new ListViewItem();
-
-        item.setIconDrawable(icon);
-        item.setTitle_ko(title_ko);
-        item.setRating(rating);
-        item.setCategory(category);
-        item.setAccepted_date(accepted_date);
-        item.setFinished_date(finished_date);
-
-        listViewItemList.add(item);
-        Log.d("listsize", Integer.toString(listViewItemList.size()));
-        Log.d("filtersize", Integer.toString(filteredItemList.size()));
-    }
 
 
     @Override

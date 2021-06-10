@@ -1,43 +1,7 @@
-title,category,added,done,title_ko,keyword,way,quest_num
-Own a dog,love,1400,195,개를 기르다.,dog,object,139
-Go to Australia,love,1400,49,호주로 가다,australia,object,140
-Learn how to ride a bike,love,1100,134,자전거 타는 법 배우기,bike,object,141
-"Visit Paris, France",love,964,584,프랑스 파리 방문,paris,gps,142
-See fireflies,love,174,174,반딧불 보기,fireflies,object,143
-See Eiffel Tower in the winter,love,155,101,에펠탑 보기,eiffel tower,object,144
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
+title,category,added,done,title_ko,keyword,way,quest_num,difficulty,period
+Own a dog,love,1400,195,개를 기르다.,dog,object,139,2,7
+Go to Australia,love,1400,49,호주로 가다,australia,object,140,3,14
+Learn how to ride a bike,love,1100,134,자전거 타는 법 배우기,bike,object,141,2,7
+"Visit Paris, France",love,964,584,프랑스 파리 방문,paris,gps,142,3,14
+See fireflies,love,174,174,반딧불 보기,fireflies,object,143,2,7
+See Eiffel Tower in the winter,love,155,101,에펠탑 보기,eiffel tower,object,144,3,14

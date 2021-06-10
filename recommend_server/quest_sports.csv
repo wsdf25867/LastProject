@@ -1,43 +1,5 @@
-title,category,added,done,title_ko,keyword,way,quest_num
-Do yoga,sports,1900,471,요가를 하다,yoga,text,199
-Drive a race car,sports,171,484,경주용 자동차 운전,race car,object,200
-Jump out of a plane,sports,128,33,비행기에서 뛰어내리기,plane,object,201
-Buy A Boat,sports,108,102,보트 구입,boat,object,202
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
+title,category,added,done,title_ko,keyword,way,quest_num,difficulty,period
+Do yoga,sports,1900,471,요가를 하다,yoga,text,199,2,7
+Drive a race car,sports,171,484,경주용 자동차 운전,race car,object,200,3,14
+Jump out of a plane,sports,128,33,비행기에서 뛰어내리기,plane,object,201,3,14
+Buy A Boat,sports,108,102,보트 구입,boat,object,202,3,14

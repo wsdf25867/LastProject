@@ -1,43 +1,4 @@
-title,category,added,done,title_ko,keyword,way,quest_num
-Take Pole Dancing Classes,health,4400,756,Æú´í½º ¼ö¾÷ µè±â,pole dancing,text,67
-Complete a half marathon,health,1800,290,ÇÏÇÁ ¸¶¶óÅæ ¿ÏÁÖ,"complete,marathon",text,68
-Take a Bellydancing Classes,health,1400,75,º§¸®´í½º ¼ö¾÷ µè±â,bellydancing,text,69
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
+title,category,added,done,title_ko,keyword,way,quest_num,difficulty,period
+Take Pole Dancing Classes,health,4400,756,Æú´í½º ¼ö¾÷ µè±â,pole dancing,text,67,2,7
+Complete a half marathon,health,1800,290,ÇÏÇÁ ¸¶¶óÅæ ¿ÏÁÖ,"complete,marathon",text,68,2,14
+Take a Bellydancing Classes,health,1400,75,º§¸®´í½º ¼ö¾÷ µè±â,bellydancing,text,69,2,7
