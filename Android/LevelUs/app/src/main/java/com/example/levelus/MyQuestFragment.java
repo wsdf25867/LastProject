@@ -49,8 +49,6 @@ public class MyQuestFragment extends Fragment {
 
     String uid = firebaseUser.getUid();
 
-    Context mContext = getContext();
-
 
 
     public MyQuestFragment() {
@@ -81,7 +79,7 @@ public class MyQuestFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView2.setHasFixedSize(true);
         mAdapter = new SimpleTextAdapter(list);
-        ingQuestAdapter = new IngQuestAdapter(mContext,qlist);
+        ingQuestAdapter = new IngQuestAdapter(qlist);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());

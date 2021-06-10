@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHolder> {
 
     ArrayList<QuestlogInfo> qData;
-    Context mContext;
+
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
@@ -48,8 +48,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
         }
     }
 
-    public IngQuestAdapter(Context mContext,ArrayList<QuestlogInfo> ing_list) {
-        this.mContext = mContext;
+    public IngQuestAdapter(ArrayList<QuestlogInfo> ing_list) {
         this.qData = ing_list;
     }
 
@@ -96,7 +95,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
         firebaseDatabase.getReference("quest").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                holder.check_button.setOnClickListener(new View.OnClickListener() {
+                holder.check_button.setOnClickListener(new View.OnClickListener() { //검증버튼
                     @Override
                     public void onClick(View v) {
                         Context context = v.getContext();
@@ -109,7 +108,8 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                                     intent.putExtra("keyword",questInfo.getKeyword());
                                     intent.putExtra("way",questInfo.getWay());
                                     intent.putExtra("quest_num",questInfo.getQuest_num());
-                                    mContext.startActivity(intent);
+                                    intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                                    v.getContext().startActivity(intent);
                                     break;
 
                                 }
