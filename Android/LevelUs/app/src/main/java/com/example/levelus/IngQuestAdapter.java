@@ -1,6 +1,7 @@
 package com.example.levelus;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHolder> {
 
     ArrayList<QuestlogInfo> qData;
+    Context mContext;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
@@ -46,7 +48,8 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
         }
     }
 
-    public IngQuestAdapter(ArrayList<QuestlogInfo> ing_list) {
+    public IngQuestAdapter(Context mContext,ArrayList<QuestlogInfo> ing_list) {
+        this.mContext = mContext;
         this.qData = ing_list;
     }
 
@@ -68,7 +71,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
         mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() { //퀘스트 포기
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                holder.giveup_button.setOnClickListener(new View.OnClickListener() {
+                holder.giveup_button.setOnClickListener(new View.OnClickListener() { //포기 버튼
                     @Override
                     public void onClick(View v) {
                         for (int i = 0; i < 222; i++) {
@@ -77,6 +80,38 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                                 if (qData.get(position).getTitle_ko().equals(questlogInfo.getTitle_ko())) {
                                     mDatabaseRef.child(uid).child(Integer.toString(i)).removeValue();
                                     break;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        firebaseDatabase.getReference("quest").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                holder.check_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        for(int i=0;i<222;i++){
+                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            if(questInfo!=null){
+                                if(questInfo.getTitle_ko().equals(qData.get(position).getTitle_ko())){
+                                    Intent intent = new Intent(v.getContext(),ImageLabellingActivity.class);
+                                    intent.putExtra("title_ko",questInfo.getTitle_ko());
+                                    intent.putExtra("keyword",questInfo.getKeyword());
+                                    intent.putExtra("way",questInfo.getWay());
+                                    intent.putExtra("quest_num",questInfo.getQuest_num());
+                                    mContext.startActivity(intent);
+                                    break;
+
                                 }
                             }
                         }
