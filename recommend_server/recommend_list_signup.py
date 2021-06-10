@@ -19,16 +19,10 @@ def get_member_data_signup(uid):
 
 def get_recommend_difficulty(uid, df) :
     member = db.reference('/Level Us/UserAccount/' + uid).get()
-    # user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
-    
-    # for index in user_log['quest_num'] :  
-    #     df = df[df['quest_num'] != index]
-    #     print(df)
 
     is_lv1 = (df['difficulty'] == "1")
     is_lv2 = (df['difficulty'] == ("1" or "2" ))
     is_lv3 = (df['difficulty'] == ("1" or "2" or "3")) 
-
 
     if member['level'] < 10 :
         result = df[is_lv1]
@@ -82,14 +76,19 @@ def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30)
             quest_index = row['quest_num']
    
     member = db.reference('/Level Us/UserAccount/' + uid).get()
-    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
-
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get(),columns=["quest_num","title_ko","category","accepted_date","finished_date","rating"])
+    
     if member['level'] < 10 :
         df = df[is_lv1]
     elif member['level'] < 20 :
         df = df[is_lv2]
     else :
         df = df[is_lv3]
+
+    for index in user_log['quest_num'] :  
+        df = df[df['quest_num'] != index]
+        print(df)
+
 
     target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)

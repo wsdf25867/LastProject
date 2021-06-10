@@ -12,9 +12,10 @@ from flask import Flask, escape, request
 
 def get_recommend_difficulty(uid, df) :
     member = db.reference('/Level Us/UserAccount/' + uid).get()
-    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
-    
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get(),columns=["quest_num","title_ko","category","accepted_date","finished_date","rating"])
+    print(user_log)
     for index in user_log['quest_num'] :  
+        print(index)
         df = df[df['quest_num'] != index]
         print(df)
 
@@ -61,7 +62,7 @@ if __name__ == "__main__":
     #content based filtering 알고리즘을 이용한 유사한 퀘스트 추천
     data = pd.DataFrame(dir.get())
 
-    uid = "qEyWe2xINORTYNzUBqjwavFFtCz1"
+    uid = "80QCXnA2EUP0CC4DS9CNQh00nsx2"
     print(get_recommend_difficulty(uid, data))
 
    
