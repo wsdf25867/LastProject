@@ -26,31 +26,39 @@ public class LoggedPages extends AppCompatActivity {
     //    private TextView logout;
 //    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
 //    public static LoggedPages loggedPages;
+    private EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
+    private MyQuestFragment myQuestFragment = new MyQuestFragment();
+    private QuestListFragment questListFragment = new QuestListFragment();
+    private RankFragment rankFragment = new RankFragment();
 
-    private Fragment selected_fragment = null;
+    private long backBtnTime = 0;
+    private Fragment selected_fragment = null, current_fragment, preview_fragment;
     private FragmentTransaction transaction;
 
     private BottomNavigationView navigationView;
     private BottomNavigationView.OnNavigationItemSelectedListener listener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            preview_fragment = selected_fragment;
             switch(item.getItemId()){
                 case R.id.edit_my_info:
-                    selected_fragment = new EditMyInfoFragment();
+                    selected_fragment = editMyInfoFragment;
                     break;
                 case R.id.media_play:
-                    selected_fragment = new MyQuestFragment();
+                    selected_fragment = myQuestFragment;
                     break;
                 case R.id.plus_square:
-                    selected_fragment = new QuestListFragment();
+                    selected_fragment = questListFragment;
                     break;
                 case R.id.bar_chart:
-                    selected_fragment = new RankFragment();
+                    selected_fragment = rankFragment;
                     break;
             }
+            current_fragment = selected_fragment;
             transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_layout, selected_fragment);
-            transaction.addToBackStack(null);
+            if(preview_fragment != current_fragment)
+                transaction.addToBackStack(null);
             transaction.commit();
 //            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, selected_fragment).commit();
             return true;
@@ -85,8 +93,16 @@ public class LoggedPages extends AppCompatActivity {
         else { //쌓인 BackStack 여부에 따라 Toast를 띄울지, 뒤로갈지
             if(getSupportFragmentManager().getBackStackEntryCount()==0){
                 //* 종료 EndToast Bean 사용
-                Toast.makeText(LoggedPages.this, "종료하려면 한번 더 누르세요.",Toast.LENGTH_SHORT).show();
-                finish();
+                long curTime = System.currentTimeMillis();
+                long gapTime = curTime - backBtnTime;
+
+                if(0 <= gapTime && 2000 >= gapTime) {
+                    super.onBackPressed();
+                }
+                else {
+                    backBtnTime = curTime;
+                    Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+                }
             }
             else{
                 super.onBackPressed();

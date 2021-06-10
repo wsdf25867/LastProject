@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -122,21 +123,26 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
                     for(int i=0;i< rankList.size();i++)
                         Log.i(i+"번째 사람의 레벨 ", Integer.toString(userAccount.getLevel()));
                 }
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
