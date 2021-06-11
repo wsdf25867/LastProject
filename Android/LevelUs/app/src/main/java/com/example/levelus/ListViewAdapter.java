@@ -1,6 +1,7 @@
 package com.example.levelus;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +17,15 @@ import java.util.ArrayList;
 public class ListViewAdapter extends BaseAdapter implements Filterable {
 
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList. (원본 데이터 리스트)
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
+    private ArrayList<ListViewItem> listViewItemList ;
     // 필터링된 결과 데이터를 저장하기 위한 ArrayList. 최초에는 전체 리스트 보유.
-    private ArrayList<ListViewItem> filteredItemList = listViewItemList ;
+    private ArrayList<ListViewItem> filteredItemList;
     Filter listFilter ;
 
     // ListViewAdapter의 생성자
     public ListViewAdapter(ArrayList<ListViewItem> listViewItemList) {
         this.listViewItemList = listViewItemList;
         this.filteredItemList = listViewItemList;
-        Log.d("filtersize",Integer.toString(filteredItemList.size()));
     }
 
 
@@ -90,12 +90,25 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         return listFilter ;
     }
 
+    // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
+    public void addItem(Drawable icon, String title_ko, String rating, String category, String accepted_date, String finished_date ) {
+        ListViewItem item = new ListViewItem();
+
+        item.setIconDrawable(icon);
+        item.setTitle_ko(title_ko);
+        item.setRating(rating);
+        item.setCategory(category);
+        item.setAccepted_date(accepted_date);
+        item.setFinished_date(finished_date);
+
+        listViewItemList.add(item);
+    }
+
     private class ListFilter extends Filter {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults() ;
-
             if (constraint == null || constraint.length() == 0) {
                 results.values = listViewItemList ;
                 results.count = listViewItemList.size() ;
@@ -117,10 +130,8 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-
             // update listview by filtered data list.
             filteredItemList = (ArrayList<ListViewItem>) results.values ;
-
             // notify
             if (results.count > 0) {
                 notifyDataSetChanged() ;
@@ -128,5 +139,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
                 notifyDataSetInvalidated() ;
             }
         }
+
+
     }
 }

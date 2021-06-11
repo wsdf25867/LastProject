@@ -39,45 +39,47 @@ import java.util.ArrayList;
 
 public class CompletedQuestActivity extends AppCompatActivity {
 
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
-    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");;
-    private StorageReference storageRef = storage.getReference();
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference mDatabaseRef;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser firebaseUser;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
 
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
+    private ArrayList<ListViewItem> listViewItemList ;
 
 
     private TextView back;
     private ListView listView = null;          // 검색을 보여줄 리스트변수
     private ListViewAdapter adapter;      // 리스트뷰에 연결할 아답터
-    private int cnt; //quest_log 개수 반환
     private Drawable questThumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest_finished);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseRef = firebaseDatabase.getReference("quest_log");
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = mFirebaseAuth.getCurrentUser();
+        storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");;
+        storageRef = storage.getReference();
+
+
+        listViewItemList = new ArrayList<ListViewItem>();
         // 검색에 사용할 데이터을 미리 저장한다.
-        prepareData();
-        Log.d("check",Integer.toString(listViewItemList.size()));
+        this.prepareData();
+
         // Adapter 생성
         adapter = new ListViewAdapter(listViewItemList) ;
+
 
         listView = (ListView) findViewById(R.id.listview1);
         listView.setAdapter(adapter);
 
-        back = (TextView) findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
-                startActivity(GoToLoggedPages);
-                finish();
-            }
-        });
 
+        ((ListViewAdapter)listView.getAdapter()).getFilter().filter(" ") ;
 
         EditText editTextFilter = (EditText)findViewById(R.id.editTextFilter) ;
         editTextFilter.addTextChangedListener(new TextWatcher() {
@@ -95,17 +97,25 @@ public class CompletedQuestActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         }) ;
+        // Back 버튼
+        back = (TextView) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
+                startActivity(GoToLoggedPages);
+                finish();
+            }
+        });
 
     }
+
 
     public void prepareData() {
         String uid = firebaseUser.getUid();
         mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                cnt = (int)snapshot.getChildrenCount();
-                Log.d("count",Integer.toString(cnt));
-
                 for(int i =0; i<= 222;i++){
                     try{
                         mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
@@ -125,6 +135,7 @@ public class CompletedQuestActivity extends AppCompatActivity {
                                                                 questThumbnail = new BitmapDrawable(getResources(),resource);
                                                                 //Drawable icon, String title_ko, String rating, String category, String accepted_date, String finished_date
                                                                 addItem(questThumbnail, questlogInfo.getTitle_ko(),questlogInfo.getRating(),questlogInfo.getCategory(),questlogInfo.getAccepted_date(),questlogInfo.getFinished_date());
+                                                                ((ListViewAdapter)listView.getAdapter()).getFilter().filter(" ") ;
                                                             }
                                                         });
                                             }
@@ -133,7 +144,6 @@ public class CompletedQuestActivity extends AppCompatActivity {
                                 }catch(NullPointerException e){
                                 }
                             }
-
                             @Override
                             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
@@ -143,6 +153,7 @@ public class CompletedQuestActivity extends AppCompatActivity {
 
                     }
                 }
+
             }
 
             @Override
@@ -165,6 +176,7 @@ public class CompletedQuestActivity extends AppCompatActivity {
 
         listViewItemList.add(item);
     }
+
 
 
 }

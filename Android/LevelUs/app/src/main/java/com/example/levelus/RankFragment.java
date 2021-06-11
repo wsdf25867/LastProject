@@ -1,5 +1,6 @@
 package com.example.levelus;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,7 +36,7 @@ import java.util.List;
  * Use the {@link RankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RankFragment extends Fragment {
+public class RankFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -121,21 +123,26 @@ public class RankFragment extends Fragment {
                     for(int i=0;i< rankList.size();i++)
                         Log.i(i+"번째 사람의 레벨 ", Integer.toString(userAccount.getLevel()));
                 }
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
+                Collections.sort(rankList);
+                rankAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -144,5 +151,15 @@ public class RankFragment extends Fragment {
             }
         });
         return view;
+    }
+    @Override
+    public void onBackKey() {
+        LoggedPages activity = (LoggedPages) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
     }
 }

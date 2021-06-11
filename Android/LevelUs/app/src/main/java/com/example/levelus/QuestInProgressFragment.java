@@ -1,5 +1,6 @@
 package com.example.levelus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class QuestInProgressFragment extends Fragment {
+public class QuestInProgressFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -69,5 +70,15 @@ public class QuestInProgressFragment extends Fragment {
         });
         // Inflate the layout for this fragment
         return view;
+    }
+    @Override
+    public void onBackKey() {
+        LoggedPages activity = (LoggedPages) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
     }
 }

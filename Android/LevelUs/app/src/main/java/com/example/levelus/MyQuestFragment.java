@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 
-public class MyQuestFragment extends Fragment {
+public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
 
     private ArrayList<QuestInfo> list = new ArrayList<>();
     private ArrayList<QuestlogInfo> qlist = new ArrayList<>();
@@ -144,5 +144,15 @@ public class MyQuestFragment extends Fragment {
         Intent GoToWebPractice2 = new Intent(getActivity(),WebPractice2.class);
         GoToWebPractice2.putExtra("uid",uid);
         startActivity(GoToWebPractice2);
+    }
+    @Override
+    public void onBackKey() {
+        LoggedPages activity = (LoggedPages) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
     }
 }
