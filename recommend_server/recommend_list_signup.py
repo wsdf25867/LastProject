@@ -21,16 +21,8 @@ def get_recommend_difficulty(uid, df) :
     member = db.reference('/Level Us/UserAccount/' + uid).get()
 
     is_lv1 = (df['difficulty'] == "1")
-    is_lv2 = (df['difficulty'] == ("1" or "2" ))
-    is_lv3 = (df['difficulty'] == ("1" or "2" or "3")) 
-
-    if member['level'] < 10 :
-        result = df[is_lv1]
-        print(result)
-    elif member['level'] < 20 :
-        result = df[is_lv2]
-    else :
-        result = df[is_lv3]
+    result = df[is_lv1]
+    
 
     result = result.sort_values('done', ascending=False)[:10]
     result = result.sort_values(by=['quest_num'], axis=0)
@@ -63,47 +55,53 @@ def get_member_data_refresh(uid):
     return(get_recommend_bucket_list_refresh(uid, data, user_log, category_c_sim))
 
 def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30):
+
+    member = db.reference('/Level Us/UserAccount/' + uid).get()
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get()).transpose()
+
     toprate = 0
     quest_index = 0
-
-    is_lv1 = (df['difficulty'] == "1")
-    is_lv2 = (df['difficulty'] == ("1" or "2" ))
-    is_lv3 = (df['difficulty'] == ("1" or "2" or "3")) 
 
     for index, row in user_log.iterrows() : 
         if (toprate <= int(row['rating'])) :
             toprate = int(row['rating'])
             quest_index = row['quest_num']
    
-    member = db.reference('/Level Us/UserAccount/' + uid).get()
-    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get(),columns=["quest_num","title_ko","category","accepted_date","finished_date","rating"])
-    
-    if member['level'] < 10 :
-        df = df[is_lv1]
-    elif member['level'] < 20 :
-        df = df[is_lv2]
-    else :
-        df = df[is_lv3]
-
-    for index in user_log['quest_num'] :  
-        df = df[df['quest_num'] != index]
-        print(df)
-
-
+    print("questindex :" + quest_index)
     target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)
-
-    for index in user_log['quest_num'] :  
-        sim_index = sim_index[sim_index != index]
+    print("sim : ")
+    print(sim_index)
+    print(type(sim_index))
+    for index in user_log['quest_num'] : 
+        print(sim_index)
+        sim_index = np.delete(sim_index, np.where(sim_index == int(index)))
     
-    result = df.iloc[sim_index].sort_values('done', ascending=False)[:10]
+    print("sim : ")
+    print(sim_index)
+    result = df.iloc[sim_index].sort_values('done', ascending=False)
     result = result.sort_values(by=['quest_num'], axis=0)
 
-    # 2) index reset하기
-    result = result.reset_index(drop=True)
-    js = result.to_dict('records')
+    for index in user_log['quest_num'] :  
+        result = result[result['quest_num'] != index]
+
+    is_lv1 = (result['difficulty'] == "1")
+    is_lv2 = (result['difficulty'] == "2")
+    is_lv3 = (result['difficulty'] == "3") 
+    
+    if member['level'] < 10 :
+        result = result[is_lv1]
+    elif member['level'] < 20 :
+        result = pd.concat([result[is_lv1],result[is_lv2]])
+    else :
+        result = pd.concat([result[is_lv1],result[is_lv2],result[is_lv3]])
+
+    result = result[:10]
+
+    print(result)
     
     #json 파일로 저장
+    js = result.to_dict('records')
     with open('test.json', 'w', encoding='cp949') as make_file:
         json.dump(js, make_file)
 
@@ -111,6 +109,7 @@ def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30)
     jsonData = open("test.json","r",encoding="cp949").read()
     data = json.loads(jsonData)
 
+    print(data)
     dir = db.reference('/recommend_list/'+uid)
     dir.set(data)
    

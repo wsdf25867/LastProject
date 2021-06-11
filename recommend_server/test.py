@@ -1,35 +1,60 @@
 import json
 import pandas as pd 
+import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-
-#사용자 평점이 가장 높은 퀘스트의 유사 퀘스트를 추천(완료된 퀘스트는 제거)
 def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30):
+
+    member = db.reference('/Level Us/UserAccount/' + uid).get()
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get()).transpose()
+
     toprate = 0
     quest_index = 0
+
     for index, row in user_log.iterrows() : 
         if (toprate <= int(row['rating'])) :
             toprate = int(row['rating'])
             quest_index = row['quest_num']
    
+    print("questindex :" + quest_index)
     target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)
-
-    for index in user_log['quest_num'] :  
-        sim_index = sim_index[sim_index != int(index)]
+    print("sim : ")
+    print(sim_index)
+    print(type(sim_index))
+    for index in user_log['quest_num'] : 
+        print(sim_index)
+        sim_index = np.delete(sim_index, np.where(sim_index == int(index)))
     
-    result = df.iloc[sim_index].sort_values('done', ascending=False)[:10]
+    print("sim : ")
+    print(sim_index)
+    result = df.iloc[sim_index].sort_values('done', ascending=False)
     result = result.sort_values(by=['quest_num'], axis=0)
 
-    # 2) index reset하기
-    result = result.reset_index(drop=True)
-    js = result.to_dict('records')
+    for index in user_log['quest_num'] :  
+        result = result[result['quest_num'] != index]
+
+    is_lv1 = (result['difficulty'] == "1")
+    is_lv2 = (result['difficulty'] == "2")
+    is_lv3 = (result['difficulty'] == "3") 
+    
+    if member['level'] < 10 :
+        result = result[is_lv1]
+    elif member['level'] < 20 :
+        result = pd.concat([result[is_lv1],result[is_lv2]])
+    else :
+        result = pd.concat([result[is_lv1],result[is_lv2],result[is_lv3]])
+
+    result = result[:10]
+
+    print(result)
     
     #json 파일로 저장
+    js = result.to_dict('records')
     with open('test.json', 'w', encoding='cp949') as make_file:
         json.dump(js, make_file)
 
@@ -37,6 +62,7 @@ def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30)
     jsonData = open("test.json","r",encoding="cp949").read()
     data = json.loads(jsonData)
 
+    print(data)
     dir = db.reference('/recommend_list/'+uid)
     dir.set(data)
    
@@ -51,7 +77,7 @@ if __name__ == "__main__":
     #content based filtering 알고리즘을 이용한 유사한 퀘스트 추천
     df = pd.DataFrame(dir.get())
     
-    uid = 'qEyWe2xINORTYNzUBqjwavFFtCz1'
+    uid = '80QCXnA2EUP0CC4DS9CNQh00nsx2'
     user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
 
     count_vector = CountVectorizer(ngram_range=(1,3))
