@@ -146,5 +146,3 @@ public class MyQuestFragment extends Fragment {
         startActivity(GoToWebPractice2);
     }
 }
-
-

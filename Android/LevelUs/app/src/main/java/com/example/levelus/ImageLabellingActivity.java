@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
@@ -42,6 +43,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private ImageView imageView;                    //찍은 이미지
     private TextView resultTv;                      //찍은 이미지의 텍스트
     static final int REQUEST_IMAGE_CAPTURE = 1;     //찍은 사진 1장의 의미 인가?
+    Context context;
 
     private Bitmap imageBitmap; //인코딩된 이미지
 
@@ -61,6 +63,16 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     Button b1;          //주소반환 버튼
 
     //intent로 값 받아와야 함.
+//    Intent intent = getIntent();
+//    String title_ko = intent.getStringExtra("title_ko");
+//    String keyword = intent.getStringExtra("keyword");
+//    String way = intent.getStringExtra("way");
+//    String quest_num = intent.getStringExtra("quest_num");
+    SharedPreferences sharedPreferences= context.getSharedPreferences("test", MODE_PRIVATE);    // test 이름의 기본모드 설정, 만약 test key값이 있다면 해당 값을 불러옴.
+    String title_ko = sharedPreferences.getString("inputText","");
+
+
+
 
     //얘넨 테스트용
     ArrayList list = new ArrayList();
@@ -120,6 +132,12 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                 nowLat = lat;
                 nowLng = lng;
                 location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
+                System.out.println("이부분");
+                System.out.println(title_ko);
+//                System.out.println(title_ko);
+//                System.out.println(keyword);
+//                System.out.println(quest_num);
+//                System.out.println(way);
             }
         });
 
