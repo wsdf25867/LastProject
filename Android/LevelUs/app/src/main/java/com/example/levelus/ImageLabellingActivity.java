@@ -63,13 +63,14 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     Button b1;          //주소반환 버튼
 
     //intent로 값 받아와야 함.
-//    Intent intent = getIntent();
-//    String title_ko = intent.getStringExtra("title_ko");
-//    String keyword = intent.getStringExtra("keyword");
-//    String way = intent.getStringExtra("way");
-//    String quest_num = intent.getStringExtra("quest_num");
-    SharedPreferences sharedPreferences= context.getSharedPreferences("test", MODE_PRIVATE);    // test 이름의 기본모드 설정, 만약 test key값이 있다면 해당 값을 불러옴.
-    String title_ko = sharedPreferences.getString("inputText","");
+    String title_ko;
+    String keyword;
+    String way;
+    String quest_num;
+
+    //안드로이드 자체 db실패
+//    SharedPreferences sharedPreferences= context.getSharedPreferences("test", MODE_PRIVATE);    // test 이름의 기본모드 설정, 만약 test key값이 있다면 해당 값을 불러옴.
+//    String title_ko = sharedPreferences.getString("inputText","");
 
 
 
@@ -95,6 +96,13 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
         // LocationManager 참조 객체
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        //intent로 값 받아와야 함.
+        Intent intent = getIntent();
+        String title_ko = intent.getStringExtra("title_ko");
+        String keyword = intent.getStringExtra("keyword");
+        String way = intent.getStringExtra("way");
+        String quest_num = intent.getStringExtra("quest_num");
 
 
         Geocoder g = new Geocoder(this);    //좌표 -> 주소
@@ -134,10 +142,9 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                 location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
                 System.out.println("이부분");
                 System.out.println(title_ko);
-//                System.out.println(title_ko);
-//                System.out.println(keyword);
-//                System.out.println(quest_num);
-//                System.out.println(way);
+                System.out.println(keyword);
+                System.out.println(quest_num);
+                System.out.println(way);
             }
         });
 

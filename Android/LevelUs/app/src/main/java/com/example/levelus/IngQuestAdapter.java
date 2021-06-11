@@ -31,6 +31,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     ArrayList<QuestlogInfo> qData;
 
 
+
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -100,7 +101,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(v.getContext(), ImageLabellingActivity.class);
+                Intent intent = new Intent(context, ImageLabellingActivity.class);
 //                firebaseDatabase.getReference("quest").addValueEventListener(new ValueEventListener() {
 //                    @Override
 //                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -123,11 +124,18 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 //
 //                    }
 //                });
-                SharedPreferences sharedPreferences= context.getSharedPreferences("test", context.MODE_PRIVATE);    // test 이름의 기본모드 설정
-                SharedPreferences.Editor editor= sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
-                editor.putString("inputText","test"); // key,value 형식으로 저장
-                editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
-                v.getContext().startActivity(intent);
+
+                intent.putExtra("title_ko","test title_ko");
+                intent.putExtra("keyword","test keyword");
+                intent.putExtra("way","test way");
+                intent.putExtra("quest_num","test_quest_num");
+
+                    //안드로이드 자체 db실패
+//                SharedPreferences sharedPreferences= context.getSharedPreferences("test", context.MODE_PRIVATE);    // test 이름의 기본모드 설정
+//                SharedPreferences.Editor editor= sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
+//                editor.putString("inputText","test"); // key,value 형식으로 저장
+//                editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
+                context.startActivity(intent);
             }
         });
 
