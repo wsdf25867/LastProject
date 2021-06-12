@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,7 +23,7 @@
         android:theme="@style/Theme.LevelUs"
         android:usesCleartextTraffic="true">
         <activity android:name=".WebPractice"/>
-        <activity android:name=".WebPractice2"></activity>
+        <activity android:name=".WebPractice2"/>
         <activity android:name=".DeleteActivity" />
         <activity android:name=".EditActivity" />
         <activity android:name=".ImageLabellingActivity" />
@@ -37,8 +38,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignActivity" />
         <activity
-            android:name=".CompletedQuestActivity"
-            android:parentActivityName="" />
+            android:name=".CompletedQuestActivity" />
     </application>
 
 </manifest>
