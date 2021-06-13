@@ -23,32 +23,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ImageLabellingActivity extends AppCompatActivity implements LocationListener {
@@ -57,6 +43,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private ImageView imageView;                    //찍은 이미지
     private TextView resultTv;                      //찍은 이미지의 텍스트
     static final int REQUEST_IMAGE_CAPTURE = 1;     //찍은 사진 1장의 의미 인가?
+    Context context;
 
     private Bitmap imageBitmap; //인코딩된 이미지
 
@@ -70,54 +57,35 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
     double lat;         //처음 받아오는 좌표
     double lng;         //처음 받아오는 좌표
-//    double nowLat;      //사진 찍으면 고정되는 현재좌표
-//    double nowLng;      //사진 찍으면 고정되는 현재좌표
-    double nowLat = -33.53222;      //사진 찍으면 고정되는 현재좌표  test때문에 호주로 고정해놓은 상태
-    double nowLng = 151.21111;      //사진 찍으면 고정되는 현재좌표
+    double nowLat;      //사진 찍으면 고정되는 현재좌표
+    double nowLng;      //사진 찍으면 고정되는 현재좌표
     TextView txt;       //주소반환 버튼 누를 시 반환되는 주소 값
     Button b1;          //주소반환 버튼
 
-    //현재시간
-    long now = System.currentTimeMillis();  //현재시간
-    Date date = new Date(now);              //Date로 형변환
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       //원하는 시간형식으로 변환
-
-    String finished_date = dateFormat.format(date);
-
-    Boolean objectSuccess = false;
-
     //intent로 값 받아와야 함.
-    String title_ko;    //얘는 테스트용
-    String quest_num;
-    String way;
-
-    //db에서 받아오는 keyword
+    String title_ko;
     String keyword;
-    
+    String way;
+    String quest_num;
 
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mDatabaseRef2 = firebaseDatabase.getReference("quest");
-    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
-    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
+    //안드로이드 자체 db실패
+//    SharedPreferences sharedPreferences= context.getSharedPreferences("test", MODE_PRIVATE);    // test 이름의 기본모드 설정, 만약 test key값이 있다면 해당 값을 불러옴.
+//    String title_ko = sharedPreferences.getString("inputText","");
 
 
-    //인식된 객체 배열
+
+
+    //얘넨 테스트용
     ArrayList list = new ArrayList();
+
+    String object = "object";
+    String gps = "gps";
+    String room = "Room";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_labelling);
-
-        RatingBar rb = (RatingBar)findViewById(R.id.rb);
-        Button submit = (Button)findViewById(R.id.submit);
-
-        rb.setVisibility(View.INVISIBLE);
-        submit.setVisibility(View.INVISIBLE);
-
-
 
         //gps관련
         logView = (TextView) findViewById(R.id.location);    //gps2
@@ -131,49 +99,17 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
         //intent로 값 받아와야 함.
         Intent intent = getIntent();
-        quest_num = intent.getStringExtra("quest_num");
-        title_ko = intent.getStringExtra("title_ko");
-        System.out.println("사진 찍기 전 받아오는지 확인");
-        System.out.println(quest_num);
-
-        //검증방법 받아오기
-        mDatabaseRef2.child("ALL").child(quest_num).child("way").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
-                way = String.valueOf(task.getResult().getValue());
-                System.out.println("db에서 가져오는 way : "+ way);    //이게 지금 null이다.
-                if(way.equals("object")){
-                    txt.setVisibility(View.INVISIBLE);
-                    b1.setVisibility(View.INVISIBLE);
-                    logView.setVisibility(View.INVISIBLE);
-                    location2.setVisibility(View.INVISIBLE);
-                    captureImageBtn.setVisibility(View.VISIBLE);
-                }else if(way.equals("gps")){
-                    captureImageBtn.setVisibility(View.INVISIBLE);
-                    b1.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        //keyword받아오기
-        mDatabaseRef2.child("ALL").child(quest_num).child("keyword").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
-                keyword = String.valueOf(task.getResult().getValue());
-                System.out.println("db에서 가져오는 keyword : "+ keyword);
-            }
-        });
+        String title_ko = intent.getStringExtra("title_ko");
+        String keyword = intent.getStringExtra("keyword");
+        String way = intent.getStringExtra("way");
+        String quest_num = intent.getStringExtra("quest_num");
 
 
-
-        Geocoder g = new Geocoder(this);    //좌표 -> 주소  //gps검증하기
+        Geocoder g = new Geocoder(this);    //좌표 -> 주소
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                nowLat = lat;
-//                nowLng = lng;
-                location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
-                List<Address> address = null;
+                List<Address> address=null;
                 try {
                     address = g.getFromLocation(nowLat,nowLng,10);
                 } catch (IOException e) {
@@ -186,34 +122,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     }else{
                         Log.d("찾은 주소",address.get(0).toString());
                         txt.setText(address.get(0).getAddressLine(0));
-                        String countryName = address.get(0).getCountryName();
-                        String admin = address.get(0).getAdminArea();
-                        String sub_admin = address.get(0).getSubAdminArea();
-                        String locality = address.get(0).getLocality();
-                        if(keyword.equals(countryName) || keyword.equals(admin) || keyword.equals(sub_admin) || keyword.equals(locality)){
-                            Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
-                            myToast.show();
-                            rb.setVisibility(View.VISIBLE);
-                            submit.setVisibility(View.VISIBLE);
-                            //제출 버튼 클릭했을때
-                            submit.setOnClickListener(new View.OnClickListener(){
-
-
-                                @Override
-                                public void onClick(View view) {
-                                    Toast.makeText(getApplicationContext(),"제출했당~",Toast.LENGTH_SHORT).show();
-                                    String rating;
-                                    rating = String.valueOf(rb.getRating());
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
-                                }
-                            });
-
-                        }else {
-                            Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"해당 위치가 아닙니다.", Toast.LENGTH_SHORT);
-                            myToast.show();
-                        }
-                        
                     }
                 }
             }
@@ -227,27 +135,16 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         captureImageBtn.setOnClickListener(new View.OnClickListener() { //검증사진촬영 버튼 누를시
             @Override
             public void onClick(View v) {
-                list.clear();
 
                 dispatchTakePictureIntent();
-
-                if(objectSuccess == true){
-                    rb.setVisibility(View.VISIBLE);
-                    submit.setVisibility(View.VISIBLE);
-                    //제출 버튼 클릭했을때
-                    submit.setOnClickListener(new View.OnClickListener(){
-
-
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(getApplicationContext(),"제출했당~",Toast.LENGTH_SHORT).show();
-                            String rating;
-                            rating = String.valueOf(rb.getRating());
-                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
-                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
-                        }
-                    });
-                }
+                nowLat = lat;
+                nowLng = lng;
+                location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
+                System.out.println("이부분");
+                System.out.println(title_ko);
+                System.out.println(keyword);
+                System.out.println(quest_num);
+                System.out.println(way);
             }
         });
 
@@ -256,6 +153,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     @Override
     protected void onResume() {
         super.onResume();
+
+        //*******************************************************************
+        // Runtime permission check
+        //*******************************************************************
         if (ContextCompat.checkSelfPermission(ImageLabellingActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -264,17 +165,26 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             if (ActivityCompat.shouldShowRequestPermissionRationale(ImageLabellingActivity.this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
             } else {
+
+                // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(ImageLabellingActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
             }
         } else {
+            // ACCESS_FINE_LOCATION 권한이 있는 것이므로
+            // location updates 요청을 할 수 있다.
 
             // GPS provider를 이용
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
+        //*********************************************************************
     }   //gps2
 
     @Override
@@ -298,6 +208,12 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // read_external_storage-related task you need to do.
+
+                    // ACCESS_FINE_LOCATION 권한을 얻었으므로
+                    // 관련 작업을 수행할 수 있다
                     try {
                         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                     } catch (SecurityException e) {
@@ -305,10 +221,19 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     }
 
                 } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+
+                    // 권한을 얻지 못 하였으므로 location 요청 작업을 수행할 수 없다
+                    // 적절히 대처한다
+
                 }
                 return;
             }
 
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }   //gps2
 
@@ -354,39 +279,26 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             FirebaseVisionImageLabeler labeler = FirebaseVision.getInstance()
                     .getOnDeviceImageLabeler();
             labeler.processImage(firebaseVisionImage)
+//                labeler.processImage(image)
                     .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
                         @Override
                         public void onSuccess(List<FirebaseVisionImageLabel> labels) {
+                            // Task completed successfully
+                            // ...
                             for (FirebaseVisionImageLabel label : labels) {
                                 String text = label.getText();
                                 String entityId = label.getEntityId();
                                 float confidence = label.getConfidence();
                                 resultTv.append(text + "    " + confidence + "\n");
-                                list.add(text);             //텍스트부분 배열에 넣기
+                                list.add(text);
                                 System.out.println(text);
 
                             }
                             System.out.println(list);
-                            
                             for(int i = 0; i<list.size(); i++){
-                                if(keyword.equals((String)list.get(i))){
+                                if(room.equals((String)list.get(i))){
                                     Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
-                                    long now = System.currentTimeMillis();  //현재시간
-                                    Date date = new Date(now);              //Date로 형변환
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       //원하는 시간형식으로 변환
-
-                                    String finished_date = dateFormat.format(date);
-
-                                    String rating = "5";    //test용
-                                    
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
-
-                                    System.out.println("종료 시간:"+date);
-
                                     myToast.show();
-
-                                    //별점주기를 layout에 띄우기 위해 다른 방법을 사용해야함. activity를 새로 만들던가?
                                 }
                             }
                         }
@@ -394,10 +306,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            // Task failed with an exception
+                            // ...
                         }
                     });
         }
     }
-
-
 }

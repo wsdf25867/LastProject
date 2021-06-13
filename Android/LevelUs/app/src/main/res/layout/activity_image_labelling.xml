@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ImageLabellingActivity">
 
-    <RatingBar
-        android:id="@+id/rb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:layout_below="@+id/imageView"
-        android:stepSize="0.5"
-        android:isIndicator="false"
-        android:rating="2.5"/>
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rb"
-        android:text="제출"/>
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -54,7 +38,7 @@
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="좌표 불러오는중..."
+        android:text="Location: "
         android:textSize="24dp"
         android:layout_above="@+id/capture_image_btn"/>
 
