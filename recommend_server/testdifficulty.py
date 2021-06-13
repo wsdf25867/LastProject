@@ -8,35 +8,47 @@ from firebase_admin import db
 from flask import Flask, escape, request
 
 
-    
+    #,columns=["quest_num","title_ko","category","accepted_date","finished_date","rating"]
 
 def get_recommend_difficulty(uid, df) :
     member = db.reference('/Level Us/UserAccount/' + uid).get()
-    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get(),columns=["quest_num","title_ko","category","accepted_date","finished_date","rating"])
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get()).transpose()
+    print(member)
     print(user_log)
     for index in user_log['quest_num'] :  
+        print('------------------------index------------------')
         print(index)
+        print('------------------------index end------------------')
         df = df[df['quest_num'] != index]
+        print('------------------------df------------------')
         print(df)
+        print('------------------------df end------------------')
 
     is_lv1 = (df['difficulty'] == "1")
-    is_lv2 = (df['difficulty'] == ("1" or "2" ))
-    is_lv3 = (df['difficulty'] == ("1" or "2" or "3")) 
-
-
+    is_lv2 = (df['difficulty'] == "2")
+    is_lv3 = (df['difficulty'] == "3") 
+    
     if member['level'] < 10 :
         result = df[is_lv1]
+        print('------------------------result------------------')
         print(result)
+        print('------------------------result end------------------')
     elif member['level'] < 20 :
-        result = df[is_lv2]
+        result =  pd.concat([df[is_lv1],df[is_lv2]])
+        print('------------------------result------------------')
+        print(result)
+        print('------------------------result end------------------')
     else :
-        result = df[is_lv3]
+        result = pd.concat([df[is_lv1],df[is_lv2],df[is_lv3]])
+        print('------------------------result------------------')
+        print(result)
+        print('------------------------result end------------------')
 
     result = result.sort_values('done', ascending=False)[:10]
     result = result.sort_values(by=['quest_num'], axis=0)
 
     # 2) index reset하기
-    result = result.reset_index(drop=True)
+    #result = result.reset_index(drop=True)
     js = result.to_dict('records')
     
     #json 파일로 저장

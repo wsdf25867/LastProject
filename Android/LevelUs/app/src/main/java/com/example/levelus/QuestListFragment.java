@@ -1,13 +1,16 @@
 package com.example.levelus;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -52,14 +56,13 @@ public class QuestListFragment extends Fragment {
 
     private DatabaseReference mDatabaseRef;
 
+    private DatabaseReference questDataReference = FirebaseDatabase.getInstance().getReference("quest");
+
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");
-    ;
+
     private StorageReference storageRef = storage.getReference();
 
     //경로
-
-
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,74 +79,132 @@ public class QuestListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static class MyAlertDialogFragment extends DialogFragment {
+    public static class MyAlertDialogFragment extends AppCompatDialogFragment {
+        TextView category, success_rate, check_way, difficulty, period;
 
-        public static MyAlertDialogFragment newInstance(String title_ko, String category, String quest_num) {
+        public static MyAlertDialogFragment newInstance(String title_ko,
+                                                        String category,
+                                                        String added,
+                                                        String done,
+                                                        String check_way,
+                                                        String difficulty,
+                                                        String period) {
             MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Double rate = Double.parseDouble(done)/Double.parseDouble(added)*100;
+            String success_rate = (rate)+"%";
             Bundle args = new Bundle();
             args.putString("title_ko", title_ko);
             args.putString("category", category);
-            args.putString("quest_num", quest_num);
+            args.putString("success_rate", success_rate);
+            args.putString("check_way", check_way);
+            args.putString("difficulty", difficulty);
+            args.putString("period", period);
             frag.setArguments(args);
             return frag;
         }
 
+//        @Override public void onResume() {
+//            super.onResume();
+//            int width = getResources().getDimensionPixelSize(R.dimen.popup_width);
+//            int height = getResources().getDimensionPixelSize(R.dimen.popup_height);
+//            getDialog().getWindow().setLayout(width, height);
+//        } //다이얼로그 프래그먼트 크기 조절
+
         @NonNull
+        @NotNull
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            //return super.onCreateDialog(savedInstanceState);
+        public Dialog onCreateDialog(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View view = inflater.inflate(R.layout.dialog_quest_info, null);
+            builder.setView(view).setTitle(getArguments().getString("title_ko"));
 
-            String title_ko = getArguments().getString("title_ko");
-            String category = getArguments().getString("category");
-            String quest_num = getArguments().getString("quest_num");
-            String finished_date = "0";
-            String rating = "0";
+            String strCategory = getArguments().getString("category");
+            String strSuccess_rate = getArguments().getString("success_rate");
+            String strCheck_way = getArguments().getString("check_way");
+            String strDifficulty = getArguments().getString("difficulty");
+            String strPeriod = getArguments().getString("period");
 
-            return new AlertDialog.Builder(getActivity())
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle(title_ko)
-                    .setPositiveButton("수락하기", new DialogInterface.OnClickListener() {
+            category = view.findViewById(R.id.category);
+            success_rate = view.findViewById(R.id.success_rate);
+            check_way = view.findViewById(R.id.check_way);
+            difficulty = view.findViewById(R.id.difficulty);
+            period = view.findViewById(R.id.period);
 
-                        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("quest_log");
-                        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-                        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {    //이때 QuestlogInfo로 UID에 퀘스트 입력.
-                            Toast myToast = Toast.makeText(getActivity().getApplicationContext(), "퀘스트가 수락되었습니다.", Toast.LENGTH_SHORT);
-
-                            long now = System.currentTimeMillis();  //현재시간
-                            Date date = new Date(now);              //Date로 형변환
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       //원하는 시간형식으로 변환
-
-                            String accepted_date = dateFormat.format(date);
-
-                            DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("quest_log");
-                            FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
-                            QuestlogInfo questlogInfo = new QuestlogInfo();
-
-                            questlogInfo.setTitle_ko(title_ko);
-                            questlogInfo.setCategory(category);
-                            questlogInfo.setQuest_num(quest_num);
-                            questlogInfo.setFinished_date(finished_date);
-                            questlogInfo.setAccepted_date(accepted_date);
-                            questlogInfo.setRating(rating);
-                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).setValue(questlogInfo);
-                            //해당 퀘스트 번호로 저장됨
-                            myToast.show();
-                        }
-                    })
-                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Log.i("MyLog", "취소 버튼이 눌림");
-                        }
-                    })
-                    .create();
+            category.setText(strCategory);
+            success_rate.setText(strSuccess_rate);
+            check_way.setText(strCheck_way);
+            difficulty.setText(strDifficulty);
+            period.setText(strPeriod);
+            return builder.create();
         }
+        //        public MyAlertDialogFragment(@NonNull Context context) {
+//            super(context);
+//        }
+
+
+
+//        @NonNull
+//        @Override
+//        public Dialog onCreateDialog(Bundle savedInstanceState) {
+//            //return super.onCreateDialog(savedInstanceState);
+//
+//            String title_ko = getArguments().getString("title_ko");
+//            String category = getArguments().getString("category");
+//            String quest_num = getArguments().getString("quest_num");
+//            String finished_date = "0";
+//            String rating = "0";
+//
+//            return new AlertDialog.Builder(getActivity())
+//                    .setIcon(R.mipmap.ic_launcher)
+//                    .setTitle(title_ko)
+//                    .setPositiveButton("수락하기", new DialogInterface.OnClickListener() {
+//
+//                        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("quest_log");
+//                        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+//                        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+//
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {    //이때 QuestlogInfo로 UID에 퀘스트 입력.
+//                            Toast myToast = Toast.makeText(getActivity().getApplicationContext(), "퀘스트가 수락되었습니다.", Toast.LENGTH_SHORT);
+//
+//                            long now = System.currentTimeMillis();  //현재시간
+//                            Date date = new Date(now);              //Date로 형변환
+//                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       //원하는 시간형식으로 변환
+//
+//                            String accepted_date = dateFormat.format(date);
+//
+//                            DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("quest_log");
+//                            FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+//                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+//
+//                            QuestlogInfo questlogInfo = new QuestlogInfo();
+//
+//                            questlogInfo.setTitle_ko(title_ko);
+//                            questlogInfo.setCategory(category);
+//                            questlogInfo.setQuest_num(quest_num);
+//                            questlogInfo.setFinished_date(finished_date);
+//                            questlogInfo.setAccepted_date(accepted_date);
+//                            questlogInfo.setRating(rating);
+//                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).setValue(questlogInfo);
+//                            //해당 퀘스트 번호로 저장됨
+//                            myToast.show();
+//                        }
+//                    })
+//                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Log.i("MyLog", "취소 버튼이 눌림");
+//                        }
+//                    })
+//                    .create();
+//        }
+    }
+
+    public void openDialog(View view){
+        MyAlertDialogFragment myAlertDialogFragment = new MyAlertDialogFragment();
+        myAlertDialogFragment.show(getActivity().getSupportFragmentManager(), "Quest Infos");
     }
 
     /**
@@ -1050,157 +1111,157 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest11:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getAdded(), questInfo[11].getDone(), questInfo[11].getWay(), questInfo[11].getDifficulty(), questInfo[11].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest12:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getAdded(), questInfo[12].getDone(), questInfo[12].getWay(), questInfo[12].getDifficulty(), questInfo[12].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest13:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getAdded(), questInfo[13].getDone(), questInfo[13].getWay(), questInfo[13].getDifficulty(), questInfo[13].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest14:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getAdded(), questInfo[14].getDone(), questInfo[14].getWay(), questInfo[14].getDifficulty(), questInfo[14].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest15:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getAdded(), questInfo[15].getDone(), questInfo[15].getWay(), questInfo[15].getDifficulty(), questInfo[15].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest16:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getAdded(), questInfo[16].getDone(), questInfo[16].getWay(), questInfo[16].getDifficulty(), questInfo[16].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest17:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getAdded(), questInfo[17].getDone(), questInfo[17].getWay(), questInfo[17].getDifficulty(), questInfo[17].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest18:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getAdded(), questInfo[18].getDone(), questInfo[18].getWay(), questInfo[18].getDifficulty(), questInfo[18].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest19:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getAdded(), questInfo[19].getDone(), questInfo[19].getWay(), questInfo[19].getDifficulty(), questInfo[19].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest20:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getAdded(), questInfo[20].getDone(), questInfo[20].getWay(), questInfo[20].getDifficulty(), questInfo[20].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest21:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getAdded(), questInfo[21].getDone(), questInfo[21].getWay(), questInfo[21].getDifficulty(), questInfo[21].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest22:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getAdded(), questInfo[22].getDone(), questInfo[22].getWay(), questInfo[22].getDifficulty(), questInfo[22].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest23:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getAdded(), questInfo[23].getDone(), questInfo[23].getWay(), questInfo[23].getDifficulty(), questInfo[23].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest24:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getAdded(), questInfo[24].getDone(), questInfo[24].getWay(), questInfo[24].getDifficulty(), questInfo[24].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest25:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getAdded(), questInfo[25].getDone(), questInfo[25].getWay(), questInfo[25].getDifficulty(), questInfo[25].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest26:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getAdded(), questInfo[26].getDone(), questInfo[26].getWay(), questInfo[26].getDifficulty(), questInfo[26].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest27:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getAdded(), questInfo[27].getDone(), questInfo[27].getWay(), questInfo[27].getDifficulty(), questInfo[27].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest28:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[8].getCategory(), questInfo[28].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[28].getCategory(), questInfo[28].getAdded(), questInfo[28].getDone(), questInfo[28].getWay(), questInfo[28].getDifficulty(), questInfo[28].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest29:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[29].getTitle_ko(), questInfo[9].getCategory(), questInfo[29].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[29].getTitle_ko(), questInfo[29].getCategory(), questInfo[29].getAdded(), questInfo[29].getDone(), questInfo[29].getWay(), questInfo[29].getDifficulty(), questInfo[29].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest30:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[30].getTitle_ko(), questInfo[30].getCategory(), questInfo[30].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[30].getTitle_ko(), questInfo[30].getCategory(), questInfo[30].getAdded(), questInfo[30].getDone(), questInfo[30].getWay(), questInfo[30].getDifficulty(), questInfo[30].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest31:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[31].getTitle_ko(), questInfo[31].getCategory(), questInfo[31].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[31].getTitle_ko(), questInfo[31].getCategory(), questInfo[31].getAdded(), questInfo[31].getDone(), questInfo[31].getWay(), questInfo[31].getDifficulty(), questInfo[31].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest32:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[32].getTitle_ko(), questInfo[32].getCategory(), questInfo[32].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[32].getTitle_ko(), questInfo[32].getCategory(), questInfo[32].getAdded(), questInfo[32].getDone(), questInfo[32].getWay(), questInfo[32].getDifficulty(), questInfo[32].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest33:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[33].getTitle_ko(), questInfo[33].getCategory(), questInfo[33].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[33].getTitle_ko(), questInfo[33].getCategory(), questInfo[33].getAdded(), questInfo[33].getDone(), questInfo[33].getWay(), questInfo[33].getDifficulty(), questInfo[33].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest34:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[34].getTitle_ko(), questInfo[34].getCategory(), questInfo[34].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[34].getTitle_ko(), questInfo[34].getCategory(), questInfo[34].getAdded(), questInfo[34].getDone(), questInfo[34].getWay(), questInfo[34].getDifficulty(), questInfo[34].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest35:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[35].getTitle_ko(), questInfo[35].getCategory(), questInfo[35].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[35].getTitle_ko(), questInfo[35].getCategory(), questInfo[35].getAdded(), questInfo[35].getDone(), questInfo[35].getWay(), questInfo[35].getDifficulty(), questInfo[35].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest36:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[36].getTitle_ko(), questInfo[36].getCategory(), questInfo[36].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[36].getTitle_ko(), questInfo[36].getCategory(), questInfo[36].getAdded(), questInfo[36].getDone(), questInfo[36].getWay(), questInfo[36].getDifficulty(), questInfo[36].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest37:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[37].getTitle_ko(), questInfo[37].getCategory(), questInfo[37].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[37].getTitle_ko(), questInfo[37].getCategory(), questInfo[37].getAdded(), questInfo[37].getDone(), questInfo[37].getWay(), questInfo[37].getDifficulty(), questInfo[37].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest38:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[38].getTitle_ko(), questInfo[38].getCategory(), questInfo[38].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[38].getTitle_ko(), questInfo[38].getCategory(), questInfo[38].getAdded(), questInfo[38].getDone(), questInfo[38].getWay(), questInfo[38].getDifficulty(), questInfo[38].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest39:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[39].getTitle_ko(), questInfo[39].getCategory(), questInfo[39].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[39].getTitle_ko(), questInfo[39].getCategory(), questInfo[39].getAdded(), questInfo[39].getDone(), questInfo[39].getWay(), questInfo[39].getDifficulty(), questInfo[39].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest40:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[40].getTitle_ko(), questInfo[40].getCategory(), questInfo[40].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[40].getTitle_ko(), questInfo[40].getCategory(), questInfo[40].getAdded(), questInfo[40].getDone(), questInfo[40].getWay(), questInfo[40].getDifficulty(), questInfo[40].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest41:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[41].getTitle_ko(), questInfo[41].getCategory(), questInfo[41].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[41].getTitle_ko(), questInfo[41].getCategory(), questInfo[41].getAdded(), questInfo[41].getDone(), questInfo[41].getWay(), questInfo[41].getDifficulty(), questInfo[41].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest42:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[42].getTitle_ko(), questInfo[42].getCategory(), questInfo[42].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[42].getTitle_ko(), questInfo[42].getCategory(), questInfo[42].getAdded(), questInfo[42].getDone(), questInfo[42].getWay(), questInfo[42].getDifficulty(), questInfo[42].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest43:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[43].getTitle_ko(), questInfo[43].getCategory(), questInfo[43].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[43].getTitle_ko(), questInfo[43].getCategory(), questInfo[43].getAdded(), questInfo[43].getDone(), questInfo[43].getWay(), questInfo[43].getDifficulty(), questInfo[43].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest44:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[44].getTitle_ko(), questInfo[44].getCategory(), questInfo[44].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[44].getTitle_ko(), questInfo[44].getCategory(), questInfo[44].getAdded(), questInfo[44].getDone(), questInfo[44].getWay(), questInfo[44].getDifficulty(), questInfo[44].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest45:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[45].getTitle_ko(), questInfo[45].getCategory(), questInfo[45].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[45].getTitle_ko(), questInfo[45].getCategory(), questInfo[45].getAdded(), questInfo[45].getDone(), questInfo[45].getWay(), questInfo[45].getDifficulty(), questInfo[45].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest46:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[46].getTitle_ko(), questInfo[46].getCategory(), questInfo[46].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[46].getTitle_ko(), questInfo[46].getCategory(), questInfo[46].getAdded(), questInfo[46].getDone(), questInfo[46].getWay(), questInfo[46].getDifficulty(), questInfo[46].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest47:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[47].getTitle_ko(), questInfo[47].getCategory(), questInfo[47].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[47].getTitle_ko(), questInfo[47].getCategory(), questInfo[47].getAdded(), questInfo[47].getDone(), questInfo[47].getWay(), questInfo[47].getDifficulty(), questInfo[47].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest48:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[48].getTitle_ko(), questInfo[48].getCategory(), questInfo[48].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[48].getTitle_ko(), questInfo[48].getCategory(), questInfo[48].getAdded(), questInfo[48].getDone(), questInfo[48].getWay(), questInfo[48].getDifficulty(), questInfo[48].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest49:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[49].getTitle_ko(), questInfo[49].getCategory(), questInfo[49].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[49].getTitle_ko(), questInfo[49].getCategory(), questInfo[49].getAdded(), questInfo[49].getDone(), questInfo[49].getWay(), questInfo[49].getDifficulty(), questInfo[49].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest50:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[50].getTitle_ko(), questInfo[50].getCategory(), questInfo[50].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[50].getTitle_ko(), questInfo[50].getCategory(), questInfo[50].getAdded(), questInfo[50].getDone(), questInfo[50].getWay(), questInfo[50].getDifficulty(), questInfo[50].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -1508,37 +1569,37 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -1707,10 +1768,8 @@ public class QuestListFragment extends Fragment {
                             @Override
                             public void onClick(View v) {
                                 MyAlertDialogFragment newDialogFragment =
-                                        MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                 newDialogFragment.show(getFragmentManager(), "dialog");
-
-
                             }
                         });
 
@@ -1882,13 +1941,13 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -2317,88 +2376,88 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest11:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getAdded(), questInfo[11].getDone(), questInfo[11].getWay(), questInfo[11].getDifficulty(), questInfo[11].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest12:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getAdded(), questInfo[12].getDone(), questInfo[12].getWay(), questInfo[12].getDifficulty(), questInfo[12].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest13:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getAdded(), questInfo[13].getDone(), questInfo[13].getWay(), questInfo[13].getDifficulty(), questInfo[13].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest14:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getAdded(), questInfo[14].getDone(), questInfo[14].getWay(), questInfo[14].getDifficulty(), questInfo[14].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest15:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getAdded(), questInfo[15].getDone(), questInfo[15].getWay(), questInfo[15].getDifficulty(), questInfo[15].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest16:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getAdded(), questInfo[16].getDone(), questInfo[16].getWay(), questInfo[16].getDifficulty(), questInfo[16].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest17:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getAdded(), questInfo[17].getDone(), questInfo[17].getWay(), questInfo[17].getDifficulty(), questInfo[17].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest18:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getAdded(), questInfo[18].getDone(), questInfo[18].getWay(), questInfo[18].getDifficulty(), questInfo[18].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest19:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getAdded(), questInfo[19].getDone(), questInfo[19].getWay(), questInfo[19].getDifficulty(), questInfo[19].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest20:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getAdded(), questInfo[20].getDone(), questInfo[20].getWay(), questInfo[20].getDifficulty(), questInfo[20].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest21:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getAdded(), questInfo[21].getDone(), questInfo[21].getWay(), questInfo[21].getDifficulty(), questInfo[21].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest22:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getAdded(), questInfo[22].getDone(), questInfo[22].getWay(), questInfo[22].getDifficulty(), questInfo[22].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest23:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getAdded(), questInfo[23].getDone(), questInfo[23].getWay(), questInfo[23].getDifficulty(), questInfo[23].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest24:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getAdded(), questInfo[24].getDone(), questInfo[24].getWay(), questInfo[24].getDifficulty(), questInfo[24].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest25:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getAdded(), questInfo[25].getDone(), questInfo[25].getWay(), questInfo[25].getDifficulty(), questInfo[25].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest26:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getAdded(), questInfo[26].getDone(), questInfo[26].getWay(), questInfo[26].getDifficulty(), questInfo[26].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest27:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getAdded(), questInfo[27].getDone(), questInfo[27].getWay(), questInfo[27].getDifficulty(), questInfo[27].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -2881,97 +2940,97 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest11:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getAdded(), questInfo[11].getDone(), questInfo[11].getWay(), questInfo[11].getDifficulty(), questInfo[11].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest12:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getAdded(), questInfo[12].getDone(), questInfo[12].getWay(), questInfo[12].getDifficulty(), questInfo[12].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest13:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getAdded(), questInfo[13].getDone(), questInfo[13].getWay(), questInfo[13].getDifficulty(), questInfo[13].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest14:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getAdded(), questInfo[14].getDone(), questInfo[14].getWay(), questInfo[14].getDifficulty(), questInfo[14].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest15:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getAdded(), questInfo[15].getDone(), questInfo[15].getWay(), questInfo[15].getDifficulty(), questInfo[15].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest16:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getAdded(), questInfo[16].getDone(), questInfo[16].getWay(), questInfo[16].getDifficulty(), questInfo[16].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest17:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getAdded(), questInfo[17].getDone(), questInfo[17].getWay(), questInfo[17].getDifficulty(), questInfo[17].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest18:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getAdded(), questInfo[18].getDone(), questInfo[18].getWay(), questInfo[18].getDifficulty(), questInfo[18].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest19:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getAdded(), questInfo[19].getDone(), questInfo[19].getWay(), questInfo[19].getDifficulty(), questInfo[19].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest20:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getAdded(), questInfo[20].getDone(), questInfo[20].getWay(), questInfo[20].getDifficulty(), questInfo[20].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest21:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getAdded(), questInfo[21].getDone(), questInfo[21].getWay(), questInfo[21].getDifficulty(), questInfo[21].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest22:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getAdded(), questInfo[22].getDone(), questInfo[22].getWay(), questInfo[22].getDifficulty(), questInfo[22].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest23:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getAdded(), questInfo[23].getDone(), questInfo[23].getWay(), questInfo[23].getDifficulty(), questInfo[23].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest24:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getAdded(), questInfo[24].getDone(), questInfo[24].getWay(), questInfo[24].getDifficulty(), questInfo[24].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest25:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getAdded(), questInfo[25].getDone(), questInfo[25].getWay(), questInfo[25].getDifficulty(), questInfo[25].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest26:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getAdded(), questInfo[26].getDone(), questInfo[26].getWay(), questInfo[26].getDifficulty(), questInfo[26].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest27:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getAdded(), questInfo[27].getDone(), questInfo[27].getWay(), questInfo[27].getDifficulty(), questInfo[27].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest28:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[8].getCategory(), questInfo[28].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[28].getCategory(), questInfo[28].getAdded(), questInfo[28].getDone(), questInfo[28].getWay(), questInfo[28].getDifficulty(), questInfo[28].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest29:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[29].getTitle_ko(), questInfo[9].getCategory(), questInfo[29].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[29].getTitle_ko(), questInfo[29].getCategory(), questInfo[29].getAdded(), questInfo[29].getDone(), questInfo[29].getWay(), questInfo[29].getDifficulty(), questInfo[29].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest30:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[30].getTitle_ko(), questInfo[30].getCategory(), questInfo[30].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[30].getTitle_ko(), questInfo[30].getCategory(), questInfo[30].getAdded(), questInfo[30].getDone(), questInfo[30].getWay(), questInfo[30].getDifficulty(), questInfo[30].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -3209,22 +3268,22 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -3667,91 +3726,91 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest11:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getAdded(), questInfo[11].getDone(), questInfo[11].getWay(), questInfo[11].getDifficulty(), questInfo[11].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest12:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getAdded(), questInfo[12].getDone(), questInfo[12].getWay(), questInfo[12].getDifficulty(), questInfo[12].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest13:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getAdded(), questInfo[13].getDone(), questInfo[13].getWay(), questInfo[13].getDifficulty(), questInfo[13].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest14:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getAdded(), questInfo[14].getDone(), questInfo[14].getWay(), questInfo[14].getDifficulty(), questInfo[14].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest15:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getAdded(), questInfo[15].getDone(), questInfo[15].getWay(), questInfo[15].getDifficulty(), questInfo[15].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest16:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getAdded(), questInfo[16].getDone(), questInfo[16].getWay(), questInfo[16].getDifficulty(), questInfo[16].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest17:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getAdded(), questInfo[17].getDone(), questInfo[17].getWay(), questInfo[17].getDifficulty(), questInfo[17].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest18:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getAdded(), questInfo[18].getDone(), questInfo[18].getWay(), questInfo[18].getDifficulty(), questInfo[18].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest19:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getAdded(), questInfo[19].getDone(), questInfo[19].getWay(), questInfo[19].getDifficulty(), questInfo[19].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest20:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getAdded(), questInfo[20].getDone(), questInfo[20].getWay(), questInfo[20].getDifficulty(), questInfo[20].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest21:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getAdded(), questInfo[21].getDone(), questInfo[21].getWay(), questInfo[21].getDifficulty(), questInfo[21].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest22:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getAdded(), questInfo[22].getDone(), questInfo[22].getWay(), questInfo[22].getDifficulty(), questInfo[22].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest23:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getAdded(), questInfo[23].getDone(), questInfo[23].getWay(), questInfo[23].getDifficulty(), questInfo[23].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest24:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getAdded(), questInfo[24].getDone(), questInfo[24].getWay(), questInfo[24].getDifficulty(), questInfo[24].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest25:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getAdded(), questInfo[25].getDone(), questInfo[25].getWay(), questInfo[25].getDifficulty(), questInfo[25].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest26:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getAdded(), questInfo[26].getDone(), questInfo[26].getWay(), questInfo[26].getDifficulty(), questInfo[26].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest27:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getAdded(), questInfo[27].getDone(), questInfo[27].getWay(), questInfo[27].getDifficulty(), questInfo[27].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest28:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[8].getCategory(), questInfo[28].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[28].getCategory(), questInfo[28].getAdded(), questInfo[28].getDone(), questInfo[28].getWay(), questInfo[28].getDifficulty(), questInfo[28].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -4056,43 +4115,43 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest11:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getAdded(), questInfo[11].getDone(), questInfo[11].getWay(), questInfo[11].getDifficulty(), questInfo[11].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest12:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getAdded(), questInfo[12].getDone(), questInfo[12].getWay(), questInfo[12].getDifficulty(), questInfo[12].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -4372,40 +4431,40 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest11:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getAdded(), questInfo[11].getDone(), questInfo[11].getWay(), questInfo[11].getDifficulty(), questInfo[11].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -4604,16 +4663,16 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
@@ -5105,106 +5164,106 @@ public class QuestListFragment extends Fragment {
                             public void onClick(View v) {
                                 switch (v.getId()) {
                                     case R.id.quest:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[0].getTitle_ko(), questInfo[0].getCategory(), questInfo[0].getAdded(), questInfo[0].getDone(), questInfo[0].getWay(), questInfo[0].getDifficulty(), questInfo[0].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest1:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[1].getTitle_ko(), questInfo[1].getCategory(), questInfo[1].getAdded(), questInfo[1].getDone(), questInfo[1].getWay(), questInfo[1].getDifficulty(), questInfo[1].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest2:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[2].getTitle_ko(), questInfo[2].getCategory(), questInfo[2].getAdded(), questInfo[2].getDone(), questInfo[2].getWay(), questInfo[2].getDifficulty(), questInfo[2].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest3:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[3].getTitle_ko(), questInfo[3].getCategory(), questInfo[3].getAdded(), questInfo[3].getDone(), questInfo[3].getWay(), questInfo[3].getDifficulty(), questInfo[3].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest4:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[4].getTitle_ko(), questInfo[4].getCategory(), questInfo[4].getAdded(), questInfo[4].getDone(), questInfo[4].getWay(), questInfo[4].getDifficulty(), questInfo[4].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest5:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[5].getTitle_ko(), questInfo[5].getCategory(), questInfo[5].getAdded(), questInfo[5].getDone(), questInfo[5].getWay(), questInfo[5].getDifficulty(), questInfo[5].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest6:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[6].getTitle_ko(), questInfo[6].getCategory(), questInfo[6].getAdded(), questInfo[6].getDone(), questInfo[6].getWay(), questInfo[6].getDifficulty(), questInfo[6].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest7:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[7].getTitle_ko(), questInfo[7].getCategory(), questInfo[7].getAdded(), questInfo[7].getDone(), questInfo[7].getWay(), questInfo[7].getDifficulty(), questInfo[7].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest8:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[8].getTitle_ko(), questInfo[8].getCategory(), questInfo[8].getAdded(), questInfo[8].getDone(), questInfo[8].getWay(), questInfo[8].getDifficulty(), questInfo[8].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest9:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[9].getTitle_ko(), questInfo[9].getCategory(), questInfo[9].getAdded(), questInfo[9].getDone(), questInfo[9].getWay(), questInfo[9].getDifficulty(), questInfo[9].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest10:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[10].getTitle_ko(), questInfo[10].getCategory(), questInfo[10].getAdded(), questInfo[10].getDone(), questInfo[10].getWay(), questInfo[10].getDifficulty(), questInfo[10].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest11:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[11].getTitle_ko(), questInfo[11].getCategory(), questInfo[11].getAdded(), questInfo[11].getDone(), questInfo[11].getWay(), questInfo[11].getDifficulty(), questInfo[11].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest12:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[12].getTitle_ko(), questInfo[12].getCategory(), questInfo[12].getAdded(), questInfo[12].getDone(), questInfo[12].getWay(), questInfo[12].getDifficulty(), questInfo[12].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest13:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[13].getTitle_ko(), questInfo[13].getCategory(), questInfo[13].getAdded(), questInfo[13].getDone(), questInfo[13].getWay(), questInfo[13].getDifficulty(), questInfo[13].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest14:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[14].getTitle_ko(), questInfo[14].getCategory(), questInfo[14].getAdded(), questInfo[14].getDone(), questInfo[14].getWay(), questInfo[14].getDifficulty(), questInfo[14].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest15:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[15].getTitle_ko(), questInfo[15].getCategory(), questInfo[15].getAdded(), questInfo[15].getDone(), questInfo[15].getWay(), questInfo[15].getDifficulty(), questInfo[15].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest16:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[16].getTitle_ko(), questInfo[16].getCategory(), questInfo[16].getAdded(), questInfo[16].getDone(), questInfo[16].getWay(), questInfo[16].getDifficulty(), questInfo[16].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest17:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[17].getTitle_ko(), questInfo[17].getCategory(), questInfo[17].getAdded(), questInfo[17].getDone(), questInfo[17].getWay(), questInfo[17].getDifficulty(), questInfo[17].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest18:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[18].getTitle_ko(), questInfo[18].getCategory(), questInfo[18].getAdded(), questInfo[18].getDone(), questInfo[18].getWay(), questInfo[18].getDifficulty(), questInfo[18].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest19:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[19].getTitle_ko(), questInfo[19].getCategory(), questInfo[19].getAdded(), questInfo[19].getDone(), questInfo[19].getWay(), questInfo[19].getDifficulty(), questInfo[19].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest20:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[20].getTitle_ko(), questInfo[20].getCategory(), questInfo[20].getAdded(), questInfo[20].getDone(), questInfo[20].getWay(), questInfo[20].getDifficulty(), questInfo[20].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest21:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[21].getTitle_ko(), questInfo[21].getCategory(), questInfo[21].getAdded(), questInfo[21].getDone(), questInfo[21].getWay(), questInfo[21].getDifficulty(), questInfo[21].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest22:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[22].getTitle_ko(), questInfo[22].getCategory(), questInfo[22].getAdded(), questInfo[22].getDone(), questInfo[22].getWay(), questInfo[22].getDifficulty(), questInfo[22].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest23:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[23].getTitle_ko(), questInfo[23].getCategory(), questInfo[23].getAdded(), questInfo[23].getDone(), questInfo[23].getWay(), questInfo[23].getDifficulty(), questInfo[23].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest24:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[24].getTitle_ko(), questInfo[24].getCategory(), questInfo[24].getAdded(), questInfo[24].getDone(), questInfo[24].getWay(), questInfo[24].getDifficulty(), questInfo[24].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest25:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[25].getTitle_ko(), questInfo[25].getCategory(), questInfo[25].getAdded(), questInfo[25].getDone(), questInfo[25].getWay(), questInfo[25].getDifficulty(), questInfo[25].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest26:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[26].getTitle_ko(), questInfo[26].getCategory(), questInfo[26].getAdded(), questInfo[26].getDone(), questInfo[26].getWay(), questInfo[26].getDifficulty(), questInfo[26].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest27:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[27].getTitle_ko(), questInfo[27].getCategory(), questInfo[27].getAdded(), questInfo[27].getDone(), questInfo[27].getWay(), questInfo[27].getDifficulty(), questInfo[27].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest28:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[8].getCategory(), questInfo[28].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[28].getTitle_ko(), questInfo[28].getCategory(), questInfo[28].getAdded(), questInfo[28].getDone(), questInfo[28].getWay(), questInfo[28].getDifficulty(), questInfo[28].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest29:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[29].getTitle_ko(), questInfo[9].getCategory(), questInfo[29].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[29].getTitle_ko(), questInfo[29].getCategory(), questInfo[29].getAdded(), questInfo[29].getDone(), questInfo[29].getWay(), questInfo[29].getDifficulty(), questInfo[29].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest30:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[30].getTitle_ko(), questInfo[30].getCategory(), questInfo[30].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[30].getTitle_ko(), questInfo[30].getCategory(), questInfo[30].getAdded(), questInfo[30].getDone(), questInfo[30].getWay(), questInfo[30].getDifficulty(), questInfo[30].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest31:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[31].getTitle_ko(), questInfo[31].getCategory(), questInfo[31].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[31].getTitle_ko(), questInfo[31].getCategory(), questInfo[31].getAdded(), questInfo[31].getDone(), questInfo[31].getWay(), questInfo[31].getDifficulty(), questInfo[31].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest32:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[32].getTitle_ko(), questInfo[32].getCategory(), questInfo[32].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[32].getTitle_ko(), questInfo[32].getCategory(), questInfo[32].getAdded(), questInfo[32].getDone(), questInfo[32].getWay(), questInfo[32].getDifficulty(), questInfo[32].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
                                     case R.id.quest33:
-                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[33].getTitle_ko(), questInfo[33].getCategory(), questInfo[33].getQuest_num());
+                                        newDialogFragment = MyAlertDialogFragment.newInstance(questInfo[33].getTitle_ko(), questInfo[33].getCategory(), questInfo[33].getAdded(), questInfo[33].getDone(), questInfo[33].getWay(), questInfo[33].getDifficulty(), questInfo[33].getPeriod());
                                         newDialogFragment.show(getFragmentManager(), "dialog");break;
 
                                 }
