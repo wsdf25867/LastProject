@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="4"
-    android:gravity="center">
+    android:background="@drawable/underline">
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right">
+        android:gravity="left">
         <TextView
             android:id="@+id/rank"
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/highest_rank_imageView"
@@ -30,11 +30,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text=" level:"/>
+            android:text="레벨 "/>
         <TextView
             android:id="@+id/text_level"
             android:layout_width="wrap_content"
