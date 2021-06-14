@@ -11,6 +11,7 @@ public class QuestInfo {
     private String title;
     private String title_ko;
     private String way;
+    private String achievement;
 
 
     public QuestInfo(){
@@ -97,4 +98,8 @@ public class QuestInfo {
     public void setPeriod(String period) {
         this.period = period;
     }
+
+    public String getAchievement() { return achievement; }
+    public void setAchievement(String achievement) { this.achievement = achievement; }
+
 }

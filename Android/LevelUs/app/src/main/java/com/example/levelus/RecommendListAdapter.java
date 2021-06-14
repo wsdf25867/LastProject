@@ -88,12 +88,13 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 //로그에 넣을 데이터
                 QuestlogInfo questlogInfo = new QuestlogInfo();
 
-                questlogInfo.setTitle_ko(rData.get(position).getTitle_ko());
+                questlogInfo.setTitle_ko(cData.getTitle_ko());
                 questlogInfo.setRating("0");
                 questlogInfo.setQuest_num(cData.getQuest_num());
                 questlogInfo.setCategory(cData.getCategory());
                 questlogInfo.setAccepted_date(getTime);
                 questlogInfo.setFinished_date("0000-00-00");
+                questlogInfo.setAchievement(cData.getAchievement());
 
 
                 //퀘스트에 added에 1더하기
@@ -111,6 +112,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 questInfo.setPeriod(cData.getPeriod());
                 questInfo.setWay(cData.getWay());
                 questInfo.setQuest_num(cData.getQuest_num());
+                questInfo.setAchievement(cData.getAchievement());
 
                 iRef.child(uid).child(cData.getQuest_num()).setValue(questlogInfo);
 
