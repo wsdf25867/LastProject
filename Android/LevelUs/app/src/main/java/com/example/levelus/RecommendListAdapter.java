@@ -121,10 +121,6 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 intent.putExtra("uid",uid);
                 v.getContext().startActivity(intent);
 
-
-
-
-
             }
         });
 
