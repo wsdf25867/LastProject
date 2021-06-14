@@ -11,6 +11,7 @@ public class UserAccount implements Comparable<UserAccount>{
     private String local;
 
     private int level;
+//    private int rank;
 
     public int getLevel() {
         return level;
@@ -75,6 +76,10 @@ public class UserAccount implements Comparable<UserAccount>{
     public void setLocal(String local) {
         this.local = local;
     }
+
+//    public int getRank() { return rank; }
+
+//    public void setRank(int rank) { this.rank = rank; }
 
     public UserAccount(){
 
