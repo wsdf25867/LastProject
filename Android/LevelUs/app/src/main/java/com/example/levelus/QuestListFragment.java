@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -91,7 +92,8 @@ public class QuestListFragment extends Fragment {
                                                         String period) {
             MyAlertDialogFragment frag = new MyAlertDialogFragment();
             Double rate = Double.parseDouble(done)/Double.parseDouble(added)*100;
-            String success_rate = (rate)+"%";
+            String strRate = String.format("%.2f", rate);
+            String success_rate = (strRate)+"%";
             Bundle args = new Bundle();
             args.putString("title_ko", title_ko);
             args.putString("category", category);
@@ -474,6 +476,19 @@ public class QuestListFragment extends Fragment {
         category1.setOnClickListener(new View.OnClickListener() {   //diy   51개..?
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
+
                 mDatabaseRef.child("quest").child("diy").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -1334,6 +1349,18 @@ public class QuestListFragment extends Fragment {
         category2.setOnClickListener(new View.OnClickListener() {   //entertainment 11개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("entertainment").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -1632,6 +1659,18 @@ public class QuestListFragment extends Fragment {
         category3.setOnClickListener(new View.OnClickListener() {   //food  1개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("food").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -1786,6 +1825,18 @@ public class QuestListFragment extends Fragment {
         category4.setOnClickListener(new View.OnClickListener() {   //health    3개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("health").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -1972,6 +2023,18 @@ public class QuestListFragment extends Fragment {
         category5.setOnClickListener(new View.OnClickListener() {   //hiking    28개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("hiking").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -2506,6 +2569,18 @@ public class QuestListFragment extends Fragment {
         category6.setOnClickListener(new View.OnClickListener() {   //life_milestone    31개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("life_milestone").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -3083,6 +3158,18 @@ public class QuestListFragment extends Fragment {
         category7.setOnClickListener(new View.OnClickListener() {   //love  6개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("love").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -3311,6 +3398,18 @@ public class QuestListFragment extends Fragment {
         category8.setOnClickListener(new View.OnClickListener() {   //nature    29개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("nature").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -3860,6 +3959,18 @@ public class QuestListFragment extends Fragment {
         category9.setOnClickListener(new View.OnClickListener() {   //new_skill 13개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("new_skill").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -4187,6 +4298,18 @@ public class QuestListFragment extends Fragment {
         category10.setOnClickListener(new View.OnClickListener() {   //outdoor  12개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("outdoor").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -4498,6 +4621,18 @@ public class QuestListFragment extends Fragment {
         category11.setOnClickListener(new View.OnClickListener() {   //sports   4개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#64E7AE"));
+                category12.setBackgroundColor(Color.parseColor("#00000000"));
                 mDatabaseRef.child("quest").child("sports").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -4699,6 +4834,18 @@ public class QuestListFragment extends Fragment {
         category12.setOnClickListener(new View.OnClickListener() {   //travel   34개
             @Override
             public void onClick(View v) {
+                category1.setBackgroundColor(Color.parseColor("#00000000"));
+                category2.setBackgroundColor(Color.parseColor("#00000000"));
+                category3.setBackgroundColor(Color.parseColor("#00000000"));
+                category4.setBackgroundColor(Color.parseColor("#00000000"));
+                category5.setBackgroundColor(Color.parseColor("#00000000"));
+                category6.setBackgroundColor(Color.parseColor("#00000000"));
+                category7.setBackgroundColor(Color.parseColor("#00000000"));
+                category8.setBackgroundColor(Color.parseColor("#00000000"));
+                category9.setBackgroundColor(Color.parseColor("#00000000"));
+                category10.setBackgroundColor(Color.parseColor("#00000000"));
+                category11.setBackgroundColor(Color.parseColor("#00000000"));
+                category12.setBackgroundColor(Color.parseColor("#64E7AE"));
                 mDatabaseRef.child("quest").child("travel").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

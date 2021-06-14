@@ -54,6 +54,7 @@
         android:inputType="textPassword"
         android:paddingLeft="16dp"/>
     <TextView
+        android:id="@+id/find_id"
         android:layout_width="105dp"
         android:layout_height="19dp"
         android:layout_centerHorizontal="true"
