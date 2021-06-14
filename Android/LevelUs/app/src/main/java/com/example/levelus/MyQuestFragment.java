@@ -32,7 +32,7 @@ import java.sql.Ref;
 import java.util.ArrayList;
 
 
-public class MyQuestFragment extends Fragment {
+public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference rRef = firebaseDatabase.getReference("recommend_list");
@@ -140,6 +140,14 @@ public class MyQuestFragment extends Fragment {
 
         iAdapter = new IngQuestAdapter(iData);
     }
+    @Override
+    public void onBackKey() {
+        LoggedPages activity = (LoggedPages) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
+    }
 }
-
-

@@ -3,6 +3,7 @@ package com.example.levelus;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -50,7 +51,7 @@ import java.io.File;
  * Use the {@link EditMyInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditMyInfoFragment extends Fragment{
+public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBackPressedListener {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
@@ -213,7 +214,6 @@ public class EditMyInfoFragment extends Fragment{
             public void onClick(View v) {
             Intent GotoCompletedQeusetActivity = new Intent(getActivity(), CompletedQuestActivity.class);
             startActivity(GotoCompletedQeusetActivity);
-            getActivity().finish();
             }
         });
 
@@ -330,4 +330,14 @@ public class EditMyInfoFragment extends Fragment{
 
         }
     };
+    @Override
+    public void onBackKey() {
+        LoggedPages activity = (LoggedPages) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
+    }
 }

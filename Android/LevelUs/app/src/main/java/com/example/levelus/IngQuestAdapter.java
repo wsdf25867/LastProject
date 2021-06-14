@@ -2,6 +2,10 @@ package com.example.levelus;
 
 import android.content.Context;
 import android.content.Intent;
+
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +32,14 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     ArrayList<QuestlogInfo> iData;
 
 
+
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
     String uid = firebaseUser.getUid();
+    private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView ing_quest_name;
@@ -97,6 +103,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
+
                 Intent intent = new Intent(v.getContext(), ImageLabellingActivity.class);
                 intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 firebaseDatabase.getReference("quest").addValueEventListener(new ValueEventListener() {
@@ -124,6 +131,43 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                     }
                 });
                 v.getContext().startActivity(intent);
+
+//                Intent intent = new Intent(context, ImageLabellingActivity.class);
+//                firebaseDatabase.getReference("quest").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                        for (int i = 0; i < 222; i++) {
+//                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+//                            if (questInfo != null) {
+//                                if (questInfo.getTitle_ko().equals(qData.get(position).getTitle_ko())) {
+//                                    intent.putExtra("title_ko", questInfo.getTitle_ko());
+//                                    intent.putExtra("keyword", questInfo.getKeyword());
+//                                    intent.putExtra("way", questInfo.getWay());
+//                                    intent.putExtra("quest_num", questInfo.getQuest_num());
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//                    }
+//                });
+
+                intent.putExtra("title_ko","test title_ko");
+                intent.putExtra("keyword","test keyword");
+                intent.putExtra("way","test way");
+                intent.putExtra("quest_num","test_quest_num");
+
+                    //안드로이드 자체 db실패
+//                SharedPreferences sharedPreferences= context.getSharedPreferences("test", context.MODE_PRIVATE);    // test 이름의 기본모드 설정
+//                SharedPreferences.Editor editor= sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
+//                editor.putString("inputText","test"); // key,value 형식으로 저장
+//                editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
+                context.startActivity(intent);
+
             }
         });
 
@@ -137,4 +181,6 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 
 
 
+
 }
+
