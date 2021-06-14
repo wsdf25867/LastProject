@@ -3,14 +3,15 @@ package com.example.levelus;
 public class QuestInfo {
     private String added;
     private String category;
+    private String difficulty;
     private String done;
     private String keyword;
+    private String period;
     private String quest_num;
     private String title;
     private String title_ko;
     private String way;
-    private String difficulty;
-    private String period;
+
 
     public QuestInfo(){
 

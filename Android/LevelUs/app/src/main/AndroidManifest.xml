@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:screenOrientation="portrait"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,23 +21,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LevelUs"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WebPractice"/>
-        <activity android:name=".WebPractice2"/>
+
+        <activity android:name=".WebPractice" />
+        <activity android:name=".WebPractice2" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".EditActivity" />
         <activity android:name=".ImageLabellingActivity" />
         <activity android:name=".LoggedPages" />
         <activity android:name=".MainActivity">
+
+        <activity android:name=".WebPractice"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WebPractice2"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DeleteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EditActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ImageLabellingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoggedPages"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignActivity" />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SignActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".CompletedQuestActivity" />
+            android:name=".CompletedQuestActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
