@@ -131,6 +131,8 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 //                        intent.putExtra("quest_num",quest_num);
 
                         //여기서도 intent로 넘어가지가 않는다.
+                        intent.putExtra("quest_num",quest_num);
+                        context.startActivity(intent);
                     }
 
                     @Override
@@ -141,13 +143,12 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                 //여기서 intent로 값을 지정해줘야만 imageLabelling에서 받을 수 있는데, 여기는 onDataChange메소드 전에 실행이 된다..이 무슨 모순이냐?
 
 //                intent.putExtra("title_ko","test title_ko");
-                intent.putExtra("quest_num","140");
+//                intent.putExtra("quest_num","4");
 //                System.out.println("넘기기 직전 intent위치 바꾼 결과는?");
 //                System.out.println(quest_num);
                 //intent의 위치는 상관 없었음. 지금 intent로 값을 지정하는 행위 자체가 onDataChange메소드보다 먼저 실행 되어버림.
                 //onDataChange이 메소드 뒤에 quest_num을 넘길 방법을 찾아야함.
 
-                context.startActivity(intent);
             }
         });
 

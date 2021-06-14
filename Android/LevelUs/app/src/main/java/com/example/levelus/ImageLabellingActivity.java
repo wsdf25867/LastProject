@@ -117,8 +117,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         rb.setVisibility(View.INVISIBLE);
         submit.setVisibility(View.INVISIBLE);
 
-
-
         //gps관련
         logView = (TextView) findViewById(R.id.location);    //gps2
 
@@ -201,7 +199,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
                                 @Override
                                 public void onClick(View view) {
-                                    Toast.makeText(getApplicationContext(),"제출했당~",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
                                     String rating;
                                     rating = String.valueOf(rb.getRating());
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
@@ -219,7 +217,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             }
         });
 
-
         captureImageBtn = findViewById(R.id.capture_image_btn);
         resultTv = findViewById(R.id.textView);
         imageView = findViewById(R.id.imageView);
@@ -231,23 +228,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
                 dispatchTakePictureIntent();
 
-                if(objectSuccess == true){
-                    rb.setVisibility(View.VISIBLE);
-                    submit.setVisibility(View.VISIBLE);
-                    //제출 버튼 클릭했을때
-                    submit.setOnClickListener(new View.OnClickListener(){
-
-
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(getApplicationContext(),"제출했당~",Toast.LENGTH_SHORT).show();
-                            String rating;
-                            rating = String.valueOf(rb.getRating());
-                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
-                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
-                        }
-                    });
-                }
             }
         });
 
@@ -362,13 +342,13 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                 String entityId = label.getEntityId();
                                 float confidence = label.getConfidence();
                                 resultTv.append(text + "    " + confidence + "\n");
-                                list.add(text);             //텍스트부분 배열에 넣기
+                                list.add(text);             //인식된 객체 텍스트 배열에 넣기
                                 System.out.println(text);
 
                             }
                             System.out.println(list);
                             
-                            for(int i = 0; i<list.size(); i++){
+                            for(int i = 0; i<list.size(); i++){     //배열이랑 비교하여 keyword랑 같을 경우
                                 if(keyword.equals((String)list.get(i))){
                                     Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
                                     long now = System.currentTimeMillis();  //현재시간
@@ -377,16 +357,26 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
                                     String finished_date = dateFormat.format(date);
 
-                                    String rating = "5";    //test용
-                                    
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
-
-                                    System.out.println("종료 시간:"+date);
-
                                     myToast.show();
 
-                                    //별점주기를 layout에 띄우기 위해 다른 방법을 사용해야함. activity를 새로 만들던가?
+                                    RatingBar rb = requireViewById(R.id.rb);
+                                    Button submit = requireViewById(R.id.submit);
+                                    rb.setVisibility(View.VISIBLE);
+                                    submit.setVisibility(View.VISIBLE);
+
+                                    submit.setOnClickListener(new View.OnClickListener(){
+
+
+                                        @Override
+                                        public void onClick(View view) {
+                                            Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
+                                            String rating;
+                                            rating = String.valueOf(rb.getRating());
+                                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
+                                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+                                        }
+                                    });
+
                                 }
                             }
                         }
