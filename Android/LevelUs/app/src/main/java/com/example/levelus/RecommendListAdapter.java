@@ -133,16 +133,17 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                     @Override
                     public void onClick(View v) {
                         for(int i=0;i<10;i++){
-                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
-                            if(questInfo.getQuest_num().equals(cData.getQuest_num())){
-                                rRef.child(uid).child(Integer.toString(i)).removeValue();
+                            if(snapshot.child(Integer.toString(i)).exists()){
+                                QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                                if(questInfo.getQuest_num().equals(cData.getQuest_num())){
+                                    rRef.child(uid).child(Integer.toString(i)).removeValue();
 
-                                Intent intent = new Intent(v.getContext(),WebPractice2.class);
-                                intent.putExtra("uid",uid);
-                                v.getContext().startActivity(intent);
-                                break;
+                                    Intent intent = new Intent(v.getContext(),WebPractice2.class);
+                                    intent.putExtra("uid",uid);
+                                    v.getContext().startActivity(intent);
+                                    break;
+                                }
                             }
-
                         }
                     }
                 });

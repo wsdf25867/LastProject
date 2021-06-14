@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +59,11 @@ public class EditActivity extends AppCompatActivity {
                 taskMap.put("name", name.getText().toString());
                 taskMap.put("password", password.getText().toString());
                 databaseReference.child("UserAccount").child(firebaseAuth.getUid()).updateChildren(taskMap);
+                firebaseUser.delete();
+                firebaseUser.updateEmail(email.getText().toString());
+                firebaseUser.updatePassword(email.getText().toString());
+//                firebaseAuth.updateCurrentUser(firebaseUser);
+
                 Intent intent = new Intent(getApplicationContext(), LoggedPages.class);
                 startActivity(intent);
                 finish();
