@@ -38,6 +38,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference rRef = firebaseDatabase.getReference("recommend_list");
     private DatabaseReference iRef = firebaseDatabase.getReference("quest_log");
+    private DatabaseReference qRef = firebaseDatabase.getReference("quest");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     String uid = firebaseUser.getUid();
@@ -71,38 +72,56 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecommendListAdapter.ViewHolder holder, int position) {
         QuestInfo cData = rData.get(position);
+        MyQuestFragment myQuestFragment = new MyQuestFragment();
 
         holder.quest_name.setText(rData.get(position).getTitle_ko());
 
-//        iRef.child(uid).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                holder.agree_button.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        QuestlogInfo questlogInfo = new QuestlogInfo();
-//                        questlogInfo.setFinished_date("0000-00-00");
-//                        questlogInfo.setAccepted_date(getTime);
-//                        questlogInfo.setCategory(cData.getCategory());
-//                        questlogInfo.setQuest_num(cData.getQuest_num());
-//                        questlogInfo.setRating("0");
-//                        questlogInfo.setTitle_ko(cData.getTitle_ko());
-//                        for (int i = 0; i < 233; i++) {
-//                            System.out.println(iRef.child(uid).child(Integer.toString(i)));
-//                            if(iRef.child(uid).child(Integer.toString(i)).equals("null")){
-//                                iRef.child(uid).child(Integer.toString(i)).setValue(questlogInfo);
-//                            }
-//                        }
-//                    }
-//                });
-//                notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
+        holder.agree_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //로그에 넣을 데이터
+                QuestlogInfo questlogInfo = new QuestlogInfo();
+
+                questlogInfo.setTitle_ko(cData.getTitle_ko());
+                questlogInfo.setRating("0");
+                questlogInfo.setQuest_num(cData.getQuest_num());
+                questlogInfo.setCategory(cData.getCategory());
+                questlogInfo.setAccepted_date(getTime);
+                questlogInfo.setFinished_date("0000-00-00");
+
+
+                //퀘스트에 added에 1더하기
+                QuestInfo questInfo = new QuestInfo();
+
+                int added = Integer.parseInt(cData.getAdded())+1;
+
+                questInfo.setTitle(cData.getTitle());
+                questInfo.setTitle_ko(cData.getTitle_ko());
+                questInfo.setAdded(Integer.toString(added));
+                questInfo.setCategory(cData.getCategory());
+                questInfo.setDifficulty(cData.getDifficulty());
+                questInfo.setDone(cData.getDone());
+                questInfo.setKeyword(cData.getKeyword());
+                questInfo.setPeriod(cData.getPeriod());
+                questInfo.setWay(cData.getWay());
+                questInfo.setQuest_num(cData.getQuest_num());
+
+                qRef.child(cData.getCategory()).child(cData.getQuest_num()).setValue(questInfo);
+
+
+                iRef.child(uid).child(cData.getQuest_num()).setValue(questlogInfo);
+
+
+            }
+        });
+        holder.disagree_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rRef.child(uid).child(cData.getQuest_num()).removeValue();
+
+                notifyDataSetChanged();
+            }
+        });
 
     }
 

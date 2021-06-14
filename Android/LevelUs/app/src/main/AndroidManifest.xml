@@ -22,13 +22,7 @@
         android:theme="@style/Theme.LevelUs"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".WebPractice" />
-        <activity android:name=".WebPractice2" />
-        <activity android:name=".DeleteActivity" />
-        <activity android:name=".EditActivity" />
-        <activity android:name=".ImageLabellingActivity" />
-        <activity android:name=".LoggedPages" />
-        <activity android:name=".MainActivity">
+
 
         <activity android:name=".WebPractice"
             android:screenOrientation="portrait"/>
