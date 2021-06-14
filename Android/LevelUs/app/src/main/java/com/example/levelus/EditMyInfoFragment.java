@@ -217,6 +217,15 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
             }
         });
 
+        Button achievement = view.findViewById(R.id.achievement);
+        achievement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GotoAchievementActivity = new Intent(getActivity(), AchievementActivity.class);
+                startActivity(GotoAchievementActivity);
+            }
+        });
+
 
         user_img = view.findViewById(R.id.user_img);
 

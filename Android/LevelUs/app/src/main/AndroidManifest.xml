@@ -51,6 +51,9 @@
         <activity
             android:name=".CompletedQuestActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AchievementActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="AchievementActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/page_header"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginRight="16dp">
+            <TextView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="top"
+                android:text="Back"
+                android:textAppearance="@style/left_black" />
+            <TextView
+                android:id="@+id/completed_quest_title"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal|top"
+                android:text="성취도"
+                android:textAppearance="@style/big_black_title" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/radar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_below="@+id/page_header">
+
+            <com.github.mikephil.charting.charts.RadarChart
+                android:id="@+id/chart1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/radar_chart">
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

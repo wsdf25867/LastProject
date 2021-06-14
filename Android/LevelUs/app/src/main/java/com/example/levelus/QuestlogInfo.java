@@ -9,6 +9,7 @@ public class QuestlogInfo {
     private String title_ko;
     private String accepted_date;
     private String finished_date;
+    private String achievement;
 
     public QuestlogInfo(){
 
@@ -60,6 +61,14 @@ public class QuestlogInfo {
     public void setFinished_date(String finished_date) {
         this.finished_date = finished_date;
     }
+
+    public String getAchievement() { return achievement; }
+
+    public void setAchievement(String achievement) { this.achievement = achievement; }
+
+
+
+
 
 
 }
