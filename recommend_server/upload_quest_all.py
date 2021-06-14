@@ -24,10 +24,10 @@ firebase_admin.initialize_app(cred,{
 })
 
 #매서드 호출
-csv2json('bucket_list_ko2.csv','bucket_list_ko2.json')
+csv2json('bucket_list_achieve.csv','bucket_list_achieve.json')
 
 # firebase에 json파일 업로드
-jsonData = open('bucket_list_ko2.json',"r",encoding="cp949").read()
+jsonData = open('bucket_list_achieve.json',"r",encoding="cp949").read()
 data = json.loads(jsonData)
 
 dir = db.reference('/quest/ALL')
