@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,7 +38,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class RankFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
-
+//    static boolean isCurUser = false;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -54,6 +55,8 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
     private RankAdapter rankAdapter;
     private RecyclerView rankRecyclerView;
     private LinearLayoutManager linearLayoutManager;
+
+    private TextView my_rank;
 //    private RankAdapter rankAdapter = new RankAdapter();
 
 //    ArrayAdapter adapter;
@@ -97,8 +100,10 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_rank, container, false);
 
+
+        View view = inflater.inflate(R.layout.fragment_rank, container, false);
+        my_rank = view.findViewById(R.id.my_rank);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Level Us");
 
@@ -110,22 +115,30 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
         rankList = new ArrayList<>();
         rankAdapter = new RankAdapter(rankList);
         rankRecyclerView.setAdapter(rankAdapter);
-
         databaseReference.child("UserAccount").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                if(snapshot.exists()){
+                if(snapshot.exists()){  //result.next()랑 비슷한 개념인듯?
                     UserAccount userAccount = snapshot.getValue(UserAccount.class);
-
                     rankList.add(userAccount);
                     rankRecyclerView.scrollToPosition(rankList.size()-1);
                     rankAdapter.notifyItemInserted(rankList.size()-1);
-                    for(int i=0;i< rankList.size();i++)
-                        Log.i(i+"번째 사람의 레벨 ", Integer.toString(userAccount.getLevel()));
                 }
                 Collections.sort(rankList);
                 rankAdapter.notifyDataSetChanged();
+
+                for(int i=0;i< rankList.size();i++) {
+                    UserAccount userAccount = rankList.get(i);
+                    Log.i(i + "번째 사람의 레벨 ", Integer.toString(userAccount.getLevel()));
+                    if (userAccount.getIdToken().equals(firebaseUser.getUid())) {
+//                            userAccount.setRank(i+1);
+                        Log.i("현재 사용자 등수",Integer.toString(i+1));
+                        my_rank.setText(Integer.toString(i+1));
+//                            isCurUser = true;
+                    }
+                }
             }
+
 
             @Override
             public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {

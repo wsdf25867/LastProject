@@ -113,4 +113,18 @@
         </item>
 
     </style>
+    <style name="Text.MyRankStyle" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+<!--        <item name="android:textSize">@dimen/text_size_16</item>-->
+<!--        <item name="android:textColor">@color/colorBlack</item>-->
+        <item name="android:fontFamily">@font/wandohopeb</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="Text.Category" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <!--        <item name="android:textSize">@dimen/text_size_16</item>-->
+        <!--        <item name="android:textColor">@color/colorBlack</item>-->
+        <item name="android:fontFamily">@font/harngton</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>
