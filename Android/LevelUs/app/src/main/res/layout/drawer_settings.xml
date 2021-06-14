@@ -11,15 +11,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:background="@drawable/draw_background"
-        android:orientation="vertical"
-        android:gravity="right">
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/ic_close_24"/>
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:background="@drawable/settings_cancel_background">
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_close_24"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
