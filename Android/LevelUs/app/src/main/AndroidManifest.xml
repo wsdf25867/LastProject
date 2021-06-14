@@ -29,22 +29,6 @@
         <activity android:name=".ImageLabellingActivity" />
         <activity android:name=".LoggedPages" />
         <activity android:name=".MainActivity">
-
-        <activity android:name=".WebPractice"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".WebPractice2"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DeleteActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".EditActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ImageLabellingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoggedPages"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

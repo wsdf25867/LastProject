@@ -61,7 +61,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ing_quest_text, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ing_list_adapter, parent, false);
 
         return new ViewHolder(view);
     }
