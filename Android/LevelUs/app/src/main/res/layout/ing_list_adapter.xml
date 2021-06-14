@@ -24,6 +24,8 @@
             android:text="검증"
             android:textColor="@color/white"
             android:background="@drawable/button_prim"
+            android:layout_marginEnd="10dp"
+            android:textSize="20dp"
             />
 
         <Button
@@ -31,7 +33,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_prim2"
-            android:text="포기"/>
+            android:layout_marginEnd="10dp"
+            android:text="포기"
+            android:textSize="20dp"/>
     </LinearLayout>
 
 </LinearLayout>
