@@ -1,9 +1,7 @@
 package com.example.levelus;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +25,14 @@ import java.util.ArrayList;
 
 public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHolder> {
 
-    ArrayList<QuestlogInfo> qData;
+    ArrayList<QuestlogInfo> iData;
 
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
     String uid = firebaseUser.getUid();
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,8 +48,8 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
         }
     }
 
-    public IngQuestAdapter(ArrayList<QuestlogInfo> ing_list) {
-        this.qData = ing_list;
+    public IngQuestAdapter(ArrayList<QuestlogInfo> iData) {
+        this.iData = iData;
     }
 
 
@@ -58,7 +57,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ing_quest_text, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ing_list_adapter, parent, false);
 
         return new ViewHolder(view);
     }
@@ -66,7 +65,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
-        holder.ing_quest_name.setText(qData.get(position).getTitle_ko()); //진행 퀘스트 제목 출력
+        holder.ing_quest_name.setText(iData.get(position).getTitle_ko()); //진행 퀘스트 제목 출력
 
         mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() { //퀘스트 포기
             @Override
@@ -77,7 +76,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                         for (int i = 0; i < 222; i++) {
                             QuestlogInfo questlogInfo = snapshot.child(Integer.toString(i)).getValue(QuestlogInfo.class);
                             if (questlogInfo != null) {
-                                if (qData.get(position).getTitle_ko().equals(questlogInfo.getTitle_ko())) {
+                                if (iData.get(position).getTitle_ko().equals(questlogInfo.getTitle_ko())) {
                                     mDatabaseRef.child(uid).child(Integer.toString(i)).removeValue();
                                     break;
                                 }
@@ -106,11 +105,13 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                         for (int i = 0; i < 222; i++) {
                             QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
                             if (questInfo != null) {
-                                if (questInfo.getTitle_ko().equals(qData.get(position).getTitle_ko())) {
+                                if (questInfo.getTitle_ko().equals(iData.get(position).getTitle_ko())) {
                                     intent.putExtra("title_ko", questInfo.getTitle_ko());
                                     intent.putExtra("keyword", questInfo.getKeyword());
                                     intent.putExtra("way", questInfo.getWay());
                                     intent.putExtra("quest_num", questInfo.getQuest_num());
+                                    notifyDataSetChanged();
+
                                     break;
                                 }
                             }
@@ -131,6 +132,9 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return qData.size();
+        return iData.size();
     }
+
+
+
 }

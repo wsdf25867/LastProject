@@ -28,27 +28,26 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 
 
 public class MyQuestFragment extends Fragment {
 
-    private ArrayList<QuestInfo> list = new ArrayList<>();
-    private ArrayList<QuestlogInfo> qlist = new ArrayList<>();
-
-    private RecyclerView recyclerView;
-    private RecyclerView recyclerView2;
-    private SimpleTextAdapter mAdapter;
-    private IngQuestAdapter ingQuestAdapter;
-
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    //    private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("recommend_list");
-//    private DatabaseReference mDatabaseRef2 = firebaseDatabase.getReference("quest_log");
+    private DatabaseReference rRef = firebaseDatabase.getReference("recommend_list");
+    private DatabaseReference iRef = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
     String uid = firebaseUser.getUid();
 
+    ArrayList<QuestInfo> rData = new ArrayList<>();
+    ArrayList<QuestlogInfo> iData = new ArrayList<>();
+    ArrayList<String> qData = new ArrayList<>();
+
+    RecommendListAdapter rAdapter;
+    IngQuestAdapter iAdapter;
 
 
     public MyQuestFragment() {
@@ -61,10 +60,9 @@ public class MyQuestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         webPractice();
-        prepareData();
-        prepareLogData();
+        getRecommendData();
+        getIngQuest();
 
     }
 
@@ -74,12 +72,11 @@ public class MyQuestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_quest, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
-        recyclerView2 = (RecyclerView) v.findViewById(R.id.recycleView2);
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
+        RecyclerView recyclerView2 = (RecyclerView) v.findViewById(R.id.recycleView2);
         recyclerView.setHasFixedSize(true);
         recyclerView2.setHasFixedSize(true);
-        mAdapter = new SimpleTextAdapter(list);
-        ingQuestAdapter = new IngQuestAdapter(qlist);
+
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
@@ -87,63 +84,61 @@ public class MyQuestFragment extends Fragment {
         recyclerView2.setLayoutManager(mLayoutManager2);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-        recyclerView2.setAdapter(ingQuestAdapter);
+        recyclerView.setAdapter(rAdapter);
+        recyclerView2.setAdapter(iAdapter);
 
         return v;
     }
 
-
-    public void prepareData() {
-        DatabaseReference ref = firebaseDatabase.getReference("recommend_list").child(uid);
-        for (int i = 0; i < 10; i++) {
-            ref.child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                    QuestInfo questInfo = snapshot.getValue(QuestInfo.class);
-                    if (questInfo != null) {
-                        list.add(questInfo);
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }
-
-    }
-
-    public void prepareLogData() {
-        for (int i = 0; i < 222; i++) {
-            firebaseDatabase.getReference("quest_log").child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                    QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
-                    if (questlogInfo != null) {
-                        if (questlogInfo.getRating().equals("0")) {
-                            qlist.add(questlogInfo);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }
-
-    }
-
-    public void webPractice(){
-        Intent GoToWebPractice2 = new Intent(getActivity(),WebPractice2.class);
-        GoToWebPractice2.putExtra("uid",uid);
+    public void webPractice() {
+        Intent GoToWebPractice2 = new Intent(getActivity(), WebPractice2.class);
+        GoToWebPractice2.putExtra("uid", uid);
         startActivity(GoToWebPractice2);
+    }
+
+    public void getRecommendData() {
+        rRef.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                rData.clear();
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+
+                    QuestInfo questInfo = dataSnapshot.getValue(QuestInfo.class);
+                    rData.add(questInfo);
+
+                }
+                rAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+        rAdapter = new RecommendListAdapter(rData);
+    }
+
+    public void getIngQuest() {
+        iRef.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                iData.clear();
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    QuestlogInfo questlogInfo = dataSnapshot.getValue(QuestlogInfo.class);
+                    if(questlogInfo.getRating().equals("0")){
+                        iData.add(questlogInfo);
+                    }
+                }
+                iAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        iAdapter = new IngQuestAdapter(iData);
     }
 }
 
