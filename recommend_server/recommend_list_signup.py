@@ -58,51 +58,33 @@ def get_member_data_refresh(uid):
 def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30):
 
     member = db.reference('/Level Us/UserAccount/' + uid).get()
-    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get()).transpose()
 
     toprate = 0
     quest_index = 0
-    
-    if(user_log.empty):
-        print(user_log)
-        quest_index = str(0)
-    else:
-        if (user_log.index[0] == "achievement") or (user_log.index[0] == "accepted_date")  :
-            user_log = user_log.transpose()
-            print(user_log)
-        else:
-            print(user_log)
-        
-        for index, row in user_log.iterrows() : 
-            if (toprate <= float(row['rating'])) :
-                toprate = float(row['rating'])
-                quest_index = row['quest_num']
-    
-    
+
+    for index, row in user_log.iterrows() : 
+        if (toprate <= int(row['rating'])) :
+            toprate = int(row['rating'])
+            quest_index = row['quest_num']
+   
+    print("questindex :" + quest_index)
     target_bucketlist_index = df[df['quest_num'] == quest_index].index.values
     sim_index = category_c_sim[target_bucketlist_index, :top].reshape(-1)
-    print("questindex :")
-    print(quest_index)
-    print(type(quest_index))
     print("sim : ")
     print(sim_index)
     print(type(sim_index))
-
-    if(user_log.empty):
-        print("sim : ")
+    for index in user_log['quest_num'] : 
         print(sim_index)
-    else:
-        for index in user_log['quest_num'] : 
-            sim_index = np.delete(sim_index, np.where(sim_index == int(index)))
-        print("sim : ")
-        print(sim_index)
+        sim_index = np.delete(sim_index, np.where(sim_index == int(index)))
     
+    print("sim : ")
+    print(sim_index)
     result = df.iloc[sim_index].sort_values('done', ascending=False)
     result = result.sort_values(by=['quest_num'], axis=0)
 
-    # if(user_log is not None):
-    #     for index in user_log['quest_num'] :  
-    #         result = result[result['quest_num'] != index]
+    for index in user_log['quest_num'] :  
+        result = result[result['quest_num'] != index]
 
     is_lv1 = (result['difficulty'] == "1")
     is_lv2 = (result['difficulty'] == "2")
