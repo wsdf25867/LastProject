@@ -13,7 +13,8 @@
             android:padding="8dp"
             android:textSize="18dp"
             android:gravity="center_vertical"
-            android:layout_weight="9"/>
+            android:layout_weight="9"
+            />
 
         <Button
             android:id="@+id/check_button"
@@ -22,12 +23,14 @@
             android:backgroundTint="#64E7AE"
             android:text="검증"
             android:textColor="@color/white"
+            android:background="@drawable/button_prim"
             />
 
         <Button
             android:id="@+id/giveup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_prim2"
             android:text="포기"/>
     </LinearLayout>
 
