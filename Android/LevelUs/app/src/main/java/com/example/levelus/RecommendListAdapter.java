@@ -1,11 +1,15 @@
 package com.example.levelus;
 
+import android.content.Context;
+import android.content.Intent;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,10 +28,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+
 public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdapter.ViewHolder> {
 
     ArrayList<QuestInfo> rData = new ArrayList<>();
     ArrayList<QuestlogInfo> iData = new ArrayList<>();
+
 
     //오늘 날짜 받아서 String 변환
     long now = System.currentTimeMillis();
@@ -72,7 +79,6 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecommendListAdapter.ViewHolder holder, int position) {
         QuestInfo cData = rData.get(position);
-        MyQuestFragment myQuestFragment = new MyQuestFragment();
 
         holder.quest_name.setText(rData.get(position).getTitle_ko());
 
@@ -82,7 +88,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 //로그에 넣을 데이터
                 QuestlogInfo questlogInfo = new QuestlogInfo();
 
-                questlogInfo.setTitle_ko(cData.getTitle_ko());
+                questlogInfo.setTitle_ko(rData.get(position).getTitle_ko());
                 questlogInfo.setRating("0");
                 questlogInfo.setQuest_num(cData.getQuest_num());
                 questlogInfo.setCategory(cData.getCategory());
@@ -93,7 +99,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 //퀘스트에 added에 1더하기
                 QuestInfo questInfo = new QuestInfo();
 
-                int added = Integer.parseInt(cData.getAdded())+1;
+                int added = Integer.parseInt(cData.getAdded()) + 1;
 
                 questInfo.setTitle(cData.getTitle());
                 questInfo.setTitle_ko(cData.getTitle_ko());
@@ -106,22 +112,52 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 questInfo.setWay(cData.getWay());
                 questInfo.setQuest_num(cData.getQuest_num());
 
-                qRef.child(cData.getCategory()).child(cData.getQuest_num()).setValue(questInfo);
-
-
                 iRef.child(uid).child(cData.getQuest_num()).setValue(questlogInfo);
 
+                qRef.child("ALL").child(cData.getQuest_num()).setValue(questInfo);
+                System.out.println("여기까지왔음2");
+
+                Intent intent = new Intent(v.getContext(),WebPractice2.class);
+                intent.putExtra("uid",uid);
+                v.getContext().startActivity(intent);
+
+
+
+
 
             }
         });
-        holder.disagree_button.setOnClickListener(new View.OnClickListener() {
+
+        rRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                rRef.child(uid).child(cData.getQuest_num()).removeValue();
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                holder.disagree_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        for(int i=0;i<10;i++){
+                            QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
+                            if(questInfo.getQuest_num().equals(cData.getQuest_num())){
+                                rRef.child(uid).child(Integer.toString(i)).removeValue();
 
-                notifyDataSetChanged();
+                                Intent intent = new Intent(v.getContext(),WebPractice2.class);
+                                intent.putExtra("uid",uid);
+                                v.getContext().startActivity(intent);
+                                break;
+                            }
+
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
             }
         });
+
+
+
 
     }
 

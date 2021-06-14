@@ -53,6 +53,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     }
 
     public IngQuestAdapter(ArrayList<QuestlogInfo> ing_list) {
+
         this.qData = ing_list;
     }
 
@@ -71,30 +72,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 
         holder.ing_quest_name.setText(qData.get(position).getTitle_ko()); //진행 퀘스트 제목 출력
 
-        mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() { //퀘스트 포기
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                holder.giveup_button.setOnClickListener(new View.OnClickListener() { //포기 버튼
-                    @Override
-                    public void onClick(View v) {
-                        for (int i = 0; i < 222; i++) {
-                            QuestlogInfo questlogInfo = snapshot.child(Integer.toString(i)).getValue(QuestlogInfo.class);
-                            if (questlogInfo != null) {
-                                if (qData.get(position).getTitle_ko().equals(questlogInfo.getTitle_ko())) {
-                                    mDatabaseRef.child(uid).child(Integer.toString(i)).removeValue();
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
-            }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
 
 
         holder.check_button.setOnClickListener(new View.OnClickListener() { //검증버튼
@@ -148,6 +126,16 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 //                System.out.println(quest_num);
                 //intent의 위치는 상관 없었음. 지금 intent로 값을 지정하는 행위 자체가 onDataChange메소드보다 먼저 실행 되어버림.
                 //onDataChange이 메소드 뒤에 quest_num을 넘길 방법을 찾아야함.
+
+            }
+        });
+
+        holder.giveup_button.setOnClickListener(new View.OnClickListener() { //포기하기버튼
+            @Override
+            public void onClick(View v) {
+                mDatabaseRef.child(uid).child(qData.get(position).getQuest_num()).removeValue();
+                notifyDataSetChanged();
+
 
             }
         });

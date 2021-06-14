@@ -93,7 +93,7 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
     public void webPractice() {
         Intent GoToWebPractice2 = new Intent(getActivity(), WebPractice2.class);
         GoToWebPractice2.putExtra("uid", uid);
-        getActivity().startActivity(GoToWebPractice2);
+        startActivity(GoToWebPractice2);
     }
 
     public void getRecommendData() {
@@ -137,7 +137,6 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
 
             }
         });
-
         iAdapter = new IngQuestAdapter(iData);
     }
     @Override
