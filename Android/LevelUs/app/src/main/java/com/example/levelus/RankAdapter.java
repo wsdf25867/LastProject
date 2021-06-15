@@ -49,6 +49,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
     @NotNull
     @Override
     public RankAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        Collections.sort(this.rankList);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rank_list, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -59,7 +60,6 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         int rank = holder.getAdapterPosition();
         holder.text_name.setText(rankList.get(position).getName());
         holder.text_level.setText(Integer.toString(rankList.get(position).getLevel()));
-//        holder.highest_rank.setImageDrawable(gold_medal);
         switch (rank){
             case 0:
                 holder.highest_rank_imageView.setBackgroundResource(R.drawable.gold_medal);

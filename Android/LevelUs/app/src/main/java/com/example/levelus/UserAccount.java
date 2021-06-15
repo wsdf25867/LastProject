@@ -89,7 +89,8 @@ public class UserAccount implements Comparable<UserAccount>{
     public int compareTo(UserAccount o) {
         if (this.level < o.getLevel()) {
             return 1;
-        } else if (this.level > o.getLevel()) {
+        }
+        else if (this.level > o.getLevel()) {
             return -1;
         }
         return 0;

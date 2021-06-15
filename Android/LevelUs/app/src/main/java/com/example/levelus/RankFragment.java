@@ -13,8 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,13 +22,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +53,7 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
     private LinearLayoutManager linearLayoutManager;
 
     private TextView my_rank;
+
 //    private RankAdapter rankAdapter = new RankAdapter();
 
 //    ArrayAdapter adapter;
@@ -100,14 +97,11 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View view = inflater.inflate(R.layout.fragment_rank, container, false);
         my_rank = view.findViewById(R.id.my_rank);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Level Us");
 
-//        adapter = new ArrayAdapter<String>(getActivity(), R.layout.fragment_rank, R.id.rank_list, rankList);
         rankRecyclerView = view.findViewById(R.id.rank_list);
         rankRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -115,6 +109,12 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
         rankList = new ArrayList<>();
         rankAdapter = new RankAdapter(rankList);
         rankRecyclerView.setAdapter(rankAdapter);
+
+        return view;
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         databaseReference.child("UserAccount").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
@@ -126,19 +126,15 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
                 }
                 Collections.sort(rankList);
                 rankAdapter.notifyDataSetChanged();
-
                 for(int i=0;i< rankList.size();i++) {
                     UserAccount userAccount = rankList.get(i);
                     Log.i(i + "번째 사람의 레벨 ", Integer.toString(userAccount.getLevel()));
                     if (userAccount.getIdToken().equals(firebaseUser.getUid())) {
-//                            userAccount.setRank(i+1);
                         Log.i("현재 사용자 등수",Integer.toString(i+1));
                         my_rank.setText(Integer.toString(i+1));
-//                            isCurUser = true;
                     }
                 }
             }
-
 
             @Override
             public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
@@ -163,7 +159,7 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
 
             }
         });
-        return view;
+        rankAdapter.notifyDataSetChanged();
     }
     @Override
     public void onBackKey() {

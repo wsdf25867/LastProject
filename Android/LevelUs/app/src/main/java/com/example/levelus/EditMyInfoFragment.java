@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -303,6 +304,15 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
         }
         else if(resultCode == Activity.RESULT_CANCELED) {
             Toast.makeText(getActivity(), "사진 선택 취소", Toast.LENGTH_LONG).show();
+            if(storageRef.child(firebaseUser.getUid()+"/profile_img") != null){
+                storageRef.child(firebaseUser.getUid()+"/profile_img").delete();
+                storageRef.child(firebaseUser.getUid()).delete();
+                getActivity().finish();
+                Intent LoggedPages = new Intent(getActivity(), LoggedPages.class);
+                startActivity(LoggedPages);
+            }
+//            user_img.setBackground(null);
+//            user_img.invalidate();
         }
     }
 
