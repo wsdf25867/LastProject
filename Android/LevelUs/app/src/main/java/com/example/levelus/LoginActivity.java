@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
+        mAuthListener.onAuthStateChanged(mFirebaseAuth);
 
         email = findViewById(R.id.input_id);
         password = findViewById(R.id.input_password);

@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +35,8 @@ public class DeleteActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Level Us");
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = storage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,10 @@ public class DeleteActivity extends AppCompatActivity {
                                 askDeleteAccount.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        if(storageRef.child(firebaseUser.getUid()+"/profile_img") != null){
+                                            storageRef.child(firebaseUser.getUid()+"/profile_img").delete();
+                                            storageRef.child(firebaseUser.getUid()).delete();
+                                        }
                                         firebaseUser.delete();
                                         firebaseAuth.signOut();
                                         databaseReference.child("UserAccount").child(firebaseUser.getUid()).removeValue();
