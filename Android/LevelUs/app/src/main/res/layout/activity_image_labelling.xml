@@ -20,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rb"
+        android:textColor="@color/white"
+        android:background="@drawable/button_prim"
         android:text="제출"/>
 
     <ImageView
@@ -48,6 +50,8 @@
         android:textAllCaps="false"
         android:layout_marginBottom="48dp"
         android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:background="@drawable/button_prim"
         />
 
     <TextView
@@ -79,6 +83,7 @@
         android:layout_height="wrap_content"
         android:text="주소반환"
         android:layout_above="@+id/txt"
-
+        android:textColor="@color/white"
+        android:background="@drawable/button_prim"
         />
 </RelativeLayout>
