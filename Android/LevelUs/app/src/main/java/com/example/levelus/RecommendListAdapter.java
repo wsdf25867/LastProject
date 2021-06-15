@@ -95,6 +95,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 questlogInfo.setAccepted_date(getTime);
                 questlogInfo.setFinished_date("0000-00-00");
                 questlogInfo.setAchievement(cData.getAchievement());
+                questlogInfo.setPeriod(cData.getPeriod());
 
 
                 //퀘스트에 added에 1더하기
