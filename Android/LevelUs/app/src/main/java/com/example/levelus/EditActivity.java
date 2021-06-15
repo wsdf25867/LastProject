@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -18,8 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.AuthProvider;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.security.auth.AuthPermission;
 
 public class EditActivity extends AppCompatActivity {
     private EditText email, password;
@@ -62,6 +66,7 @@ public class EditActivity extends AppCompatActivity {
                 firebaseUser.delete();
                 firebaseUser.updateEmail(email.getText().toString());
                 firebaseUser.updatePassword(email.getText().toString());
+//                AuthCredential authCredential = AuthCredential.
 //                firebaseAuth.updateCurrentUser(firebaseUser);
 
                 Intent intent = new Intent(getApplicationContext(), LoggedPages.class);
