@@ -2,6 +2,7 @@ package com.example.levelus;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -17,6 +18,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -57,6 +59,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private ImageView imageView;                    //찍은 이미지
     private TextView resultTv;                      //찍은 이미지의 텍스트
     static final int REQUEST_IMAGE_CAPTURE = 1;     //찍은 사진 1장의 의미 인가?
+    Context context;
 
     private Bitmap imageBitmap; //인코딩된 이미지
 
@@ -69,11 +72,11 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     TextView location2; //사진 찍으면 고정되는 현재위치
 
     double lat;         //처음 받아오는 좌표
-    double lng;         //처음 받아오는 좌표
-//    double nowLat;      //사진 찍으면 고정되는 현재좌표
-//    double nowLng;      //사진 찍으면 고정되는 현재좌표
-    double nowLat = -33.53222;      //사진 찍으면 고정되는 현재좌표  test때문에 호주로 고정해놓은 상태
-    double nowLng = 151.21111;      //사진 찍으면 고정되는 현재좌표
+    double lng;         //처음 받아오는 좌표//
+     double nowLat;      //사진 찍으면 고정되는 현재좌표
+    double nowLng;      //사진 찍으면 고정되는 현재좌표
+//    double nowLat = 41.5180;      //사진 찍으면 고정되는 현재좌표
+//    double nowLng = 82.8516;      //사진 찍으면 고정되는 현재좌표
     TextView txt;       //주소반환 버튼 누를 시 반환되는 주소 값
     Button b1;          //주소반환 버튼
 
@@ -82,18 +85,16 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     Date date = new Date(now);              //Date로 형변환
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       //원하는 시간형식으로 변환
 
-    String finished_date = dateFormat.format(date);
+    String finished_date = dateFormat.format(date); //퀘스트 종료한 날짜
 
-    Boolean objectSuccess = false;
-
-    //intent로 값 받아와야 함.
-    String title_ko;    //얘는 테스트용
+    //intent로 받아오는 값
     String quest_num;
-    String way;
+
 
     //db에서 받아오는 keyword
     String keyword;
-    
+    String way;
+
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef2 = firebaseDatabase.getReference("quest");
@@ -130,9 +131,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         //intent로 값 받아와야 함.
         Intent intent = getIntent();
         quest_num = intent.getStringExtra("quest_num");
-        title_ko = intent.getStringExtra("title_ko");
-        System.out.println("사진 찍기 전 받아오는지 확인");
-        System.out.println(quest_num);
 
         //검증방법 받아오기
         mDatabaseRef2.child("ALL").child(quest_num).child("way").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -168,8 +166,8 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                nowLat = lat;
-//                nowLng = lng;
+                nowLat = lat;
+                nowLng = lng;
                 location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
                 List<Address> address = null;
                 try {
@@ -188,7 +186,11 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                         String admin = address.get(0).getAdminArea();
                         String sub_admin = address.get(0).getSubAdminArea();
                         String locality = address.get(0).getLocality();
-                        if(keyword.equals(countryName) || keyword.equals(admin) || keyword.equals(sub_admin) || keyword.equals(locality)){
+                        String thoroughfare = address.get(0).getThoroughfare();
+                        String feature = address.get(0).getFeatureName();
+                        if(keyword.equals(countryName) || keyword.equals(admin)
+                                || keyword.equals(sub_admin) || keyword.equals(locality)
+                                || keyword.equals(thoroughfare) || keyword.equals((feature))){
                             Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
                             myToast.show();
                             rb.setVisibility(View.VISIBLE);
@@ -204,6 +206,9 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     rating = String.valueOf(rb.getRating());
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+                                    Intent intent1 = new Intent(context, EditMyInfoFragment.class);
+                                    startActivity(intent1);
+                                    finish();
                                 }
                             });
 
@@ -211,7 +216,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                             Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"해당 위치가 아닙니다.", Toast.LENGTH_SHORT);
                             myToast.show();
                         }
-                        
+
                     }
                 }
             }
@@ -224,7 +229,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         captureImageBtn.setOnClickListener(new View.OnClickListener() { //검증사진촬영 버튼 누를시
             @Override
             public void onClick(View v) {
-                list.clear();
+                list.clear();   //인식된 객체가 담겨져 있는 배열 초기화(선언X)
 
                 dispatchTakePictureIntent();
 
@@ -335,6 +340,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     .getOnDeviceImageLabeler();
             labeler.processImage(firebaseVisionImage)
                     .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
+                        @RequiresApi(api = Build.VERSION_CODES.P)
                         @Override
                         public void onSuccess(List<FirebaseVisionImageLabel> labels) {
                             for (FirebaseVisionImageLabel label : labels) {
@@ -347,7 +353,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
                             }
                             System.out.println(list);
-                            
+
                             for(int i = 0; i<list.size(); i++){     //배열이랑 비교하여 keyword랑 같을 경우
                                 if(keyword.equals((String)list.get(i))){
                                     Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
@@ -369,14 +375,19 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
                                         @Override
                                         public void onClick(View view) {
-                                            Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??
                                             String rating;
                                             rating = String.valueOf(rb.getRating());
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+                                            Intent intent1 = new Intent(context, EditMyInfoFragment.class);
+                                            startActivity(intent1);
+                                            finish();
                                         }
-                                    });
-
+                                    });break;
+                                }else{
+                                    Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
+                                    myToast.show();
                                 }
                             }
                         }
