@@ -10,6 +10,15 @@ public class QuestlogInfo {
     private String accepted_date;
     private String finished_date;
     private String achievement;
+    private String period;
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
+    }
 
     public QuestlogInfo(){
 
