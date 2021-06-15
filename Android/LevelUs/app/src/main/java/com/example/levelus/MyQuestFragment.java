@@ -46,7 +46,7 @@ import java.util.Date;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 
-public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
+public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPressedListener {
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference rRef = firebaseDatabase.getReference("recommend_list");
@@ -115,7 +115,7 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 rData.clear();
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                     QuestInfo questInfo = dataSnapshot.getValue(QuestInfo.class);
                     rData.add(questInfo);
@@ -137,12 +137,14 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 iData.clear();
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     QuestlogInfo questlogInfo = dataSnapshot.getValue(QuestlogInfo.class);
-                    if(questlogInfo.getRating().equals("0")){
+                    if (questlogInfo.getRating().equals("0")) {
                         iData.add(questlogInfo);
-                        if(calDate(questlogInfo.getAccepted_date())<=1){
-                            show();
+                        if (questlogInfo.getPeriod() != null) {
+                            if (Long.parseLong(questlogInfo.getPeriod())-calDate(questlogInfo.getAccepted_date()) <= 1) {
+                                show();
+                            }
                         }
                     }
                 }
@@ -156,15 +158,18 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
         });
         iAdapter = new IngQuestAdapter(iData);
     }
+
     @Override
     public void onBackKey() {
         LoggedPages activity = (LoggedPages) getActivity();
         activity.setOnKeyBackPressedListener(null);
         activity.onBackPressed();
     }
-    @Override public void onAttach(Context context) {
+
+    @Override
+    public void onAttach(Context context) {
         super.onAttach(context);
-        ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
+        ((LoggedPages) context).setOnKeyBackPressedListener(this::onBackKey);
     }
 
 
@@ -201,22 +206,21 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
 
         NotificationManager manager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager.createNotificationChannel(new NotificationChannel("default","기본 채널",
+            manager.createNotificationChannel(new NotificationChannel("default", "기본 채널",
                     NotificationManager.IMPORTANCE_DEFAULT));
         }
-        manager.notify(1,builder.build());
+        manager.notify(1, builder.build());
     }
 
-    public long calDate(String accepted_date){
-        long calDateDays=0;
+    public long calDate(String accepted_date) {
+        long calDateDays = 0;
         // 현재 날짜 가져오기 (설정한 형식인 "yyyy-MM-dd HH:mm:ss" 대로 가져와진다.
         // current = "2020-08-29 21:58:50";
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String current = format1.format(System.currentTimeMillis());
 
 
-
-        try{
+        try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); // 소문자mm으로 할 경우 분을 의미한다.
 
             // current, last 두 날짜를 parse()를 통해 Date형으로 변환.
@@ -229,13 +233,12 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
 
             // getTime()은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환해준다.
             // 24*60*60*1000(각 시간값에 따른 차이점) 을 나눠주면 일수가 나온다.
-            calDateDays = calDate / ( 24*60*60*1000);
+            calDateDays = calDate / (24 * 60 * 60 * 1000);
 
             calDateDays = Math.abs(calDateDays);
 
-            System.out.println("날짜 계산 결과 : "+calDateDays);
-        }
-        catch(ParseException e) {
+            System.out.println("날짜 계산 결과 : " + calDateDays);
+        } catch (ParseException e) {
             // 예외 처리
         }
 
