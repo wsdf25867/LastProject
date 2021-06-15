@@ -124,7 +124,7 @@ public class CompletedQuestActivity extends AppCompatActivity {
                                 questThumbnail = null;
                                 QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
                                 try{
-                                    if(Integer.parseInt(questlogInfo.getRating()) > 0){
+                                    if(Float.parseFloat(questlogInfo.getRating()) > 0){
                                         storageRef.child("quest_thumbnail/" + questlogInfo.getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                             @Override
                                             public void onSuccess(Uri uri) {
