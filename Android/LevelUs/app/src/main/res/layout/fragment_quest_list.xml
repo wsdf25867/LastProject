@@ -16,154 +16,111 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        android:gravity="center">
         <ImageButton
             android:id="@+id/category1"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/edit" />
+            android:src="@raw/diy"
+            android:scaleType="centerInside"/>
 
         <ImageButton
             android:id="@+id/category2"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/layers_alt" />
+            android:src="@raw/entertainment"
+            android:scaleType="centerInside"/>
 
         <ImageButton
             android:id="@+id/category3"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/dribbble" />
+            android:src="@raw/food"
+            android:scaleType="centerInside"/>
 
         <ImageButton
             android:id="@+id/category4"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/discord" />
+            android:src="@raw/health"
+            android:scaleType="centerInside"/>
 
         <ImageButton
             android:id="@+id/category5"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/window_check" />
+            android:src="@raw/hiking"
+            android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category6"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/location" />
+            android:src="@raw/life_milestone"
+            android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category7"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/flag_fill" />
+            android:src="@raw/love"
+            android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category8"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/heart_fill" />
+            android:src="@raw/nature"
+            android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category9"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/warning" />
+            android:src="@raw/new_skill"
+            android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category10"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/play_circle_outline" />
+            android:src="@raw/outdoor"
+            android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category11"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/group_alt" />
+            android:src="@raw/sports"
+            android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category12"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="7.5dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:src="@drawable/home_alt_fill" />
+            android:src="@raw/travel"
+            android:scaleType="centerInside"/>
     </LinearLayout>
     </HorizontalScrollView>
 
-
-    <LinearLayout
-        android:id="@+id/little_menu_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/little_menu_bottom_background"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/user_circle"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/user_circle" />
-
-        <Button
-            android:id="@+id/media_play"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/media_play" />
-
-        <Button
-            android:id="@+id/edit_plus_s"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/plus_square" />
-
-        <Button
-            android:id="@+id/bar_chart"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/bar_chart" />
-    </LinearLayout>
     <!--        <TextView-->
     <!--            android:id="@+id/title"-->
     <!--            android:layout_width="wrap_content"-->
@@ -174,8 +131,6 @@
     <!--            android:layout_width="wrap_content"-->
     <!--            android:layout_height="wrap_content"-->
     <!--            android:layout_gravity="center"/>-->
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

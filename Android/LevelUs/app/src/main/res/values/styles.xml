@@ -124,7 +124,7 @@
         <item name="android:textStyle">bold</item>
         <!--        <item name="android:textSize">@dimen/text_size_16</item>-->
         <!--        <item name="android:textColor">@color/colorBlack</item>-->
-        <item name="android:fontFamily">@font/harngton</item>
+        <item name="android:fontFamily">@font/e0norat10</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 </resources>
