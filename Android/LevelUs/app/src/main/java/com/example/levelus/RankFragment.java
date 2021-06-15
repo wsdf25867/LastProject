@@ -109,6 +109,7 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
         rankList = new ArrayList<>();
         rankAdapter = new RankAdapter(rankList);
         rankRecyclerView.setAdapter(rankAdapter);
+        rankAdapter.notifyDataSetChanged();
 
         return view;
     }
