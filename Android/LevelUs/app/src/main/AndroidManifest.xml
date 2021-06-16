@@ -64,6 +64,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".AchievementActivity"
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
             android:screenOrientation="portrait"/>
         <provider
             android:authorities="${applicationId}.provider"
@@ -74,6 +78,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
     </application>
 
 </manifest>

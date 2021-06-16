@@ -6,12 +6,23 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
+<<<<<<< HEAD
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+=======
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
 
 import android.Manifest;
 import android.content.Context;
@@ -82,8 +93,15 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     TextView logView;   //처음 받아오는 현재위치
     LocationManager lm;
+<<<<<<< HEAD
     Uri checkedPhotoUri;
     String getUri;
+=======
+
+            Uri checkedPhotoUri;
+    String getUri;
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
 
     TextView location2; //사진 찍으면 고정되는 현재위치
 
@@ -122,7 +140,13 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+<<<<<<< HEAD
     private StorageReference storageReference = firebaseStorage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
+=======
+
+    private StorageReference storageReference = firebaseStorage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
 
 
     //인식된 객체 배열
@@ -257,6 +281,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //퀘스트 종료 날짜
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
                                     StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
                                     UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
                                     uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -271,7 +299,11 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             // ...
                                         }
                                     });
+<<<<<<< HEAD
 //                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
                                     //done증가
                                     String realDone = String.valueOf(Integer.valueOf(done)+1);
                                     mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
@@ -279,14 +311,26 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //해당 난이도에 따른 레벨 증가
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
+<<<<<<< HEAD
 
                                     Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                     startActivity(intent1);
+=======
+
+
+                                    Intent intent1 = new Intent(context, EditMyInfoFragment.class);
+                                    startActivity(intent1);
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
                                     FragmentManager fragmentManager = getSupportFragmentManager();
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
                                     fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
                                     fragmentTransaction.commit();
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
                                     finish();
                                 }
                             });
@@ -496,6 +540,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
 
+<<<<<<< HEAD
                                             StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
                                             UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
                                             uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -511,17 +556,27 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                                 }
                                             });
 
+=======
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
                                             FragmentManager fragmentManager = getSupportFragmentManager();
                                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                             EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
                                             fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
                                             fragmentTransaction.commit();
                                             finish();
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
 
                                             Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
                                             intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                                             ImageLabellingActivity.this.getApplicationContext().startActivity(intent);
                                             finishAffinity();
+<<<<<<< HEAD
+=======
+
+>>>>>>> f42d584f81c65fe939542a389c3457b2e7c08f34
                                         }
                                     });
                                     break;
