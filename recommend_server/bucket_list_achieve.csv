@@ -1,224 +1,224 @@
 title,category,added,done,title_ko,keyword,way,quest_num,difficulty,period,achievement
-Send a message in a bottle,diy,9500,550,ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Coffee,object,0,1,3,experience
-Ride in a hot air balloon,diy,7100,445,ï¿½ï¿½ï¿½â±¸ Å¸ï¿½ï¿½ï¿½ï¿½,Balloon,object,1,1,3,challenge
-Visit Japan,travel,6500,528,ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ïºï¿½,gps,2,3,14,travel
-Visit Germany,travel,6500,513,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½,gps,3,3,14,travel
-Write a book,diy,4200,128,Ã¥ ï¿½ï¿½ï¿½ï¿½,Paper,object,4,2,7,growth
-Swim with sharks,diy,3800,538,ï¿½ï¿½ï¿½ï¿½ ï¿½Ô²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Aquarium,object,5,3,14,challenge
-Volunteer abroad,diy,3400,591,ï¿½Ø¿Üºï¿½ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½,Event,object,6,3,14,growth
-Sleep under the stars,diy,3000,662,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úºï¿½ï¿½ï¿½,Star,object,7,2,2,experience
-Travel by myself,diy,2900,945,È¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½êµ¿,gps,8,1,7,challenge
-Go on a road trip,travel,2200,461,ï¿½Îµï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Road,object,9,2,7,challenge
-Learn Spanish,diy,2100,371,ï¿½ï¿½ï¿½ï¿½ï¿½Î¾ï¿½ ï¿½ï¿½ï¿½ï¿½,Paper,object,10,2,7,growth
-Find a four leaf clover,diy,1800,806,ï¿½ï¿½ ï¿½ï¿½ Å¬ï¿½Î¹ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½,Flower,object,11,3,14,enjoy
-Learn to paint,diy,1700,303,ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½,Poster,object,12,2,7,growth
-Learn to Sew,diy,1600,361,ï¿½Ù´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Skin,object,13,1,7,growth
-Go to Australia,travel,1400,174,È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½,gps,14,3,14,travel
-See a Shooting Star,diy,1300,668,ï¿½ï¿½ï¿½Ëºï¿½ ï¿½ï¿½ï¿½ï¿½,Star,object,15,2,14,experience
-Take a cooking class,diy,1100,142,ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½,Food,object,16,2,7,growth
-Write a novel,diy,1000,47,ï¿½Ò¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Paper,object,17,2,7,challenge
-Go to a shooting range,diy,987,296,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Sports,object,18,2,3,experience
-Learn Programming,diy,900,174,ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½,Computer,object,19,1,2,growth
-Build my own mini library,diy,889,67,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,Shelf,object,20,2,14,challenge
-Watch the sunset,diy,873,537,ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½,Sunset,object,21,1,2,experience
-Grow an abundant herb garden,diy,871,26,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù±ï¿½,Garden,object,22,2,7,challenge
-Start a Blog,diy,807,343,ï¿½ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Computer,object,23,1,2,challenge
-Solve a Rubix-Cube,diy,694,265,ï¿½ï¿½ï¿½ Å¥ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½,Toy,object,24,1,2,enjoy
-Bungee Jumping,entertainment,625,81,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½,Sky,object,25,2,7,challenge
-Start my own business,diy,604,82,Ã¢ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½,Room,object,26,3,14,growth
-Donate my hair,diy,552,234,ï¿½Ó¸ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½,Hair,object,27,2,14,experience
-Bake a cake,diy,550,389,ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½,Cake,object,28,1,2,enjoy
-Get my drivers license,diy,513,137,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½,Mobile phone,object,29,2,14,growth
-Make a YouTube video,diy,507,130,ï¿½ï¿½Æ©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,Flag,object,30,2,7,challenge
-Take a jumping picture,diy,477,217,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½,Fun,object,31,1,2,enjoy
-Build a snowman,diy,428,170,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.,Bird,object,32,1,2,enjoy
-Buy my own car,diy,378,133,ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Car,object,33,3,14,growth
-Hold an Owl,diy,324,64,ï¿½Ã»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½,Bird,object,34,3,14,enjoy
-Make a time capsule,diy,291,19,Å¸ï¿½ï¿½Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,Vehicle,object,35,1,2,experience
-Learn to use chopsticks,diy,233,108,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Vehicle,object,36,1,7,growth
-Get a college degree,diy,233,46,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Paper,object,37,3,14,growth
-Try oysters,diy,217,121,ï¿½ï¿½ ï¿½Ô¾îº¸ï¿½ï¿½,Food,object,38,1,2,experience
-Go to a Fancy Dress Party,diy,214,86,ï¿½å·¹ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Dress,object,39,2,7,enjoy
-Fold 1000 paper cranes,diy,205,15,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1000ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Paper,object,40,2,14,challenge
-Climb a tree,diy,188,62,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Plant,object,41,1,2,experience
-Learn to Crochet,diy,184,47,ï¿½Ú¹Ù´ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Skin,object,42,1,2,challenge
-Take a dance class,diy,184,36,ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Dance,object,43,2,7,challenge
-Carve a pumpkin for halloween,diy,163,81,ï¿½Ò·ï¿½ï¿½ï¿½ È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Vegetable,object,44,2,7,enjoy
-Own a Cat,diy,159,59,ï¿½ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½,Cat,object,45,2,7,challenge
-Become an Early Riser,diy,145,22,7ï¿½Ã¿ï¿½ ï¿½Ï¾î³ªï¿½ï¿½,7:00 AM,text,46,1,2,growth
-Build A Computer,diy,138,58,ï¿½ï¿½ ï¿½ï¿½Ç»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Computer,object,47,2,7,experience
-Learn to dive,diy,130,28,ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½,Leisure,object,48,2,7,challenge
-Ride on an Elephant,diy,122,25,ï¿½Ú³ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½,Safari,object,49,2,7,experience
-Make tiramisu,diy,113,27,Æ¼ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,Cake,object,50,1,2,enjoy
-Join a gym,diy,110,49,ï¿½ï½ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Metal,object,51,2,5,challenge
-Make a kite and fly it,diy,108,33,ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Flag,object,52,2,5,experience
-Dye my hair,diy,106,37,ï¿½ï¿½ ï¿½Ó¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Hair,object,53,1,5,experience
-Complete a scrapbook,diy,105,12,ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï±ï¿½,Paper,object,54,2,5,challenge
-Learn to Make Homemade Pasta,diy,27,10,ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½Å¸ ï¿½ï¿½ï¿½ï¿½ï¿½,Food,object,55,1,2,enjoy
-Celebrate Holi in India,entertainment,3900,41,ï¿½Îµï¿½ï¿½ï¿½ È¦ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Îµï¿½,gps,56,3,14,travel
-Ride a Unicycle,entertainment,1100,134,ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½,Bicycle,object,57,2,7,experience
-Go to disneyworld,entertainment,1000,320,Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½,Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½,gps,58,3,14,enjoy
-Drink wine in Italy,entertainment,786,238,ï¿½ï¿½Å»ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã±ï¿½,ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½,gps,59,3,14,travel
-Visit Versailles,entertainment,326,136,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Versailles,gps,60,3,14,travel
-See A Broadway Play,entertainment,296,802,ï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Chicago,gps,61,2,7,experience
-Go to a nude beach,entertainment,226,30,ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Skin,object,62,3,7,enjoy
-Go to a jazz bar,entertainment,195,40,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.,Event,object,63,2,7,experience
-Eat gelato in Italy,entertainment,190,91,ï¿½ï¿½Å»ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô±ï¿½,ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½,gps,64,3,14,enjoy
-Make a kite and fly it,entertainment,108,33,ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Flag,object,65,1,5,experience
-"Eat ""Chinese"" Food in China",food,300,121,"ï¿½ß±ï¿½ï¿½ï¿½ï¿½ï¿½ ""ï¿½ß±ï¿½"" ï¿½ï¿½ï¿½ï¿½ ï¿½Ô±ï¿½",ï¿½ß±ï¿½,gps,66,3,14,experience
-Take Pole Dancing Classes,health,4400,756,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½,Dance,object,67,2,7,challenge
-Complete a half marathon,health,1800,290,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Marathon,object,68,2,14,challenge
-Take a Bellydancing Classes,health,1400,75,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½,Dance,object,69,2,7,challenge
-Walk on the Great Wall of China,hiking,9400,574,ï¿½ï¿½ï¿½ï¿½ï¿½å¼º ï¿½È±ï¿½,ï¿½ß±ï¿½,gps,70,3,14,travel
-Trek the Inca Trail,hiking,3600,95,ï¿½ï¿½Ä«ï¿½ï¿½Ã¥ï¿½ï¿½ ï¿½È±ï¿½,ï¿½ï¿½ï¿½,gps,71,3,14,travel
-Visit hawaii,hiking,3300,519,ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,72,3,14,travel
-Visit the Grand Canyon,hiking,2300,507,ï¿½×·ï¿½ï¿½ï¿½ Ä³ï¿½Ï¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ì±ï¿½,gps,73,3,14,travel
-Visit the Blue mountains in Australia!,hiking,2300,188,È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½,gps,74,3,14,travel
-Visit Machu Picchu,hiking,2100,122,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½,gps,75,3,14,travel
-Go to Antarctica,hiking,2000,20,ï¿½ï¿½ï¿½Ø¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ß¹Ù¸ï¿½,gps,76,3,14,travel
-Own a dog,hiking,1400,632,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½.,Dog,object,77,2,7,challenge
-Visit San Fransico,hiking,1400,584,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,78,3,14,travel
-Hike for at least 20km,hiking,1400,135,20km ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½Å· ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Leisure,object,79,2,14,challenge
-See a Shooting Star,hiking,1300,668,ï¿½ï¿½ï¿½Ëºï¿½ ï¿½ï¿½ï¿½ï¿½,Star,object,80,3,14,experience
-Visit Prague,hiking,1200,413,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Ã¼ï¿½ï¿½,gps,81,3,14,travel
-Visit the Leaning Tower of Pisa,hiking,1200,332,ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½Å¾ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Tower,object,82,3,14,travel
-Visit Canada,hiking,1100,258,Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Ä³ï¿½ï¿½ï¿½ï¿½,gps,83,3,14,travel
-Hike/Climb Kilimanjaro,hiking,997,29,Å³ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Åºï¿½Ú´Ï¾ï¿½,gps,84,3,14,challenge
-"Visit Petra, Jordan",hiking,945,87,ï¿½ä¸£ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ä¸£ï¿½ï¿½,gps,85,3,14,travel
-Visit LA,hiking,909,321,LA ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,86,3,14,travel
-Visit Croatia,hiking,809,223,Å©ï¿½Î¾ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Å©ï¿½Î¾ï¿½Æ¼ï¿½ï¿½,gps,87,3,14,travel
-Visit Morocco,hiking,779,153,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½,gps,88,3,14,travel
-Go horseback riding,hiking,668,218,ï¿½Â¸ï¿½ Ã¼ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½,Horse,object,89,2,7,experience
-Zipline,hiking,412,128,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½Ï±ï¿½,Leisure,object,90,2,7,challenge
-Travel to New Zealand,hiking,353,36,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,gps,91,3,14,travel
-Go canoeing,hiking,294,133,Ä«ï¿½ï¿½ Å¸ï¿½ï¿½,Canoe,object,92,2,7,experience
-Walk the Golden Gate bridge,hiking,237,53,ï¿½Ý¹ï¿½ï¿½ï¿½ ï¿½È±ï¿½,ï¿½Ì±ï¿½,gps,93,3,14,experience
-Visit yellowstone,hiking,231,31,ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ì±ï¿½,gps,94,3,14,travel
-Visit Yosemite National Park,hiking,216,40,ï¿½ä¼¼ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½,gps,95,3,14,travel
-Put My Feet in the Ocean,hiking,196,201,ï¿½Ù´å¹°ï¿½ï¿½ ï¿½ï¿½ ï¿½ã±¸ï¿½ï¿½,Skin,object,96,1,7,experience
-Travel to Iceland,hiking,186,15,ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½,object,97,3,14,travel
-Visit the Pyramids,travel,3000,513,ï¿½Ç¶ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Desert,object,98,3,14,travel
-Go to Spain,travel,1900,550,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,gps,99,3,14,travel
-Get my first car!,travel,1100,156,ï¿½ï¿½ Ã¹ ï¿½ï¿½ ï¿½ï¿½ï¿½,car,object,100,3,14,growth
-Visit Vatican city,travel,938,238,ï¿½ï¿½Æ¼Ä­ ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Æ¼Ä­,gps,101,3,14,travel
-Visit the 9-11 Memorial (Ground Zero),travel,782,332,9-11 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,09ï¿½ï¿½ 11ï¿½ï¿½,gps,102,3,14,travel
-Visit amsterdam,travel,778,579,ï¿½Ï½ï¿½ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Amsterdam,gps,103,3,14,travel
-Go to Venice,travel,544,15,ï¿½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½,gps,104,3,14,travel
-"Visit Vienna, Austria",travel,241,584,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ñ¿£³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½,gps,105,3,14,travel
-Make a bucket list,travel,204,50,ï¿½ï¿½Å¶ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½,Paper,object,106,1,5,growth
-Visit Istanbul,travel,164,35,ï¿½Ì½ï¿½Åºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½Å°,gps,107,3,14,travel
-Buy a house,life_milestone,4300,510,ï¿½ï¿½ ï¿½å¸¸ï¿½Ï±ï¿½,Building,object,108,3,14,growth
-Have Children,life_milestone,4200,510,ï¿½Î¸ï¿½ ï¿½Ç¾îº¸ï¿½ï¿½,Baby,object,109,3,14,growth
-Swim with sharks,life_milestone,3800,538,ï¿½ï¿½ï¿½ï¿½ ï¿½Ô²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Aquarium,object,110,3,14,challenge
-Own my dream house,life_milestone,3800,33,ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Building,object,111,3,14,growth
-Volunteer abroad,life_milestone,3400,591,ï¿½Ø¿Üºï¿½ï¿½ï¿½,Event,object,112,3,14,growth
-Go on a Romantic Camping Trip,life_milestone,1800,46,Ä·ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½Úºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Fire,object,113,2,7,enjoy
-Wear a snake around my neck,life_milestone,1500,851,ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ï¿½,Insect,object,114,2,5,enjoy
-Dye my hair,life_milestone,1500,646,ï¿½ï¿½ ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½.,Hair,object,115,1,5,experience
-Climb a mountain,life_milestone,1500,311,ï¿½ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½,Mountain,object,116,1,3,experience
-Own a dog,life_milestone,1400,632,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½.,Dog,object,117,2,7,challenge
-Write a novel,life_milestone,1000,47,ï¿½Ò¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.,Paper,object,118,2,7,challenge
-Hold a koala,life_milestone,917,119,ï¿½Ú¾Ë¶ï¿½ ï¿½ï¿½ï¿½ï¿½,Dog,object,119,2,7,enjoy
-Pass my driving test,life_milestone,911,429,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Mobile phone,text,120,2,14,challenge
-Visit LA,life_milestone,909,321,LA ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,121,3,14,travel
-Attend an opera,life_milestone,898,157,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Event,object,122,3,14,enjoy
-Start a Blog,life_milestone,807,343,ï¿½ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½,Computer,object,123,1,2,experience
-Learn japanese,life_milestone,538,16,ï¿½Ïºï¿½ï¿½î¸¦ ï¿½ï¿½ï¿½ï¿½,Paper,object,124,2,7,challenge
-Become a mother,life_milestone,509,113,ï¿½Î¸ï¿½ ï¿½Ç±ï¿½,Baby,object,125,3,14,growth
-See a lunar eclipse,life_milestone,497,220,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Moon,object,126,3,14,experience
-Swim with the Dolphins,life_milestone,470,93,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Aquarium,object,127,3,14,experience
-Run a full Marathon,life_milestone,334,33,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Marathon,text,128,3,14,challenge
-Learn how to ride a horse,life_milestone,277,74,ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Horse,object,129,2,7,challenge
-Drive a Ferrari,life_milestone,259,19,ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½,Road,object,130,3,7,experience
-Run with the bulls,life_milestone,255,14,È²ï¿½Òµï¿½ï¿½ ï¿½Ô²ï¿½ ï¿½Þ·ï¿½ï¿½ï¿½.,Bull,object,131,3,7,experience
-Adopt a cat,life_milestone,209,87,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¾ï¿½ï¿½Ï±ï¿½.,Cat,object,132,2,7,challenge
-Go to China,life_milestone,205,35,ï¿½ß±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ß±ï¿½,object,133,3,14,travel
-Find out my blood type,life_milestone,203,61,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æºï¿½ï¿½ï¿½,"a,b,o,ab",text,134,1,2,experience
-LIve in New York,life_milestone,198,22,ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½Æºï¿½ï¿½ï¿½,ï¿½Ì±ï¿½,gps,135,3,14,experience
-Own a Cat,life_milestone,159,59,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½â¸£ï¿½ï¿½,Cat,object,136,2,7,challenge
-Get my passport,life_milestone,156,51,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,Paper,object,137,1,7,growth
-Take An I.Q. Test,life_milestone,115,42,ï¿½ï¿½ï¿½ï¿½Å¥ ï¿½×½ï¿½Æ® ï¿½Øºï¿½ï¿½ï¿½,number,text,138,1,2,experience
-Own a dog,love,1400,195,ï¿½ï¿½ï¿½Æ±ï¿½ Å°ï¿½ï¿½ï¿½,Dog,object,139,2,7,challenge
-Go to Australia,love,1400,49,È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½,object,140,3,14,travel
-Learn how to ride a bike,love,1100,134,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Bicycle,object,141,2,7,challenge
-"Visit Paris, France",love,964,584,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,gps,142,3,14,travel
-See fireflies,love,174,174,ï¿½Ýµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Insect,object,143,2,7,experience
-See Eiffel Tower in the winter,love,155,101,ï¿½ï¿½ï¿½ï¿½Å¾ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Tower,object,144,3,14,travel
-See the Northern Lights (Aurora Borealis),nature,17000,658,ï¿½Ï±Ø±ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Î¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ï¿½),aurora,object,145,3,14,travel
-Go on an African safari,nature,9400,846,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä« ï¿½ï¿½ï¿½Ä¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä«,gps,146,3,14,travel
-Visit Argentinas Iguazu Falls,nature,4100,257,ï¿½Æ¸ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Æ¸ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½,gps,147,3,14,travel
-Go Whale Watching,nature,3300,914,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Aquarium,object,148,2,7,experience
-Plant a Tree,nature,2400,567,ï¿½ï¿½ï¿½ï¿½ ï¿½É±ï¿½,Plant,object,149,2,7,growth
-Feed a giraffe,nature,2100,892,ï¿½â¸°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ö±ï¿½,Safari,object,150,2,7,experience
-Stand on the equator,nature,2100,140,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½,gps,151,3,14,experience
- Go to Antarctica,nature,2000,20,ï¿½ï¿½ï¿½Ø¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½,gps,152,3,14,travel
-Find a four leaf clover,nature,1800,806,ï¿½ï¿½ ï¿½ï¿½ Å¬ï¿½Î¹ï¿½ï¿½ï¿½ Ã£ï¿½Æ¶ï¿½.,Flower,object,153,3,14,experience
-Go kayaking,nature,1400,755,Ä«ï¿½ï¿½ Å¸ï¿½ï¿½,Kayak,object,154,2,7,enjoy
-Visit the Galapagos Islands,nature,946,33,ï¿½ï¿½ï¿½ï¿½ï¿½Ä°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½âµµï¿½ï¿½,gps,155,3,14,travel
-Watch the sunset,nature,873,537,ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½,Sunset,object,156,3,14,experience
-Capture lightning in a photograph,nature,832,123,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½,Lightning,object,157,3,14,enjoy
-Visit Morocco,nature,779,153,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½,gps,158,3,14,travel
-Swim with a sea turtle,nature,630,172,ï¿½Ù´Ù°Åºï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Aquarium,object,159,3,14,experience
-Visit Alaska,nature,617,49,ï¿½Ë·ï¿½ï¿½ï¿½Ä« ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,160,3,14,travel
-Swim with whale sharks,nature,563,85,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Aquarium,object,161,3,14,experience
-Visit Scotland,nature,535,97,ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½,gps,162,3,14,travel
-Visit Niagra Falls,nature,524,96,ï¿½ï¿½ï¿½Ì¾Æ±×¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä³ï¿½ï¿½ï¿½ï¿½,gps,163,3,14,travel
-See a lunar eclipse,nature,497,220,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Moon,object,164,3,14,experience
-Visit the Maldives,nature,485,27,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Îµï¿½,gps,165,3,14,travel
-See the tulips in Holland,nature,451,86,ï¿½×´ï¿½ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ Æ«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Flower,object,166,3,14,travel
-Hold a Tarantula,nature,337,127,Å¸ï¿½ï¿½Æ«ï¿½ï¿½ ï¿½ï¿½ï¿½,Insect,object,167,3,14,experience
-Swim in the Blue Lagoon in Iceland,nature,269,25,ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Çªï¿½ï¿½ ï¿½ó±º¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½,gps,168,3,14,travel
-Try oysters,nature,217,121,ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¾îº¸ï¿½ï¿½,Food,object,169,1,2,experience
-Build an igloo,nature,204,27,ï¿½Ì±Û·ç¸¦ ï¿½Ç¼ï¿½ï¿½Ï±ï¿½,Room,object,170,2,5,experience
-See a solar eclipse,nature,197,48,ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½,Moon,object,171,3,14,experience
-Make a snowman,nature,192,77,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,Bird,object,172,1,2,enjoy
-Watch a sunrise,nature,191,52,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Sunset,object,173,1,2,experience
-Learn to ride a motorcycle,new_skill,7100,779,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Motorcycle,object,174,2,7,challenge
-Learn to Surf,new_skill,6800,800,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Surfing,object,175,2,7,experience
-Learn how to play guitar,new_skill,3500,882,ï¿½ï¿½Å¸ Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Musical instrument,object,176,1,7,challenge
-Learn sign language,new_skill,3200,211,ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½,Hand,object,177,2,7,challenge
-Ride an Elephant in Thailand,new_skill,3000,578,ï¿½Â±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú³ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½,ï¿½Â±ï¿½,gps,178,3,14,travel
-Learn how to play the piano,new_skill,2500,602,ï¿½Ç¾Æ³ï¿½ Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Piano,object,179,1,7,challenge
-Visit Las Vegas,new_skill,1000,306,ï¿½ó½ººï¿½ï¿½Ì°Å½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,180,3,14,travel
-Make a YouTube video,new_skill,507,130,ï¿½ï¿½Æ©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,Flag,object,181,2,7,experience
-Travel to London,new_skill,431,222,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½,gps,182,3,14,travel
-Learn to speak french,new_skill,359,22,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î¸¦ ï¿½ï¿½ï¿½ï¿½,Paper,object,183,2,7,challenge
-Learn to play the Violin,new_skill,269,36,ï¿½ï¿½ï¿½Ì¿Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½,Musical instrument,object,184,2,7,challenge
-Try Fencing,new_skill,190,25,ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Sports,object,185,2,7,challenge
-Learn how to Longboard,new_skill,143,24,ï¿½Õºï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ë¾Æºï¿½ï¿½ï¿½,Skateboard,object,186,2,7,challenge
-Float in the Dead Sea,outdoor,14000,806,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,ï¿½Ì½ï¿½ï¿½ï¿½,gps,187,3,14,travel
-Go Snowboarding,outdoor,1200,381,ï¿½ï¿½ï¿½ëº¸ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Sports,object,188,2,7,experience
-See Mount Rushmore,outdoor,866,156,ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ì±ï¿½,gps,189,3,14,travel
-Learn to Ski,outdoor,841,234,ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½,Leisure,object,190,2,7,challenge
-Ride a dune buggy in the desert,outdoor,583,49,ï¿½ç¸·ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¹ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½,Vehicle,object,191,3,14,experience
-Go jet skiing,outdoor,370,109,ï¿½ï¿½Æ®ï¿½ï¿½Å° Å¸ï¿½ï¿½ï¿½ï¿½,Boat,object,192,2,7,experience
-Go to glastonbury festival,outdoor,287,36,ï¿½Û·ï¿½ï¿½ï¿½ï¿½æº£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½,object,193,3,14,enjoy
-Go on the London Eye,outdoor,255,127,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½,gps,194,3,14,travel
-Go to Fiji,outdoor,189,16,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½,gps,195,3,14,travel
-Visit Redwood National Park,outdoor,135,12,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½,gps,196,3,14,travel
-Ice skate,outdoor,129,70,ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ï±ï¿½,Shoe,object,197,1,7,experience
-Have a Bonfire,outdoor,120,31,ï¿½ï¿½Úºï¿½ï¿½ï¿½ ï¿½Ç¿ï¿½ï¿½,Fire,object,198,1,5,enjoy
-Do yoga,sports,1900,471,ï¿½ä°¡ï¿½ï¿½ ï¿½Ï´ï¿½,Sitting,object,199,2,7,experience
-Drive a race car,sports,171,484,ï¿½ï¿½ï¿½Ö¿ï¿½ ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,Car,object,200,3,14,experience
-Jump out of a plane,sports,128,33,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Sky,object,201,3,14,challenge
-Buy A Boat,sports,108,102,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Boat,object,202,3,14,challenge
-Swim The Great Barrier Reef,travel,6300,467,ï¿½ëº¸ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½,gps,203,3,14,experience
-See the Taj Mahal,travel,2500,257,Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Èµï¿½,gps,204,3,14,travel
-Visit Singapore,travel,2100,468,ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½,gps,205,3,14,travel
-Ride a Gondola in Venice,travel,2000,336,ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½Æ¿ï¿½ï¿½ï¿½ ï¿½ïµ¹ï¿½ï¿½ Å¸ï¿½ï¿½,ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½,gps,206,3,14,experience
-Visit Switzerland,travel,1900,625,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,gps,207,3,14,travel
-Visit Easter Island,travel,1100,14,ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ä¥ï¿½ï¿½,gps,208,3,14,travel
-Visit New York City,travel,963,299,ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,209,3,14,travel
-Go to South America,travel,909,69,ï¿½ï¿½ï¿½Æ¸Þ¸ï¿½Ä« ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½Æ¸Þ¸ï¿½Ä«,gps,210,3,14,travel
-Go to a black sand beach,travel,608,148,ï¿½ï¿½ï¿½ï¿½ ï¿½ð·¡»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Asphalt,object,211,3,14,travel
-Drink from a coconut,travel,604,243,ï¿½ï¿½ï¿½Ú³ï¿½ ï¿½ï¿½ï¿½Ã±ï¿½,Food,object,212,2,5,experience
-Visit Austria,travel,462,194,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½,gps,213,3,14,travel
-See the Mona Lisa,travel,410,175,ï¿½ð³ª¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Smile,object,214,3,14,experience
-Visit Norway,travel,382,57,ï¿½ë¸£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ë¸£ï¿½ï¿½ï¿½ï¿½,gps,215,3,14,travel
-Visit Chicago,travel,257,76,ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,Chicago,gps,216,3,14,travel
-Drive Down Route 66,travel,241,11,ï¿½Ì±ï¿½ 66ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ì±ï¿½,gps,217,3,14,challenge
-Visit South America,travel,213,19,ï¿½ï¿½ï¿½Æ¸Þ¸ï¿½Ä« ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½ï¿½ï¿½Æ¸Þ¸ï¿½Ä«,gps,218,3,14,travel
-Visit Israel,travel,193,19,ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì½ï¿½ï¿½ï¿½,gps,219,3,14,travel
-"Visit Rome, Italy",travel,187,50,ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½,gps,220,3,14,travel
-See the Pope,travel,157,50,ï¿½ï¿½È²ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ï¿½,Smile,object,221,3,14,experience
-Visit Seattle,travel,143,36,ï¿½Ã¾ï¿½Æ² ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½,ï¿½Ì±ï¿½,gps,222,3,14,travel
+Send a message in a bottle,diy,9500,550,¸Þ¼¼Áö º´¿¡ ´ã¾Æ º¸³»±â,Coffee,object,0,1,3,experience
+Ride in a hot air balloon,diy,7100,445,¿­±â±¸ Å¸º¸±â,Balloon,object,1,1,3,challenge
+Visit Japan,travel,6500,528,ÀÏº» ¿©ÇàÇÏ±â,ÀÏº»,gps,2,3,14,travel
+Visit Germany,travel,6500,513,µ¶ÀÏ ¿©ÇàÇÏ±â,µ¶ÀÏ,gps,3,3,14,travel
+Write a book,diy,4200,128,Ã¥ ¾²±â,Paper,object,4,2,7,growth
+Swim with sharks,diy,3800,538,»ó¾î¿Í ÇÔ²² ¼ö¿µÇÏ±â,Aquarium,object,5,3,14,challenge
+Volunteer abroad,diy,3400,591,ÇØ¿ÜºÀ»ç ÇØº¸±â,Event,object,6,3,14,growth
+Sleep under the stars,diy,3000,662,º°º¸¸ç ÀÚº¸±â,Star,object,7,2,2,experience
+Travel by myself,diy,2900,945,È¥ÀÚ ¿©ÇàÇÏ±â,°¡»êµ¿,gps,8,1,7,challenge
+Go on a road trip,travel,2200,461,·ÎµåÆ®¸³ ¶°³ª±â,Road,object,9,2,7,challenge
+Learn Spanish,diy,2100,371,½ºÆäÀÎ¾î ¹è¿ì±â,Paper,object,10,2,7,growth
+Find a four leaf clover,diy,1800,806,³× ÀÙ Å¬·Î¹ö¸¦ Ã£±â,Flower,object,11,3,14,enjoy
+Learn to paint,diy,1700,303,±×¸² ¹è¿ì±â,Poster,object,12,2,7,growth
+Learn to Sew,diy,1600,361,¹Ù´ÀÁú ¹è¿ì±â,Skin,object,13,1,7,growth
+Go to Australia,travel,1400,174,È£ÁÖ ¿©ÇàÇÏ±â,¿À½ºÆ®·¹ÀÏ¸®¾Æ,gps,14,3,14,travel
+See a Shooting Star,diy,1300,668,º°¶Ëº° º¸±â,Star,object,15,2,14,experience
+Take a cooking class,diy,1100,142,¿ä¸® ¹è¿ì±â,Food,object,16,2,7,growth
+Write a novel,diy,1000,47,¼Ò¼³À» ¾²±â,Paper,object,17,2,7,challenge
+Go to a shooting range,diy,987,296,»ç°ÝÀå °¡º¸±â,Sports,object,18,2,3,experience
+Learn Programming,diy,900,174,ÇÁ·Î±×·¡¹Ö Ã¼ÇèÇØº¸±â,Computer,object,19,1,2,growth
+Build my own mini library,diy,889,67,³ª¸¸ÀÇ ÀÛÀº µµ¼­°ü ¸¸µé±â,Shelf,object,20,2,14,challenge
+Watch the sunset,diy,873,537,ÀÏ¸ô º¸±â,Sunset,object,21,1,2,experience
+Grow an abundant herb garden,diy,871,26,³ª¸¸ÀÇ Á¤¿ø °¡²Ù±â,Garden,object,22,2,7,challenge
+Start a Blog,diy,807,343,ºí·Î±× ½ÃÀÛÇÏ±â,Computer,object,23,1,2,challenge
+Solve a Rubix-Cube,diy,694,265,·çºò½º Å¥ºê ÇØº¸±â,Toy,object,24,1,2,enjoy
+Bungee Jumping,entertainment,625,81,¹øÁöÁ¡ÇÁ ÇØº¸±â,Sky,object,25,2,7,challenge
+Start my own business,diy,604,82,Ã¢¾÷ ÇØº¸±â,Room,object,26,3,14,growth
+Donate my hair,diy,552,234,¸Ó¸®Ä«¶ô ±âºÎÇØº¸±â,Hair,object,27,2,14,experience
+Bake a cake,diy,550,389,ÄÉÀÌÅ© ¸¸µé±â,Cake,object,28,1,2,enjoy
+Get my drivers license,diy,513,137,¿îÀü¸éÇãÁõ ¹Þ±â,Mobile phone,object,29,2,14,growth
+Make a YouTube video,diy,507,130,À¯Æ©ºê µ¿¿µ»ó ¸¸µé±â,Flag,object,30,2,7,challenge
+Take a jumping picture,diy,477,217,Á¡ÇÁ »çÁø Âï±â,Fun,object,31,1,2,enjoy
+Build a snowman,diy,428,170,´«»ç¶÷À» ¸¸µé´Ù.,Bird,object,32,1,2,enjoy
+Buy my own car,diy,378,133,³» ÀÚµ¿Â÷ ±¸ÀÔÇÏ±â,Car,object,33,3,14,growth
+Hold an Owl,diy,324,64,¿Ã»©¹Ì Àâ±â,Bird,object,34,3,14,enjoy
+Make a time capsule,diy,291,19,Å¸ÀÓÄ¸½¶ ¸¸µé±â,Vehicle,object,35,1,2,enjoy
+Learn to use chopsticks,diy,233,108,Á£°¡¶ô »ç¿ë¹ý ¹è¿ì±â,Vehicle,object,36,1,7,growth
+Get a college degree,diy,233,46,´ëÇÐ ÇÐÀ§¸¦ µû±â,Paper,object,37,3,14,growth
+Try oysters,diy,217,121,±¼ ¸Ô¾îº¸±â,Food,object,38,1,2,experience
+Go to a Fancy Dress Party,diy,214,86,µå·¹½º ÆÄÆ¼¿¡ °¡º¸±â,Dress,object,39,2,7,enjoy
+Fold 1000 paper cranes,diy,205,15,Á¾ÀÌ ÇÐ 1000°³ Á¢±â,Paper,object,40,2,14,challenge
+Climb a tree,diy,188,62,³ª¹«¿¡ ¿À¸£±â,Plant,object,41,1,2,experience
+Learn to Crochet,diy,184,47,ÄÚ¹Ù´Ã ¶ß°³Áú ¹è¿ì±â,Skin,object,42,1,2,challenge
+Take a dance class,diy,184,36,Ãã ¹è¿ì±â,Dance,object,43,2,7,challenge
+Carve a pumpkin for halloween,diy,163,81,ÇÒ·ÎÀ© È£¹Ú Á¶°¢ÇÏ±â,Vegetable,object,44,2,7,enjoy
+Own a Cat,diy,159,59,°í¾çÀÌ Å°¿ì±â,Cat,object,45,2,7,challenge
+Become an Early Riser,diy,145,22,7½Ã¿¡ ÀÏ¾î³ª±â,7:00 AM,text,46,1,2,growth
+Build A Computer,diy,138,58,³» ÄÄÇ»ÅÍ Á¶¸³ÇÏ±â,Computer,object,47,2,7,experience
+Learn to dive,diy,130,28,´ÙÀÌºù ¹è¿ì±â,Leisure,object,48,2,7,challenge
+Ride on an Elephant,diy,122,25,ÄÚ³¢¸® Å¸±â,Safari,object,49,2,7,experience
+Make tiramisu,diy,113,27,Æ¼¶ó¹Ì¼ö ¸¸µé±â,Cake,object,50,1,2,enjoy
+Join a gym,diy,110,49,Çï½ºÀå µî·ÏÇÏ±â,Metal,object,51,2,5,challenge
+Make a kite and fly it,diy,108,33,¿¬ ³¯¸®±â,Flag,object,52,2,5,experience
+Dye my hair,diy,106,37,³» ¸Ó¸® ¿°»öÇÏ±â,Hair,object,53,1,5,experience
+Complete a scrapbook,diy,105,12,½ºÅ©·¦ºÏ ÀÛ¼ºÇÏ±â,Paper,object,54,2,5,challenge
+Learn to Make Homemade Pasta,diy,27,10,Á÷Á¢ ÆÄ½ºÅ¸ ¸¸µé±â,Food,object,55,1,2,enjoy
+Celebrate Holi in India,entertainment,3900,41,ÀÎµµÀÇ È¦¸® ÃàÁ¦ °¡º¸±â,ÀÎµµ,gps,56,3,14,travel
+Ride a Unicycle,entertainment,1100,134,¿Ü¹ßÀÚÀü°Å Å¸±â,Bicycle,object,57,2,7,experience
+Go to disneyworld,entertainment,1000,320,Ä¶¸®Æ÷´Ï¾Æ µðÁî´Ï¿ùµå¿¡ °¡±â,Ä¶¸®Æ÷´Ï¾Æ,gps,58,3,14,enjoy
+Drink wine in Italy,entertainment,786,238,ÀÌÅ»¸®¾Æ¿¡¼­ ¿ÍÀÎÀ» ¸¶½Ã±â,ÀÌÅ»¸®¾Æ,gps,59,3,14,travel
+Visit Versailles,entertainment,326,136,º£¸£»çÀ¯ °¡º¸±â,Versailles,gps,60,3,14,travel
+See A Broadway Play,entertainment,296,802,ºê·Îµå¿þÀÌ ¿¬±Ø º¸±â,Chicago,gps,61,2,7,experience
+Go to a nude beach,entertainment,226,30,´©µåºñÄ¡ °¡º¸±â,Skin,object,62,3,7,enjoy
+Go to a jazz bar,entertainment,195,40,ÀçÁî¹Ù °¡º¸±â.,Event,object,63,2,7,experience
+Eat gelato in Italy,entertainment,190,91,ÀÌÅ»¸®¾Æ¿¡¼­ Á©¶ó¶Ç ¸Ô±â,ÀÌÅ»¸®¾Æ,gps,64,3,14,enjoy
+Make a kite and fly it,entertainment,108,33,¿¬ ³¯¸®±â,Flag,object,65,1,5,experience
+"Eat ""Chinese"" Food in China",food,300,121,"Áß±¹¿¡¼­ ""Áß±¹"" À½½Ä ¸Ô±â",Áß±¹,gps,66,3,14,experience
+Take Pole Dancing Classes,health,4400,756,Æú´í½º ¼ö¾÷ µè±â,Dance,object,67,2,7,challenge
+Complete a half marathon,health,1800,290,ÇÏÇÁ ¸¶¶óÅæ ¿ÏÁÖÇÏ±â,Marathon,object,68,2,14,challenge
+Take a Bellydancing Classes,health,1400,75,º§¸®´í½º ¼ö¾÷ µè±â,Dance,object,69,2,7,challenge
+Walk on the Great Wall of China,hiking,9400,574,¸¸¸®Àå¼º °È±â,Áß±¹,gps,70,3,14,travel
+Trek the Inca Trail,hiking,3600,95,À×Ä«»êÃ¥·Î °È±â,Æä·ç,gps,71,3,14,travel
+Visit hawaii,hiking,3300,519,ÇÏ¿ÍÀÌ ¿©ÇàÇÏ±â,¹Ì±¹,gps,72,3,14,travel
+Visit the Grand Canyon,hiking,2300,507,±×·£µå Ä³´Ï¾ð °¡º¸±â,¹Ì±¹,gps,73,3,14,travel
+Visit the Blue mountains in Australia!,hiking,2300,188,È£ÁÖÀÇ ºí·ç ¸¶¿îÆ¾ °¡º¸±â,¿À½ºÆ®·¹ÀÏ¸®¾Æ,gps,74,3,14,travel
+Visit Machu Picchu,hiking,2100,122,¸¶ÃßÇÈÃß °¡º¸±â,Æä·ç,gps,75,3,14,travel
+Go to Antarctica,hiking,2000,20,³²±Ø¿¡ °¡º¸±â,½º¹ß¹Ù¸£,gps,76,3,14,travel
+Own a dog,hiking,1400,632,°­¾ÆÁö Å°¿ì±â.,Dog,object,77,2,7,challenge
+Visit San Fransico,hiking,1400,584,»÷ÇÁ¶õ½Ã½ºÄÚ ¿©ÇàÇÏ±â,¹Ì±¹,gps,78,3,14,travel
+Hike for at least 20km,hiking,1400,135,20km ÀÌ»ó ÇÏÀÌÅ· µµÀüÇÏ±â,Leisure,object,79,2,14,challenge
+See a Shooting Star,hiking,1300,668,º°¶Ëº° º¸±â,Star,object,80,3,14,experience
+Visit Prague,hiking,1200,413,ÇÁ¶óÇÏ ¿©ÇàÇÏ±â,Ã¼ÄÚ,gps,81,3,14,travel
+Visit the Leaning Tower of Pisa,hiking,1200,332,ÇÇ»çÀÇ »çÅ¾ »çÁøÂï±â,Tower,object,82,3,14,travel
+Visit Canada,hiking,1100,258,Ä³³ª´Ù ¿©ÇàÇÏ±â,Ä³³ª´Ù,gps,83,3,14,travel
+Hike/Climb Kilimanjaro,hiking,997,29,Å³¸®¸¸ÀÚ·Î °¡º¸±â,ÅºÀÚ´Ï¾Æ,gps,84,3,14,challenge
+"Visit Petra, Jordan",hiking,945,87,¿ä¸£´Ü ÆäÆ®¶ó °¡º¸±â,¿ä¸£´Ü,gps,85,3,14,travel
+Visit LA,hiking,909,321,LA ¿©ÇàÇÏ±â,¹Ì±¹,gps,86,3,14,travel
+Visit Croatia,hiking,809,223,Å©·Î¾ÆÆ¼¾Æ ¿©ÇàÇÏ±â,Å©·Î¾ÆÆ¼¾Æ,gps,87,3,14,travel
+Visit Morocco,hiking,779,153,¸ð·ÎÄÚ ¿©ÇàÇÏ±â,¸ð·ÎÄÚ,gps,88,3,14,travel
+Go horseback riding,hiking,668,218,½Â¸¶ Ã¼ÇèÇØº¸±â,Horse,object,89,2,7,experience
+Zipline,hiking,412,128,Áý¶óÀÎ Ã¼ÇèÇÏ±â,Leisure,object,90,2,7,challenge
+Travel to New Zealand,hiking,353,36,´ºÁú·£µå ¿©ÇàÇÏ±â,´ºÁú·£µå,gps,91,3,14,travel
+Go canoeing,hiking,294,133,Ä«´© Å¸±â,Canoe,object,92,2,7,experience
+Walk the Golden Gate bridge,hiking,237,53,±Ý¹®±³ °È±â,¹Ì±¹,gps,93,3,14,experience
+Visit yellowstone,hiking,231,31,¿»·Î½ºÅæ °¡º¸±â,¹Ì±¹,gps,94,3,14,travel
+Visit Yosemite National Park,hiking,216,40,¿ä¼¼¹ÌÆ¼ ±¹¸³°ø¿ø °¡º¸±â,Ä¶¸®Æ÷´Ï¾Æ,gps,95,3,14,travel
+Put My Feet in the Ocean,hiking,196,201,¹Ù´å¹°¿¡ ¹ß ´ã±¸±â,Skin,object,96,1,7,experience
+Travel to Iceland,hiking,186,15,¾ÆÀÌ½½¶õµå ¿©ÇàÇÏ±â,¾ÆÀÌ½½¶õµå,object,97,3,14,travel
+Visit the Pyramids,travel,3000,513,ÇÇ¶ó¹Ìµå »çÁøÂï±â,Desert,object,98,3,14,travel
+Go to Spain,travel,1900,550,½ºÆäÀÎ ¿©ÇàÇÏ±â,½ºÆäÀÎ,gps,99,3,14,travel
+Get my first car!,travel,1100,156,³» Ã¹ Â÷ »ç±â,car,object,100,3,14,growth
+Visit Vatican city,travel,938,238,¹ÙÆ¼Ä­ ½ÃÆ¼ °¡º¸±â,¹ÙÆ¼Ä­,gps,101,3,14,travel
+Visit the 9-11 Memorial (Ground Zero),travel,782,332,9-11 ±â³ä°ü °¡º¸±â,09¿ù 11ÀÏ,gps,102,3,14,travel
+Visit amsterdam,travel,778,579,¾Ï½ºÅ×¸£´ã °¡º¸±â,Amsterdam,gps,103,3,14,travel
+Go to Venice,travel,544,15,º£´Ï½º ¿©ÇàÇÏ±â,ÀÌÅ»¸®¾Æ,gps,104,3,14,travel
+"Visit Vienna, Austria",travel,241,584,¿À½ºÆ®¸®¾Æ ºñ¿£³ª °¡º¸±â,¿À½ºÆ®¸®¾Æ,gps,105,3,14,travel
+Make a bucket list,travel,204,50,¹öÅ¶ ¸®½ºÆ® ¸¸µé±â,Paper,object,106,1,5,growth
+Visit Istanbul,travel,164,35,ÀÌ½ºÅººÒ ¿©ÇàÇÏ±â,ÅÍÅ°,gps,107,3,14,travel
+Buy a house,life_milestone,4300,510,Áý Àå¸¸ÇÏ±â,Building,object,108,3,14,growth
+Have Children,life_milestone,4200,510,ºÎ¸ð°¡ µÇ¾îº¸±â,Baby,object,109,3,14,growth
+Swim with sharks,life_milestone,3800,538,»ó¾î¿Í ÇÔ²² ¼ö¿µÇÏ±â,Aquarium,object,110,3,14,challenge
+Own my dream house,life_milestone,3800,33,³» ²ÞÀÇ ÁýÀ» ¼ÒÀ¯ÇÏ±â,Building,object,111,3,14,growth
+Volunteer abroad,life_milestone,3400,591,ÇØ¿ÜºÀ»ç,Event,object,112,3,14,growth
+Go on a Romantic Camping Trip,life_milestone,1800,46,Ä·ÇÎ°¡¼­ ¸ð´ÚºÒ »çÁøÂï±â,Fire,object,113,2,7,enjoy
+Wear a snake around my neck,life_milestone,1500,851,³» ¸ñ¿¡ ¹ì µÎ¸£±â,Insect,object,114,2,5,enjoy
+Dye my hair,life_milestone,1500,646,³» ¸Ó¸®¸¦ ¿°»öÇØ¶ó.,Hair,object,115,1,5,experience
+Climb a mountain,life_milestone,1500,311,µî»ê ÇØº¸±â,Mountain,object,116,1,3,experience
+Own a dog,life_milestone,1400,632,°­¾ÆÁö Å°¿ì±â.,Dog,object,117,2,7,challenge
+Write a novel,life_milestone,1000,47,¼Ò¼³À» ¾²´Ù.,Paper,object,118,2,7,challenge
+Hold a koala,life_milestone,917,119,ÄÚ¾Ë¶ó º¸±â,Dog,object,119,2,7,enjoy
+Pass my driving test,life_milestone,911,429,¿îÀü¸éÇã µû±â,Mobile phone,text,120,2,14,challenge
+Visit LA,life_milestone,909,321,LA ¿©ÇàÇÏ±â,¹Ì±¹,gps,121,3,14,travel
+Attend an opera,life_milestone,898,157,¿ÀÆä¶ó¿¡ º¸±â,Event,object,122,3,14,enjoy
+Start a Blog,life_milestone,807,343,ºí·Î±× ½ÃÀÛ,Computer,object,123,1,2,experience
+Learn japanese,life_milestone,538,16,ÀÏº»¾î¸¦ ¹è¿ì±â,Paper,object,124,2,7,challenge
+Become a mother,life_milestone,509,113,ºÎ¸ð°¡ µÇ±â,Baby,object,125,3,14,growth
+See a lunar eclipse,life_milestone,497,220,¿ù½Ä º¸±â,Moon,object,126,3,14,experience
+Swim with the Dolphins,life_milestone,470,93,µ¹°í·¡¿Í ÇÔ²² ¼ö¿µÇÏ±â,Aquarium,object,127,3,14,experience
+Run a full Marathon,life_milestone,334,33,¸¶¶óÅæ ·¯´×À¸·Î ¿ÏÁÖÇÏ±â,Marathon,text,128,3,14,challenge
+Learn how to ride a horse,life_milestone,277,74,¸» Å¸´Â ¹ý ¹è¿ì±â,Horse,object,129,2,7,challenge
+Drive a Ferrari,life_milestone,259,19,Æä¶ó¸® ¿îÀüÇØº¸±â,Road,object,130,3,7,experience
+Run with the bulls,life_milestone,255,14,È²¼Òµé°ú ÇÔ²² ´Þ·Á¶ó.,Bull,object,131,3,7,experience
+Adopt a cat,life_milestone,209,87,°í¾çÀÌ ÀÔ¾çÇÏ±â.,Cat,object,132,2,7,challenge
+Go to China,life_milestone,205,35,Áß±¹ ¿©ÇàÇÏ±â,Áß±¹,object,133,3,14,travel
+Find out my blood type,life_milestone,203,61,³ªÀÇ Ç÷¾×Çü ¾Ë¾Æº¸±â,"a,b,o,ab",text,134,1,2,experience
+LIve in New York,life_milestone,198,22,´º¿å¿¡¼­ »ì¾Æº¸±â,¹Ì±¹,gps,135,3,14,experience
+Own a Cat,life_milestone,159,59,°í¾çÀÌ ±â¸£±â,Cat,object,136,2,7,challenge
+Get my passport,life_milestone,156,51,¿©±Ç ¸¸µé±â,Paper,object,137,1,7,growth
+Take An I.Q. Test,life_milestone,115,42,¾ÆÀÌÅ¥ Å×½ºÆ® ÇØº¸±â,number,text,138,1,2,experience
+Own a dog,love,1400,195,°­¾Æ±â Å°¿ì±â,Dog,object,139,2,7,challenge
+Go to Australia,love,1400,49,È£ÁÖ ¿©ÇàÇÏ±â,¿À½ºÆ®·¹ÀÏ¸®¾Æ,object,140,3,14,travel
+Learn how to ride a bike,love,1100,134,ÀÚÀü°Å Å¸´Â ¹ý ¹è¿ì±â,Bicycle,object,141,2,7,challenge
+"Visit Paris, France",love,964,584,ÇÁ¶û½º ÆÄ¸® ¿©ÇàÇÏ±â,ÇÁ¶û½º,gps,142,3,14,travel
+See fireflies,love,174,174,¹Ýµ÷ºÒ º¸±â,Insect,object,143,2,7,experience
+See Eiffel Tower in the winter,love,155,101,¿¡ÆçÅ¾ »çÁøÂï±â,Tower,object,144,3,14,travel
+See the Northern Lights (Aurora Borealis),nature,17000,658,ºÏ±Ø±¤ º¸±â(¿À·Î¶ó º¸·¹¾Ë¸®½º),aurora,object,145,3,14,travel
+Go on an African safari,nature,9400,846,¾ÆÇÁ¸®Ä« »çÆÄ¸® °¡º¸±â,¾ÆÇÁ¸®Ä«,gps,146,3,14,travel
+Visit Argentinas Iguazu Falls,nature,4100,257,¾Æ¸£ÇîÆ¼³ª ÀÌ°ú¼ö ÆøÆ÷ °¡º¸±â,¾Æ¸£ÇîÆ¼³ª,gps,147,3,14,travel
+Go Whale Watching,nature,3300,914,°í·¡¸¦ º¸±â,Aquarium,object,148,2,7,experience
+Plant a Tree,nature,2400,567,³ª¹« ½É±â,Plant,object,149,2,7,growth
+Feed a giraffe,nature,2100,892,±â¸°¿¡°Ô ¸ÔÀÌ¸¦ ÁÖ±â,Safari,object,150,2,7,experience
+Stand on the equator,nature,2100,140,Àûµµ¿¡ ¼­º¸±â,Àûµµ,gps,151,3,14,experience
+ Go to Antarctica,nature,2000,20,³²±Ø¿¡ °¡º¸±â,³²±Ø,gps,152,3,14,travel
+Find a four leaf clover,nature,1800,806,³× ÀÙ Å¬·Î¹ö¸¦ Ã£¾Æ¶ó.,Flower,object,153,3,14,experience
+Go kayaking,nature,1400,755,Ä«¾à Å¸±â,Kayak,object,154,2,7,enjoy
+Visit the Galapagos Islands,nature,946,33,°¥¶óÆÄ°í½º Á¦µµ °¡º¸±â,¿¡Äâµµ¸£,gps,155,3,14,travel
+Watch the sunset,nature,873,537,ÀÏ¸ô º¸±â,Sunset,object,156,3,14,experience
+Capture lightning in a photograph,nature,832,123,¹ø°³ »çÁø Âï±â,Lightning,object,157,3,14,enjoy
+Visit Morocco,nature,779,153,¸ð·ÎÄÚ °¡º¸±â,¸ð·ÎÄÚ,gps,158,3,14,travel
+Swim with a sea turtle,nature,630,172,¹Ù´Ù°ÅºÏÀÌ¿Í ¼ö¿µÇÏ±â,Aquarium,object,159,3,14,experience
+Visit Alaska,nature,617,49,¾Ë·¡½ºÄ« ¿©ÇàÇÏ±â,¹Ì±¹,gps,160,3,14,travel
+Swim with whale sharks,nature,563,85,°í·¡»ó¾î¿Í ¼ö¿µÇÏ±â,Aquarium,object,161,3,14,experience
+Visit Scotland,nature,535,97,½ºÄÚÆ²·£µå ¿©ÇàÇÏ±â,½ºÄÚÆ²·£µå,gps,162,3,14,travel
+Visit Niagra Falls,nature,524,96,³ªÀÌ¾Æ±×¶ó ÆøÆ÷ °¡º¸±â,Ä³³ª´Ù,gps,163,3,14,travel
+See a lunar eclipse,nature,497,220,¿ù½Ä º¸±â,Moon,object,164,3,14,experience
+Visit the Maldives,nature,485,27,¸ôµðºê °¡º¸±â,ÀÎµµ,gps,165,3,14,travel
+See the tulips in Holland,nature,451,86,³×´ú¶õµå¿¡¼­ Æ«¸³À» »çÁøÂï±â,Flower,object,166,3,14,travel
+Hold a Tarantula,nature,337,127,Å¸¶õÆ«¶ó Àâ±â,Insect,object,167,3,14,experience
+Swim in the Blue Lagoon in Iceland,nature,269,25,¾ÆÀÌ½½¶õµåÀÇ Çª¸¥ ¶ó±º¿¡¼­ ¼ö¿µÇÏ±â,¾ÆÀÌ½½¶õµå,gps,168,3,14,travel
+Try oysters,nature,217,121,±¼À» ¸Ô¾îº¸±â,Food,object,169,1,2,experience
+Build an igloo,nature,204,27,ÀÌ±Û·ç¸¦ °Ç¼³ÇÏ±â,Room,object,170,2,5,experience
+See a solar eclipse,nature,197,48,ÀÏ½Ä º¸±â,Moon,object,171,3,14,experience
+Make a snowman,nature,192,77,´«»ç¶÷ ¸¸µé±â,Bird,object,172,1,2,enjoy
+Watch a sunrise,nature,191,52,ÀÏÃâ º¸±â,Sunset,object,173,1,2,experience
+Learn to ride a motorcycle,new_skill,7100,779,¿ÀÅä¹ÙÀÌ Å¸´Â ¹ý ¹è¿ì±â,Motorcycle,object,174,2,7,challenge
+Learn to Surf,new_skill,6800,800,¼­ÇÎ ¹è¿ì±â,Surfing,object,175,2,7,experience
+Learn how to play guitar,new_skill,3500,882,±âÅ¸ Ä¡´Â ¹ý ¹è¿ì±â,Musical instrument,object,176,1,7,challenge
+Learn sign language,new_skill,3200,211,¼öÈ­ ¹è¿ì±â,Hand,object,177,2,7,challenge
+Ride an Elephant in Thailand,new_skill,3000,578,ÅÂ±¹¿¡¼­ ÄÚ³¢¸® Å¸±â,ÅÂ±¹,gps,178,3,14,travel
+Learn how to play the piano,new_skill,2500,602,ÇÇ¾Æ³ë Ä¡´Â ¹ý ¹è¿ì±â,Piano,object,179,1,7,challenge
+Visit Las Vegas,new_skill,1000,306,¶ó½ºº£ÀÌ°Å½º ¿©ÇàÇÏ±â,¹Ì±¹,gps,180,3,14,travel
+Make a YouTube video,new_skill,507,130,À¯Æ©ºê µ¿¿µ»ó ¸¸µé±â,Flag,object,181,2,7,experience
+Travel to London,new_skill,431,222,·±´ø ¿©ÇàÇÏ±â,¿µ±¹,gps,182,3,14,travel
+Learn to speak french,new_skill,359,22,ÇÁ¶û½º¾î¸¦ ¹è¿ì±â,Paper,object,183,2,7,challenge
+Learn to play the Violin,new_skill,269,36,¹ÙÀÌ¿Ã¸° ¿¬ÁÖ ÇÏ±â,Musical instrument,object,184,2,7,challenge
+Try Fencing,new_skill,190,25,Ææ½Ì µµÀüÇÏ±â,Sports,object,185,2,7,challenge
+Learn how to Longboard,new_skill,143,24,·Õº¸µå Å¸´Â ¹æ¹ý ¾Ë¾Æº¸±â,Skateboard,object,186,2,7,challenge
+Float in the Dead Sea,outdoor,14000,806,»çÇØ °¡±â,ÀÌ½º¶ó¿¤,gps,187,3,14,travel
+Go Snowboarding,outdoor,1200,381,½º³ëº¸µå Å¸·¯ °¡±â,Sports,object,188,2,7,experience
+See Mount Rushmore,outdoor,866,156,·¯½Ã¸ð¾î »ê °¡º¸±â,¹Ì±¹,gps,189,3,14,travel
+Learn to Ski,outdoor,841,234,½ºÅ° ¹è¿ì±â,Leisure,object,190,2,7,challenge
+Ride a dune buggy in the desert,outdoor,583,49,»ç¸·¿¡¼­ µÐ¹ö±â Å¸±â,Vehicle,object,191,3,14,experience
+Go jet skiing,outdoor,370,109,Á¦Æ®½ºÅ° Å¸º¸±â,Boat,object,192,2,7,experience
+Go to glastonbury festival,outdoor,287,36,±Û·¡½ºÅæº£¸® ÃàÁ¦ °¡º¸±â,¿µ±¹,object,193,3,14,enjoy
+Go on the London Eye,outdoor,255,127,·±´ø¾ÆÀÌ¿¡ °¡º¸±â,¿µ±¹,gps,194,3,14,travel
+Go to Fiji,outdoor,189,16,ÇÇÁö ¿©ÇàÇÏ±â,ÇÇÁö,gps,195,3,14,travel
+Visit Redwood National Park,outdoor,135,12,·¹µå¿ìµå ±¹¸³°ø¿ø °¡º¸±â,Ä¶¸®Æ÷´Ï¾Æ,gps,196,3,14,travel
+Ice skate,outdoor,129,70,¾ÆÀÌ½º ½ºÄÉÀÌÆ®ÇÏ±â,Shoe,object,197,1,7,experience
+Have a Bonfire,outdoor,120,31,¸ð´ÚºÒÀ» ÇÇ¿ì±â,Fire,object,198,1,5,enjoy
+Do yoga,sports,1900,471,¿ä°¡¸¦ ÇÏ´Ù,Sitting,object,199,2,7,experience
+Drive a race car,sports,171,484,°æÁÖ¿ë ÀÚµ¿Â÷ ¿îÀü,Car,object,200,3,14,experience
+Jump out of a plane,sports,128,33,°í°ø³«ÇÏ µµÀüÇÏ±â,Sky,object,201,3,14,challenge
+Buy A Boat,sports,108,102,³ª¸¸ÀÇ º¸Æ® ±¸ÀÔÇÏ±â,Boat,object,202,3,14,challenge
+Swim The Great Barrier Reef,travel,6300,467,´ëº¸ÃÊ¿¡¼­ ¼ö¿µÇÏ±â,¿À½ºÆ®·¹ÀÏ¸®¾Æ,gps,203,3,14,experience
+See the Taj Mahal,travel,2500,257,Å¸Áö¸¶ÇÒ °¡º¸±â,¾Èµµ,gps,204,3,14,travel
+Visit Singapore,travel,2100,468,½Ì°¡Æ÷¸£ ¿©ÇàÇÏ±â,½Ì°¡Æ÷¸£,gps,205,3,14,travel
+Ride a Gondola in Venice,travel,2000,336,º£³×Ä¡¾Æ¿¡¼­ °ïµ¹¶ó Å¸±â,ÀÌÅ»¸®¾Æ,gps,206,3,14,experience
+Visit Switzerland,travel,1900,625,½ºÀ§½º ¿©ÇàÇÏ±â,½ºÀ§½º,gps,207,3,14,travel
+Visit Easter Island,travel,1100,14,ÀÌ½ºÅÍ ¼¶ °¡º¸±â,Ä¥·¹,gps,208,3,14,travel
+Visit New York City,travel,963,299,´º¿å ¿©ÇàÇÏ±â,¹Ì±¹,gps,209,3,14,travel
+Go to South America,travel,909,69,³²¾Æ¸Þ¸®Ä« ¿©ÇàÇÏ±â,³²¾Æ¸Þ¸®Ä«,gps,210,3,14,travel
+Go to a black sand beach,travel,608,148,°ËÀº ¸ð·¡»çÀå »çÁøÂï±â,Asphalt,object,211,3,14,travel
+Drink from a coconut,travel,604,243,ÄÚÄÚ³Ó ¸¶½Ã±â,Food,object,212,2,5,experience
+Visit Austria,travel,462,194,¿À½ºÆ®¸®¾Æ ¿©ÇàÇÏ±â,¿À½ºÆ®¸®¾Æ,gps,213,3,14,travel
+See the Mona Lisa,travel,410,175,¸ð³ª¸®ÀÚ »çÁøÂï±â,Smile,object,214,3,14,experience
+Visit Norway,travel,382,57,³ë¸£¿þÀÌ ¿©ÇàÇÏ±â,³ë¸£¿þÀÌ,gps,215,3,14,travel
+Visit Chicago,travel,257,76,½ÃÄ«°í ¿©ÇàÇÏ±â,Chicago,gps,216,3,14,travel
+Drive Down Route 66,travel,241,11,¹Ì±¹ 66¹ø ±¹µµ Â÷·Î ´Þ·Áº¸±â,¹Ì±¹,gps,217,3,14,challenge
+Visit South America,travel,213,19,³²¾Æ¸Þ¸®Ä« ¿©ÇàÇÏ±â,³²¾Æ¸Þ¸®Ä«,gps,218,3,14,travel
+Visit Israel,travel,193,19,ÀÌ½º¶ó¿¤ ¿©ÇàÇÏ±â,ÀÌ½º¶ó¿¤,gps,219,3,14,travel
+"Visit Rome, Italy",travel,187,50,ÀÌÅ»¸®¾Æ ·Î¸¶ °¡º¸±â,ÀÌÅ»¸®¾Æ,gps,220,3,14,travel
+See the Pope,travel,157,50,±³È²°ú ¼¿Ä«Âï±â,Smile,object,221,3,14,experience
+Visit Seattle,travel,143,36,½Ã¾ÖÆ² ¿©ÇàÇÏ±â,¹Ì±¹,gps,222,3,14,travel
