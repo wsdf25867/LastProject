@@ -201,7 +201,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
                                 @Override
                                 public void onClick(View view) {
-                                    Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ImageLabellingActivity.this, "제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
                                     String rating;
                                     rating = String.valueOf(rb.getRating());
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
@@ -384,10 +384,12 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             startActivity(intent1);
                                             finish();
                                         }
-                                    });break;
+                                    });
+                                    break;
                                 }else{
                                     Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
                                     myToast.show();
+                                    break;
                                 }
                             }
                         }
