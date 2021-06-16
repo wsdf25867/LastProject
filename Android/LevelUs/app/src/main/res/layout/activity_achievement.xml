@@ -43,7 +43,7 @@
         <RelativeLayout
             android:id="@+id/radar_chart"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:layout_below="@+id/page_header">
 
             <com.github.mikephil.charting.charts.RadarChart
@@ -53,12 +53,29 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/calendar_R"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/radar_chart">
 
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/radar_chart">
-
+            android:layout_below="@id/calendar_R">
+            <TextView
+                android:id="@+id/calendar_quest_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="완료한 퀘스트 이름"
+                android:textSize="30dp">
+            </TextView>
         </RelativeLayout>
     </RelativeLayout>
 

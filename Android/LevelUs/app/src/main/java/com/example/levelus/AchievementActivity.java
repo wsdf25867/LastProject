@@ -44,7 +44,6 @@ public class AchievementActivity extends AppCompatActivity {
     //firebase
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
-    private DatabaseReference qADatabaseRef = firebaseDatabase.getReference("quest");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -52,9 +51,6 @@ public class AchievementActivity extends AppCompatActivity {
     //xml
     private TextView back;
     private RadarChart chart;
-
-    private int difficulty; // 퀘스트 난이도
-    private int[] achievement_score; // 사용자 성취도
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +91,23 @@ public class AchievementActivity extends AppCompatActivity {
         dataSet.setDrawHighlightCircleEnabled(true);
 
 
+        ArrayList<RadarEntry> defdataVals = new ArrayList<>();
+        for(int i = 0; i<6; i++){
+            defdataVals.add(new RadarEntry(10));
+        }
+
+        RadarDataSet defdataSet = new RadarDataSet(defdataVals, "목표 성취도");
+        defdataSet.setColor(Color.parseColor("#A9BCF5"));
+        defdataSet.setDrawFilled(true);
+        defdataSet.setFillColor(Color.parseColor("#A9BCF5"));
+        defdataSet.setFillAlpha(50);
+        defdataSet.setLineWidth(2f);
+        defdataSet.setDrawHighlightCircleEnabled(true);
+
+
         RadarData data = new RadarData();
         data.addDataSet(dataSet);
+        data.addDataSet(defdataSet);
         String[] labels =  {"성장", "여행", "체험", "도전", "즐김", "의지"};
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
@@ -107,8 +118,15 @@ public class AchievementActivity extends AppCompatActivity {
     //차트 데이터 생성
     public ArrayList<RadarEntry> prepareData() {
         String uid = firebaseUser.getUid();
-        achievement_score = new int[6];
+
         ArrayList<RadarEntry> dataVals = new ArrayList<>();
+        for(int i = 0; i<6; i++){
+            dataVals.add(new RadarEntry(50));
+        }
+        for(int i = 0; i<6; i++){
+            dataVals.set(i, new RadarEntry(0));
+        }
+
         for(int i =0; i<= 222;i++){
             int quest_num = i;
             try{
@@ -120,19 +138,18 @@ public class AchievementActivity extends AppCompatActivity {
                             Log.d("dif",questlogInfo.getDifficulty());
                             Log.d("achieve",questlogInfo.getAchievement());
                             switch (questlogInfo.getAchievement()){
-                                case "growth" : achievement_score[0] += Integer.parseInt(questlogInfo.getDifficulty()); achievement_score[5]++; break;
-                                case "travel" : achievement_score[1] += Integer.parseInt(questlogInfo.getDifficulty()); achievement_score[5]++;break;
-                                case "experience" : achievement_score[2] += Integer.parseInt(questlogInfo.getDifficulty()); achievement_score[5]++;break;
-                                case "challenge" : achievement_score[3] += Integer.parseInt(questlogInfo.getDifficulty()); achievement_score[5]++;break;
-                                case "enjoy" : achievement_score[4] += Integer.parseInt(questlogInfo.getDifficulty()); achievement_score[5]++;break;
+                                case "growth" : dataVals.set(0, new RadarEntry(dataVals.get(0).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "travel" : dataVals.set(1, new RadarEntry(dataVals.get(1).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "experience" : dataVals.set(2, new RadarEntry(dataVals.get(2).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "challenge" : dataVals.set(3, new RadarEntry(dataVals.get(3).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "enjoy" : dataVals.set(4, new RadarEntry(dataVals.get(4).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
                                 default : break;
                             }
-                            Log.d("growth0",Integer.toString(achievement_score[0]));
-                            Log.d("growth1",Integer.toString(achievement_score[1]));
-                            Log.d("growth2",Integer.toString(achievement_score[2]));
-                            Log.d("growth3",Integer.toString(achievement_score[3]));
-                            Log.d("growth4",Integer.toString(achievement_score[4]));
-                            Log.d("growth5",Integer.toString(achievement_score[5]));
                         }catch(NullPointerException e){}
 
                     }
@@ -145,21 +162,8 @@ public class AchievementActivity extends AppCompatActivity {
             }catch(NullPointerException e){
                 System.out.println("없음");
             }
-                Log.d("growth0",Integer.toString(achievement_score[0]));
-                Log.d("growth1",Integer.toString(achievement_score[1]));
-                Log.d("growth2",Integer.toString(achievement_score[2]));
-                Log.d("growth3",Integer.toString(achievement_score[3]));
-                Log.d("growth4",Integer.toString(achievement_score[4]));
-                Log.d("growth5",Integer.toString(achievement_score[5]));
-                dataVals.add(new RadarEntry(achievement_score[0])); // 성장
-                dataVals.add(new RadarEntry(achievement_score[1])); // 여행
-                dataVals.add(new RadarEntry(achievement_score[2])); // 경험
-                dataVals.add(new RadarEntry(achievement_score[3])); // 도전
-                dataVals.add(new RadarEntry(achievement_score[4])); // 즐김
-                dataVals.add(new RadarEntry(achievement_score[5])); // 의지
+
             }
-
-
         return  dataVals;
     }
 }
