@@ -143,7 +143,7 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
                         iData.add(questlogInfo);
                         if (questlogInfo.getPeriod() != null) {
                             if (Long.parseLong(questlogInfo.getPeriod())-calDate(questlogInfo.getAccepted_date()) <= 1) {
-                                show();
+                                show(questlogInfo.getTitle_ko());
                             }
                         }
                     }
@@ -173,12 +173,12 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
     }
 
 
-    private void show() {
+    private void show(String title) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "default");
 
         builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentTitle("퀘스트");
-        builder.setContentText("진행중인 퀘스트가 하루 남았습니다");
+        builder.setContentTitle("LEVEL US");
+        builder.setContentText("진행중인 퀘스트 '"+title+"'가 하루 남았습니다");
 
 
         Intent intent = new Intent(getContext(), MyQuestFragment.class);

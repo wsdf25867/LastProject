@@ -21,39 +21,50 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LevelUs"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true"></service>
 
-
-        <activity android:name=".WebPractice"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".WebPractice2"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DeleteActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".EditActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ImageLabellingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoggedPages"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".WebPractice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebPractice2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeleteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ImageLabellingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoggedPages"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SignActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CompletedQuestActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AchievementActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
