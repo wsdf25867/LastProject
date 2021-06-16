@@ -43,7 +43,7 @@
         <RelativeLayout
             android:id="@+id/radar_chart"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="270dp"
             android:layout_below="@+id/page_header">
 
             <com.github.mikephil.charting.charts.RadarChart
@@ -59,12 +59,12 @@
             android:layout_height="300dp"
             android:layout_below="@+id/radar_chart">
 
-<!--            <com.prolificinteractive.materialcalendarview.MaterialCalendarView-->
-<!--                android:id="@+id/calendarView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:mcv_selectionColor="#00F"-->
-<!--                app:mcv_showOtherDates="all"/>-->
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mcv_selectionColor="#00F"
+                app:mcv_showOtherDates="all"/>
 
         </RelativeLayout>
         <RelativeLayout
