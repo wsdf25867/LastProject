@@ -430,12 +430,11 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-                                            FragmentManager fragmentManager = getSupportFragmentManager();
-                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                            EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
-                                            fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
-                                            fragmentTransaction.commit();
-                                            finish();
+
+                                            Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
+                                            intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                                            ImageLabellingActivity.this.getApplicationContext().startActivity(intent);
+                                            finishAffinity();
                                         }
                                     });
                                     break;
