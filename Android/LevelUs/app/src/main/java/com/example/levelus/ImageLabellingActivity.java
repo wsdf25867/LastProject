@@ -6,6 +6,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Context;
@@ -249,6 +251,11 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //해당 난이도에 따른 레벨 증가
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
+                                    FragmentManager fragmentManager = getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
+                                    fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
+                                    fragmentTransaction.commit();
                                     finish();
                                 }
                             });
@@ -423,6 +430,11 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
+                                            FragmentManager fragmentManager = getSupportFragmentManager();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
+                                            fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
+                                            fragmentTransaction.commit();
                                             finish();
                                         }
                                     });
