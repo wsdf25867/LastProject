@@ -36,10 +36,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+//import com.prolificinteractive.materialcalendarview.CalendarDay;
+//import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+//import com.prolificinteractive.materialcalendarview.DayViewFacade;
+//import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -59,7 +59,7 @@ public class AchievementActivity extends AppCompatActivity {
     private TextView back;
     private RadarChart chart;
 
-    private MaterialCalendarView materialCalendarView;
+    //private MaterialCalendarView materialCalendarView;
 
 
 
@@ -93,13 +93,13 @@ public class AchievementActivity extends AppCompatActivity {
 
         makeChart();
 
-        //캘린더
-        materialCalendarView = findViewById(R.id.calendarView);
-        materialCalendarView.setSelectedDate(CalendarDay.today());
-        materialCalendarView.addDecorators(
-                new SundayDecorator(),
-                new SaturdayDecorator()
-        );
+//        //캘린더
+//        materialCalendarView = findViewById(R.id.calendarView);
+//        materialCalendarView.setSelectedDate(CalendarDay.today());
+//        materialCalendarView.addDecorators(
+//                new SundayDecorator(),
+//                new SaturdayDecorator()
+//        );
     }
 
 
@@ -191,42 +191,42 @@ public class AchievementActivity extends AppCompatActivity {
     }
 }
 
-class SaturdayDecorator implements DayViewDecorator{
-    private final Calendar calendar = Calendar.getInstance();
-
-    public SaturdayDecorator(){
-
-    }
-
-    @Override
-    public boolean shouldDecorate(CalendarDay day){
-        day.copyTo(calendar);
-        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
-        return weekDay == Calendar.SATURDAY;
-    }
-
-    @Override
-    public void decorate(DayViewFacade view){
-        view.addSpan(new ForegroundColorSpan(Color.BLUE));
-    }
-}
-
-class SundayDecorator implements DayViewDecorator{
-    private final Calendar calendar = Calendar.getInstance();
-
-    public SundayDecorator(){
-
-    }
-
-    @Override
-    public boolean shouldDecorate(CalendarDay day){
-        day.copyTo(calendar);
-        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
-        return weekDay == Calendar.SUNDAY;
-    }
-
-    @Override
-    public void decorate(DayViewFacade view){
-        view.addSpan(new ForegroundColorSpan(Color.RED));
-    }
-}
+//class SaturdayDecorator implements DayViewDecorator{
+//    private final Calendar calendar = Calendar.getInstance();
+//
+//    public SaturdayDecorator(){
+//
+//    }
+//
+//    @Override
+//    public boolean shouldDecorate(CalendarDay day){
+//        day.copyTo(calendar);
+//        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+//        return weekDay == Calendar.SATURDAY;
+//    }
+//
+//    @Override
+//    public void decorate(DayViewFacade view){
+//        view.addSpan(new ForegroundColorSpan(Color.BLUE));
+//    }
+//}
+//
+//class SundayDecorator implements DayViewDecorator{
+//    private final Calendar calendar = Calendar.getInstance();
+//
+//    public SundayDecorator(){
+//
+//    }
+//
+//    @Override
+//    public boolean shouldDecorate(CalendarDay day){
+//        day.copyTo(calendar);
+//        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+//        return weekDay == Calendar.SUNDAY;
+//    }
+//
+//    @Override
+//    public void decorate(DayViewFacade view){
+//        view.addSpan(new ForegroundColorSpan(Color.RED));
+//    }
+//}
