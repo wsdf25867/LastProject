@@ -57,7 +57,7 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
     
     member = db.reference('/Level Us/UserAccount/' + uid).get()       #사용자 정보
     user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())  #추천 퀘스트 목록
-    rj_list = pd.DataFrame(db.reference('/rejected_list'/ + uid).get)      #거절 퀘스트 목록
+    rj_list = pd.DataFrame(db.reference('/rejected_list/' + uid).get)      #거절 퀘스트 목록
 
     toprate = 0
     quest_index = 0
