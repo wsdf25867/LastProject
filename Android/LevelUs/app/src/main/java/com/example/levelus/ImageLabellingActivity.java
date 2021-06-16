@@ -6,22 +6,27 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+<<<<<<< HEAD
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
+=======
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+>>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -50,12 +55,9 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,17 +69,24 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private Button captureImageBtn;                 //사진찍기
     private ImageView imageView;                    //찍은 이미지
     private TextView resultTv;                      //찍은 이미지의 텍스트
-    static final int REQUEST_IMAGE_CAPTURE = 1;     //찍은 사진 1장의 의미 인가?
+    static final int CAMERA_ACTION = 1;     //찍은 사진 1장의 의미 인가?
+    static final int GET_FROM_GALLERY = 2;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     Context context;
 
     private Bitmap imageBitmap; //인코딩된 이미지
+    private String mCurrentPhotoPath;
 
     //gps관련 (사진에서 말고 현재 위치 가져오는 방식임!)
     final static String TAG = "MSP03";
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     TextView logView;   //처음 받아오는 현재위치
     LocationManager lm;
+<<<<<<< HEAD
     Uri checkedPhotoUri;
+    String getUri;
+=======
+>>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
 
     TextView location2; //사진 찍으면 고정되는 현재위치
 
@@ -116,7 +125,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-    private StorageReference storageReference = firebaseStorage.getReference();
+<<<<<<< HEAD
+    private StorageReference storageReference = firebaseStorage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
+=======
+>>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
 
 
     //인식된 객체 배열
@@ -239,6 +251,8 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                             submit.setVisibility(View.VISIBLE);
                             //제출 버튼 클릭했을때
                             submit.setOnClickListener(new View.OnClickListener(){
+
+
                                 @Override
                                 public void onClick(View view) {
                                     Toast.makeText(ImageLabellingActivity.this, "제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
@@ -249,8 +263,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //퀘스트 종료 날짜
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
 
+<<<<<<< HEAD
                                     StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
-                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
+//                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
+                                    UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
                                     uploadTask.addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception exception) {
@@ -264,6 +280,8 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                         }
                                     });
 
+=======
+>>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
                                     //done증가
                                     String realDone = String.valueOf(Integer.valueOf(done)+1);
                                     mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
@@ -271,9 +289,17 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //해당 난이도에 따른 레벨 증가
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-                                    
+<<<<<<< HEAD
+
                                     Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                     startActivity(intent1);
+=======
+                                    FragmentManager fragmentManager = getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
+                                    fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
+                                    fragmentTransaction.commit();
+>>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
                                     finish();
                                 }
                             });
@@ -301,7 +327,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
             }
         });
-
+//        if(getUri!=null)
     }
 
     @Override
@@ -386,19 +412,53 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(takePictureIntent, 2);
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//            File photoFile = null;
+//
+//            try {
+//                //임시로 사용할 파일이므로 경로는 캐시폴더로
+//                File tempDir = getCacheDir();
+//
+//                //임시촬영파일 세팅
+//                String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
+//                String imageFileName = "Capture_" + timeStamp + "_"; //ex) Capture_20201206_
+//
+//                File tempImage = File.createTempFile(
+//                        imageFileName,  /* 파일이름 */
+//                        ".jpg",         /* 파일형식 */
+//                        tempDir      /* 경로 */
+//                );
+//
+//                // ACTION_VIEW 인텐트를 사용할 경로 (임시파일의 경로)
+//                mCurrentPhotoPath = tempImage.getAbsolutePath();
+//
+//                photoFile = tempImage;
+//
+//            } catch (IOException e) {
+//                //에러 로그는 이렇게 관리하는 편이 좋다.
+//                Log.w(TAG, "파일 생성 에러!", e);
+//            }
+//
+//            //파일이 정상적으로 생성되었다면 계속 진행
+//            if (photoFile != null) {
+//                //Uri 가져오기
+//                Uri photoURI = FileProvider.getUriForFile(this,
+//                        getPackageName() + ".fileprovider",
+//                        photoFile);
+//                //인텐트에 Uri담기
+//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+//            startActivityForResult(takePictureIntent, 2); && data != null && data.getData() != null
+                startActivityForResult(takePictureIntent, CAMERA_ACTION);
+//            }
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            checkedPhotoUri = data.getData();
             Bundle extras = data.getExtras();     //여기부터 아래 3줄이 원본 if바로 밑
             imageBitmap = (Bitmap) extras.get("data");  //Bitmap = 이미지를 인코딩 //얘네는 String 형태가 아님!
             imageView.setImageBitmap(imageBitmap);      //이미지 띄우기.    //이거로 하면 화질 많이 안좋음
+
 //            FirebaseVisionImage image;
             //                image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData());
             FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(imageBitmap);
@@ -439,7 +499,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     submit.setOnClickListener(new View.OnClickListener(){
                                         @Override
                                         public void onClick(View view) {
-                                            Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??
+                                            Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??
                                             String rating;
                                             rating = String.valueOf(rb.getRating());
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
@@ -448,9 +508,20 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-                                            Intent intent1 = new Intent(context, EditMyInfoFragment.class);
-                                            startActivity(intent1);
+<<<<<<< HEAD
+                                            FragmentManager fragmentManager = getSupportFragmentManager();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
+                                            fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
+                                            fragmentTransaction.commit();
                                             finish();
+=======
+
+                                            Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
+                                            intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                                            ImageLabellingActivity.this.getApplicationContext().startActivity(intent);
+                                            finishAffinity();
+>>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
                                         }
                                     });
                                     break;
@@ -467,19 +538,118 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     });
         }
     }
-
-
-//    public String getPath(Uri uri){
-//        String[] proj = {MediaStore.Images.Media.DATA};
-//        CursorLoader cursorLoader = new CursorLoader(ImageLabellingActivity.this, uri, proj, null, null, null);
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK){
+//            switch (requestCode){
+//                case CAMERA_ACTION:
+//                    getUri = data.getDataString();
+//                    Log.d("Uri", getUri);
+//                    checkedPhotoUri = data.getData();
+//                    Bundle extras = data.getExtras();     //여기부터 아래 3줄이 원본 if바로 밑
+//                    imageBitmap = (Bitmap) extras.get("data");  //Bitmap = 이미지를 인코딩 //얘네는 String 형태가 아님!
+//                    imageView.setImageBitmap(imageBitmap);      //이미지 띄우기.    //이거로 하면 화질 많이 안좋음
+//                    imageView.setImageURI(checkedPhotoUri);
+////            FirebaseVisionImage image;
+//                    //                image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData());
+//                    FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(imageBitmap);
+//                    FirebaseVisionImageLabeler labeler = FirebaseVision.getInstance()
+//                            .getOnDeviceImageLabeler();
+//                    labeler.processImage(firebaseVisionImage)
+//                            .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
+//                                @RequiresApi(api = Build.VERSION_CODES.P)
+//                                @Override
+//                                public void onSuccess(List<FirebaseVisionImageLabel> labels) {
+//                                    for (FirebaseVisionImageLabel label : labels) {
+//                                        String text = label.getText();
+//                                        String entityId = label.getEntityId();
+//                                        float confidence = label.getConfidence();
+//                                        resultTv.append(text + "    " + confidence + "\n");
+//                                        list.add(text);             //인식된 객체 텍스트 배열에 넣기
+//                                        System.out.println(text);
 //
-//        Cursor cursor = cursorLoader.loadInBackground();
-//        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//                                    }
+//                                    System.out.println(list);
 //
-//        cursor.moveToFirst();
+//                                    for(int i = 0; i<list.size(); i++){     //배열이랑 비교하여 keyword랑 같을 경우
+//                                        if(keyword.equals((String)list.get(i))){
+//                                            Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
+//                                            long now = System.currentTimeMillis();  //현재시간
+//                                            Date date = new Date(now);              //Date로 형변환
+//                                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       //원하는 시간형식으로 변환
 //
-//        return cursor.getString(index);
+//                                            String finished_date = dateFormat.format(date);
+//
+//                                            myToast.show();
+//
+//                                            RatingBar rb = requireViewById(R.id.rb);
+//                                            Button submit = requireViewById(R.id.submit);
+//                                            rb.setVisibility(View.VISIBLE);
+//                                            submit.setVisibility(View.VISIBLE);
+//
+//                                            submit.setOnClickListener(new View.OnClickListener(){
+//                                                @Override
+//                                                public void onClick(View view) {
+//                                                    Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??
+//                                                    String rating;
+//                                                    rating = String.valueOf(rb.getRating());
+//                                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
+//                                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+//                                                    String realDone = String.valueOf(Integer.valueOf(done)+1);
+//                                                    mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
+//                                                    String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
+//                                                    mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
+//                                                    Intent intent1 = new Intent(context, EditMyInfoFragment.class);
+//                                                    startActivity(intent1);
+//                                                    finish();
+//                                                }
+//                                            });
+//                                            break;
+//                                        }
+//                                    }
+//                                    Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
+//                                    myToast.show();
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                }
+//                            });
+//                    break;
+//                case GET_FROM_GALLERY:
+//                    if(data.getData()!=null){
+//                        try{
+//                            checkedPhotoUri = data.getData();
+//                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), checkedPhotoUri);
+////                            img1.setImageBitmap(bitmap);
+//                        }catch (Exception e){
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    break;
+//            }
+//        }
 //    }
+//    public void galleryAddPic(){
+//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        File f = new File(mCurrentPhotoPath);
+//        Uri contentUri = Uri.fromFile(f);
+//        mediaScanIntent.setData(contentUri);
+//        sendBroadcast(mediaScanIntent);
+//        Toast.makeText(this,"사진이 저장되었습니다",Toast.LENGTH_SHORT).show();
+//    }
+//    public void selectAlbum(){
+//        //앨범에서 이미지 가져옴
+//        //앨범 열기
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//        intent.setType("image/*");
+//        startActivityForResult(intent, GET_FROM_GALLERY);
+//    }
+
+
 
 
 }
