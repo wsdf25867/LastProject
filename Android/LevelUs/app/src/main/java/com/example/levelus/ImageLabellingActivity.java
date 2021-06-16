@@ -93,14 +93,18 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     String quest_num;
 
 
-    //db에서 받아오는 keyword
+    //db에서 받아오는 것들
     String keyword;
     String way;
+    String difficulty;
+    String done;
+    String level;
 
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef2 = firebaseDatabase.getReference("quest");
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
+    private DatabaseReference mDatabaseRef3 = firebaseDatabase.getReference("Level Us");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
@@ -162,6 +166,33 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             }
         });
 
+        //difficulty받아오기
+        mDatabaseRef2.child("ALL").child(quest_num).child("difficulty").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                difficulty = String.valueOf(task.getResult().getValue());
+                System.out.println("db에서 가져오는 difficulty : "+ difficulty);
+            }
+        });
+
+        //done받아오기
+        mDatabaseRef2.child("ALL").child(quest_num).child("done").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                done = String.valueOf(task.getResult().getValue());
+                System.out.println("db에서 가져오는 done : "+ done);
+            }
+        });
+
+        //사용자 level받아오기
+        mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                level = String.valueOf(task.getResult().getValue());
+                System.out.println("db에서 가져오는 level : "+ level);
+            }
+        });
+
 
 
         Geocoder g = new Geocoder(this);    //좌표 -> 주소  //gps검증하기
@@ -206,34 +237,19 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     Toast.makeText(ImageLabellingActivity.this, "제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
                                     String rating;
                                     rating = String.valueOf(rb.getRating());
+                                    //별점부여
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
+                                    //퀘스트 종료 날짜
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("difficulty").addChildEventListener(new ChildEventListener() {
-                                        @Override
-                                        public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
-                                        }
+                                    //done증가
+                                    String realDone = String.valueOf(Integer.valueOf(done)+1);
+                                    mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
 
-                                        @Override
-                                        public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                                    //해당 난이도에 따른 레벨 증가
+                                    String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
+                                    mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
 
-                                        }
-
-                                        @Override
-                                        public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
-                                        }
-
-                                        @Override
-                                        public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                                        }
-                                    });
                                     Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                     startActivity(intent1);
                                     finish();
@@ -406,18 +422,20 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             rating = String.valueOf(rb.getRating());
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+                                            String realDone = String.valueOf(Integer.valueOf(done)+1);
+                                            mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
+                                            String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
+                                            mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
                                             Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                             startActivity(intent1);
                                             finish();
                                         }
                                     });
                                     break;
-                                }else{
-                                    Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
-                                    myToast.show();
-                                    break;
                                 }
                             }
+                            Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
+                            myToast.show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
