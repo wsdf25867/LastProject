@@ -3,8 +3,10 @@ package com.example.levelus;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,10 +36,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AchievementActivity extends AppCompatActivity {
 
@@ -52,21 +59,16 @@ public class AchievementActivity extends AppCompatActivity {
     private TextView back;
     private RadarChart chart;
 
+    private MaterialCalendarView materialCalendarView;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievement);
-        chart = findViewById(R.id.chart1);
-
-        chart.setBackgroundColor(Color.rgb(255, 255, 255));
-        chart.getDescription().setEnabled(false);
-        chart.setWebLineWidth(1f);
-        chart.setWebColor(Color.LTGRAY);
-        chart.setWebLineWidthInner(1f);
-        chart.setWebColorInner(Color.LTGRAY);
-        chart.setWebAlpha(100);
-
-        makeChart();
 
         // Back 버튼
         back = (TextView) findViewById(R.id.back);
@@ -78,7 +80,28 @@ public class AchievementActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // 원형 차트
+        chart = findViewById(R.id.chart1);
+        chart.setBackgroundColor(Color.rgb(255, 255, 255));
+        chart.getDescription().setEnabled(false);
+        chart.setWebLineWidth(1f);
+        chart.setWebColor(Color.LTGRAY);
+        chart.setWebLineWidthInner(1f);
+        chart.setWebColorInner(Color.LTGRAY);
+        chart.setWebAlpha(100);
+
+        makeChart();
+
+        //캘린더
+        materialCalendarView = findViewById(R.id.calendarView);
+        materialCalendarView.setSelectedDate(CalendarDay.today());
+        materialCalendarView.addDecorators(
+                new SundayDecorator(),
+                new SaturdayDecorator()
+        );
     }
+
 
     //차트생성
     private void makeChart(){
@@ -165,5 +188,45 @@ public class AchievementActivity extends AppCompatActivity {
 
             }
         return  dataVals;
+    }
+}
+
+class SaturdayDecorator implements DayViewDecorator{
+    private final Calendar calendar = Calendar.getInstance();
+
+    public SaturdayDecorator(){
+
+    }
+
+    @Override
+    public boolean shouldDecorate(CalendarDay day){
+        day.copyTo(calendar);
+        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+        return weekDay == Calendar.SATURDAY;
+    }
+
+    @Override
+    public void decorate(DayViewFacade view){
+        view.addSpan(new ForegroundColorSpan(Color.BLUE));
+    }
+}
+
+class SundayDecorator implements DayViewDecorator{
+    private final Calendar calendar = Calendar.getInstance();
+
+    public SundayDecorator(){
+
+    }
+
+    @Override
+    public boolean shouldDecorate(CalendarDay day){
+        day.copyTo(calendar);
+        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+        return weekDay == Calendar.SUNDAY;
+    }
+
+    @Override
+    public void decorate(DayViewFacade view){
+        view.addSpan(new ForegroundColorSpan(Color.RED));
     }
 }

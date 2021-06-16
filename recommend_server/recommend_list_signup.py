@@ -108,9 +108,9 @@ def get_recommend_bucket_list_refresh(uid, df, user_log, category_c_sim, top=30)
     is_lv2 = (result['difficulty'] == "2")
     is_lv3 = (result['difficulty'] == "3") 
     
-    if member['level'] < 10 :
+    if int(member['level']) < 10 :
         result = result[is_lv1]
-    elif member['level'] < 20 :
+    elif int(member['level']) < 50 :
         result = pd.concat([result[is_lv1],result[is_lv2]])
     else :
         result = pd.concat([result[is_lv1],result[is_lv2],result[is_lv3]])
