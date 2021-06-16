@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -134,6 +135,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 
                         //여기서도 intent로 넘어가지가 않는다.
                         intent.putExtra("quest_num",quest_num);
+                        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
                         context.startActivity(intent);
                     }
 
@@ -153,6 +155,7 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
 
             }
         });
+
 
 
     }

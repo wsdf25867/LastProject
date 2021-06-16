@@ -249,9 +249,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //해당 난이도에 따른 레벨 증가
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-
-                                    Intent intent1 = new Intent(context, EditMyInfoFragment.class);
-                                    startActivity(intent1);
                                     finish();
                                 }
                             });
@@ -417,7 +414,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     submit.setOnClickListener(new View.OnClickListener(){
                                         @Override
                                         public void onClick(View view) {
-                                            Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??
+                                            Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??
                                             String rating;
                                             rating = String.valueOf(rb.getRating());
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
@@ -426,8 +423,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-                                            Intent intent1 = new Intent(context, EditMyInfoFragment.class);
-                                            startActivity(intent1);
                                             finish();
                                         }
                                     });
