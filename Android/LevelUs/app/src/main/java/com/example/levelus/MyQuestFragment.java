@@ -64,8 +64,10 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
     IngQuestAdapter iAdapter;
 
 
+
+
     public MyQuestFragment() {
-        // Required empty public constructor
+
     }
     // TODO: Rename and change types and number of parameters
 
@@ -73,6 +75,8 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         webPractice();
         getRecommendData();
@@ -100,6 +104,7 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
         recyclerView2.setAdapter(iAdapter);
+
 
         return v;
     }
@@ -132,7 +137,7 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
         rAdapter = new RecommendListAdapter(rData);
     }
 
-    public void getIngQuest() {
+        public void getIngQuest() {
         iRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -141,11 +146,6 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
                     QuestlogInfo questlogInfo = dataSnapshot.getValue(QuestlogInfo.class);
                     if (questlogInfo.getRating().equals("0")) {
                         iData.add(questlogInfo);
-                        if (questlogInfo.getPeriod() != null) {
-                            if (Long.parseLong(questlogInfo.getPeriod())-calDate(questlogInfo.getAccepted_date()) <= 1) {
-                                show(questlogInfo.getTitle_ko());
-                            }
-                        }
                     }
                 }
                 iAdapter.notifyDataSetChanged();
@@ -170,79 +170,5 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
     public void onAttach(Context context) {
         super.onAttach(context);
         ((LoggedPages) context).setOnKeyBackPressedListener(this::onBackKey);
-    }
-
-
-    private void show(String title) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "default");
-
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentTitle("LEVEL US");
-        builder.setContentText("진행중인 퀘스트 '"+title+"'가 하루 남았습니다");
-
-
-        Intent intent = new Intent(getContext(), MyQuestFragment.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-
-        builder.setContentIntent(pendingIntent);
-
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.ic_launcher);
-
-        builder.setLargeIcon(largeIcon);
-        builder.setColor(Color.BLACK);
-
-        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(getContext(),
-                RingtoneManager.TYPE_NOTIFICATION);
-
-        builder.setSound(ringtoneUri);
-
-        long[] vibrate = {0, 100, 200, 300};
-        builder.setVibrate(vibrate);
-        builder.setAutoCancel(true); //알림을 클릭하면 알림 없앰
-
-        NotificationManager manager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager.createNotificationChannel(new NotificationChannel("default", "기본 채널",
-                    NotificationManager.IMPORTANCE_DEFAULT));
-        }
-        manager.notify(1, builder.build());
-    }
-
-    public long calDate(String accepted_date) {
-        long calDateDays = 0;
-        // 현재 날짜 가져오기 (설정한 형식인 "yyyy-MM-dd HH:mm:ss" 대로 가져와진다.
-        // current = "2020-08-29 21:58:50";
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String current = format1.format(System.currentTimeMillis());
-
-
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); // 소문자mm으로 할 경우 분을 의미한다.
-
-            // current, last 두 날짜를 parse()를 통해 Date형으로 변환.
-            Date currentDate = format.parse(current);
-            Date acceptedDate = format.parse(accepted_date);
-
-            // Date로 변환된 두 날짜를 계산한 후, 리턴값으로 long type 변수를 초기화
-            // 연산의 결과 -950400000 long type 으로 return
-            long calDate = currentDate.getTime() - acceptedDate.getTime();
-
-            // getTime()은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환해준다.
-            // 24*60*60*1000(각 시간값에 따른 차이점) 을 나눠주면 일수가 나온다.
-            calDateDays = calDate / (24 * 60 * 60 * 1000);
-
-            calDateDays = Math.abs(calDateDays);
-
-            System.out.println("날짜 계산 결과 : " + calDateDays);
-        } catch (ParseException e) {
-            // 예외 처리
-        }
-
-
-        return calDateDays;
     }
 }
