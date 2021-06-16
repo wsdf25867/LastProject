@@ -10,15 +10,15 @@ public class UserAccount implements Comparable<UserAccount>{
     private String favorite;
     private String local;
 
-    private int level;
+    private String level;
 //    private int rank;
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
     public void setLevel(){
-        this.level = 0;
+        this.level = "0";
     }
 
     public String getIdToken() {
@@ -87,10 +87,10 @@ public class UserAccount implements Comparable<UserAccount>{
 
     @Override
     public int compareTo(UserAccount o) {
-        if (this.level < o.getLevel()) {
+        if (Integer.parseInt(this.level) < Integer.parseInt(o.getLevel())) {
             return 1;
         }
-        else if (this.level > o.getLevel()) {
+        else if (Integer.parseInt(this.level) > Integer.parseInt(o.getLevel())) {
             return -1;
         }
         return 0;

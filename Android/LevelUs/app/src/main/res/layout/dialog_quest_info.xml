@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="category : " />
+            android:text="카테고리 : " />
         <TextView
             android:id="@+id/category"
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="success_rate : " />
+            android:text="성공률 : " />
         <TextView
             android:id="@+id/success_rate"
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="check_way : " />
+            android:text="검증 방식 : " />
         <TextView
             android:id="@+id/check_way"
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="difficulty : " />
+            android:text="난이도 : " />
         <TextView
             android:id="@+id/difficulty"
             android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="period : " />
+            android:text="수행 기간 : " />
         <TextView
             android:id="@+id/period"
             android:layout_width="wrap_content"

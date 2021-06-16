@@ -1,13 +1,9 @@
 package com.example.levelus;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,7 +24,9 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +51,6 @@ public class AchievementActivity extends AppCompatActivity {
     //xml
     private TextView back;
     private RadarChart chart;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,20 +80,9 @@ public class AchievementActivity extends AppCompatActivity {
         });
     }
 
-    //차트 데이터 생성
-    private ArrayList<RadarEntry> dataValue(){
-        ArrayList<RadarEntry> dataVals = new ArrayList<>();
-        dataVals.add(new RadarEntry(80)); // 의지력
-        dataVals.add(new RadarEntry(60)); // 지력
-        dataVals.add(new RadarEntry(75)); // 체력
-        dataVals.add(new RadarEntry(40)); // 추진력
-        dataVals.add(new RadarEntry(50)); // 매력
-        return  dataVals;
-    }
-
     //차트생성
     private void makeChart(){
-        RadarDataSet dataSet = new RadarDataSet(dataValue(), "내 성취도");
+        RadarDataSet dataSet = new RadarDataSet(prepareData(), "내 성취도");
         dataSet.setColor(Color.parseColor("#64E7AE"));
         dataSet.setDrawFilled(true);
         dataSet.setFillColor(Color.parseColor("#64E7AE"));
@@ -105,63 +91,79 @@ public class AchievementActivity extends AppCompatActivity {
         dataSet.setDrawHighlightCircleEnabled(true);
 
 
+        ArrayList<RadarEntry> defdataVals = new ArrayList<>();
+        for(int i = 0; i<6; i++){
+            defdataVals.add(new RadarEntry(10));
+        }
+
+        RadarDataSet defdataSet = new RadarDataSet(defdataVals, "목표 성취도");
+        defdataSet.setColor(Color.parseColor("#A9BCF5"));
+        defdataSet.setDrawFilled(true);
+        defdataSet.setFillColor(Color.parseColor("#A9BCF5"));
+        defdataSet.setFillAlpha(50);
+        defdataSet.setLineWidth(2f);
+        defdataSet.setDrawHighlightCircleEnabled(true);
+
+
         RadarData data = new RadarData();
         data.addDataSet(dataSet);
+        data.addDataSet(defdataSet);
         String[] labels =  {"성장", "여행", "체험", "도전", "즐김", "의지"};
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         chart.setData(data);
     }
 
-//    public void prepareData() {
-//        String uid = firebaseUser.getUid();
-//        mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                for(int i =0; i<= 222;i++){
-//                    try{
-//                        mDatabaseRef.child(uid).child(Integer.toString(i)).addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                                questThumbnail = null;
-//                                QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
-//                                try{
-//                                    if(Integer.parseInt(questlogInfo.getRating()) > 0){
-//                                        storageRef.child("quest_thumbnail/" + questlogInfo.getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                            @Override
-//                                            public void onSuccess(Uri uri) {
-//                                                Glide.with(getApplicationContext()).asBitmap().load(uri)
-//                                                        .into(new SimpleTarget<Bitmap>() {
-//                                                            @Override
-//                                                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-//                                                                questThumbnail = new BitmapDrawable(getResources(),resource);
-//                                                                //Drawable icon, String title_ko, String rating, String category, String accepted_date, String finished_date
-//                                                                addItem(questThumbnail, questlogInfo.getTitle_ko(),questlogInfo.getRating(),questlogInfo.getCategory(),questlogInfo.getAccepted_date(),questlogInfo.getFinished_date());
-//                                                                ((ListViewAdapter)listView.getAdapter()).getFilter().filter(" ") ;
-//                                                            }
-//                                                        });
-//                                            }
-//                                        });
-//                                    }
-//                                }catch(NullPointerException e){
-//                                }
-//                            }
-//                            @Override
-//                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//                            }
-//                        });
-//                    }catch(NullPointerException e){
-//
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+
+    //차트 데이터 생성
+    public ArrayList<RadarEntry> prepareData() {
+        String uid = firebaseUser.getUid();
+
+        ArrayList<RadarEntry> dataVals = new ArrayList<>();
+        for(int i = 0; i<6; i++){
+            dataVals.add(new RadarEntry(50));
+        }
+        for(int i = 0; i<6; i++){
+            dataVals.set(i, new RadarEntry(0));
+        }
+
+        for(int i =0; i<= 222;i++){
+            int quest_num = i;
+            try{
+                mDatabaseRef.child(uid).child(Integer.toString(quest_num)).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
+                        try{
+                            Log.d("dif",questlogInfo.getDifficulty());
+                            Log.d("achieve",questlogInfo.getAchievement());
+                            switch (questlogInfo.getAchievement()){
+                                case "growth" : dataVals.set(0, new RadarEntry(dataVals.get(0).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "travel" : dataVals.set(1, new RadarEntry(dataVals.get(1).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "experience" : dataVals.set(2, new RadarEntry(dataVals.get(2).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "challenge" : dataVals.set(3, new RadarEntry(dataVals.get(3).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                case "enjoy" : dataVals.set(4, new RadarEntry(dataVals.get(4).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
+                                default : break;
+                            }
+                        }catch(NullPointerException e){}
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+            }catch(NullPointerException e){
+                System.out.println("없음");
+            }
+
+            }
+        return  dataVals;
+    }
 }

@@ -6,18 +6,22 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -35,6 +39,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,9 +49,13 @@ import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,6 +77,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     TextView logView;   //처음 받아오는 현재위치
     LocationManager lm;
+    Uri checkedPhotoUri;
 
     TextView location2; //사진 찍으면 고정되는 현재위치
 
@@ -91,17 +101,22 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     String quest_num;
 
 
-    //db에서 받아오는 keyword
+    //db에서 받아오는 것들
     String keyword;
     String way;
+    String difficulty;
+    String done;
+    String level;
 
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef2 = firebaseDatabase.getReference("quest");
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
+    private DatabaseReference mDatabaseRef3 = firebaseDatabase.getReference("Level Us");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
+    private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = firebaseStorage.getReference();
 
 
     //인식된 객체 배열
@@ -160,6 +175,33 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             }
         });
 
+        //difficulty받아오기
+        mDatabaseRef2.child("ALL").child(quest_num).child("difficulty").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                difficulty = String.valueOf(task.getResult().getValue());
+                System.out.println("db에서 가져오는 difficulty : "+ difficulty);
+            }
+        });
+
+        //done받아오기
+        mDatabaseRef2.child("ALL").child(quest_num).child("done").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                done = String.valueOf(task.getResult().getValue());
+                System.out.println("db에서 가져오는 done : "+ done);
+            }
+        });
+
+        //사용자 level받아오기
+        mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                level = String.valueOf(task.getResult().getValue());
+                System.out.println("db에서 가져오는 level : "+ level);
+            }
+        });
+
 
 
         Geocoder g = new Geocoder(this);    //좌표 -> 주소  //gps검증하기
@@ -197,15 +239,39 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                             submit.setVisibility(View.VISIBLE);
                             //제출 버튼 클릭했을때
                             submit.setOnClickListener(new View.OnClickListener(){
-
-
                                 @Override
                                 public void onClick(View view) {
-                                    Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ImageLabellingActivity.this, "제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
                                     String rating;
                                     rating = String.valueOf(rb.getRating());
+                                    //별점부여
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
+                                    //퀘스트 종료 날짜
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+
+                                    StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
+                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
+                                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Handle unsuccessful uploads
+                                        }
+                                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                            // ...
+                                        }
+                                    });
+
+                                    //done증가
+                                    String realDone = String.valueOf(Integer.valueOf(done)+1);
+                                    mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
+
+                                    //해당 난이도에 따른 레벨 증가
+                                    String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
+                                    mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
+                                    
                                     Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                     startActivity(intent1);
                                     finish();
@@ -329,10 +395,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            checkedPhotoUri = data.getData();
             Bundle extras = data.getExtras();     //여기부터 아래 3줄이 원본 if바로 밑
             imageBitmap = (Bitmap) extras.get("data");  //Bitmap = 이미지를 인코딩 //얘네는 String 형태가 아님!
             imageView.setImageBitmap(imageBitmap);      //이미지 띄우기.    //이거로 하면 화질 많이 안좋음
-
 //            FirebaseVisionImage image;
             //                image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData());
             FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(imageBitmap);
@@ -371,8 +437,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     submit.setVisibility(View.VISIBLE);
 
                                     submit.setOnClickListener(new View.OnClickListener(){
-
-
                                         @Override
                                         public void onClick(View view) {
                                             Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??
@@ -380,16 +444,20 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             rating = String.valueOf(rb.getRating());
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
                                             mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+                                            String realDone = String.valueOf(Integer.valueOf(done)+1);
+                                            mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
+                                            String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
+                                            mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
                                             Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                             startActivity(intent1);
                                             finish();
                                         }
-                                    });break;
-                                }else{
-                                    Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
-                                    myToast.show();
+                                    });
+                                    break;
                                 }
                             }
+                            Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
+                            myToast.show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -399,6 +467,19 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     });
         }
     }
+
+
+//    public String getPath(Uri uri){
+//        String[] proj = {MediaStore.Images.Media.DATA};
+//        CursorLoader cursorLoader = new CursorLoader(ImageLabellingActivity.this, uri, proj, null, null, null);
+//
+//        Cursor cursor = cursorLoader.loadInBackground();
+//        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//
+//        cursor.moveToFirst();
+//
+//        return cursor.getString(index);
+//    }
 
 
 }

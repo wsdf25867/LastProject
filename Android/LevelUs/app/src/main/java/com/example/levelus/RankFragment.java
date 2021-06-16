@@ -129,7 +129,7 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
                 rankAdapter.notifyDataSetChanged();
                 for(int i=0;i< rankList.size();i++) {
                     UserAccount userAccount = rankList.get(i);
-                    Log.i(i + "번째 사람의 레벨 ", Integer.toString(userAccount.getLevel()));
+                    Log.i(i + "번째 사람의 레벨 ", userAccount.getLevel());
                     if (userAccount.getIdToken().equals(firebaseUser.getUid())) {
                         Log.i("현재 사용자 등수",Integer.toString(i+1));
                         my_rank.setText(Integer.toString(i+1));

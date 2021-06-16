@@ -1,7 +1,5 @@
 package com.example.levelus;
 
-import java.util.Date;
-
 public class QuestlogInfo {
     private String quest_num;
     private String rating;
@@ -11,14 +9,8 @@ public class QuestlogInfo {
     private String finished_date;
     private String achievement;
     private String period;
+    private String difficulty;
 
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
-    }
 
     public QuestlogInfo(){
 
@@ -75,7 +67,13 @@ public class QuestlogInfo {
 
     public void setAchievement(String achievement) { this.achievement = achievement; }
 
+    public String getDifficulty() { return difficulty; }
 
+    public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
+
+    public String getPeriod() { return period; }
+
+    public void setPeriod(String period) { this.period = period; }
 
 
 
