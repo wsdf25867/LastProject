@@ -89,10 +89,12 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
             print(rj_list)
 
         for index, row in rj_list.iterrows() : #rejected_list에 있는 quest_num을 제거
-            del_index = df[df['quest_num'] == int(row['quest_num'])].index
+            print(row['quest_num'])
+            del_index = df[df['quest_num'] == row['quest_num']].index
             df = df.drop(del_index)
 
-        
+    print('여기서 확인 :')
+    print(df)    
     
     
     # target_bucketlist_index = df[df['quest_num'] == quest_index].index.values #컨텐츠 기반 필터링
