@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ public class LoggedPages extends AppCompatActivity {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 //        loggedPages = LoggedPages.this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loggedpages);
@@ -62,6 +64,7 @@ public class LoggedPages extends AppCompatActivity {
         if(selected_fragment == null){
             selected_fragment = new EditMyInfoFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, selected_fragment).commit();
+
         }
 
         navigationView = findViewById(R.id.bottom_nav);

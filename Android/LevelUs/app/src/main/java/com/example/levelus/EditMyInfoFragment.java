@@ -364,7 +364,7 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Intent intent = new Intent(getActivity(),MyService.class);
-        getActivity().startService(intent);
+        Intent intent = new Intent(getContext(),MyService.class);
+        getContext().startService(intent);
     }
 }

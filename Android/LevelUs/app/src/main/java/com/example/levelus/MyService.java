@@ -14,9 +14,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +37,7 @@ import java.util.Date;
 
 public class MyService extends Service {
 
+    private static final String TAG = "지금이순간";
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference rRef = firebaseDatabase.getReference("recommend_list");
     private DatabaseReference iRef = firebaseDatabase.getReference("quest_log");
@@ -137,7 +140,9 @@ public class MyService extends Service {
     }
 
     private void show(String title) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "default");
+
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default");
 
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle("LEVEL US");
@@ -145,16 +150,15 @@ public class MyService extends Service {
 
 
         //인텐트 설정
-        intent = new Intent(getApplicationContext(),MyQuestFragment.class);
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),
+        intent = new Intent(this,MainActivity.class);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0,
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder.setContentIntent(pendingIntent); //이 메소드로 켜야하는데 왜 안켜지냐고
+
 
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_launcher);

@@ -6,15 +6,15 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-<<<<<<< HEAD
+
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
-=======
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
->>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
+
 
 import android.Manifest;
 import android.content.Context;
@@ -27,6 +27,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -55,6 +56,8 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -82,11 +85,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     TextView logView;   //처음 받아오는 현재위치
     LocationManager lm;
-<<<<<<< HEAD
-    Uri checkedPhotoUri;
+
+            Uri checkedPhotoUri;
     String getUri;
-=======
->>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
+
 
     TextView location2; //사진 찍으면 고정되는 현재위치
 
@@ -125,10 +127,9 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-<<<<<<< HEAD
+
     private StorageReference storageReference = firebaseStorage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
-=======
->>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
+
 
 
     //인식된 객체 배열
@@ -263,7 +264,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //퀘스트 종료 날짜
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
 
-<<<<<<< HEAD
+
                                     StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
 //                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
                                     UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
@@ -280,8 +281,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                         }
                                     });
 
-=======
->>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
                                     //done증가
                                     String realDone = String.valueOf(Integer.valueOf(done)+1);
                                     mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
@@ -289,17 +288,17 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //해당 난이도에 따른 레벨 증가
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-<<<<<<< HEAD
+
 
                                     Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                     startActivity(intent1);
-=======
+
                                     FragmentManager fragmentManager = getSupportFragmentManager();
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
                                     fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
                                     fragmentTransaction.commit();
->>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
+
                                     finish();
                                 }
                             });
@@ -508,20 +507,20 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-<<<<<<< HEAD
+
                                             FragmentManager fragmentManager = getSupportFragmentManager();
                                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                             EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
                                             fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
                                             fragmentTransaction.commit();
                                             finish();
-=======
+
 
                                             Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
                                             intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                                             ImageLabellingActivity.this.getApplicationContext().startActivity(intent);
                                             finishAffinity();
->>>>>>> 669634f93168a63253029889f6423e2ae7537f4b
+
                                         }
                                     });
                                     break;
