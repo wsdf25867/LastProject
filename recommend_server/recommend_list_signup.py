@@ -13,6 +13,8 @@ app = Flask(__name__)
 
 @app.route('/signup/<string:uid>')
 def get_member_data_signup(uid):
+    dir = db.reference('/quest/ALL')
+    data = pd.DataFrame(dir.get())
     count_vector = CountVectorizer(ngram_range=(1,3))
     c_vector_category= count_vector.fit_transform(data['category'])
     category_c_sim = cosine_similarity(c_vector_category, c_vector_category).argsort()[:, ::-1]
@@ -47,7 +49,8 @@ def get_recommend_difficulty(uid, df) :
 
 @app.route('/refresh/<string:uid>')
 def get_member_data_refresh(uid):
-    
+    dir = db.reference('/quest/ALL')
+    data = pd.DataFrame(dir.get())
     count_vector = CountVectorizer(ngram_range=(1,3))
     c_vector_category= count_vector.fit_transform(data['category'])
     category_c_sim = cosine_similarity(c_vector_category, c_vector_category).argsort()[:, ::-1]
@@ -77,8 +80,6 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
                 toprate = float(row['rating'])
                 quest_index = row['quest_num']
 
-
-    
     if(rj_list.empty):          #rejected_list 가 없으면
         print(rj_list)
     else:                       #rejected_list의 df가 행열이 바뀌어있다면
@@ -147,16 +148,38 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
    
     return result    
 
+@app.route('/quest_category')
+def quest_category():
+    dir = db.reference('/quest/ALL')
+    quest_df = pd.DataFrame(dir.get())
+
+    #퀘스트 카테고리 목록
+    quest_list = ['diy','entertainment','food','health',
+    'hiking','life_milestone','love','nature','new_skill',
+    'outdoor','sports','travel']
+
+    for category_name in quest_list: 
+        print(category_name)
+        #json 파일로 저장
+        js = quest_df[quest_df['category'] == category_name].to_dict('records')
+        with open('test.json', 'w', encoding='cp949') as make_file:
+            json.dump(js, make_file)
+
+        # firebase에 json파일 업로드
+        jsonData = open("test.json","r",encoding="cp949").read()
+        data = json.loads(jsonData)
+
+        print(data)
+        dir = db.reference('/quest/' + category_name)
+        dir.set(data)
+
+
 
 if __name__ == "__main__":
     cred = credentials.Certificate("collabtest-71a4d-firebase-adminsdk-ty8fu-79e0a2a74e.json")
     firebase_admin.initialize_app(cred,{
     'databaseURL':'https://collabtest-71a4d-default-rtdb.asia-southeast1.firebasedatabase.app/'})
-    dir = db.reference('/quest/ALL')
-    #content based filtering 알고리즘을 이용한 유사한 퀘스트 추천
-    data = pd.DataFrame(dir.get())
     app.run(host="0.0.0.0", port=5000)
-    
 
 
 
