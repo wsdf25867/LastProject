@@ -6,18 +6,22 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -46,9 +50,12 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,6 +77,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     TextView logView;   //처음 받아오는 현재위치
     LocationManager lm;
+    Uri checkedPhotoUri;
 
     TextView location2; //사진 찍으면 고정되는 현재위치
 
@@ -104,6 +112,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = firebaseStorage.getReference();
 
 
     //인식된 객체 배열
@@ -199,8 +208,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                             submit.setVisibility(View.VISIBLE);
                             //제출 버튼 클릭했을때
                             submit.setOnClickListener(new View.OnClickListener(){
-
-
                                 @Override
                                 public void onClick(View view) {
                                     Toast.makeText(ImageLabellingActivity.this, "제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
@@ -208,30 +215,19 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     rating = String.valueOf(rb.getRating());
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
-                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("difficulty").addChildEventListener(new ChildEventListener() {
-                                        @Override
-                                        public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
+                                    StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
+                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
+                                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Handle unsuccessful uploads
                                         }
-
+                                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
-                                        public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-                                        }
-
-                                        @Override
-                                        public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
-                                        }
-
-                                        @Override
-                                        public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                            // ...
                                         }
                                     });
                                     Intent intent1 = new Intent(context, EditMyInfoFragment.class);
@@ -357,10 +353,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            checkedPhotoUri = data.getData();
             Bundle extras = data.getExtras();     //여기부터 아래 3줄이 원본 if바로 밑
             imageBitmap = (Bitmap) extras.get("data");  //Bitmap = 이미지를 인코딩 //얘네는 String 형태가 아님!
             imageView.setImageBitmap(imageBitmap);      //이미지 띄우기.    //이거로 하면 화질 많이 안좋음
-
 //            FirebaseVisionImage image;
             //                image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData());
             FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(imageBitmap);
@@ -427,6 +423,19 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     });
         }
     }
+
+
+//    public String getPath(Uri uri){
+//        String[] proj = {MediaStore.Images.Media.DATA};
+//        CursorLoader cursorLoader = new CursorLoader(ImageLabellingActivity.this, uri, proj, null, null, null);
+//
+//        Cursor cursor = cursorLoader.loadInBackground();
+//        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//
+//        cursor.moveToFirst();
+//
+//        return cursor.getString(index);
+//    }
 
 
 }
