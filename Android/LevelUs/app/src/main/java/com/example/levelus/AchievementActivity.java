@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
 import org.jetbrains.annotations.NotNull;
@@ -61,6 +63,10 @@ public class AchievementActivity extends AppCompatActivity {
     private RadarChart chart;
 
     private MaterialCalendarView materialCalendarView;
+    private TextView questTitle;
+    private TextView questAchievement;
+
+    private ArrayList<CalendarText> calendarinfo;
 
 
 
@@ -94,13 +100,41 @@ public class AchievementActivity extends AppCompatActivity {
 
         makeChart();
 
+        Toast.makeText(this, "그래프를 터치하면 내 성취도가 나타납니다.", Toast.LENGTH_SHORT).show();
         //캘린더
+        questTitle = findViewById(R.id.calendar_quest_title);
+        questAchievement = findViewById(R.id.calendar_quest_achievement);
         materialCalendarView = findViewById(R.id.calendarView);
         materialCalendarView.setSelectedDate(CalendarDay.today());
         materialCalendarView.addDecorators(
                 new SundayDecorator(),
                 new SaturdayDecorator()
         );
+
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                for(int i = 0; i<calendarinfo.size(); i++){
+                    String to = null;
+                    Date from_date = date.getDate();
+                    SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+                    to = fm.format(from_date);
+
+                    if(to.equals(calendarinfo.get(i).getFinished_date())){
+                        questTitle.setText(calendarinfo.get(i).getTitle_ko());
+                        switch (calendarinfo.get(i).getAchievement()){
+                            case "growth": questAchievement.setText("성장"); break;
+                            case "travel": questAchievement.setText("여행"); break;
+                            case "experience": questAchievement.setText("경험"); break;
+                            case "challenge": questAchievement.setText("도전"); break;
+                            case "enjoy": questAchievement.setText("즐김"); break;
+                            default : break;
+                        }
+                        questAchievement.setText(calendarinfo.get(i).getAchievement());
+                    }
+                }
+            }
+        });
     }
 
 
@@ -143,6 +177,8 @@ public class AchievementActivity extends AppCompatActivity {
     public ArrayList<RadarEntry> prepareData() {
         String uid = firebaseUser.getUid();
 
+        calendarinfo = new ArrayList<>();
+        
         ArrayList<RadarEntry> dataVals = new ArrayList<>();
         for(int i = 0; i<6; i++){
             dataVals.add(new RadarEntry(50));
@@ -162,11 +198,19 @@ public class AchievementActivity extends AppCompatActivity {
                             Log.d("dif",questlogInfo.getDifficulty());
                             Log.d("achieve",questlogInfo.getAchievement());
                             Log.d("date", questlogInfo.getFinished_date());
+                            Log.d("title_ko", questlogInfo.getTitle_ko());
 
                             String from = questlogInfo.getFinished_date();
                             SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
                             Date to = fm.parse(from);
-
+                            
+                            CalendarText calendarText = new CalendarText();
+                            calendarText.setTitle_ko(questlogInfo.getTitle_ko());
+                            calendarText.setFinished_date(questlogInfo.getFinished_date());
+                            calendarText.setAchievement(questlogInfo.getAchievement());
+                            
+                            calendarinfo.add(calendarText);
+                            
                             materialCalendarView.addDecorators(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(to))));
                             switch (questlogInfo.getAchievement()){
                                 case "growth" : dataVals.set(0, new RadarEntry(dataVals.get(0).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
@@ -258,4 +302,3 @@ class EventDecorator implements DayViewDecorator{
         view.addSpan(new DotSpan(5, color));
     }
 }
-
