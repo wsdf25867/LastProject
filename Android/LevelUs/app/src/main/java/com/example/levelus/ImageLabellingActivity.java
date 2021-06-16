@@ -35,6 +35,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +45,7 @@ import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
+import com.google.firebase.storage.FirebaseStorage;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -101,7 +103,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
+    private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
 
     //인식된 객체 배열
@@ -206,6 +208,32 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     rating = String.valueOf(rb.getRating());
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("rating").setValue(rating);
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
+                                    mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("difficulty").addChildEventListener(new ChildEventListener() {
+                                        @Override
+                                        public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                                        }
+
+                                        @Override
+                                        public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                                        }
+
+                                        @Override
+                                        public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+
+                                        }
+
+                                        @Override
+                                        public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                        }
+                                    });
                                     Intent intent1 = new Intent(context, EditMyInfoFragment.class);
                                     startActivity(intent1);
                                     finish();
@@ -371,8 +399,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     submit.setVisibility(View.VISIBLE);
 
                                     submit.setOnClickListener(new View.OnClickListener(){
-
-
                                         @Override
                                         public void onClick(View view) {
                                             Toast.makeText(getApplicationContext(),"제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();  //이게 안뜨네??

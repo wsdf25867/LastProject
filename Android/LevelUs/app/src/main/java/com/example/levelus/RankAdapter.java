@@ -59,7 +59,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull @NotNull RankAdapter.ViewHolder holder, int position) {
         int rank = holder.getAdapterPosition();
         holder.text_name.setText(rankList.get(position).getName());
-        holder.text_level.setText(Integer.toString(rankList.get(position).getLevel()));
+        holder.text_level.setText(rankList.get(position).getLevel());
         switch (rank){
             case 0:
                 holder.highest_rank_imageView.setBackgroundResource(R.drawable.gold_medal);
