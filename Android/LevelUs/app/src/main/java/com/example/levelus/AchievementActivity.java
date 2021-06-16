@@ -1,34 +1,28 @@
 package com.example.levelus;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.CalendarView;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.RadarChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
+
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
+
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,15 +30,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-//import com.prolificinteractive.materialcalendarview.CalendarDay;
-//import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-//import com.prolificinteractive.materialcalendarview.DayViewFacade;
-//import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
 
 public class AchievementActivity extends AppCompatActivity {
 
@@ -59,7 +60,7 @@ public class AchievementActivity extends AppCompatActivity {
     private TextView back;
     private RadarChart chart;
 
-    //private MaterialCalendarView materialCalendarView;
+    private MaterialCalendarView materialCalendarView;
 
 
 
@@ -93,13 +94,13 @@ public class AchievementActivity extends AppCompatActivity {
 
         makeChart();
 
-//        //캘린더
-//        materialCalendarView = findViewById(R.id.calendarView);
-//        materialCalendarView.setSelectedDate(CalendarDay.today());
-//        materialCalendarView.addDecorators(
-//                new SundayDecorator(),
-//                new SaturdayDecorator()
-//        );
+        //캘린더
+        materialCalendarView = findViewById(R.id.calendarView);
+        materialCalendarView.setSelectedDate(CalendarDay.today());
+        materialCalendarView.addDecorators(
+                new SundayDecorator(),
+                new SaturdayDecorator()
+        );
     }
 
 
@@ -160,6 +161,13 @@ public class AchievementActivity extends AppCompatActivity {
                         try{
                             Log.d("dif",questlogInfo.getDifficulty());
                             Log.d("achieve",questlogInfo.getAchievement());
+                            Log.d("date", questlogInfo.getFinished_date());
+
+                            String from = questlogInfo.getFinished_date();
+                            SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+                            Date to = fm.parse(from);
+
+                            materialCalendarView.addDecorators(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(to))));
                             switch (questlogInfo.getAchievement()){
                                 case "growth" : dataVals.set(0, new RadarEntry(dataVals.get(0).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
                                     dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
@@ -173,7 +181,7 @@ public class AchievementActivity extends AppCompatActivity {
                                     dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
                                 default : break;
                             }
-                        }catch(NullPointerException e){}
+                        }catch(NullPointerException | ParseException e){}
 
                     }
                     @Override
@@ -191,42 +199,63 @@ public class AchievementActivity extends AppCompatActivity {
     }
 }
 
-//class SaturdayDecorator implements DayViewDecorator{
-//    private final Calendar calendar = Calendar.getInstance();
-//
-//    public SaturdayDecorator(){
-//
-//    }
-//
-//    @Override
-//    public boolean shouldDecorate(CalendarDay day){
-//        day.copyTo(calendar);
-//        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
-//        return weekDay == Calendar.SATURDAY;
-//    }
-//
-//    @Override
-//    public void decorate(DayViewFacade view){
-//        view.addSpan(new ForegroundColorSpan(Color.BLUE));
-//    }
-//}
-//
-//class SundayDecorator implements DayViewDecorator{
-//    private final Calendar calendar = Calendar.getInstance();
-//
-//    public SundayDecorator(){
-//
-//    }
-//
-//    @Override
-//    public boolean shouldDecorate(CalendarDay day){
-//        day.copyTo(calendar);
-//        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
-//        return weekDay == Calendar.SUNDAY;
-//    }
-//
-//    @Override
-//    public void decorate(DayViewFacade view){
-//        view.addSpan(new ForegroundColorSpan(Color.RED));
-//    }
-//}
+class SaturdayDecorator implements DayViewDecorator{
+    private final Calendar calendar = Calendar.getInstance();
+
+    public SaturdayDecorator(){
+
+    }
+
+    @Override
+    public boolean shouldDecorate(CalendarDay day){
+        day.copyTo(calendar);
+        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+        return weekDay == Calendar.SATURDAY;
+    }
+
+    @Override
+    public void decorate(DayViewFacade view){
+        view.addSpan(new ForegroundColorSpan(Color.BLUE));
+    }
+}
+
+class SundayDecorator implements DayViewDecorator{
+    private final Calendar calendar = Calendar.getInstance();
+
+    public SundayDecorator(){
+
+    }
+
+    @Override
+    public boolean shouldDecorate(CalendarDay day){
+        day.copyTo(calendar);
+        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+        return weekDay == Calendar.SUNDAY;
+    }
+
+    @Override
+    public void decorate(DayViewFacade view){
+        view.addSpan(new ForegroundColorSpan(Color.RED));
+    }
+}
+
+class EventDecorator implements DayViewDecorator{
+    private final int color;
+    private final HashSet<CalendarDay> dates;
+
+    public EventDecorator(int color, Collection<CalendarDay> dates){
+        this.color = color;
+        this.dates = new HashSet<>(dates);
+    }
+
+    @Override
+    public boolean shouldDecorate(CalendarDay day){
+        return dates.contains(day);
+    }
+
+    @Override
+    public void decorate(DayViewFacade view){
+        view.addSpan(new DotSpan(5, color));
+    }
+}
+
