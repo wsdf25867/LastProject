@@ -103,22 +103,23 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 QuestInfo questInfo = new QuestInfo();
 
                 int added = Integer.parseInt(cData.getAdded()) + 1;
+                String addeds= String.valueOf(added);
 
-                questInfo.setTitle(cData.getTitle());
-                questInfo.setTitle_ko(cData.getTitle_ko());
-                questInfo.setAdded(Integer.toString(added));
-                questInfo.setCategory(cData.getCategory());
-                questInfo.setDifficulty(cData.getDifficulty());
-                questInfo.setDone(cData.getDone());
-                questInfo.setKeyword(cData.getKeyword());
-                questInfo.setPeriod(cData.getPeriod());
-                questInfo.setWay(cData.getWay());
-                questInfo.setQuest_num(cData.getQuest_num());
-                questInfo.setAchievement(cData.getAchievement());
+//                questInfo.setTitle(cData.getTitle());
+//                questInfo.setTitle_ko(cData.getTitle_ko());
+//                questInfo.setAdded(Integer.toString(added));
+//                questInfo.setCategory(cData.getCategory());
+//                questInfo.setDifficulty(cData.getDifficulty());
+//                questInfo.setDone(cData.getDone());
+//                questInfo.setKeyword(cData.getKeyword());
+//                questInfo.setPeriod(cData.getPeriod());
+//                questInfo.setWay(cData.getWay());
+//                questInfo.setQuest_num(cData.getQuest_num());
+//                questInfo.setAchievement(cData.getAchievement());
 
                 iRef.child(uid).child(cData.getQuest_num()).setValue(questlogInfo);
 
-                qRef.child("ALL").child(cData.getQuest_num()).setValue(questInfo);
+                qRef.child("ALL").child(cData.getQuest_num()).child("added").setValue(addeds);
                 System.out.println("여기까지왔음2");
 
                 Intent intent = new Intent(v.getContext(),WebPractice2.class);
