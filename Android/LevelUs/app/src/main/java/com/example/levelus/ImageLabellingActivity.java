@@ -77,7 +77,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
     double lat;         //처음 받아오는 좌표
     double lng;         //처음 받아오는 좌표//
-     double nowLat;      //사진 찍으면 고정되는 현재좌표
+    double nowLat;      //사진 찍으면 고정되는 현재좌표
     double nowLng;      //사진 찍으면 고정되는 현재좌표
 //    double nowLat = 41.5180;      //사진 찍으면 고정되는 현재좌표
 //    double nowLng = 82.8516;      //사진 찍으면 고정되는 현재좌표
@@ -129,7 +129,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         //gps관련
         logView = (TextView) findViewById(R.id.location);    //gps2
 
-        location2 = (TextView) findViewById(R.id.location2);
+//        location2 = (TextView) findViewById(R.id.location2);
         b1 = (Button) findViewById(R.id.b1);
         txt = (TextView)findViewById(R.id.txt);
 
@@ -150,11 +150,13 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     txt.setVisibility(View.INVISIBLE);
                     b1.setVisibility(View.INVISIBLE);
                     logView.setVisibility(View.INVISIBLE);
-                    location2.setVisibility(View.INVISIBLE);
+//                    location2.setVisibility(View.INVISIBLE);
                     captureImageBtn.setVisibility(View.VISIBLE);
                 }else if(way.equals("gps")){
-                    captureImageBtn.setVisibility(View.INVISIBLE);
+                    captureImageBtn.setVisibility(View.VISIBLE);
                     b1.setVisibility(View.VISIBLE);
+//                    location2.setVisibility(View.INVISIBLE);
+                    resultTv.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -203,7 +205,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             public void onClick(View v) {
                 nowLat = lat;
                 nowLng = lng;
-                location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
+//                location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
                 List<Address> address = null;
                 try {
                     address = g.getFromLocation(nowLat,nowLng,10);
@@ -251,12 +253,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //해당 난이도에 따른 레벨 증가
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
-                                    FragmentManager fragmentManager = getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
-                                    fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
-                                    fragmentTransaction.commit();
-                                    finish();
+                                    Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
+                                    intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                                    ImageLabellingActivity.this.getApplicationContext().startActivity(intent);
+                                    finishAffinity();
                                 }
                             });
 
@@ -438,10 +438,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                         }
                                     });
                                     break;
-                                }
+                                }   Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
+                                    myToast.show();
                             }
-                            Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
-                            myToast.show();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
