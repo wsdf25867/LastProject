@@ -46,6 +46,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
     private DatabaseReference rRef = firebaseDatabase.getReference("recommend_list");
     private DatabaseReference iRef = firebaseDatabase.getReference("quest_log");
     private DatabaseReference qRef = firebaseDatabase.getReference("quest");
+    private DatabaseReference rjRef = firebaseDatabase.getReference("rejected_list");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     String uid = firebaseUser.getUid();
@@ -140,7 +141,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                                 QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
                                 if(questInfo.getQuest_num().equals(cData.getQuest_num())){
                                     rRef.child(uid).child(Integer.toString(i)).removeValue();
-
+                                    rjRef.child(uid).child(cData.getQuest_num()).setValue(questInfo);
                                     Intent intent = new Intent(v.getContext(),WebPractice2.class);
                                     intent.putExtra("uid",uid);
                                     v.getContext().startActivity(intent);
