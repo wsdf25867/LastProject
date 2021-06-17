@@ -1,6 +1,8 @@
 package com.example.levelus;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,8 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -22,6 +28,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,13 +54,18 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
 
     private ArrayList<UserAccount> rankList;
     private RankAdapter rankAdapter;
     private RecyclerView rankRecyclerView;
     private LinearLayoutManager linearLayoutManager;
 
-    private TextView my_rank;
+    //사용자 정보
+    private ImageView my_rank_imageView, my_user_profile;
+    private TextView my_rank, my_text_name, my_text_level;
+
 
 //    private RankAdapter rankAdapter = new RankAdapter();
 
@@ -98,7 +111,6 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rank, container, false);
-        my_rank = view.findViewById(R.id.my_rank);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Level Us");
 
@@ -111,11 +123,21 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
         rankRecyclerView.setAdapter(rankAdapter);
         rankAdapter.notifyDataSetChanged();
 
+        //사용자 정보
+
+        my_rank_imageView = view.findViewById(R.id.my_highest_rank_imageView); //메달 이미지
+        my_user_profile = view.findViewById(R.id.my_user_profile); // 사용자 프로필
+        my_rank = view.findViewById(R.id.my_rank); // 순위
+        my_text_name = view.findViewById(R.id.my_text_name); // 이름
+        my_text_level = view.findViewById(R.id.my_text_level); // 레벨
+
         return view;
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");
+        storageRef = storage.getReference();
         databaseReference.child("UserAccount").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
@@ -132,7 +154,37 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
                     Log.i(i + "번째 사람의 레벨 ", userAccount.getLevel());
                     if (userAccount.getIdToken().equals(firebaseUser.getUid())) {
                         Log.i("현재 사용자 등수",Integer.toString(i+1));
-                        my_rank.setText(Integer.toString(i+1));
+                        my_rank.setText(Integer.toString(i+1) + "위");
+                        my_text_level.setText(userAccount.getLevel());
+                        my_text_name.setText(userAccount.getName());
+
+                        if(storageRef.child(userAccount.getIdToken()+"/profile_img") != null){
+                            StorageReference submitProfile = storageRef.child(userAccount.getIdToken()+"/profile_img");
+                            submitProfile.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if(task.isSuccessful())
+                                        Glide.with(RankFragment.this).load(task.getResult()).into(my_user_profile);
+                                }
+
+                            });
+                        }
+
+                        switch (i){
+                            case 0:
+                                my_rank_imageView.setImageResource(R.drawable.gold_medal);
+                                my_rank.setVisibility(View.INVISIBLE);
+                                break;
+                            case 1:
+                                my_rank_imageView.setImageResource(R.drawable.silver_medal);
+                                my_rank.setVisibility(View.INVISIBLE);
+                                break;
+                            case 2:
+                                my_rank_imageView.setImageResource(R.drawable.bronze_medal);
+                                my_rank.setVisibility(View.INVISIBLE);
+                                break;
+                            default :  my_rank_imageView.setVisibility(View.INVISIBLE); my_rank.setVisibility(View.VISIBLE); break;
+                        }
                     }
                 }
             }

@@ -63,7 +63,7 @@ public class CompletedQuestActivity extends AppCompatActivity {
         mDatabaseRef = firebaseDatabase.getReference("quest_log");
         mFirebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = mFirebaseAuth.getCurrentUser();
-        storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");;
+        storage = FirebaseStorage.getInstance("gs://collabtest-71a4d.appspot.com");
         storageRef = storage.getReference();
 
 

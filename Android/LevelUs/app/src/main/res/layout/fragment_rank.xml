@@ -20,42 +20,94 @@
         android:layout_marginTop="36dp">
         <TextView
             android:id="@+id/log_in"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
             android:text="Rank"
             android:textAppearance="@style/big_black_title"
             android:gravity="center_horizontal|top" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/log_in"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/trophy"/>
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rectangle_my"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="left">
+            <ImageView
+                android:id="@+id/my_highest_rank_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:id="@+id/my_rank"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:layout_marginLeft="7dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/my_user_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/my_text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:layout_weight="2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:text="LV."/>
+            <TextView
+                android:id="@+id/my_text_level"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rank_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="10dp"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="5dp"
         android:scrollbarThumbVertical="@color/browser_actions_bg_grey"
         android:scrollbars="vertical"
         android:layout_weight="3"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 랭킹 : "
-            android:textSize="40sp"
-            style="@style/Text.MyRankStyle"/>
-        <TextView
-            android:id="@+id/my_rank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            style="@style/Text.MyRankStyle"/>
-    </LinearLayout>
+
 </LinearLayout>
