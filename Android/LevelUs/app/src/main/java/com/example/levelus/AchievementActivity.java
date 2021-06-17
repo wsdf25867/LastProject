@@ -110,10 +110,13 @@ public class AchievementActivity extends AppCompatActivity {
                 new SundayDecorator(),
                 new SaturdayDecorator()
         );
+//        questTitle.setVisibility(View.INVISIBLE);
+//        questAchievement.setVisibility(View.INVISIBLE);
 
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                loopOut:
                 for(int i = 0; i<calendarinfo.size(); i++){
                     String to = null;
                     Date from_date = date.getDate();
@@ -121,6 +124,7 @@ public class AchievementActivity extends AppCompatActivity {
                     to = fm.format(from_date);
 
                     if(to.equals(calendarinfo.get(i).getFinished_date())){
+                        System.out.println(calendarinfo.get(i).getTitle_ko());
                         questTitle.setText(calendarinfo.get(i).getTitle_ko());
                         switch (calendarinfo.get(i).getAchievement()){
                             case "growth": questAchievement.setText("성장"); break;
@@ -130,9 +134,17 @@ public class AchievementActivity extends AppCompatActivity {
                             case "enjoy": questAchievement.setText("즐김"); break;
                             default : break;
                         }
-                        questAchievement.setText(calendarinfo.get(i).getAchievement());
+                        questTitle.setVisibility(View.VISIBLE);
+                        questAchievement.setVisibility(View.VISIBLE);
+                        break loopOut;
+                    }
+                    else{
+                        questTitle.setVisibility(View.INVISIBLE);
+                        questAchievement.setVisibility(View.INVISIBLE);
                     }
                 }
+
+
             }
         });
     }
