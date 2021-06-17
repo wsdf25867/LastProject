@@ -157,8 +157,9 @@ public class MyService extends Service {
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder.setContentIntent(pendingIntent); //이 메소드로 켜야하는데 왜 안켜지냐고
+        builder.setContentIntent(pendingIntent);
 
+        this.onDestroy();
 
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_launcher);

@@ -103,6 +103,8 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = new Intent(getContext(),MyService.class);
+        getContext().startService(intent);
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -361,10 +363,4 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
         ((LoggedPages)context).setOnKeyBackPressedListener(this::onBackKey);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Intent intent = new Intent(getContext(),MyService.class);
-        getContext().startService(intent);
-    }
 }
