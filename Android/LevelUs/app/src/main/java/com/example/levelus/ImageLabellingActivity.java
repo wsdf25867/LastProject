@@ -6,15 +6,15 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
-
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Context;
@@ -85,16 +85,14 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     TextView logView;   //처음 받아오는 현재위치
     LocationManager lm;
-
-            Uri checkedPhotoUri;
+    Uri checkedPhotoUri;
     String getUri;
-
 
     TextView location2; //사진 찍으면 고정되는 현재위치
 
     double lat;         //처음 받아오는 좌표
     double lng;         //처음 받아오는 좌표//
-     double nowLat;      //사진 찍으면 고정되는 현재좌표
+    double nowLat;      //사진 찍으면 고정되는 현재좌표
     double nowLng;      //사진 찍으면 고정되는 현재좌표
 //    double nowLat = 41.5180;      //사진 찍으면 고정되는 현재좌표
 //    double nowLng = 82.8516;      //사진 찍으면 고정되는 현재좌표
@@ -127,10 +125,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-
     private StorageReference storageReference = firebaseStorage.getReferenceFromUrl("gs://collabtest-71a4d.appspot.com");
-
-
 
     //인식된 객체 배열
     ArrayList list = new ArrayList();
@@ -149,7 +144,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         //gps관련
         logView = (TextView) findViewById(R.id.location);    //gps2
 
-        location2 = (TextView) findViewById(R.id.location2);
+//        location2 = (TextView) findViewById(R.id.location2);
         b1 = (Button) findViewById(R.id.b1);
         txt = (TextView)findViewById(R.id.txt);
 
@@ -170,11 +165,13 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                     txt.setVisibility(View.INVISIBLE);
                     b1.setVisibility(View.INVISIBLE);
                     logView.setVisibility(View.INVISIBLE);
-                    location2.setVisibility(View.INVISIBLE);
+//                    location2.setVisibility(View.INVISIBLE);
                     captureImageBtn.setVisibility(View.VISIBLE);
                 }else if(way.equals("gps")){
-                    captureImageBtn.setVisibility(View.INVISIBLE);
+                    captureImageBtn.setVisibility(View.VISIBLE);
                     b1.setVisibility(View.VISIBLE);
+//                    location2.setVisibility(View.INVISIBLE);
+                    resultTv.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -223,7 +220,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             public void onClick(View v) {
                 nowLat = lat;
                 nowLng = lng;
-                location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
+//                location2.setText("latitude: " + nowLat + ", longitude: " + nowLng);
                 List<Address> address = null;
                 try {
                     address = g.getFromLocation(nowLat,nowLng,10);
@@ -264,9 +261,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //퀘스트 종료 날짜
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
 
-
                                     StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
-//                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
                                     UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
                                     uploadTask.addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -280,7 +275,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             // ...
                                         }
                                     });
-
+//                                    UploadTask uploadTask = checkedPhotoRef.putFile(checkedPhotoUri);
                                     //done증가
                                     String realDone = String.valueOf(Integer.valueOf(done)+1);
                                     mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
@@ -290,16 +285,12 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
 
 
-                                    Intent intent1 = new Intent(context, EditMyInfoFragment.class);
-                                    startActivity(intent1);
+                                    Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
+                                    intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                                    ImageLabellingActivity.this.getApplicationContext().startActivity(intent);
+                                    finishAffinity();
 
-                                    FragmentManager fragmentManager = getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
-                                    fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
-                                    fragmentTransaction.commit();
 
-                                    finish();
                                 }
                             });
 
@@ -508,12 +499,21 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
 
-                                            FragmentManager fragmentManager = getSupportFragmentManager();
-                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                            EditMyInfoFragment editMyInfoFragment = new EditMyInfoFragment();
-                                            fragmentTransaction.replace(R.id.drawer_layout, editMyInfoFragment);
-                                            fragmentTransaction.commit();
-                                            finish();
+//                                            StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
+//                                            UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
+//                                            uploadTask.addOnFailureListener(new OnFailureListener() {
+//                                                @Override
+//                                                public void onFailure(@NonNull Exception exception) {
+//                                                    // Handle unsuccessful uploads
+//                                                }
+//                                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                                                @Override
+//                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+//                                                    // ...
+//                                                }
+//                                            });
+
 
 
                                             Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
@@ -524,10 +524,10 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                         }
                                     });
                                     break;
-                                }
+                                }   Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
+                                    myToast.show();
                             }
-                            Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
-                            myToast.show();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -647,8 +647,5 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 //        intent.setType("image/*");
 //        startActivityForResult(intent, GET_FROM_GALLERY);
 //    }
-
-
-
 
 }

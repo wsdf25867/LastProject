@@ -58,17 +58,17 @@
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="좌표 불러오는중..."
+        android:text="이곳에 좌표가 생성되면 촬영하시오"
         android:textSize="24dp"
         android:layout_above="@+id/capture_image_btn"/>
 
-    <TextView
-        android:id="@+id/location2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location: "
-        android:textSize="24dp"
-        android:layout_above="@+id/location"/>
+<!--    <TextView-->
+<!--        android:id="@+id/location2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Location: "-->
+<!--        android:textSize="24dp"-->
+<!--        android:layout_above="@+id/location"/>-->
 
     <TextView
         android:id="@+id/txt"
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:text="주소: "
         android:textSize="24dp"
-        android:layout_above="@+id/location2"/>
+        android:layout_above="@+id/location"/>
     <Button
         android:id="@+id/b1"
         android:layout_width="100dp"
