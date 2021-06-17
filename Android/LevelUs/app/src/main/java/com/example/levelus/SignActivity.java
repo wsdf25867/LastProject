@@ -86,8 +86,7 @@ public class SignActivity extends AppCompatActivity {
                             account.setAge(strAge);
                             account.setFavorite(strFavorite);
                             account.setLocal(strLocal);
-
-                            String level = "0";
+                            account.setLevel();
 
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
 //                            mDatabaseRef.child("SortLevel").push().child("level").setValue(level); //정렬용 level
