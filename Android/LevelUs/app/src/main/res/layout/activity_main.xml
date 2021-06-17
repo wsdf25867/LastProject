@@ -3,28 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <RelativeLayout
-        android:id="@+id/page_header"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="36dp">
-        <TextView
-            android:id="@+id/first_page"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:text="Let's start!!"
-            android:textAppearance="@style/big_black_title"
-            android:gravity="center_horizontal|top"
-            />
-    </RelativeLayout>
+    tools:context=".MainActivity"
+    android:background="@drawable/start_page">
     <Button
         android:id="@+id/log_in"
         android:layout_width="0dp"
@@ -34,7 +14,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="508dp"
         android:text="@string/log_in"
         android:background="@drawable/button_prim"
         android:textColor="#ffffff"/>
@@ -42,13 +22,34 @@
         android:id="@+id/sign_in"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/log_in"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginTop="336dp"
+        android:layout_marginTop="20dp"
         android:text="@string/sign_in"
         android:background="@drawable/button_prim"
         android:textColor="#ffffff"/>
+    <RelativeLayout
+        android:id="@+id/page_header"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/sign_in"
+        android:layout_marginTop="60dp">
+        <TextView
+            android:id="@+id/first_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:text="Let's start!!"
+            android:textAppearance="@style/big_black_title"
+            android:gravity="center_horizontal|top"
+            android:textColor="#ffffff"/>
+    </RelativeLayout>
 </RelativeLayout>
