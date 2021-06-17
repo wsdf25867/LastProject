@@ -290,6 +290,9 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
 
+                                    Intent GoToWeb3 = new Intent(v.getContext(),WebPractice3.class);
+                                    startActivity(GoToWeb3);
+
 
                                     Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
                                     intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
