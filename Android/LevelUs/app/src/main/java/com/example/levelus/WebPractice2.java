@@ -31,10 +31,6 @@ public class WebPractice2 extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webView2.loadUrl("http://3.35.9.194:5000/refresh/"+uid);
 
-
-        Intent GoToWeb3 = new Intent(this, WebPractice3.class);
-        startActivity(GoToWeb3);
-
         finish();
     }
 }
