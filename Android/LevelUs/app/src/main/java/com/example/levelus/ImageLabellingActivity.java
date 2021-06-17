@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -61,6 +62,7 @@ import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -262,7 +264,11 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
 
                                     StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
-                                    UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
+                                    Bitmap uploadBitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                    uploadBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                    byte[] data = baos.toByteArray();
+                                    UploadTask uploadTask = checkedPhotoRef.putBytes(data);
                                     uploadTask.addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception exception) {
@@ -283,6 +289,9 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //해당 난이도에 따른 레벨 증가
                                     String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                     mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
+
+                                    Intent GoToWeb3 = new Intent(v.getContext(),WebPractice3.class);
+                                    startActivity(GoToWeb3);
 
 
                                     Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
@@ -448,7 +457,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
             Bundle extras = data.getExtras();     //여기부터 아래 3줄이 원본 if바로 밑
             imageBitmap = (Bitmap) extras.get("data");  //Bitmap = 이미지를 인코딩 //얘네는 String 형태가 아님!
             imageView.setImageBitmap(imageBitmap);      //이미지 띄우기.    //이거로 하면 화질 많이 안좋음
-
 //            FirebaseVisionImage image;
             //                image = FirebaseVisionImage.fromFilePath(getApplicationContext(), data.getData());
             FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(imageBitmap);
@@ -498,6 +506,25 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             mDatabaseRef2.child("ALL").child(quest_num).child("done").setValue(realDone);
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
+
+                                            StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
+                                            Bitmap uploadBitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                            uploadBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                            byte[] data = baos.toByteArray();
+                                            UploadTask uploadTask = checkedPhotoRef.putBytes(data);
+                                            uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception exception) {
+                                                    // Handle unsuccessful uploads
+                                                }
+                                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                                    // ...
+                                                }
+                                            });
 
 //                                            StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
 //                                            UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
