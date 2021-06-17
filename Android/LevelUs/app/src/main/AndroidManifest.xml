@@ -63,9 +63,7 @@
             android:name=".CompletedQuestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AchievementActivity"
-
-            android:screenOrientation="portrait"/>
+            android:name=".AchievementActivity"/>
         <provider
             android:authorities="${applicationId}.provider"
             android:name="androidx.core.content.FileProvider"
@@ -75,7 +73,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
-
     </application>
 
 </manifest>
