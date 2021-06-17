@@ -20,8 +20,10 @@
         android:gravity="center">
         <ImageButton
             android:id="@+id/category1"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/diy"
@@ -29,8 +31,9 @@
 
         <ImageButton
             android:id="@+id/category2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/entertainment"
@@ -38,8 +41,9 @@
 
         <ImageButton
             android:id="@+id/category3"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/food"
@@ -47,8 +51,9 @@
 
         <ImageButton
             android:id="@+id/category4"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/health"
@@ -56,64 +61,72 @@
 
         <ImageButton
             android:id="@+id/category5"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/hiking"
             android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category6"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/life_milestone"
             android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category7"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/love"
             android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category8"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/nature"
             android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category9"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/new_skill"
             android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category10"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/outdoor"
             android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category11"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/sports"
             android:scaleType="centerInside"/>
         <ImageButton
             android:id="@+id/category12"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:src="@raw/travel"
