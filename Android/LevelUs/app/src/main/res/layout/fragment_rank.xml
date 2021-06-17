@@ -32,7 +32,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rank_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="240dp"
         android:layout_margin="30dp"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="5dp"
