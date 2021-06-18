@@ -4,11 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("Level Us");
-//    private boolean state = firebaseAuth.
+    private String TAG = "VideoActivity";
+    private VideoView videoView;
+//    private static String SAVE_INSTANCE_KEY;
+
     public static boolean isLoginSuccess = true;
     Button login_in,sign_in;
     @Override
@@ -37,10 +45,28 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 //        Log.d("유저 Uid",firebaseUser.getUid().toString());
+        //play video
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        videoView = (VideoView) findViewById(R.id.video_view);
         login_in = findViewById(R.id.log_in);
         sign_in = findViewById(R.id.sign_in);
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video));
+        videoView.start();
+//        SAVE_INSTANCE_KEY = "key";
+//        if(savedInstanceState != null && SAVE_INSTANCE_KEY != null){
+//            videoView.resume();
+//        }
+//        loop
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true); // 동영상 무한 반복. 반복을 원치 않을 경우 false
+                if(!mp.isPlaying())
+                    videoView.start();
+            }
+        });
         login_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//
+//        outState.putString(SAVE_INSTANCE_KEY,
+//                "onSaveInstanceState is called!\n");
+//    }
 
 }
