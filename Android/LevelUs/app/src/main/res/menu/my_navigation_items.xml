@@ -8,12 +8,12 @@
     <item
         android:id="@+id/media_play"
         android:enabled="true"
-        android:title="진행상황"
+        android:title="내 퀘스트"
         android:icon="@drawable/media_play"/>
     <item
         android:id="@+id/plus_square"
         android:enabled="true"
-        android:title="퀘스트 추가"
+        android:title="퀘스트 정보"
         android:icon="@drawable/plus_square"/>
     <item
         android:id="@+id/bar_chart"
