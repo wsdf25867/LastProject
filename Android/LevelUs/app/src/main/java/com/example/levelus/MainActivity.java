@@ -33,11 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = "VideoActivity";
     private VideoView videoView;
 //    private static String SAVE_INSTANCE_KEY;
-
+    private int rNum;
     public static boolean isLoginSuccess = true;
     Button login_in,sign_in;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        rNum = (int)((Math.random()*10000)%3);
         if(firebaseUser != null && isLoginSuccess){
             Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
             startActivity(GoToLoggedPages);
@@ -52,8 +53,22 @@ public class MainActivity extends AppCompatActivity {
         videoView = (VideoView) findViewById(R.id.video_view);
         login_in = findViewById(R.id.log_in);
         sign_in = findViewById(R.id.sign_in);
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video));
-        videoView.start();
+//        videoView.setVideoURI(null);
+        switch (rNum) {
+            case 0:
+                videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video));
+                break;
+            case 1:
+                videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video1));
+                break;
+            case 2:
+                videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video2));
+                break;
+            default:
+                videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video3));
+                break;
+        }
+//        videoView.start();
 //        SAVE_INSTANCE_KEY = "key";
 //        if(savedInstanceState != null && SAVE_INSTANCE_KEY != null){
 //            videoView.resume();
@@ -63,8 +78,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setLooping(true); // 동영상 무한 반복. 반복을 원치 않을 경우 false
-                if(!mp.isPlaying())
+                rNum = (int)((Math.random()*10000)%3);
+                if(!mp.isPlaying()) {
                     videoView.start();
+//                    videoView.stopPlayback();
+                }
             }
         });
         login_in.setOnClickListener(new View.OnClickListener() {
