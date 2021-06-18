@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Button login_in,sign_in;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        rNum = (int)((Math.random()*10000)%3);
+        rNum = (int)((Math.random()*10000)%4);
         if(firebaseUser != null && isLoginSuccess){
             Intent GoToLoggedPages = new Intent(getApplicationContext(), LoggedPages.class);
             startActivity(GoToLoggedPages);
