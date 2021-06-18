@@ -20,6 +20,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -96,6 +97,8 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
         View v = inflater.inflate(R.layout.fragment_my_quest, container, false);
         RecyclerView recyclerView_recommend = (RecyclerView) v.findViewById(R.id.recycleView_recommend);
         RecyclerView recyclerView_ing = (RecyclerView) v.findViewById(R.id.recycleView_ing);
+        GridLayoutManager gridlayoutManager;
+
         title_recommend = (TextView) v.findViewById(R.id.title_recommend);
         title_ing = (TextView) v.findViewById(R.id.title_ing);
 
@@ -103,10 +106,27 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
         recyclerView_recommend.setHasFixedSize(true);
         recyclerView_ing.setHasFixedSize(true);
 
+        gridlayoutManager = new GridLayoutManager(getActivity(), 6);
+        gridlayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+//                int gridPosition = position % 5;
+//                switch (gridPosition) {
+//                    case 0:
+//                    case 1:
+//                    case 2:
+//                        return 2;
+//                    case 3:
+//                    case 4:
+//                        return 3;
+//                }
+                return 3;
+            }
+        });
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
-        recyclerView_recommend.setLayoutManager(mLayoutManager);
+        recyclerView_recommend.setLayoutManager(gridlayoutManager);
         recyclerView_ing.setLayoutManager(mLayoutManager2);
         recyclerView_recommend.setItemAnimator(new DefaultItemAnimator());
         recyclerView_ing.setItemAnimator(new DefaultItemAnimator());

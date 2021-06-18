@@ -3,6 +3,7 @@ package com.example.levelus;
 import android.content.Context;
 import android.content.Intent;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdapter.ViewHolder> {
@@ -49,15 +55,21 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
     private DatabaseReference rjRef = firebaseDatabase.getReference("rejected_list");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+    private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = firebaseStorage.getReference();
     String uid = firebaseUser.getUid();
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView quest_name;
+        TextView quest_name, quest_category, quest_achievement;
+        CircleImageView quest_thumbnail;
         Button agree_button, disagree_button;
 
         ViewHolder(View view) {
             super(view);
             quest_name = view.findViewById(R.id.recommend_quest_name);
+            quest_category = view.findViewById(R.id.recommend_quest_category);
+            quest_achievement = view.findViewById(R.id.recommend_quest_achievement);
+            quest_thumbnail = view.findViewById(R.id.recommend_quest_thumbnail);
             agree_button = view.findViewById(R.id.agree_button);
             disagree_button = view.findViewById(R.id.disagree_button);
 
@@ -82,6 +94,16 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
         QuestInfo cData = rData.get(position);
 
         holder.quest_name.setText(rData.get(position).getTitle_ko());
+        holder.quest_category.setText(rData.get(position).getCategory());
+        holder.quest_achievement.setText(rData.get(position).getAchievement());
+
+        storageRef.child("quest_thumbnail/" + rData.get(position).getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(holder.itemView.getContext()).load(uri).into(holder.quest_thumbnail);
+            }
+        });
+
 
         holder.agree_button.setOnClickListener(new View.OnClickListener() {
             @Override

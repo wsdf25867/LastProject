@@ -1,39 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_width="190dp"
+    android:layout_height="250dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rectangle_recquest_or">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recommend_quest_name"
             android:padding="8dp"
-            android:textSize="18dp"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
             android:gravity="center_vertical"
             android:layout_weight="9"/>
 
-        <Button
-            android:id="@+id/agree_button"
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recommend_quest_category"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recommend_quest_achievement"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"/>
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/recommend_quest_thumbnail"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수락"
-            android:textSize="18dp"
-            android:textColor="@color/white"
-            android:background="@drawable/button_prim"
-            android:layout_marginEnd="10dp"/>
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/disagree_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="거절"
-            android:textSize="18dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/button_prim2"/>
+            <Button
+                android:id="@+id/agree_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수락"
+                android:textSize="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button_prim"
+                android:layout_marginEnd="10dp"/>
 
+            <Button
+                android:id="@+id/disagree_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="거절"
+                android:textSize="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/button_prim2"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
