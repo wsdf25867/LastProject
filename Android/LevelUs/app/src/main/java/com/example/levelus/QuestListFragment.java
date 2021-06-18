@@ -140,68 +140,6 @@ public class QuestListFragment extends Fragment {
             period.setText(strPeriod);
             return builder.create();
         }
-        //        public MyAlertDialogFragment(@NonNull Context context) {
-//            super(context);
-//        }
-
-
-
-//        @NonNull
-//        @Override
-//        public Dialog onCreateDialog(Bundle savedInstanceState) {
-//            //return super.onCreateDialog(savedInstanceState);
-//
-//            String title_ko = getArguments().getString("title_ko");
-//            String category = getArguments().getString("category");
-//            String quest_num = getArguments().getString("quest_num");
-//            String finished_date = "0";
-//            String rating = "0";
-//
-//            return new AlertDialog.Builder(getActivity())
-//                    .setIcon(R.mipmap.ic_launcher)
-//                    .setTitle(title_ko)
-//                    .setPositiveButton("수락하기", new DialogInterface.OnClickListener() {
-//
-//                        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("quest_log");
-//                        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-//                        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-//
-//
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {    //이때 QuestlogInfo로 UID에 퀘스트 입력.
-//                            Toast myToast = Toast.makeText(getActivity().getApplicationContext(), "퀘스트가 수락되었습니다.", Toast.LENGTH_SHORT);
-//
-//                            long now = System.currentTimeMillis();  //현재시간
-//                            Date date = new Date(now);              //Date로 형변환
-//                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       //원하는 시간형식으로 변환
-//
-//                            String accepted_date = dateFormat.format(date);
-//
-//                            DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("quest_log");
-//                            FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-//                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-//
-//                            QuestlogInfo questlogInfo = new QuestlogInfo();
-//
-//                            questlogInfo.setTitle_ko(title_ko);
-//                            questlogInfo.setCategory(category);
-//                            questlogInfo.setQuest_num(quest_num);
-//                            questlogInfo.setFinished_date(finished_date);
-//                            questlogInfo.setAccepted_date(accepted_date);
-//                            questlogInfo.setRating(rating);
-//                            mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).setValue(questlogInfo);
-//                            //해당 퀘스트 번호로 저장됨
-//                            myToast.show();
-//                        }
-//                    })
-//                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Log.i("MyLog", "취소 버튼이 눌림");
-//                        }
-//                    })
-//                    .create();
-//        }
     }
 
     public void openDialog(View view){
