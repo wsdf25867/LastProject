@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +21,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,10 +32,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHolder> {
 
@@ -39,19 +52,28 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     private DatabaseReference mDatabaseRef = firebaseDatabase.getReference("quest_log");
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+    private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = firebaseStorage.getReference();
+
     String uid = firebaseUser.getUid();
     private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ing_quest_name;
+        TextView ing_quest_name, ing_quest_category, ing_quest_achievement, ing_quest_difficulty;
         Button check_button, giveup_button;
+        CircleImageView ing_quest_thumbnail;
 
         ViewHolder(View view) {
             super(view);
             // 뷰 객체에 대한 참조. (hold strong reference)
             ing_quest_name = (TextView) view.findViewById(R.id.ing_quest_name);
+            ing_quest_category = (TextView) view.findViewById(R.id.ing_quest_category);
+            ing_quest_achievement = (TextView) view.findViewById(R.id.ing_quest_achievement);
             check_button = (Button) view.findViewById(R.id.check_button);
             giveup_button = (Button) view.findViewById(R.id.giveup_button);
+            ing_quest_thumbnail = view.findViewById(R.id.ing_quest_thumbnail);
+            ing_quest_difficulty = (TextView) view.findViewById(R.id.ing_quest_difficulty);
+
         }
     }
 
@@ -65,7 +87,6 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ing_list_adapter, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -73,6 +94,17 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
 
         holder.ing_quest_name.setText(qData.get(position).getTitle_ko()); //진행 퀘스트 제목 출력
+        holder.ing_quest_category.setText("#" + qData.get(position).getCategory()); // 진행 퀘스트 카테고리 출력
+        holder.ing_quest_achievement.setText("#" + qData.get(position).getAchievement()); // 진행 퀘스트 성취 분야 출력
+        holder.ing_quest_difficulty.setText("난이도 : " + qData.get(position).getDifficulty()); // 진행 퀘스트 난이도 출력
+
+        storageRef.child("quest_thumbnail/" + qData.get(position).getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(holder.itemView.getContext()).load(uri).into(holder.ing_quest_thumbnail);
+            }
+        });
+
 
         mDatabaseRef.child(uid).addValueEventListener(new ValueEventListener() { //퀘스트 포기
             @Override

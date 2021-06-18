@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,6 +65,8 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
     RecommendListAdapter rAdapter;
     IngQuestAdapter iAdapter;
 
+    TextView title_recommend, title_ing;
+
 
 
 
@@ -90,20 +94,51 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_quest, container, false);
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
-        RecyclerView recyclerView2 = (RecyclerView) v.findViewById(R.id.recycleView2);
-        recyclerView.setHasFixedSize(true);
-        recyclerView2.setHasFixedSize(true);
+        RecyclerView recyclerView_recommend = (RecyclerView) v.findViewById(R.id.recycleView_recommend);
+        RecyclerView recyclerView_ing = (RecyclerView) v.findViewById(R.id.recycleView_ing);
+        title_recommend = (TextView) v.findViewById(R.id.title_recommend);
+        title_ing = (TextView) v.findViewById(R.id.title_ing);
+
+
+        recyclerView_recommend.setHasFixedSize(true);
+        recyclerView_ing.setHasFixedSize(true);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView2.setLayoutManager(mLayoutManager2);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView2.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(rAdapter);
-        recyclerView2.setAdapter(iAdapter);
+        recyclerView_recommend.setLayoutManager(mLayoutManager);
+        recyclerView_ing.setLayoutManager(mLayoutManager2);
+        recyclerView_recommend.setItemAnimator(new DefaultItemAnimator());
+        recyclerView_ing.setItemAnimator(new DefaultItemAnimator());
+        recyclerView_recommend.setAdapter(rAdapter);
+        recyclerView_ing.setAdapter(iAdapter);
+
+        recyclerView_recommend.setVisibility(View.VISIBLE);
+        recyclerView_ing.setVisibility(View.INVISIBLE);
+        title_recommend.setTextColor(Color.parseColor("#0E1621"));
+        title_ing.setTextColor(Color.parseColor("#9FA7C1"));
+
+        title_recommend.setOnClickListener(new View.OnClickListener() { // 추천 버튼
+            @Override
+            public void onClick(View v) {
+                recyclerView_recommend.setVisibility(View.VISIBLE);
+                recyclerView_ing.setVisibility(View.INVISIBLE);
+                title_recommend.setTextColor(Color.parseColor("#0E1621"));
+                title_ing.setTextColor(Color.parseColor("#9FA7C1"));
+
+            }
+        });
+
+        title_ing.setOnClickListener(new View.OnClickListener() { // 진행중 버튼
+            @Override
+            public void onClick(View v) {
+                recyclerView_recommend.setVisibility(View.INVISIBLE);
+                recyclerView_ing.setVisibility(View.VISIBLE);
+                title_ing.setTextColor(Color.parseColor("#0E1621"));
+                title_recommend.setTextColor(Color.parseColor("#9FA7C1"));
+
+            }
+        });
 
 
         return v;
