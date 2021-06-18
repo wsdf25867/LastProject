@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         videoView = (VideoView) findViewById(R.id.video_view);
         login_in = findViewById(R.id.log_in);
         sign_in = findViewById(R.id.sign_in);
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fixed_background_video));
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video));
         videoView.start();
 //        SAVE_INSTANCE_KEY = "key";
 //        if(savedInstanceState != null && SAVE_INSTANCE_KEY != null){
@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setLooping(true); // 동영상 무한 반복. 반복을 원치 않을 경우 false
+                if(!mp.isPlaying())
+                    videoView.start();
             }
         });
         login_in.setOnClickListener(new View.OnClickListener() {
