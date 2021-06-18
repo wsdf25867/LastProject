@@ -29,7 +29,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="16dp">
         <TextView
             android:id="@+id/settings"
@@ -67,8 +67,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_img"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="155dp"
+            android:layout_height="155dp"
             android:background="@drawable/user_img_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -183,8 +183,9 @@
             android:layout_height="51dp"
             android:background="@drawable/button_prim"
             android:text="성취도"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
             android:textAppearance="@style/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +198,8 @@
             android:layout_height="51dp"
             android:background="@drawable/button_prim"
             android:text="완료한 퀘스트"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
             android:textAppearance="@style/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
