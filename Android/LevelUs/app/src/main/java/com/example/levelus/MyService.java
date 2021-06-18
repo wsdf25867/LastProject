@@ -68,15 +68,15 @@ public class MyService extends Service {
     public void onCreate() {
 
         super.onCreate();
+
         try {
             uid = firebaseUser.getUid();
+            getIngQuest();
+            getRecommendData();
 
         }catch(NullPointerException e){
             this.onDestroy();
         }
-        getIngQuest();
-        getRecommendData();
-
 
     }
 
