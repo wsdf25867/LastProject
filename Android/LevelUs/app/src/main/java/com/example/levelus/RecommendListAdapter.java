@@ -94,8 +94,8 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
         QuestInfo cData = rData.get(position);
 
         holder.quest_name.setText(rData.get(position).getTitle_ko());
-        holder.quest_category.setText(rData.get(position).getCategory());
-        holder.quest_achievement.setText(rData.get(position).getAchievement());
+        holder.quest_category.setText("#" + rData.get(position).getCategory());
+        holder.quest_achievement.setText("#" + rData.get(position).getAchievement());
 
         storageRef.child("quest_thumbnail/" + rData.get(position).getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -183,9 +183,6 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
 
             }
         });
-
-
-
 
     }
 

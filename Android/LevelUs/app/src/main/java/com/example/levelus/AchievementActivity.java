@@ -206,40 +206,56 @@ public class AchievementActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                         QuestlogInfo questlogInfo = snapshot.getValue(QuestlogInfo.class);
-                        try{
-                            Log.d("dif",questlogInfo.getDifficulty());
-                            Log.d("achieve",questlogInfo.getAchievement());
-                            Log.d("date", questlogInfo.getFinished_date());
-                            Log.d("title_ko", questlogInfo.getTitle_ko());
+                        try {
+                            if (Float.parseFloat(questlogInfo.getRating()) > 0.0) {
+                                Log.d("dif", questlogInfo.getDifficulty());
+                                Log.d("achieve", questlogInfo.getAchievement());
+                                Log.d("date", questlogInfo.getFinished_date());
+                                Log.d("title_ko", questlogInfo.getTitle_ko());
 
-                            String from = questlogInfo.getFinished_date();
-                            SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
-                            Date to = fm.parse(from);
-                            
-                            CalendarText calendarText = new CalendarText();
-                            calendarText.setTitle_ko(questlogInfo.getTitle_ko());
-                            calendarText.setFinished_date(questlogInfo.getFinished_date());
-                            calendarText.setAchievement(questlogInfo.getAchievement());
-                            
-                            calendarinfo.add(calendarText);
-                            
-                            materialCalendarView.addDecorators(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(to))));
-                            switch (questlogInfo.getAchievement()){
-                                case "growth" : dataVals.set(0, new RadarEntry(dataVals.get(0).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
-                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
-                                case "travel" : dataVals.set(1, new RadarEntry(dataVals.get(1).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
-                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
-                                case "experience" : dataVals.set(2, new RadarEntry(dataVals.get(2).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
-                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
-                                case "challenge" : dataVals.set(3, new RadarEntry(dataVals.get(3).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
-                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
-                                case "enjoy" : dataVals.set(4, new RadarEntry(dataVals.get(4).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
-                                    dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));break;
-                                default : break;
+                                String from = questlogInfo.getFinished_date();
+                                SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+                                Date to = fm.parse(from);
+
+                                CalendarText calendarText = new CalendarText();
+                                calendarText.setTitle_ko(questlogInfo.getTitle_ko());
+                                calendarText.setFinished_date(questlogInfo.getFinished_date());
+                                calendarText.setAchievement(questlogInfo.getAchievement());
+
+                                calendarinfo.add(calendarText);
+
+                                materialCalendarView.addDecorators(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.from(to))));
+                                switch (questlogInfo.getAchievement()) {
+                                    case "growth":
+                                        dataVals.set(0, new RadarEntry(dataVals.get(0).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                        dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));
+                                        break;
+                                    case "travel":
+                                        dataVals.set(1, new RadarEntry(dataVals.get(1).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                        dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));
+                                        break;
+                                    case "experience":
+                                        dataVals.set(2, new RadarEntry(dataVals.get(2).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                        dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));
+                                        break;
+                                    case "challenge":
+                                        dataVals.set(3, new RadarEntry(dataVals.get(3).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                        dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));
+                                        break;
+                                    case "enjoy":
+                                        dataVals.set(4, new RadarEntry(dataVals.get(4).getValue() + Float.parseFloat(questlogInfo.getDifficulty())));
+                                        dataVals.set(5, new RadarEntry(dataVals.get(5).getValue() + 1));
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
-                        }catch(NullPointerException | ParseException e){}
+                        } catch (NullPointerException | ParseException e) {
+                        }
 
                     }
+
+
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
 

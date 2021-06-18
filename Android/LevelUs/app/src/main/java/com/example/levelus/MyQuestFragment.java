@@ -61,7 +61,6 @@ public class MyQuestFragment extends Fragment implements LoggedPages.onKeyBackPr
 
     ArrayList<QuestInfo> rData = new ArrayList<>();
     ArrayList<QuestlogInfo> iData = new ArrayList<>();
-    ArrayList<String> qData = new ArrayList<>();
 
     RecommendListAdapter rAdapter;
     IngQuestAdapter iAdapter;

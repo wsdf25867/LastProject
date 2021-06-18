@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="190dp"
-    android:layout_height="250dp">
+    android:layout_width="170dp"
+    android:layout_height="220dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/rectangle_recquest_or">
+        android:background="@drawable/rectangle_recquest_or"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp">
+
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/recommend_quest_name"
-            android:padding="8dp"
-            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginLeft="15dp"
+            android:layout_weight="9"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:gravity="center_vertical"
-            android:layout_weight="9"/>
-
-
+            android:padding="8dp"
+            android:textSize="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,20 +32,22 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/recommend_quest_category"
-                    android:textSize="15dp"
+                    android:textSize="10dp"
                     android:fontFamily="@font/notosanscjkkr_regular"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/recommend_quest_achievement"
-                    android:textSize="15dp"
+                    android:textSize="10dp"
                     android:fontFamily="@font/notosanscjkkr_regular"/>
             </LinearLayout>
 
@@ -51,7 +55,8 @@
                 android:id="@+id/recommend_quest_thumbnail"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="right"/>
+                android:layout_gravity="right"
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
