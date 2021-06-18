@@ -160,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/Text.Category"
-            android:textSize="40dp" />
+            android:textSize="30dp" />
 
         <ImageButton
             android:id="@+id/quest"
