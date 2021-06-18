@@ -44,7 +44,7 @@ public class MyService extends Service {
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
-    String uid = firebaseUser.getUid();
+    String uid;
 
     ArrayList<QuestInfo> rData = new ArrayList<>();
     ArrayList<QuestlogInfo> iData = new ArrayList<>();
@@ -68,17 +68,23 @@ public class MyService extends Service {
     public void onCreate() {
 
         super.onCreate();
+        try {
 
-        getRecommendData();
-        getIngQuest();
+            uid = firebaseUser.getUid();
+
+        }catch(NullPointerException e){
+            this.onDestroy();
+        }
+
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        if(intent == null){
+        if (intent == null) {
             return Service.START_STICKY;
-        }else{
+        } else {
 
             System.out.println("여기왔니?");
         }
@@ -122,7 +128,7 @@ public class MyService extends Service {
                     if (questlogInfo.getRating().equals("0")) {
                         iData.add(questlogInfo);
                         if (questlogInfo.getPeriod() != null) {
-                            if (Long.parseLong(questlogInfo.getPeriod())-calDate(questlogInfo.getAccepted_date()) <= 1) {
+                            if (Long.parseLong(questlogInfo.getPeriod()) - calDate(questlogInfo.getAccepted_date()) <= 1) {
                                 show(questlogInfo.getTitle_ko());
                             }
                         }
@@ -146,11 +152,11 @@ public class MyService extends Service {
 
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle("LEVEL US");
-        builder.setContentText("진행중인 퀘스트 '"+title+"'가 하루 남았습니다");
+        builder.setContentText("진행중인 퀘스트 '" + title + "'가 하루 남았습니다");
 
 
         //인텐트 설정
-        intent = new Intent(this,MainActivity.class);
+        intent = new Intent(this, MainActivity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0,
