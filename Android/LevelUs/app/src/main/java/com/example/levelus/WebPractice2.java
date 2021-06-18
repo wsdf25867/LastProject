@@ -13,6 +13,8 @@ public class WebPractice2 extends AppCompatActivity {
     private String uid;
     private WebView webView2;
     private WebSettings webSettings;
+    private WebView webView3;
+    private WebSettings webSettings2;
 
 
     @Override
@@ -30,6 +32,12 @@ public class WebPractice2 extends AppCompatActivity {
         webSettings = webView2.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView2.loadUrl("http://3.35.9.194:5000/refresh/"+uid);
+
+        webView3 = findViewById(R.id.webView3);
+        webView3.setWebViewClient(new WebViewClient());
+        webSettings2 = webView3.getSettings();
+        webSettings2.setJavaScriptEnabled(true);
+        webView3.loadUrl("http://3.35.9.194:5000/quest_category/");
 
         finish();
     }

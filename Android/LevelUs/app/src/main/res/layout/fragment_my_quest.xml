@@ -56,8 +56,8 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="510dp">
+        android:layout_width="match_parent"<
+        android:layout_height="500dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView_recommend"

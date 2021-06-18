@@ -59,8 +59,6 @@ public class QuestListFragment extends Fragment implements LoggedPages.onKeyBack
         // Required empty public constructor
     }
 
-
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

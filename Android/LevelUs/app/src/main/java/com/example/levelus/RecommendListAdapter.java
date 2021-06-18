@@ -145,8 +145,6 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 qRef.child("ALL").child(cData.getQuest_num()).child("added").setValue(addeds);
                 System.out.println("여기까지왔음2");
 
-                Intent GoToWeb3 = new Intent(v.getContext(),WebPractice3.class);
-                v.getContext().startActivity(GoToWeb3);
 
                 Intent intent = new Intent(v.getContext(),WebPractice2.class);
                 intent.putExtra("uid",uid);

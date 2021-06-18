@@ -68,14 +68,15 @@ public class MyService extends Service {
     public void onCreate() {
 
         super.onCreate();
-        try {
 
+        try {
             uid = firebaseUser.getUid();
+            getIngQuest();
+            getRecommendData();
 
         }catch(NullPointerException e){
             this.onDestroy();
         }
-
 
     }
 
@@ -85,8 +86,8 @@ public class MyService extends Service {
         if (intent == null) {
             return Service.START_STICKY;
         } else {
-
             System.out.println("여기왔니?");
+
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -156,7 +157,7 @@ public class MyService extends Service {
 
 
         //인텐트 설정
-        intent = new Intent(this, MainActivity.class);
+        intent = new Intent(this, MainActivity.class); //페이지 이동해버리기
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0,
