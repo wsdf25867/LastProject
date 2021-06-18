@@ -75,8 +75,6 @@ public class MyService extends Service {
         }catch(NullPointerException e){
             this.onDestroy();
         }
-
-
     }
 
     @Override

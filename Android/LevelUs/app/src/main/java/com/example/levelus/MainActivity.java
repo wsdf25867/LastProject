@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = firebaseDatabase.getReference("Level Us");
     private String TAG = "VideoActivity";
     private VideoView videoView;
+    private TextView titleText;
 //    private static String SAVE_INSTANCE_KEY;
     private int rNum;
     public static boolean isLoginSuccess = true;
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         //play video
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        titleText = findViewById(R.id.first_page);
         videoView = (VideoView) findViewById(R.id.video_view);
         login_in = findViewById(R.id.log_in);
         sign_in = findViewById(R.id.sign_in);
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video2));
                 break;
             default:
+                titleText.setTextColor(Color.parseColor("#000000"));
                 videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background_video3));
                 break;
         }
