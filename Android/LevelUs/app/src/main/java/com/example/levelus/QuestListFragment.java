@@ -441,8 +441,8 @@ public class QuestListFragment extends Fragment implements LoggedPages.onKeyBack
                 recyclerView_food.setVisibility(View.INVISIBLE);
                 recyclerView_health.setVisibility(View.INVISIBLE);
                 recyclerView_hiking.setVisibility(View.INVISIBLE);
-                recyclerView_life_milestone.setVisibility(View.VISIBLE);
-                recyclerView_love.setVisibility(View.INVISIBLE);
+                recyclerView_life_milestone.setVisibility(View.INVISIBLE);
+                recyclerView_love.setVisibility(View.VISIBLE);
                 recyclerView_nature.setVisibility(View.INVISIBLE);
                 recyclerView_new_skill.setVisibility(View.INVISIBLE);
                 recyclerView_outdoor.setVisibility(View.INVISIBLE);
@@ -703,7 +703,7 @@ public class QuestListFragment extends Fragment implements LoggedPages.onKeyBack
             }
 
         });
-        qAdapter = new QuestListAdapter(rData);
+        qAdapter = new QuestListAdapter(this, rData);
     }
 
     @Override

@@ -97,6 +97,18 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
         holder.quest_category.setText("#" + rData.get(position).getCategory());
         holder.quest_achievement.setText("#" + rData.get(position).getAchievement());
 
+        switch((int)((Math.random()*10000)%3)){
+            case 0:
+                holder.itemView.setBackgroundResource(R.drawable.rectangle_questlist_blue);
+                break;
+            case 1:
+                holder.itemView.setBackgroundResource(R.drawable.rectangle_questlist_mint);
+                break;
+            case 2:
+                holder.itemView.setBackgroundResource(R.drawable.rectangle_questlist_orange);
+                break;
+        }
+
         storageRef.child("quest_thumbnail/" + rData.get(position).getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

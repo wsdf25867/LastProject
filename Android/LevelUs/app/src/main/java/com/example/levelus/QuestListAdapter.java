@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -37,27 +41,28 @@ public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.View
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     private StorageReference storageRef = firebaseStorage.getReference();
 
+
     ArrayList<QuestInfo> rData = new ArrayList<>();
+    QuestListFragment fragment;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView quest_name;
+        TextView quest_list_name;
         CircleImageView quest_thumbnail;
 
         ViewHolder(View view) {
             super(view);
-            quest_name = view.findViewById(R.id.quest_list_name);
+            quest_list_name = view.findViewById(R.id.quest_list_name);
             quest_thumbnail = view.findViewById(R.id.quest_list_thumbnail);
         }
     }
 
-    public QuestListAdapter(ArrayList<QuestInfo> list) { this.rData = list; }
+    public QuestListAdapter(QuestListFragment fragment, ArrayList<QuestInfo> list) { this.rData = list; this.fragment = fragment; }
 
 
     @NonNull
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quest_list_adapter, parent, false);
         return new ViewHolder(view);
     }
@@ -65,12 +70,33 @@ public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull @NotNull QuestListAdapter.ViewHolder holder, int position) {
         QuestInfo cData = rData.get(position);
-        holder.quest_name.setText(cData.getTitle_ko());
+
+        holder.quest_list_name.setText(cData.getTitle_ko());
+        switch((int)((Math.random()*10000)%3)){
+            case 0:
+                holder.itemView.setBackgroundResource(R.drawable.rectangle_questlist_blue);
+                break;
+            case 1:
+                holder.itemView.setBackgroundResource(R.drawable.rectangle_questlist_mint);
+                break;
+            case 2:
+                holder.itemView.setBackgroundResource(R.drawable.rectangle_questlist_orange);
+                break;
+        }
 
         storageRef.child("quest_thumbnail/" + cData.getQuest_num() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(holder.itemView.getContext()).load(uri).into(holder.quest_thumbnail);
+            }
+        });
+
+        holder.quest_thumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyAlertDialogFragment newDialogFragment;
+                newDialogFragment = MyAlertDialogFragment.newInstance(cData.getTitle_ko(), cData.getCategory(), cData.getAdded(), cData.getDone(), cData.getWay(), cData.getDifficulty(), cData.getPeriod());
+                newDialogFragment.show(fragment.getActivity().getSupportFragmentManager(), "quest info");
             }
         });
     }
@@ -136,9 +162,9 @@ public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.View
         }
 
     }
+//    public void openDialog(View view){
+//        MyAlertDialogFragment myAlertDialogFragment = new MyAlertDialogFragment();
+//        myAlertDialogFragment.show(getActivity().getSupportFragmentManager(), "Quest Infos");
+//    }
 
-    public void openDialog(View view){
-        MyAlertDialogFragment myAlertDialogFragment = new MyAlertDialogFragment();
-        myAlertDialogFragment.show(getActivity().getSupportFragmentManager(), "Quest Infos");
-    }
 }
