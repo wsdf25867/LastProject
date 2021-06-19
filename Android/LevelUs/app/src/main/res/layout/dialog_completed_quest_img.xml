@@ -9,6 +9,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dialog_completed_quest_img"/>
+        android:id="@+id/completed_quest_img"
+        android:scaleType="fitCenter" />
 
 </LinearLayout>

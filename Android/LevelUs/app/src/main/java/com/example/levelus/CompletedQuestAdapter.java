@@ -172,8 +172,8 @@ public class CompletedQuestAdapter extends BaseAdapter implements Filterable {
         public static CompletedQuestAdapter.CompletedQuestAlertDialogFragment newInstance(Drawable img) {
             CompletedQuestAdapter.CompletedQuestAlertDialogFragment frag = new CompletedQuestAdapter.CompletedQuestAlertDialogFragment();
             Bundle args = new Bundle();
-            Bitmap bitmap = (Bitmap)((BitmapDrawable)img).getBitmap();
-            args.putParcelable("quest_img",bitmap);
+            Bitmap bitmap = ((BitmapDrawable)img).getBitmap();
+            args.putParcelable("bitmap",bitmap);
             frag.setArguments(args);
             return frag;
         }
@@ -185,10 +185,11 @@ public class CompletedQuestAdapter extends BaseAdapter implements Filterable {
         public Dialog onCreateDialog(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             LayoutInflater inflater = getActivity().getLayoutInflater();
-            View view = inflater.inflate(R.layout.dialog_quest_info, null);
-            
-            completed_quest_img = view.findViewById(R.id.dialog_completed_quest_img);
-            completed_quest_img.setImageBitmap(getArguments().getParcelable("quest_img"));
+            View view = inflater.inflate(R.layout.dialog_completed_quest_img, null);
+            builder.setView(view).setTitle(getArguments().getString("title_ko"));
+
+            completed_quest_img = view.findViewById(R.id.completed_quest_img);
+            completed_quest_img.setImageBitmap(getArguments().getParcelable("bitmap"));
             return builder.create();
         }
 
