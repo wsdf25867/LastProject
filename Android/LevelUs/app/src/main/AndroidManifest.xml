@@ -21,7 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LevelUs"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NotificationMoveActivity"></activity>
         <activity
             android:name=".WebPractice3"
             android:screenOrientation="portrait" />
