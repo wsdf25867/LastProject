@@ -18,21 +18,37 @@
         android:layout_marginRight="16dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="60dp">
-        <TextView
-            android:id="@+id/log_in"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:text="Rank"
-            android:textAppearance="@style/big_black_title"
-            android:gravity="center_horizontal|top" />
+
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_toRightOf="@+id/log_in"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/trophy"/>
+            android:id="@+id/my_quest_logo"
+            android:layout_width="85dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/logotype_2"
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:id="@+id/log_in"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Rank"
+                android:textAppearance="@style/big_black_title"
+                android:gravity="center_horizontal|top" />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_toRightOf="@+id/log_in"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/trophy"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <LinearLayout

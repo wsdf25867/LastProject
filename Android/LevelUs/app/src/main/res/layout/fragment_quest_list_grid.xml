@@ -18,6 +18,14 @@
         android:layout_marginTop="60dp"
         android:layout_marginRight="16dp">
 
+        <ImageView
+            android:id="@+id/my_quest_logo"
+            android:layout_width="85dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/logotype_2"
+            android:layout_marginTop="10dp" />
+
         <TextView
             android:id="@+id/log_in"
             android:layout_width="150dp"
