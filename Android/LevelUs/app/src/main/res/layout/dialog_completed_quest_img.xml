@@ -7,8 +7,8 @@
     android:background="#64E7AE">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:id="@+id/completed_quest_img"
         android:scaleType="fitCenter" />
 
