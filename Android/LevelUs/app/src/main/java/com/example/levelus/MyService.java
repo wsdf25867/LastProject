@@ -151,7 +151,7 @@ public class MyService extends Service {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default");
 
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.drawable.app_logo);
         builder.setContentTitle("LEVEL US");
         builder.setContentText("진행중인 퀘스트 '" + title + "'가 하루 남았습니다");
 
@@ -169,7 +169,7 @@ public class MyService extends Service {
         this.onDestroy();
 
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.ic_launcher);
+                R.drawable.app_logo);
 
         builder.setLargeIcon(largeIcon);
         builder.setColor(Color.BLACK);
