@@ -1,7 +1,12 @@
 package com.example.levelus;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +17,29 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
-public class ListViewAdapter extends BaseAdapter implements Filterable {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
+
+public class CompletedQuestAdapter extends BaseAdapter implements Filterable {
 
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList. (원본 데이터 리스트)
     private ArrayList<ListViewItem> listViewItemList ;
     // 필터링된 결과 데이터를 저장하기 위한 ArrayList. 최초에는 전체 리스트 보유.
     private ArrayList<ListViewItem> filteredItemList;
     Filter listFilter ;
-
+    Drawable icon;
+    CompletedQuestActivity activity;
     // ListViewAdapter의 생성자
-    public ListViewAdapter(ArrayList<ListViewItem> listViewItemList) {
+    public CompletedQuestAdapter(ArrayList<ListViewItem> listViewItemList, CompletedQuestActivity activity) {
         this.listViewItemList = listViewItemList;
         this.filteredItemList = listViewItemList;
+        this.activity = activity;
     }
 
 
@@ -78,6 +92,15 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         acceptedDateTextView.setText(listViewItem.getAccepted_date());
         finishedDateTextView.setText(listViewItem.getFinished_date());
 
+        iconImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CompletedQuestAdapter.CompletedQuestAlertDialogFragment newDialogFragment;
+                newDialogFragment = CompletedQuestAdapter.CompletedQuestAlertDialogFragment.newInstance(listViewItem.getIconDrawable());
+                newDialogFragment.show(activity.getSupportFragmentManager(),"quest_img");
+            }
+        });
+
         return convertView;
     }
 
@@ -93,7 +116,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
     public void addItem(Drawable icon, String title_ko, String rating, String category, String accepted_date, String finished_date ) {
         ListViewItem item = new ListViewItem();
-
+        this.icon = icon;
         item.setIconDrawable(icon);
         item.setTitle_ko(title_ko);
         item.setRating(rating);
@@ -142,4 +165,34 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
 
 
     }
+
+    public static class CompletedQuestAlertDialogFragment extends AppCompatDialogFragment {
+        ImageView completed_quest_img;
+
+        public static CompletedQuestAdapter.CompletedQuestAlertDialogFragment newInstance(Drawable img) {
+            CompletedQuestAdapter.CompletedQuestAlertDialogFragment frag = new CompletedQuestAdapter.CompletedQuestAlertDialogFragment();
+            Bundle args = new Bundle();
+            Bitmap bitmap = ((BitmapDrawable)img).getBitmap();
+            args.putParcelable("bitmap",bitmap);
+            frag.setArguments(args);
+            return frag;
+        }
+
+
+        @NonNull
+        @NotNull
+        @Override
+        public Dialog onCreateDialog(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View view = inflater.inflate(R.layout.dialog_completed_quest_img, null);
+            builder.setView(view).setTitle(getArguments().getString("title_ko"));
+
+            completed_quest_img = view.findViewById(R.id.completed_quest_img);
+            completed_quest_img.setImageBitmap(getArguments().getParcelable("bitmap"));
+            return builder.create();
+        }
+
+    }
 }
+

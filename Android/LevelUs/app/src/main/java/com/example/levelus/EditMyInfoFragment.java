@@ -246,8 +246,8 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
         user_favorite.setText(intent.getStringExtra("favorite"));
         user_local.setText(intent.getStringExtra("local"));
 
-        if(storageRef.child(firebaseUser.getUid()+"/profile_img") != null){
-            StorageReference submitProfile = storageRef.child(firebaseUser.getUid()+"/profile_img");
+        if(storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg") != null){
+            StorageReference submitProfile = storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg");
             submitProfile.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
@@ -284,7 +284,7 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
 
             Uri file = Uri.fromFile(new File(imagePath));
 
-            StorageReference riversRef = storageRef.child(firebaseUser.getUid()+"/profile_img");
+            StorageReference riversRef = storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg");
             UploadTask uploadTask = riversRef.putFile(file);
 
 // Register observers to listen for when the download is done or if it fails
@@ -308,8 +308,8 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
         }
         else if(resultCode == Activity.RESULT_CANCELED) {
             Toast.makeText(getActivity(), "사진 선택 취소", Toast.LENGTH_LONG).show();
-            if(storageRef.child(firebaseUser.getUid()+"/profile_img") != null){
-                storageRef.child(firebaseUser.getUid()+"/profile_img").delete();
+            if(storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg") != null){
+                storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg").delete();
                 storageRef.child(firebaseUser.getUid()).delete();
                 getActivity().finish();
                 Intent LoggedPages = new Intent(getActivity(), LoggedPages.class);

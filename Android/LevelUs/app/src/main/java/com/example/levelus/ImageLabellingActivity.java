@@ -505,7 +505,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                             String realLevel = String.valueOf(Integer.valueOf(level) + Integer.valueOf(difficulty));
                                             mDatabaseRef3.child("UserAccount").child(firebaseUser.getUid()).child("level").setValue(realLevel);
 
-                                            StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
+                                            StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num + ".jpeg");
                                             Bitmap uploadBitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                             uploadBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

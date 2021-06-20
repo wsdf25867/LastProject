@@ -12,7 +12,37 @@
         android:layout_alignParentRight="true"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
-        <Button
+
+        <ImageView
+            android:id="@+id/my_quest_logo"
+            android:layout_width="350dp"
+            android:layout_height="400dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:src="@drawable/logotype_1"
+            android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/first_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_quest_logo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="432dp"
+        android:layout_marginRight="1dp"
+        android:gravity="center_horizontal|top"
+        android:text="Let's start!!"
+        android:textAppearance="@style/big_black_title"
+        android:textColor="#ffffff" />
+
+    <Button
             android:id="@+id/log_in"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -48,15 +78,6 @@
             android:layout_marginRight="16dp"
             android:layout_below="@+id/sign_in"
             android:layout_marginTop="60dp">
-            <TextView
-                android:id="@+id/first_page"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"
-                android:text="Let's start!!"
-                android:textAppearance="@style/big_black_title"
-                android:gravity="center_horizontal|top"
-                android:textColor="#ffffff"/>
+
         </RelativeLayout>
 </RelativeLayout>

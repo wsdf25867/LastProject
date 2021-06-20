@@ -162,9 +162,5 @@ public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.View
         }
 
     }
-//    public void openDialog(View view){
-//        MyAlertDialogFragment myAlertDialogFragment = new MyAlertDialogFragment();
-//        myAlertDialogFragment.show(getActivity().getSupportFragmentManager(), "Quest Infos");
-//    }
 
 }

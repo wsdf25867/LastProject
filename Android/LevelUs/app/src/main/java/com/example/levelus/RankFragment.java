@@ -159,7 +159,7 @@ public class RankFragment extends Fragment implements LoggedPages.onKeyBackPress
                         my_text_name.setText(userAccount.getName());
 
                         if(storageRef.child(userAccount.getIdToken()+"/profile_img") != null){
-                            StorageReference submitProfile = storageRef.child(userAccount.getIdToken()+"/profile_img");
+                            StorageReference submitProfile = storageRef.child(userAccount.getIdToken()+"/profile_img.jpeg");
                             submitProfile.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
