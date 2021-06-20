@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -89,6 +90,8 @@ public class QuestListFragment extends Fragment implements LoggedPages.onKeyBack
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Toast toast = Toast.makeText(this.getActivity().getApplication(), "이미지를 클릭하여 퀘스트 목록을 확인하세요.",Toast.LENGTH_SHORT);
+        toast.show();
         View view = inflater.inflate(R.layout.fragment_quest_list_grid, container, false);
         RecyclerView recyclerView_diy = (RecyclerView) view.findViewById(R.id.recycleView_diy);
         RecyclerView recyclerView_entertainment = (RecyclerView) view.findViewById(R.id.recycleView_entertainment);

@@ -86,7 +86,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         holder.text_level.setText(rankList.get(position).getLevel());
 
         if(storageRef.child(rankList.get(position).getIdToken()+"/profile_img") != null){
-            StorageReference submitProfile = storageRef.child(rankList.get(position).getIdToken()+"/profile_img");
+            StorageReference submitProfile = storageRef.child(rankList.get(position).getIdToken()+"/profile_img.jpeg");
             submitProfile.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
