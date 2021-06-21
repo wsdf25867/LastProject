@@ -83,7 +83,7 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
         for index, row in user_log.iterrows() : #quest_log에 있는 quest_num을 제거
             print(row['quest_num'])
             del_index = df[df['quest_num'] == row['quest_num']].index
-            result = df.drop(del_index)
+            result = result.drop(del_index)
 
     if(rj_list.empty):          #rejected_list 가 없으면
         print(rj_list)
