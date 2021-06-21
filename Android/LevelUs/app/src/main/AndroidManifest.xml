@@ -16,7 +16,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_logo"
-        android:label="@string/app_name"
+        android:label="LevelUP"
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.LevelUs"

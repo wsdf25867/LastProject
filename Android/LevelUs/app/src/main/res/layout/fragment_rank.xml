@@ -130,10 +130,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_weight="3"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="5dp"
         android:scrollbarThumbVertical="@color/browser_actions_bg_grey"
-        android:scrollbars="vertical"
-        android:layout_weight="3"/>
+        android:scrollbars="vertical" />
 
 </LinearLayout>
