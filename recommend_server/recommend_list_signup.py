@@ -59,9 +59,9 @@ def get_member_data_refresh(uid):
 def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
     
     member = db.reference('/Level Us/UserAccount/' + uid).get()       #사용자 정보
-    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())  #추천 퀘스트 목록
+    user_log = pd.DataFrame(db.reference('/quest_log/' + uid).get())  #사용자 퀘스트 목록
     rj_list = pd.DataFrame(db.reference('/rejected_list/' + uid).get())      #거절 퀘스트 목록
-
+    result = df
     toprate = 0
     quest_index = 0
     
@@ -80,6 +80,11 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
                 toprate = float(row['rating'])
                 quest_index = row['quest_num']
 
+        for index, row in rj_list.iterrows() : #quest_log에 있는 quest_num을 제거
+            print(row['quest_num'])
+            del_index = df[df['quest_num'] == row['quest_num']].index
+            result = df.drop(del_index)
+
     if(rj_list.empty):          #rejected_list 가 없으면
         print(rj_list)
     else:                       #rejected_list의 df가 행열이 바뀌어있다면
@@ -92,10 +97,10 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
         for index, row in rj_list.iterrows() : #rejected_list에 있는 quest_num을 제거
             print(row['quest_num'])
             del_index = df[df['quest_num'] == row['quest_num']].index
-            df = df.drop(del_index)
+            result = result.drop(del_index)
 
     print('여기서 확인 :')
-    print(df)    
+    print(result)    
     
     
     # target_bucketlist_index = df[df['quest_num'] == quest_index].index.values #컨텐츠 기반 필터링
@@ -111,7 +116,7 @@ def get_recommend_bucket_list_refresh(uid, df, category_c_sim, top=30):
     #     print(sim_index)
     
     #result = df.iloc[sim_index].sort_values('done', ascending=False)
-    result = df.sort_values('done', ascending=False)
+    result = result.sort_values('done', ascending=False)
     result = result.sort_values(by=['quest_num'], axis=0)
 
     # if(user_log is not None):

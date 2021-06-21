@@ -42,14 +42,10 @@ import java.util.Collections;
  * create an instance of this fragment.
  */
 public class RankFragment extends Fragment implements LoggedPages.onKeyBackPressedListener{
-//    static boolean isCurUser = false;
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-//    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//    private DatabaseReference databaseReference = firebaseDatabase.getReference("Level Us");
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
