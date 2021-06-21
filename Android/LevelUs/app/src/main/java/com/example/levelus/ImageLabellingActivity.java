@@ -252,7 +252,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                             //제출 버튼 클릭했을때
                             submit.setOnClickListener(new View.OnClickListener(){
 
-
                                 @Override
                                 public void onClick(View view) {
                                     Toast.makeText(ImageLabellingActivity.this, "제출하신 별점은 다음 퀘스트 추천의 기반이 됩니다~!",Toast.LENGTH_SHORT).show();
@@ -263,7 +262,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     //퀘스트 종료 날짜
                                     mDatabaseRef.child(firebaseUser.getUid()).child(quest_num).child("finished_date").setValue(finished_date);
 
-                                    StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
+                                    StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num+".jpeg");
                                     Bitmap uploadBitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                     uploadBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

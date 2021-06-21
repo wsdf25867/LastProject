@@ -142,38 +142,32 @@ public class IngQuestAdapter extends RecyclerView.Adapter<IngQuestAdapter.ViewHo
                     QuestlogInfo[] questlogInfo = new QuestlogInfo[222];
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            for (int i = 0; i < 222; i++) {
-                                System.out.println("해당 퀘스트 타이틀");
-                                System.out.println(qData.get(position).getTitle_ko());  //이거 뜨고
-                                questlogInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestlogInfo.class);
-                                System.out.println(questlogInfo[i]);
-                                if(questlogInfo[i] != null) {
-                                    if (qData.get(position).getTitle_ko().equals(questlogInfo[i].getTitle_ko())) {
-                                        System.out.println("해당 퀘스트와 일치하는 퀘스트 넘버");
-                                        System.out.println(questlogInfo[i].getQuest_num());     //얘도 뜬다. 근데 데이터가 안넘어가네?
-                                        quest_num = questlogInfo[i].getQuest_num();
-//                                    intent.putExtra("quest_num",quest_num);       //여기서 넣으면 안넘어가짐
-//                                    intent.putExtra("title_ko","test title_ko");  //여기서 넣으면 안넘어가짐
-                                        System.out.println(quest_num);
-                                        break;
+                        try{
+                            if(snapshot.exists()){
+                                for (int i = 0; i < 222; i++) {
+//                                System.out.println("해당 퀘스트 타이틀");
+//                                System.out.println(qData.get(position).getTitle_ko());  //이거 뜨고
+                                    questlogInfo[i] = snapshot.child(Integer.toString(i)).getValue(QuestlogInfo.class);
+                                    System.out.println(questlogInfo[i]);
+                                    if(questlogInfo[i] != null) {
+                                        if (qData.get(position).getTitle_ko().equals(questlogInfo[i].getTitle_ko())) {
+                                            System.out.println("해당 퀘스트와 일치하는 퀘스트 넘버");
+                                            System.out.println(questlogInfo[i].getQuest_num());     //얘도 뜬다. 근데 데이터가 안넘어가네?
+                                            quest_num = questlogInfo[i].getQuest_num();
+                                            System.out.println(quest_num);
+                                            break;
+                                        }
                                     }
                                 }
                             }
-                        }
-                        //여기가 onDataChange메소드 끝나기 직전 부분
-//                        System.out.println("onDataChange메소드 끝나기 직전부분");
-//                        System.out.println("quest_num :"+quest_num);
-//                        intent.putExtra("title_ko","test title_ko");
-//                        intent.putExtra("quest_num",quest_num);
-
-                        //여기서도 intent로 넘어가지가 않는다.
-                        intent.putExtra("quest_num",quest_num);
+                            //여기서도 intent로 넘어가지가 않는다.
+                            intent.putExtra("quest_num",quest_num);
 //                        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK | intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(intent);
+                            context.startActivity(intent);
 
+                        }catch(IndexOutOfBoundsException e){
 
-
+                        }
                     }
 
                     @Override
