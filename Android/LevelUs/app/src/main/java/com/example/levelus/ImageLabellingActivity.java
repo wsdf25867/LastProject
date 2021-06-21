@@ -549,8 +549,7 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                         }
                                     });
                                     break;
-                                }   Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT);
-                                    myToast.show();
+                                }
                             }
 
                         }
