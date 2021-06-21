@@ -166,7 +166,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         android:layout_below="@+id/allCategory">
 
         <androidx.recyclerview.widget.RecyclerView

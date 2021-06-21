@@ -80,8 +80,7 @@
                 android:textSize="20sp"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:layout_marginLeft="7dp"
-                android:fontFamily="@font/notosanscjkkr_medium"/>
+                android:layout_marginLeft="7dp"/>
 
         </FrameLayout>
         <LinearLayout
@@ -102,8 +101,7 @@
                 android:layout_marginLeft="5dp"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:textSize="20sp"
-                android:fontFamily="@font/notosanscjkkr_medium"/>
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -123,8 +121,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textAlignment="center"
-                android:gravity="center"
-                android:fontFamily="@font/notosanscjkkr_medium"/>
+                android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>
 
