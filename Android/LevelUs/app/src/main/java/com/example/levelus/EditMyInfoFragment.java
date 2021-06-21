@@ -309,11 +309,10 @@ public class EditMyInfoFragment extends Fragment implements LoggedPages.onKeyBac
         else if(resultCode == Activity.RESULT_CANCELED) {
             Toast.makeText(getActivity(), "사진 선택 취소", Toast.LENGTH_LONG).show();
             if(storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg") != null){
-                storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg").delete();
-                storageRef.child(firebaseUser.getUid()).delete();
-                getActivity().finish();
-                Intent LoggedPages = new Intent(getActivity(), LoggedPages.class);
-                startActivity(LoggedPages);
+//                storageRef.child(firebaseUser.getUid()+"/profile_img.jpeg").delete();
+//                getActivity().finish();
+//                Intent LoggedPages = new Intent(getActivity(), LoggedPages.class);
+//                startActivity(LoggedPages);
             }
 //            user_img.setBackground(null);
 //            user_img.invalidate();
