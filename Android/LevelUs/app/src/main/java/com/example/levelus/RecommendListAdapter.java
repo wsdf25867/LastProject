@@ -120,6 +120,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
         holder.agree_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(v.getContext(), "퀘스트를 수락했습니다. 진행중 페이지로 이동해 확인하세요.", Toast.LENGTH_SHORT).show();
                 //로그에 넣을 데이터
                 QuestlogInfo questlogInfo = new QuestlogInfo();
 
@@ -173,6 +174,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                     public void onClick(View v) {
                         for(int i=0;i<10;i++){
                             if(snapshot.child(Integer.toString(i)).exists()){
+                                Toast.makeText(v.getContext(), "퀘스트를 거절했습니다. 해당 퀘스트를 제외한 추천 퀘스트 목록을 제공합니다.", Toast.LENGTH_SHORT).show();
                                 QuestInfo questInfo = snapshot.child(Integer.toString(i)).getValue(QuestInfo.class);
                                 if(questInfo.getQuest_num().equals(cData.getQuest_num())){
                                     rRef.child(uid).child(Integer.toString(i)).removeValue();
