@@ -304,7 +304,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                             Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"해당 위치가 아닙니다.", Toast.LENGTH_SHORT);
                             myToast.show();
                         }
-
                     }
                 }
             }
@@ -408,43 +407,8 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            File photoFile = null;
-//
-//            try {
-//                //임시로 사용할 파일이므로 경로는 캐시폴더로
-//                File tempDir = getCacheDir();
-//
-//                //임시촬영파일 세팅
-//                String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
-//                String imageFileName = "Capture_" + timeStamp + "_"; //ex) Capture_20201206_
-//
-//                File tempImage = File.createTempFile(
-//                        imageFileName,  /* 파일이름 */
-//                        ".jpg",         /* 파일형식 */
-//                        tempDir      /* 경로 */
-//                );
-//
-//                // ACTION_VIEW 인텐트를 사용할 경로 (임시파일의 경로)
-//                mCurrentPhotoPath = tempImage.getAbsolutePath();
-//
-//                photoFile = tempImage;
-//
-//            } catch (IOException e) {
-//                //에러 로그는 이렇게 관리하는 편이 좋다.
-//                Log.w(TAG, "파일 생성 에러!", e);
-//            }
-//
-//            //파일이 정상적으로 생성되었다면 계속 진행
-//            if (photoFile != null) {
-//                //Uri 가져오기
-//                Uri photoURI = FileProvider.getUriForFile(this,
-//                        getPackageName() + ".fileprovider",
-//                        photoFile);
-//                //인텐트에 Uri담기
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-//            startActivityForResult(takePictureIntent, 2); && data != null && data.getData() != null
+
                 startActivityForResult(takePictureIntent, CAMERA_ACTION);
-//            }
         }
     }
     @Override
@@ -474,8 +438,8 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
 
                             }
                             System.out.println(list);
-
-                            for(int i = 0; i<list.size(); i++){     //배열이랑 비교하여 keyword랑 같을 경우
+                            int i = 0;
+                            for(i = 0; i<list.size(); i++){     //배열이랑 비교하여 keyword랑 같을 경우
                                 if(keyword.equals((String)list.get(i))){
                                     Toast myToast = Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"검증에 성공하셨습니다", Toast.LENGTH_SHORT);
                                     long now = System.currentTimeMillis();  //현재시간
@@ -523,23 +487,6 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                                 }
                                             });
 
-//                                            StorageReference checkedPhotoRef = storageReference.child(firebaseUser.getUid()+"/"+quest_num);
-//                                            UploadTask uploadTask = checkedPhotoRef.putBytes(imageBitmap.getNinePatchChunk());
-//                                            uploadTask.addOnFailureListener(new OnFailureListener() {
-//                                                @Override
-//                                                public void onFailure(@NonNull Exception exception) {
-//                                                    // Handle unsuccessful uploads
-//                                                }
-//                                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                                                @Override
-//                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-//                                                    // ...
-//                                                }
-//                                            });
-
-
-
                                             Intent intent = new Intent(ImageLabellingActivity.this.getApplicationContext(), MainActivity.class);
                                             intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                                             ImageLabellingActivity.this.getApplicationContext().startActivity(intent);
@@ -550,12 +497,16 @@ public class ImageLabellingActivity extends AppCompatActivity implements Locatio
                                     break;
                                 }
                             }
+                            if(i == list.size()){
+                                Toast.makeText(ImageLabellingActivity.this.getApplicationContext(),"객체를 인식하지 못했습니다. 사진을 다시 찍어 주세요.", Toast.LENGTH_SHORT).show();
+                            }
 
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+
                         }
                     });
         }
